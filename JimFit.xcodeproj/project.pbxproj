@@ -10,9 +10,19 @@
 		555E6B382AC1D76B00DCA052 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B372AC1D76B00DCA052 /* AppDelegate.swift */; };
 		555E6B3A2AC1D76B00DCA052 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B392AC1D76B00DCA052 /* SceneDelegate.swift */; };
 		555E6B3C2AC1D76B00DCA052 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B3B2AC1D76B00DCA052 /* ViewController.swift */; };
-		555E6B3F2AC1D76B00DCA052 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 555E6B3D2AC1D76B00DCA052 /* Main.storyboard */; };
 		555E6B412AC1D76C00DCA052 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 555E6B402AC1D76C00DCA052 /* Assets.xcassets */; };
 		555E6B442AC1D76C00DCA052 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 555E6B422AC1D76C00DCA052 /* LaunchScreen.storyboard */; };
+		555E6B4D2AC1D79900DCA052 /* JimmyKit in Frameworks */ = {isa = PBXBuildFile; productRef = 555E6B4C2AC1D79900DCA052 /* JimmyKit */; };
+		555E6B502AC1D7C800DCA052 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 555E6B4F2AC1D7C800DCA052 /* SnapKit */; };
+		555E6B572AC3086500DCA052 /* ExerciseLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B562AC3086500DCA052 /* ExerciseLogViewController.swift */; };
+		555E6B5A2AC30C3A00DCA052 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 555E6B592AC30C3A00DCA052 /* FSCalendar */; };
+		555E6B5D2AC3198700DCA052 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 555E6B5C2AC3198700DCA052 /* Then */; };
+		555E6B662AC3285B00DCA052 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B652AC3285B00DCA052 /* Constants.swift */; };
+		555E6B6C2AC344CC00DCA052 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 555E6B6E2AC344CC00DCA052 /* Localizable.strings */; };
+		555E6B712AC3459A00DCA052 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B702AC3459A00DCA052 /* String+Extension.swift */; };
+		555E6B742AC34DD900DCA052 /* TodoListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B732AC34DD900DCA052 /* TodoListTableViewCell.swift */; };
+		555E6B762AC37BD900DCA052 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555E6B752AC37BD900DCA052 /* View.xib */; };
+		555E6B782AC42CB500DCA052 /* GrabberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B772AC42CB500DCA052 /* GrabberView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,10 +30,17 @@
 		555E6B372AC1D76B00DCA052 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		555E6B392AC1D76B00DCA052 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		555E6B3B2AC1D76B00DCA052 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		555E6B3E2AC1D76B00DCA052 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		555E6B402AC1D76C00DCA052 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		555E6B432AC1D76C00DCA052 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		555E6B452AC1D76C00DCA052 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		555E6B562AC3086500DCA052 /* ExerciseLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseLogViewController.swift; sourceTree = "<group>"; };
+		555E6B652AC3285B00DCA052 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		555E6B6D2AC344CC00DCA052 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		555E6B6F2AC344DD00DCA052 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		555E6B702AC3459A00DCA052 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		555E6B732AC34DD900DCA052 /* TodoListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListTableViewCell.swift; sourceTree = "<group>"; };
+		555E6B752AC37BD900DCA052 /* View.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
+		555E6B772AC42CB500DCA052 /* GrabberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrabberView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +48,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				555E6B4D2AC1D79900DCA052 /* JimmyKit in Frameworks */,
+				555E6B5A2AC30C3A00DCA052 /* FSCalendar in Frameworks */,
+				555E6B502AC1D7C800DCA052 /* SnapKit in Frameworks */,
+				555E6B5D2AC3198700DCA052 /* Then in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,15 +77,109 @@
 		555E6B362AC1D76B00DCA052 /* JimFit */ = {
 			isa = PBXGroup;
 			children = (
-				555E6B372AC1D76B00DCA052 /* AppDelegate.swift */,
-				555E6B392AC1D76B00DCA052 /* SceneDelegate.swift */,
-				555E6B3B2AC1D76B00DCA052 /* ViewController.swift */,
-				555E6B3D2AC1D76B00DCA052 /* Main.storyboard */,
+				555E6B5E2AC326CF00DCA052 /* Resource */,
+				555E6B612AC326F600DCA052 /* Source */,
+			);
+			path = JimFit;
+			sourceTree = "<group>";
+		};
+		555E6B5E2AC326CF00DCA052 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
 				555E6B402AC1D76C00DCA052 /* Assets.xcassets */,
 				555E6B422AC1D76C00DCA052 /* LaunchScreen.storyboard */,
 				555E6B452AC1D76C00DCA052 /* Info.plist */,
+				555E6B6E2AC344CC00DCA052 /* Localizable.strings */,
 			);
-			path = JimFit;
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		555E6B5F2AC326E000DCA052 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				555E6B372AC1D76B00DCA052 /* AppDelegate.swift */,
+				555E6B392AC1D76B00DCA052 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		555E6B602AC326E900DCA052 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				555E6B722AC34D9400DCA052 /* Common */,
+				555E6B3B2AC1D76B00DCA052 /* ViewController.swift */,
+				555E6B562AC3086500DCA052 /* ExerciseLogViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		555E6B612AC326F600DCA052 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				555E6B672AC32CDC00DCA052 /* Network */,
+				555E6B642AC3276000DCA052 /* Constants */,
+				555E6B632AC3273500DCA052 /* Helper */,
+				555E6B622AC3272E00DCA052 /* Extension */,
+				555E6B5F2AC326E000DCA052 /* App */,
+				555E6B692AC32CF500DCA052 /* Model */,
+				555E6B602AC326E900DCA052 /* View */,
+				555E6B682AC32CED00DCA052 /* ViewModel */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		555E6B622AC3272E00DCA052 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				555E6B702AC3459A00DCA052 /* String+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		555E6B632AC3273500DCA052 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		555E6B642AC3276000DCA052 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				555E6B652AC3285B00DCA052 /* Constants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		555E6B672AC32CDC00DCA052 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		555E6B682AC32CED00DCA052 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		555E6B692AC32CF500DCA052 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		555E6B722AC34D9400DCA052 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				555E6B732AC34DD900DCA052 /* TodoListTableViewCell.swift */,
+				555E6B752AC37BD900DCA052 /* View.xib */,
+				555E6B772AC42CB500DCA052 /* GrabberView.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +198,12 @@
 			dependencies = (
 			);
 			name = JimFit;
+			packageProductDependencies = (
+				555E6B4C2AC1D79900DCA052 /* JimmyKit */,
+				555E6B4F2AC1D7C800DCA052 /* SnapKit */,
+				555E6B592AC30C3A00DCA052 /* FSCalendar */,
+				555E6B5C2AC3198700DCA052 /* Then */,
+			);
 			productName = JimFit;
 			productReference = 555E6B342AC1D76B00DCA052 /* JimFit.app */;
 			productType = "com.apple.product-type.application";
@@ -109,8 +230,15 @@
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = 555E6B2B2AC1D76B00DCA052;
+			packageReferences = (
+				555E6B4B2AC1D79900DCA052 /* XCRemoteSwiftPackageReference "JimmyKit" */,
+				555E6B4E2AC1D7C800DCA052 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				555E6B582AC30C3A00DCA052 /* XCRemoteSwiftPackageReference "FSCalendar" */,
+				555E6B5B2AC3198700DCA052 /* XCRemoteSwiftPackageReference "Then" */,
+			);
 			productRefGroup = 555E6B352AC1D76B00DCA052 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -125,9 +253,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				555E6B762AC37BD900DCA052 /* View.xib in Resources */,
 				555E6B442AC1D76C00DCA052 /* LaunchScreen.storyboard in Resources */,
+				555E6B6C2AC344CC00DCA052 /* Localizable.strings in Resources */,
 				555E6B412AC1D76C00DCA052 /* Assets.xcassets in Resources */,
-				555E6B3F2AC1D76B00DCA052 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,8 +267,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				555E6B742AC34DD900DCA052 /* TodoListTableViewCell.swift in Sources */,
+				555E6B782AC42CB500DCA052 /* GrabberView.swift in Sources */,
+				555E6B662AC3285B00DCA052 /* Constants.swift in Sources */,
+				555E6B572AC3086500DCA052 /* ExerciseLogViewController.swift in Sources */,
 				555E6B3C2AC1D76B00DCA052 /* ViewController.swift in Sources */,
 				555E6B382AC1D76B00DCA052 /* AppDelegate.swift in Sources */,
+				555E6B712AC3459A00DCA052 /* String+Extension.swift in Sources */,
 				555E6B3A2AC1D76B00DCA052 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -147,20 +281,21 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		555E6B3D2AC1D76B00DCA052 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				555E6B3E2AC1D76B00DCA052 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		555E6B422AC1D76C00DCA052 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				555E6B432AC1D76C00DCA052 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		555E6B6E2AC344CC00DCA052 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				555E6B6D2AC344CC00DCA052 /* en */,
+				555E6B6F2AC344DD00DCA052 /* ko */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -170,6 +305,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -216,7 +352,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -230,6 +366,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -270,7 +407,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -289,10 +426,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = VJ2VF4KUF7;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = JimFit/Info.plist;
+				INFOPLIST_FILE = JimFit/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -317,10 +453,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = VJ2VF4KUF7;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = JimFit/Info.plist;
+				INFOPLIST_FILE = JimFit/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -358,6 +493,64 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		555E6B4B2AC1D79900DCA052 /* XCRemoteSwiftPackageReference "JimmyKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Jimmy-Jung/JimmyKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		555E6B4E2AC1D7C800DCA052 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		555E6B582AC30C3A00DCA052 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WenchaoD/FSCalendar.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		555E6B5B2AC3198700DCA052 /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		555E6B4C2AC1D79900DCA052 /* JimmyKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 555E6B4B2AC1D79900DCA052 /* XCRemoteSwiftPackageReference "JimmyKit" */;
+			productName = JimmyKit;
+		};
+		555E6B4F2AC1D7C800DCA052 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 555E6B4E2AC1D7C800DCA052 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		555E6B592AC30C3A00DCA052 /* FSCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 555E6B582AC30C3A00DCA052 /* XCRemoteSwiftPackageReference "FSCalendar" */;
+			productName = FSCalendar;
+		};
+		555E6B5C2AC3198700DCA052 /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 555E6B5B2AC3198700DCA052 /* XCRemoteSwiftPackageReference "Then" */;
+			productName = Then;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 555E6B2C2AC1D76B00DCA052 /* Project object */;
 }
