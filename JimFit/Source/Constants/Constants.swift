@@ -15,6 +15,7 @@ enum K {
             static let Green = UIColor(named: "Green")!
             static let Blue = UIColor(named: "Blue")!
             static let Yellow = UIColor.systemYellow
+            static let White = UIColor.white
             static let Label = UIColor.label
             static let Background = UIColor.systemBackground
         }
@@ -40,7 +41,8 @@ enum K {
     }
     
     enum Font {
-        static let Header: UIFont = .systemFont(ofSize: 20, weight: .heavy)
+        static let Header1: UIFont = .systemFont(ofSize: 20, weight: .heavy)
+        static let Header2: UIFont = .systemFont(ofSize: 18, weight: .heavy)
         static let SubHeader: UIFont = .systemFont(ofSize: 16, weight: .bold)
         static let Body: UIFont = .systemFont(ofSize: 16, weight: .medium)
         static let CellHeader: UIFont = .systemFont(ofSize: 15, weight: .bold)

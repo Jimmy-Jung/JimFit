@@ -21,8 +21,9 @@
 		555E6B6C2AC344CC00DCA052 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 555E6B6E2AC344CC00DCA052 /* Localizable.strings */; };
 		555E6B712AC3459A00DCA052 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B702AC3459A00DCA052 /* String+Extension.swift */; };
 		555E6B742AC34DD900DCA052 /* TodoListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B732AC34DD900DCA052 /* TodoListTableViewCell.swift */; };
-		555E6B762AC37BD900DCA052 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555E6B752AC37BD900DCA052 /* View.xib */; };
 		555E6B782AC42CB500DCA052 /* GrabberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B772AC42CB500DCA052 /* GrabberView.swift */; };
+		555E6B7B2AC44D4700DCA052 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B7A2AC44D4700DCA052 /* TabBarController.swift */; };
+		555E6B7D2AC4663000DCA052 /* AddButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B7C2AC4663000DCA052 /* AddButtonTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,8 +40,9 @@
 		555E6B6F2AC344DD00DCA052 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		555E6B702AC3459A00DCA052 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		555E6B732AC34DD900DCA052 /* TodoListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListTableViewCell.swift; sourceTree = "<group>"; };
-		555E6B752AC37BD900DCA052 /* View.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		555E6B772AC42CB500DCA052 /* GrabberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrabberView.swift; sourceTree = "<group>"; };
+		555E6B7A2AC44D4700DCA052 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		555E6B7C2AC4663000DCA052 /* AddButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButtonTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 		555E6B602AC326E900DCA052 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				555E6B792AC44CCB00DCA052 /* TabBar */,
 				555E6B722AC34D9400DCA052 /* Common */,
 				555E6B3B2AC1D76B00DCA052 /* ViewController.swift */,
 				555E6B562AC3086500DCA052 /* ExerciseLogViewController.swift */,
@@ -116,11 +119,11 @@
 		555E6B612AC326F600DCA052 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				555E6B5F2AC326E000DCA052 /* App */,
 				555E6B672AC32CDC00DCA052 /* Network */,
 				555E6B642AC3276000DCA052 /* Constants */,
 				555E6B632AC3273500DCA052 /* Helper */,
 				555E6B622AC3272E00DCA052 /* Extension */,
-				555E6B5F2AC326E000DCA052 /* App */,
 				555E6B692AC32CF500DCA052 /* Model */,
 				555E6B602AC326E900DCA052 /* View */,
 				555E6B682AC32CED00DCA052 /* ViewModel */,
@@ -176,10 +179,18 @@
 			isa = PBXGroup;
 			children = (
 				555E6B732AC34DD900DCA052 /* TodoListTableViewCell.swift */,
-				555E6B752AC37BD900DCA052 /* View.xib */,
+				555E6B7C2AC4663000DCA052 /* AddButtonTableViewCell.swift */,
 				555E6B772AC42CB500DCA052 /* GrabberView.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		555E6B792AC44CCB00DCA052 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				555E6B7A2AC44D4700DCA052 /* TabBarController.swift */,
+			);
+			path = TabBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,7 +264,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				555E6B762AC37BD900DCA052 /* View.xib in Resources */,
 				555E6B442AC1D76C00DCA052 /* LaunchScreen.storyboard in Resources */,
 				555E6B6C2AC344CC00DCA052 /* Localizable.strings in Resources */,
 				555E6B412AC1D76C00DCA052 /* Assets.xcassets in Resources */,
@@ -270,7 +280,9 @@
 				555E6B742AC34DD900DCA052 /* TodoListTableViewCell.swift in Sources */,
 				555E6B782AC42CB500DCA052 /* GrabberView.swift in Sources */,
 				555E6B662AC3285B00DCA052 /* Constants.swift in Sources */,
+				555E6B7B2AC44D4700DCA052 /* TabBarController.swift in Sources */,
 				555E6B572AC3086500DCA052 /* ExerciseLogViewController.swift in Sources */,
+				555E6B7D2AC4663000DCA052 /* AddButtonTableViewCell.swift in Sources */,
 				555E6B3C2AC1D76B00DCA052 /* ViewController.swift in Sources */,
 				555E6B382AC1D76B00DCA052 /* AppDelegate.swift in Sources */,
 				555E6B712AC3459A00DCA052 /* String+Extension.swift in Sources */,

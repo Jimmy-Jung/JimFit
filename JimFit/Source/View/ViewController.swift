@@ -21,7 +21,7 @@ class ViewController: UIViewController {
         .backgroundColor(.gray)
     
     var viewHeight: Constraint!
-    var calendartHeight: Constraint!
+//    var calendartHeight: Constraint!
     
 
 
@@ -59,8 +59,8 @@ class ViewController: UIViewController {
         
         let newOriginY = floatingView.frame.origin.y + translation.y
         
-//        floatingView.frame.origin.y = newOriginY
-        self.viewHeight.update(offset: translation.y)
+        floatingView.frame.origin.y = newOriginY
+//        self.viewHeight.update(offset: translation.y)
         if gesture.state == .ended {
             let yPosition = gesture.location(in: superview).y
             let viewHeight = view.frame.height

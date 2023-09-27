@@ -109,6 +109,7 @@ final class TodoListTableViewCell: UITableViewCell {
             }
         }
     }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(borderView)
@@ -178,11 +179,20 @@ final class TodoListTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         if selected {
             borderView.setBorder(color: K.Color.Primary.Label, width: K.Size.border_Medium)
         } else {
             borderView.setBorder(color: K.Color.Grayscale.border_Thin, width: K.Size.border_Thin)
+        }
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        if self.traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            if isSelected {
+                borderView.setBorder(color: K.Color.Primary.Label, width: K.Size.border_Medium)
+            } else {
+                borderView.setBorder(color: K.Color.Grayscale.border_Thin, width: K.Size.border_Thin)
+            }
         }
     }
 

@@ -16,7 +16,7 @@ final class ExerciseLogViewController: UIViewController {
     let calendarView = FSCalendar()
     private lazy var headerTitle = UILabel()
         .text(headerDateFormatter.string(from: Date()))
-        .font(K.Font.Header)
+        .font(K.Font.Header1)
     let grabberView = GrabberView()
     let tableView = UITableView()
     
@@ -24,6 +24,11 @@ final class ExerciseLogViewController: UIViewController {
       $0.dateFormat = "YYYY년 MM월"
       $0.locale = Locale(identifier: "ko_kr")
 //      $0.timeZone = TimeZone(identifier: "KST")
+    }
+    
+    private let grabberDateFormatter = DateFormatter().then {
+        $0.dateFormat = "MM월 dd일"
+        $0.locale = Locale(identifier: "ko_kr")
     }
     
     var events: [Date] = []
@@ -51,8 +56,9 @@ final class ExerciseLogViewController: UIViewController {
     
     func configureUI() {
         title = "운동 기록"
-        view.backgroundColor(.systemBackground)
+        view.backgroundColor(.secondarySystemGroupedBackground)
         configureCalendar()
+        configureGrabberView()
         configureTableView()
         view.addSubview(calendarView)
         view.addSubview(grabberView)
@@ -63,12 +69,19 @@ final class ExerciseLogViewController: UIViewController {
         
     }
     
+    func configureGrabberView() {
+        let grabberString = grabberDateFormatter.string(from: Date()) + " 운동"
+        grabberView.setTitle(grabberString)
+    }
+    
     func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(TodoListTableViewCell.self, forCellReuseIdentifier: TodoListTableViewCell.identifier)
+        tableView.register(AddButtonTableViewCell.self, forCellReuseIdentifier: AddButtonTableViewCell.identifier)
         tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorStyle = .none
+        tableView.sectionHeaderTopPadding = 0
     }
     
     func configureLayout() {
@@ -84,12 +97,12 @@ final class ExerciseLogViewController: UIViewController {
         grabberView.snp.makeConstraints { make in
             make.top.equalTo(calendarView.snp.bottom).offset(10)
             make.horizontalEdges.equalToSuperview()
-            make.height.equalTo(50)
+            make.height.equalTo(60)
         }
         
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(grabberView.snp.bottom).offset(10)
-            make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.top.equalTo(grabberView.snp.bottom)
+            make.horizontalEdges.bottom.equalToSuperview()
         }
     }
     
@@ -160,8 +173,10 @@ extension ExerciseLogViewController: FSCalendarDelegate, FSCalendarDataSource, F
     
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
         let currentDate = calendar.currentPage
-        headerTitle.text(headerDateFormatter.string(from: currentDate))
-        
+        let headerDateString = headerDateFormatter.string(from: currentDate)
+        let grabberString = grabberDateFormatter.string(from: currentDate) + " 운동"
+        headerTitle.text(headerDateString)
+        grabberView.setTitle(grabberString)
     }
     
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
@@ -177,14 +192,33 @@ extension ExerciseLogViewController: FSCalendarDelegate, FSCalendarDataSource, F
 
 
 extension ExerciseLogViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return 5
+        } else {
+            return 1
+        }
+        
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: TodoListTableViewCell.identifier, for: indexPath) as! TodoListTableViewCell
-        cell.selectionStyle = .none
-        return cell
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: TodoListTableViewCell.identifier, for: indexPath) as! TodoListTableViewCell
+            cell.selectionStyle = .none
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: AddButtonTableViewCell.identifier, for: indexPath) as! AddButtonTableViewCell
+            cell.primaryButtonSet(state: .addList)
+            return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     
