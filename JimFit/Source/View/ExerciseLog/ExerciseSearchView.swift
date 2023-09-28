@@ -11,6 +11,18 @@ final class ExerciseSearchView: UIView {
     
     var bodyPartList: [BodyPart] = BodyPart.allCases
     var equipmentTypeList: [EquipmentType] = EquipmentType.allCases
+    
+    private lazy var likeButton: UIButton = makeButton(name: "0")
+        .setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        .baseForegroundColor(.systemRed)
+        .imagePadding(4)
+    
+    var likeCount: String = "0" {
+        didSet {
+            likeButton.title(likeCount)
+        }
+    }
+    
     private let grabberView = UIView()
         .cornerRadius(2)
         .backgroundColor(K.Color.Grayscale.border_Medium)
@@ -49,8 +61,13 @@ final class ExerciseSearchView: UIView {
     private let selectedLabel = UILabel()
         .text("선택항목 2/10")
         .font(K.Font.SubHeader)
+        .numberOfLines(2)
     
-    let tableView = UITableView()
+    let tableView = UITableView().then {
+        $0.rowHeight = UITableView.automaticDimension
+        $0.separatorStyle = .none
+        $0.allowsMultipleSelection = true
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -123,14 +140,11 @@ final class ExerciseSearchView: UIView {
     }
     
     private func configureButton() {
-        let likeButton = makeButton(name: "")
-            .setImage(UIImage(systemName: "heart.fill"), for: .normal)
-            .baseForegroundColor(.systemRed)
         
         bodyPartStackView.addArrangedSubview(likeButton)
         likeButton.snp.makeConstraints { make in
             make.height.equalTo(40)
-            make.width.equalTo(40)
+            make.width.greaterThanOrEqualTo(40)
         }
         
         for bodyPart in bodyPartList {

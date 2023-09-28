@@ -9,8 +9,9 @@ import UIKit
 
 class ExerciseListTableViewCell: UITableViewCell {
 
-    let borderView = UIView()
+    private let borderView = UIView()
         .cornerRadius(K.Size.cellRadius)
+        .setBorder(color: K.Color.Grayscale.border_Thin, width: K.Size.border_Thin)
  
     let titleLabel = UILabel()
         .text("BarBell Bench Press as BarBell Bench Press")
@@ -18,29 +19,33 @@ class ExerciseListTableViewCell: UITableViewCell {
         .numberOfLines(2)
         .textColor(K.Color.Primary.Label)
     
-    let bodyPartLabel = UILabel()
+    let secondaryLabel = UILabel()
         .text("Chest")
         .font(K.Font.CellBody)
+        .numberOfLines(2)
         .textColor(K.Color.Grayscale.Label)
     
     lazy var likeButton: UIButton = UIButton(configuration: .plain())
-        .setImage(UIImage(systemName: "heart")?.renderingColor(.monochrome), for: .normal)
-        .setImage(UIImage(systemName: "heart.fill")?.renderingColor(.monochrome), for: .selected)
-        .tintColor(K.Color.Grayscale.border_Medium)
+        .setImage(UIImage(systemName: "heart"), for: .normal)
+        .setImage(UIImage(systemName: "heart.fill"), for: .selected)
+        .baseForegroundColor(K.Color.Grayscale.border_Medium)
+        .baseBackgroundColor(.clear)
         .addAction { [unowned self] in
             isChecked.toggle()
         }
     
    
-    lazy var titleStackView: UIStackView = UIStackView()
+    private lazy var titleStackView: UIStackView = UIStackView()
         .axis(.vertical)
         .alignment(.fill)
-        .distribution(.fill)
+        .distribution(.fillProportionally)
         .addArrangedSubview(titleLabel)
-        .addArrangedSubview(bodyPartLabel)
+        .addArrangedSubview(UIView())
+        .addArrangedSubview(secondaryLabel)
+        .addArrangedSubview(UIView())
     
    
-    lazy var horizontalStackView: UIStackView = UIStackView()
+    private lazy var horizontalStackView: UIStackView = UIStackView()
         .axis(.horizontal)
         .alignment(.fill)
         .distribution(.fill)
@@ -48,13 +53,15 @@ class ExerciseListTableViewCell: UITableViewCell {
         .addArrangedSubview(titleStackView)
         .addArrangedSubview(likeButton)
     
-    var isChecked: Bool = false {
+    private var isChecked: Bool = false {
         didSet {
             UIView.transition(with: likeButton, duration: 0.15, options: [.transitionCrossDissolve, .curveEaseInOut]) {
                 if self.isChecked {
-                    self.likeButton.tintColor(.red)
+                    self.likeButton.isSelected = true
+                    self.likeButton.baseForegroundColor(.red)
                 } else {
-                    self.likeButton.tintColor(K.Color.Grayscale.border_Medium)
+                    self.likeButton.isSelected = false
+                    self.likeButton.baseForegroundColor(K.Color.Grayscale.border_Medium)
                 }
             }
         }
@@ -72,6 +79,7 @@ class ExerciseListTableViewCell: UITableViewCell {
         horizontalStackView.snp.makeConstraints { make in
             make.verticalEdges.equalToSuperview().inset(8)
             make.horizontalEdges.equalToSuperview().inset(16)
+            make.height.equalTo(60)
         }
         
         likeButton.snp.makeConstraints { make in
@@ -88,7 +96,12 @@ class ExerciseListTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
+        if selected {
+            borderView.backgroundColor(K.Color.Grayscale.Selected)
+        } else {
+            borderView.backgroundColor(.clear)
+        }
     }
+
 
 }
