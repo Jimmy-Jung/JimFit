@@ -11,7 +11,7 @@ final class TabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tabBar.tintColor = .label
+        tabBar.tintColor = K.Color.Primary.Label
         tabBar.backgroundColor(.systemBackground)
         configureTabBarController()
         setupTabBarController()
@@ -22,7 +22,8 @@ final class TabBarController: UITabBarController {
         let firstVC = ExerciseLogViewController()
         let firstNav = UINavigationController(rootViewController: firstVC)
         firstVC.title = "운동 기록"
-        firstVC.tabBarItem.image = UIImage(systemName: "magnifyingglass")?.renderingColor(.paletteColors([.red, .blue, .yellow]))
+        firstVC.tabBarItem.image = UIImage(systemName: "checklist.checked")
+        firstVC.tabBarItem.title = "기록"
         
         let vc = UIViewController()
         vc.view.backgroundColor(.systemBackground)

@@ -24,6 +24,14 @@
 		555E6B782AC42CB500DCA052 /* GrabberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B772AC42CB500DCA052 /* GrabberView.swift */; };
 		555E6B7B2AC44D4700DCA052 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B7A2AC44D4700DCA052 /* TabBarController.swift */; };
 		555E6B7D2AC4663000DCA052 /* AddButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B7C2AC4663000DCA052 /* AddButtonTableViewCell.swift */; };
+		555E6B822AC54D8A00DCA052 /* Exercise.realm in Resources */ = {isa = PBXBuildFile; fileRef = 555E6B812AC54D6400DCA052 /* Exercise.realm */; };
+		555E6B852AC54EDB00DCA052 /* ExerciseSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B842AC54EDB00DCA052 /* ExerciseSearchViewController.swift */; };
+		555E6B872AC54FD000DCA052 /* ExerciseSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B862AC54FD000DCA052 /* ExerciseSearchView.swift */; };
+		555E6B8A2AC55BCC00DCA052 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 555E6B892AC55BCC00DCA052 /* Realm */; };
+		555E6B8C2AC55BCC00DCA052 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 555E6B8B2AC55BCC00DCA052 /* RealmSwift */; };
+		555E6B8E2AC573AC00DCA052 /* ExerciseListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B8D2AC573AC00DCA052 /* ExerciseListTableViewCell.swift */; };
+		555E6B902AC5796600DCA052 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B8F2AC5796600DCA052 /* Exercise.swift */; };
+		555E6B922AC5796F00DCA052 /* ExerciseRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B912AC5796F00DCA052 /* ExerciseRealm.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +51,12 @@
 		555E6B772AC42CB500DCA052 /* GrabberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrabberView.swift; sourceTree = "<group>"; };
 		555E6B7A2AC44D4700DCA052 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		555E6B7C2AC4663000DCA052 /* AddButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButtonTableViewCell.swift; sourceTree = "<group>"; };
+		555E6B812AC54D6400DCA052 /* Exercise.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = Exercise.realm; sourceTree = "<group>"; };
+		555E6B842AC54EDB00DCA052 /* ExerciseSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSearchViewController.swift; sourceTree = "<group>"; };
+		555E6B862AC54FD000DCA052 /* ExerciseSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSearchView.swift; sourceTree = "<group>"; };
+		555E6B8D2AC573AC00DCA052 /* ExerciseListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseListTableViewCell.swift; sourceTree = "<group>"; };
+		555E6B8F2AC5796600DCA052 /* Exercise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
+		555E6B912AC5796F00DCA052 /* ExerciseRealm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseRealm.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,10 +64,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				555E6B8C2AC55BCC00DCA052 /* RealmSwift in Frameworks */,
 				555E6B4D2AC1D79900DCA052 /* JimmyKit in Frameworks */,
 				555E6B5A2AC30C3A00DCA052 /* FSCalendar in Frameworks */,
 				555E6B502AC1D7C800DCA052 /* SnapKit in Frameworks */,
 				555E6B5D2AC3198700DCA052 /* Then in Frameworks */,
+				555E6B8A2AC55BCC00DCA052 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +104,7 @@
 		555E6B5E2AC326CF00DCA052 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				555E6B812AC54D6400DCA052 /* Exercise.realm */,
 				555E6B402AC1D76C00DCA052 /* Assets.xcassets */,
 				555E6B422AC1D76C00DCA052 /* LaunchScreen.storyboard */,
 				555E6B452AC1D76C00DCA052 /* Info.plist */,
@@ -108,10 +125,10 @@
 		555E6B602AC326E900DCA052 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				555E6B792AC44CCB00DCA052 /* TabBar */,
-				555E6B722AC34D9400DCA052 /* Common */,
 				555E6B3B2AC1D76B00DCA052 /* ViewController.swift */,
-				555E6B562AC3086500DCA052 /* ExerciseLogViewController.swift */,
+				555E6B722AC34D9400DCA052 /* Common */,
+				555E6B792AC44CCB00DCA052 /* TabBar */,
+				555E6B832AC54E3A00DCA052 /* ExerciseLog */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -120,10 +137,10 @@
 			isa = PBXGroup;
 			children = (
 				555E6B5F2AC326E000DCA052 /* App */,
-				555E6B672AC32CDC00DCA052 /* Network */,
 				555E6B642AC3276000DCA052 /* Constants */,
-				555E6B632AC3273500DCA052 /* Helper */,
 				555E6B622AC3272E00DCA052 /* Extension */,
+				555E6B672AC32CDC00DCA052 /* Network */,
+				555E6B632AC3273500DCA052 /* Helper */,
 				555E6B692AC32CF500DCA052 /* Model */,
 				555E6B602AC326E900DCA052 /* View */,
 				555E6B682AC32CED00DCA052 /* ViewModel */,
@@ -171,6 +188,8 @@
 		555E6B692AC32CF500DCA052 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				555E6B8F2AC5796600DCA052 /* Exercise.swift */,
+				555E6B912AC5796F00DCA052 /* ExerciseRealm.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -178,6 +197,7 @@
 		555E6B722AC34D9400DCA052 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				555E6B8D2AC573AC00DCA052 /* ExerciseListTableViewCell.swift */,
 				555E6B732AC34DD900DCA052 /* TodoListTableViewCell.swift */,
 				555E6B7C2AC4663000DCA052 /* AddButtonTableViewCell.swift */,
 				555E6B772AC42CB500DCA052 /* GrabberView.swift */,
@@ -191,6 +211,16 @@
 				555E6B7A2AC44D4700DCA052 /* TabBarController.swift */,
 			);
 			path = TabBar;
+			sourceTree = "<group>";
+		};
+		555E6B832AC54E3A00DCA052 /* ExerciseLog */ = {
+			isa = PBXGroup;
+			children = (
+				555E6B862AC54FD000DCA052 /* ExerciseSearchView.swift */,
+				555E6B842AC54EDB00DCA052 /* ExerciseSearchViewController.swift */,
+				555E6B562AC3086500DCA052 /* ExerciseLogViewController.swift */,
+			);
+			path = ExerciseLog;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,6 +244,8 @@
 				555E6B4F2AC1D7C800DCA052 /* SnapKit */,
 				555E6B592AC30C3A00DCA052 /* FSCalendar */,
 				555E6B5C2AC3198700DCA052 /* Then */,
+				555E6B892AC55BCC00DCA052 /* Realm */,
+				555E6B8B2AC55BCC00DCA052 /* RealmSwift */,
 			);
 			productName = JimFit;
 			productReference = 555E6B342AC1D76B00DCA052 /* JimFit.app */;
@@ -249,6 +281,7 @@
 				555E6B4E2AC1D7C800DCA052 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				555E6B582AC30C3A00DCA052 /* XCRemoteSwiftPackageReference "FSCalendar" */,
 				555E6B5B2AC3198700DCA052 /* XCRemoteSwiftPackageReference "Then" */,
+				555E6B882AC55BCC00DCA052 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 555E6B352AC1D76B00DCA052 /* Products */;
 			projectDirPath = "";
@@ -264,6 +297,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				555E6B822AC54D8A00DCA052 /* Exercise.realm in Resources */,
 				555E6B442AC1D76C00DCA052 /* LaunchScreen.storyboard in Resources */,
 				555E6B6C2AC344CC00DCA052 /* Localizable.strings in Resources */,
 				555E6B412AC1D76C00DCA052 /* Assets.xcassets in Resources */,
@@ -277,13 +311,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				555E6B872AC54FD000DCA052 /* ExerciseSearchView.swift in Sources */,
 				555E6B742AC34DD900DCA052 /* TodoListTableViewCell.swift in Sources */,
 				555E6B782AC42CB500DCA052 /* GrabberView.swift in Sources */,
 				555E6B662AC3285B00DCA052 /* Constants.swift in Sources */,
 				555E6B7B2AC44D4700DCA052 /* TabBarController.swift in Sources */,
 				555E6B572AC3086500DCA052 /* ExerciseLogViewController.swift in Sources */,
+				555E6B8E2AC573AC00DCA052 /* ExerciseListTableViewCell.swift in Sources */,
+				555E6B902AC5796600DCA052 /* Exercise.swift in Sources */,
+				555E6B852AC54EDB00DCA052 /* ExerciseSearchViewController.swift in Sources */,
 				555E6B7D2AC4663000DCA052 /* AddButtonTableViewCell.swift in Sources */,
 				555E6B3C2AC1D76B00DCA052 /* ViewController.swift in Sources */,
+				555E6B922AC5796F00DCA052 /* ExerciseRealm.swift in Sources */,
 				555E6B382AC1D76B00DCA052 /* AppDelegate.swift in Sources */,
 				555E6B712AC3459A00DCA052 /* String+Extension.swift in Sources */,
 				555E6B3A2AC1D76B00DCA052 /* SceneDelegate.swift in Sources */,
@@ -364,7 +403,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -419,7 +458,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -539,6 +578,14 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		555E6B882AC55BCC00DCA052 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -561,6 +608,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 555E6B5B2AC3198700DCA052 /* XCRemoteSwiftPackageReference "Then" */;
 			productName = Then;
+		};
+		555E6B892AC55BCC00DCA052 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 555E6B882AC55BCC00DCA052 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		555E6B8B2AC55BCC00DCA052 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 555E6B882AC55BCC00DCA052 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

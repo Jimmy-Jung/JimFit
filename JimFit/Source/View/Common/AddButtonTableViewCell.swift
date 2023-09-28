@@ -17,13 +17,7 @@ final class AddButtonTableViewCell: UITableViewCell {
     private lazy var addButton = UIButton(configuration: .filled())
         .baseForegroundColor(K.Color.Primary.White)
         .cornerRadius(16)
-        .addAction { [unowned self] in
-            self.buttonTapped()
-        }
-    
-    func buttonTapped() {
-        
-    }
+        .isUserInteractionEnabled(false)
     
     func primaryButtonSet(state: State) {
         switch state {
@@ -55,8 +49,13 @@ final class AddButtonTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        
+        UIView.transition(with: addButton, duration: 0.1) {
+            self.addButton.layer.opacity = 0.8
+        } completion: { _ in
+            self.addButton.layer.opacity = 1
+        }
+        
     }
-
+    
 }

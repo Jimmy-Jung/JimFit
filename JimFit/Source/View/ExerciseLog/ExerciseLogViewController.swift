@@ -35,6 +35,7 @@ final class ExerciseLogViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.scrollEdgeAppearance?.backgroundColor = .secondarySystemGroupedBackground
         configureUI()
         configureLayout()
         setEvents()
@@ -55,7 +56,6 @@ final class ExerciseLogViewController: UIViewController {
     }
     
     func configureUI() {
-        title = "운동 기록"
         view.backgroundColor(.secondarySystemGroupedBackground)
         configureCalendar()
         configureGrabberView()
@@ -97,7 +97,7 @@ final class ExerciseLogViewController: UIViewController {
         grabberView.snp.makeConstraints { make in
             make.top.equalTo(calendarView.snp.bottom).offset(10)
             make.horizontalEdges.equalToSuperview()
-            make.height.equalTo(60)
+            make.height.equalTo(64)
         }
         
         tableView.snp.makeConstraints { make in
@@ -151,8 +151,15 @@ final class ExerciseLogViewController: UIViewController {
         switch swipeGesture.direction {
         case .up :
             self.calendarView.setScope(.week, animated: true)
+            UIView.transition(with: view, duration: 0.3) {
+                self.view.backgroundColor(.secondarySystemBackground)
+            }
+            
         case .down:
             self.calendarView.setScope(.month, animated: true)
+            UIView.transition(with: view, duration: 0.3) {
+                self.view.backgroundColor(.secondarySystemGroupedBackground)
+            }
         default: break
         }
     }
@@ -213,12 +220,16 @@ extension ExerciseLogViewController: UITableViewDelegate, UITableViewDataSource 
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: AddButtonTableViewCell.identifier, for: indexPath) as! AddButtonTableViewCell
             cell.primaryButtonSet(state: .addList)
+            cell.selectionStyle = .none
             return cell
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.section == 1 {
+            transition(viewController: ExerciseSearchViewController(), style: .present)
+        }
     }
     
     
