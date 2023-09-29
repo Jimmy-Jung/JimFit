@@ -30,7 +30,7 @@
 		555E6B8C2AC55BCC00DCA052 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 555E6B8B2AC55BCC00DCA052 /* RealmSwift */; };
 		555E6B8E2AC573AC00DCA052 /* ExerciseListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B8D2AC573AC00DCA052 /* ExerciseListTableViewCell.swift */; };
 		555E6B922AC5796F00DCA052 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B912AC5796F00DCA052 /* Exercise.swift */; };
-		555E6B962AC71B5600DCA052 /* Exercise.realm in Resources */ = {isa = PBXBuildFile; fileRef = 555E6B952AC71A9900DCA052 /* Exercise.realm */; };
+		555E6B982AC723B000DCA052 /* Exercise.realm in Resources */ = {isa = PBXBuildFile; fileRef = 555E6B972AC7238E00DCA052 /* Exercise.realm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,7 +54,7 @@
 		555E6B862AC54FD000DCA052 /* ExerciseSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSearchView.swift; sourceTree = "<group>"; };
 		555E6B8D2AC573AC00DCA052 /* ExerciseListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseListTableViewCell.swift; sourceTree = "<group>"; };
 		555E6B912AC5796F00DCA052 /* Exercise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
-		555E6B952AC71A9900DCA052 /* Exercise.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = Exercise.realm; sourceTree = "<group>"; };
+		555E6B972AC7238E00DCA052 /* Exercise.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = Exercise.realm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,7 +102,7 @@
 		555E6B5E2AC326CF00DCA052 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				555E6B952AC71A9900DCA052 /* Exercise.realm */,
+				555E6B972AC7238E00DCA052 /* Exercise.realm */,
 				555E6B402AC1D76C00DCA052 /* Assets.xcassets */,
 				555E6B422AC1D76C00DCA052 /* LaunchScreen.storyboard */,
 				555E6B452AC1D76C00DCA052 /* Info.plist */,
@@ -294,7 +294,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				555E6B962AC71B5600DCA052 /* Exercise.realm in Resources */,
+				555E6B982AC723B000DCA052 /* Exercise.realm in Resources */,
 				555E6B442AC1D76C00DCA052 /* LaunchScreen.storyboard in Resources */,
 				555E6B6C2AC344CC00DCA052 /* Localizable.strings in Resources */,
 				555E6B412AC1D76C00DCA052 /* Assets.xcassets in Resources */,

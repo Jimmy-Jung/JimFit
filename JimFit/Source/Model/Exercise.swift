@@ -16,8 +16,9 @@ final class Exercise: Object {
     @Persisted var exerciseType: String
     @Persisted var targetMuscles: List<String>
     @Persisted var synergistMuscles: List<String>
+    @Persisted var liked: Bool
     
-    convenience init(bodyPart: List<String>, equipmentType: String, exerciseType: String, targetMuscles: List<String>, synergistMuscles: List<String>, reference: String, exerciseName: String) {
+    convenience init(bodyPart: List<String>, equipmentType: String, exerciseType: String, targetMuscles: List<String>, synergistMuscles: List<String>, reference: String, exerciseName: String, liked: Bool) {
         self.init()
         self.bodyPart = bodyPart
         self.equipmentType = equipmentType
@@ -26,27 +27,7 @@ final class Exercise: Object {
         self.synergistMuscles = synergistMuscles
         self.reference = reference
         self.exerciseName = exerciseName
-    }
-}
-
-final class LikedExercise: Object {
-    @Persisted var reference: String
-    @Persisted var exerciseName: String
-    @Persisted var bodyPart: List<String>
-    @Persisted var equipmentType: String
-    @Persisted var exerciseType: String
-    @Persisted var targetMuscles: List<String>
-    @Persisted var synergistMuscles: List<String>
-    
-    convenience init(bodyPart: List<String>, equipmentType: String, exerciseType: String, targetMuscles: List<String>, synergistMuscles: List<String>, reference: String, exerciseName: String) {
-        self.init()
-        self.bodyPart = bodyPart
-        self.equipmentType = equipmentType
-        self.exerciseType = exerciseType
-        self.targetMuscles = targetMuscles
-        self.synergistMuscles = synergistMuscles
-        self.reference = reference
-        self.exerciseName = exerciseName
+        self.liked = liked
     }
 }
 
