@@ -8,44 +8,7 @@
 import Foundation
 import RealmSwift
 
-struct Exercise {
-    var reference: String?
-    var exerciseName: String?
-    var bodyPart: [BodyPart]
-    var equipmentType: EquipmentType
-    var exerciseType: ExerciseType
-    var targetMuscles: [String]
-    var synergistMuscles: [String]
-    
-    func convertToRealm() -> ExerciseRealm {
-        let realmBodyPart = List<String>()
-        let realmTargetMuscles = List<String>()
-        let realmSynergistMuscles = List<String>()
-        
-        for part in bodyPart {
-            realmBodyPart.append(part.rawValue)
-        }
-        for muscles in targetMuscles {
-            realmTargetMuscles.append(muscles)
-        }
-        
-        for muscles in synergistMuscles {
-            realmSynergistMuscles.append(muscles)
-        }
-        
-        let realmExercise = ExerciseRealm(
-            bodyPart: realmBodyPart,
-            equipmentType: equipmentType.rawValue,
-            exerciseType: exerciseType.rawValue,
-            targetMuscles: realmTargetMuscles,
-            synergistMuscles: realmSynergistMuscles,
-            reference: reference ?? "",
-            exerciseName: exerciseName ?? ""
-        )
-        return realmExercise
-    }
-    
-}
+
 
 enum BodyPart: String, CaseIterable {
     case back = "Back"

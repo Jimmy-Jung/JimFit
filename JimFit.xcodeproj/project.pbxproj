@@ -24,7 +24,6 @@
 		555E6B782AC42CB500DCA052 /* GrabberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B772AC42CB500DCA052 /* GrabberView.swift */; };
 		555E6B7B2AC44D4700DCA052 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B7A2AC44D4700DCA052 /* TabBarController.swift */; };
 		555E6B7D2AC4663000DCA052 /* AddButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B7C2AC4663000DCA052 /* AddButtonTableViewCell.swift */; };
-		555E6B822AC54D8A00DCA052 /* Exercise.realm in Resources */ = {isa = PBXBuildFile; fileRef = 555E6B812AC54D6400DCA052 /* Exercise.realm */; };
 		555E6B852AC54EDB00DCA052 /* ExerciseSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B842AC54EDB00DCA052 /* ExerciseSearchViewController.swift */; };
 		555E6B872AC54FD000DCA052 /* ExerciseSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B862AC54FD000DCA052 /* ExerciseSearchView.swift */; };
 		555E6B8A2AC55BCC00DCA052 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 555E6B892AC55BCC00DCA052 /* Realm */; };
@@ -32,6 +31,7 @@
 		555E6B8E2AC573AC00DCA052 /* ExerciseListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B8D2AC573AC00DCA052 /* ExerciseListTableViewCell.swift */; };
 		555E6B902AC5796600DCA052 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B8F2AC5796600DCA052 /* Exercise.swift */; };
 		555E6B922AC5796F00DCA052 /* ExerciseRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B912AC5796F00DCA052 /* ExerciseRealm.swift */; };
+		555E6B962AC71B5600DCA052 /* Exercise.realm in Resources */ = {isa = PBXBuildFile; fileRef = 555E6B952AC71A9900DCA052 /* Exercise.realm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,12 +51,12 @@
 		555E6B772AC42CB500DCA052 /* GrabberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrabberView.swift; sourceTree = "<group>"; };
 		555E6B7A2AC44D4700DCA052 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		555E6B7C2AC4663000DCA052 /* AddButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButtonTableViewCell.swift; sourceTree = "<group>"; };
-		555E6B812AC54D6400DCA052 /* Exercise.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = Exercise.realm; sourceTree = "<group>"; };
 		555E6B842AC54EDB00DCA052 /* ExerciseSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSearchViewController.swift; sourceTree = "<group>"; };
 		555E6B862AC54FD000DCA052 /* ExerciseSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSearchView.swift; sourceTree = "<group>"; };
 		555E6B8D2AC573AC00DCA052 /* ExerciseListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseListTableViewCell.swift; sourceTree = "<group>"; };
 		555E6B8F2AC5796600DCA052 /* Exercise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		555E6B912AC5796F00DCA052 /* ExerciseRealm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseRealm.swift; sourceTree = "<group>"; };
+		555E6B952AC71A9900DCA052 /* Exercise.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = Exercise.realm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +104,7 @@
 		555E6B5E2AC326CF00DCA052 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				555E6B812AC54D6400DCA052 /* Exercise.realm */,
+				555E6B952AC71A9900DCA052 /* Exercise.realm */,
 				555E6B402AC1D76C00DCA052 /* Assets.xcassets */,
 				555E6B422AC1D76C00DCA052 /* LaunchScreen.storyboard */,
 				555E6B452AC1D76C00DCA052 /* Info.plist */,
@@ -297,7 +297,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				555E6B822AC54D8A00DCA052 /* Exercise.realm in Resources */,
+				555E6B962AC71B5600DCA052 /* Exercise.realm in Resources */,
 				555E6B442AC1D76C00DCA052 /* LaunchScreen.storyboard in Resources */,
 				555E6B6C2AC344CC00DCA052 /* Localizable.strings in Resources */,
 				555E6B412AC1D76C00DCA052 /* Assets.xcassets in Resources */,

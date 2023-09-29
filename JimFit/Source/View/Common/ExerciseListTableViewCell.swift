@@ -38,11 +38,10 @@ class ExerciseListTableViewCell: UITableViewCell {
     private lazy var titleStackView: UIStackView = UIStackView()
         .axis(.vertical)
         .alignment(.fill)
-        .distribution(.fillProportionally)
+        .distribution(.fill)
         .addArrangedSubview(titleLabel)
         .addArrangedSubview(UIView())
         .addArrangedSubview(secondaryLabel)
-        .addArrangedSubview(UIView())
     
    
     private lazy var horizontalStackView: UIStackView = UIStackView()
@@ -79,7 +78,6 @@ class ExerciseListTableViewCell: UITableViewCell {
         horizontalStackView.snp.makeConstraints { make in
             make.verticalEdges.equalToSuperview().inset(8)
             make.horizontalEdges.equalToSuperview().inset(16)
-            make.height.equalTo(60)
         }
         
         likeButton.snp.makeConstraints { make in
