@@ -25,8 +25,12 @@ class ExerciseListTableViewCell: UITableViewCell {
             }
             titleLabel.text = exercise.exerciseName
             secondaryLabel.text(secondaryString)
+            likeButton.isSelected = exercise.liked
+            setupLikeButtonColor()
         }
     }
+    
+    weak var delegate: LikeUpdateDelegate?
 
     private let borderView = UIView()
         .cornerRadius(K.Size.cellRadius)
@@ -50,7 +54,7 @@ class ExerciseListTableViewCell: UITableViewCell {
         .baseForegroundColor(K.Color.Grayscale.border_Medium)
         .baseBackgroundColor(.clear)
         .addAction { [unowned self] in
-            isChecked.toggle()
+            likeButtonTapped()
         }
     
    
@@ -71,20 +75,36 @@ class ExerciseListTableViewCell: UITableViewCell {
         .addArrangedSubview(titleStackView)
         .addArrangedSubview(likeButton)
     
-    private var isChecked: Bool = false {
-        didSet {
-            UIView.transition(with: likeButton, duration: 0.15, options: [.transitionCrossDissolve, .curveEaseInOut]) {
-                if self.isChecked {
-                    self.likeButton.isSelected = true
-                    self.likeButton.baseForegroundColor(.red)
-                } else {
-                    self.likeButton.isSelected = false
-                    self.likeButton.baseForegroundColor(K.Color.Grayscale.border_Medium)
-                }
+    private func likeButtonTapped() {
+        likeButton.isSelected.toggle()
+        UIView.transition(with: likeButton, duration: 0.15, options: [.transitionCrossDissolve, .curveEaseInOut]) {
+            self.setupLikeButtonColor()
+        }
+        let realm = RealmManager.createRealm()
+        guard let exercise else { return }
+        if let update = realm.objects(Exercise.self).filter("reference == %@", exercise.reference).first {
+            try! realm.write {
+                update.liked = likeButton.isSelected
             }
+        }
+        delegate?.updateLike()
+    }
+    
+    private func setupLikeButtonColor() {
+        if self.likeButton.isSelected {
+            self.likeButton.baseForegroundColor(.red)
+        } else {
+            self.likeButton.baseForegroundColor(K.Color.Grayscale.border_Medium)
         }
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        titleLabel.text(nil)
+        secondaryLabel.text(nil)
+        likeButton.isSelected = false
+    }
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         

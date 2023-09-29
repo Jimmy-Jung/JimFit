@@ -8,7 +8,11 @@
 import UIKit
 import RealmSwift
 
-final class ExerciseSearchViewController: UIViewController {
+protocol LikeUpdateDelegate: AnyObject {
+    func updateLike()
+}
+
+final class ExerciseSearchViewController: UIViewController, LikeUpdateDelegate {
     enum ButtonType {
         case bodyPart
         case equipmentType
@@ -31,7 +35,12 @@ final class ExerciseSearchViewController: UIViewController {
         fetchSearchList()
         configureTableView()
         configureButtons()
-        
+        updateLike()
+    }
+    
+    func updateLike() {
+        let likeCount = realm.objects(Exercise.self).filter("liked == %@", true).count
+        searchView.likeCount =  String(likeCount)
     }
     func configureTableView() {
         searchView.tableView.delegate = self
@@ -71,12 +80,7 @@ final class ExerciseSearchViewController: UIViewController {
         updateList()
     }
     private func fetchSearchList() {
-        let fileManager = FileManager.default
-        // 도큐먼트 디렉토리 경로
-        let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
-        // 저장할 파일의 URL
-        let fileURL = documentsDirectory.appendingPathComponent("Exercise.realm")
-        realm = try! Realm(fileURL: fileURL)
+        realm = RealmManager.createRealm()
         list = realm.objects(Exercise.self).sorted(byKeyPath: "reference", ascending: true)
     }
     
@@ -108,15 +112,13 @@ extension ExerciseSearchViewController: UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCell(withIdentifier: ExerciseListTableViewCell.identifier, for: indexPath) as! ExerciseListTableViewCell
         cell.exercise = list[indexPath.row]
         cell.selectionStyle = .none
+        cell.delegate = self
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         _ = tableView.dequeueReusableCell(withIdentifier: ExerciseListTableViewCell.identifier, for: indexPath) as! ExerciseListTableViewCell
-        
     }
-    
-    
 }
 
 extension ExerciseSearchViewController {
@@ -163,28 +165,49 @@ extension ExerciseSearchViewController {
     }
     
     func updateList() {
+        if isLikeButtonSelected {
             switch queryTuple {
             case (nil, nil):
                 list = realm.objects(Exercise.self)
-                    .filter("liked == %@", isLikeButtonSelected)
+                    .filter("liked == %@", true)
                     .sorted(byKeyPath: "reference", ascending: true)
             case (let predicate1?, nil):
                 list = realm.objects(Exercise.self)
-                    .filter("liked == %@", isLikeButtonSelected)
+                    .filter("liked == %@", true)
                     .filter(predicate1)
                     .sorted(byKeyPath: "reference", ascending: true)
             case (nil, let predicate2?):
                 list = realm.objects(Exercise.self)
-                    .filter("liked == %@", isLikeButtonSelected)
+                    .filter("liked == %@", true)
                     .filter(predicate2)
                     .sorted(byKeyPath: "reference", ascending: true)
             case (let predicate1?, let predicate2?):
                 list = realm.objects(Exercise.self)
-                    .filter("liked == %@", isLikeButtonSelected)
+                    .filter("liked == %@", true)
                     .filter(predicate1)
                     .filter(predicate2)
                     .sorted(byKeyPath: "reference", ascending: true)
             }
+        } else {
+            switch queryTuple {
+            case (nil, nil):
+                list = realm.objects(Exercise.self)
+                    .sorted(byKeyPath: "reference", ascending: true)
+            case (let predicate1?, nil):
+                list = realm.objects(Exercise.self)
+                    .filter(predicate1)
+                    .sorted(byKeyPath: "reference", ascending: true)
+            case (nil, let predicate2?):
+                list = realm.objects(Exercise.self)
+                    .filter(predicate2)
+                    .sorted(byKeyPath: "reference", ascending: true)
+            case (let predicate1?, let predicate2?):
+                list = realm.objects(Exercise.self)
+                    .filter(predicate1)
+                    .filter(predicate2)
+                    .sorted(byKeyPath: "reference", ascending: true)
+            }
+        }
         searchView.tableView.reloadData()
     }
     

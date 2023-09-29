@@ -31,6 +31,7 @@
 		555E6B8E2AC573AC00DCA052 /* ExerciseListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B8D2AC573AC00DCA052 /* ExerciseListTableViewCell.swift */; };
 		555E6B922AC5796F00DCA052 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B912AC5796F00DCA052 /* Exercise.swift */; };
 		555E6B982AC723B000DCA052 /* Exercise.realm in Resources */ = {isa = PBXBuildFile; fileRef = 555E6B972AC7238E00DCA052 /* Exercise.realm */; };
+		555E6B9A2AC72ECF00DCA052 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B992AC72ECF00DCA052 /* RealmManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		555E6B8D2AC573AC00DCA052 /* ExerciseListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseListTableViewCell.swift; sourceTree = "<group>"; };
 		555E6B912AC5796F00DCA052 /* Exercise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		555E6B972AC7238E00DCA052 /* Exercise.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = Exercise.realm; sourceTree = "<group>"; };
+		555E6B992AC72ECF00DCA052 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +159,7 @@
 		555E6B632AC3273500DCA052 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				555E6B992AC72ECF00DCA052 /* RealmManager.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 			files = (
 				555E6B872AC54FD000DCA052 /* ExerciseSearchView.swift in Sources */,
 				555E6B742AC34DD900DCA052 /* TodoListTableViewCell.swift in Sources */,
+				555E6B9A2AC72ECF00DCA052 /* RealmManager.swift in Sources */,
 				555E6B782AC42CB500DCA052 /* GrabberView.swift in Sources */,
 				555E6B662AC3285B00DCA052 /* Constants.swift in Sources */,
 				555E6B7B2AC44D4700DCA052 /* TabBarController.swift in Sources */,

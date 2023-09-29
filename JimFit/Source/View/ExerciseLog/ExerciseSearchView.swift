@@ -28,7 +28,7 @@ final class ExerciseSearchView: UIView {
         .backgroundColor(K.Color.Grayscale.border_Medium)
     
     /// UISearchBar 인스턴스 생성
-    private let searchBar: UISearchBar = UISearchBar().then {
+    let searchBar: UISearchBar = UISearchBar().then {
         $0.placeholder = "searchBar_placeholder"// 플레이스홀더 지정
         $0.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
         $0.setValue("cancel", forKey: "cancelButtonText") // 취소 버튼 이름 변경
@@ -128,7 +128,7 @@ final class ExerciseSearchView: UIView {
         
         addSubView(tableView)
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(selectedLabel.snp.bottom).offset(20)
+            make.top.equalTo(selectedLabel.snp.bottom).offset(12)
             make.horizontalEdges.equalToSuperview()
         }
         
