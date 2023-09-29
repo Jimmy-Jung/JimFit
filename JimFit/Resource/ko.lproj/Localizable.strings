@@ -6,4 +6,102 @@
   
 */
 
-"Hello" = "안녕하세요";
+// System
+"searchBar_placeholder" = "운동 이름을 입력하세요";
+"cancel" = "취소";
+
+// BodyPart
+"Back" = "등";
+"Calves" = "종아리";
+"Cardio" = "유산소";
+"Chest" = "가슴";
+"Feet" = "발";
+"Forearms" = "전완";
+"Full body" = "전신";
+"Hips" = "엉덩이";
+"Neck" = "목";
+"Plyometrics" = "플라이오메트릭스";
+"Shoulders" = "어깨";
+"Stretching" = "스트레칭";
+"Thighs" = "허벅지";
+"Upper Arms" = "상완";
+"Waist" = "허리";
+"Weightlifting" = "웨이트리프팅";
+"Yoga" = "요가";
+
+// TargetMuscles
+"Obliques" = "옆구리";
+"Brachialis" = "팔두근";
+"Deep Hip External Rotators" = "엉덩이 굴곡근종근육";
+"Adductor Magnus" = "대퇴내전근";
+"Trapezius Upper Fibers" = "승모근 상부";
+"Wrist Flexors" = "손목 굴곡근";
+"Sternocleidomastoid" = "목이두근";
+"Transverse Abdominus" = "횡격복근";
+"Deltoid Lateral" = "삼각근 측면";
+"Biceps Brachii" = "이두";
+"Deltoid Posterior" = "삼각근 후면";
+"Pectoralis Major Sternal Head" = "대흉근 절개장";
+"Brachioradialis" = "전완근";
+"Iliopsoas" = "허벅지굽힘근";
+"Adductor Brevis" = "대퇴내전근 짧은 부분";
+"Trapezius Lower Fibers" = "승모근 하부";
+"Serratus Anterior" = "전각근";
+"Gluteus Minimus" = "대둔근 작은 부분";
+"Latissimus Dorsi" = "넓적근";
+"Rectus Abdominis" = "직장근";
+"Quadriceps" = "사각근";
+"Deltoid Anterior" = "삼각근 전면";
+"Teres Minor" = "작은 동자근";
+"Rhomboids" = "마름근";
+"Hamstrings" = "햄스트링";
+"Tibialis Anterior" = "비골근";
+"Subscapularis" = "하견근";
+"Adductor Longus" = "대퇴내전근 긴 부분";
+"Triceps Brachii" = "삼두";
+"Gracilis" = "가늘근";
+"Soleus" = "비장근";
+"Wrist Extensors" = "손목 신전근";
+"Sartorius" = "재누근";
+"Infraspinatus" = "하회근";
+"Gluteus Maximus" = "대둔근 큰 부분";
+"Tensor Fasciae Latae" = "장대근";
+"Pectineous" = "허벅지내전근";
+"Splenius" = "장근";
+"Pectoralis Major Clavicular Head" = "대흉근 쇄골 부분";
+"Levator Scapulae" = "승모근 피관근";
+"Erector Spinae" = "척추슬근";
+"Gastrocnemius" = "비복근";
+"Trapezius Middle Fibers" = "승모근 중부";
+"Teres Major" = "큰 동자근";
+"Gluteus Medius" = "대둔근 중간 부분";
+
+// EquipmentType
+"Assisted" = "보조";
+"Band" = "밴드";
+"Barbell" = "바벨";
+"Battling Rope" = "배틀링 로프";
+"Body weight" = "체중";
+"Bosu ball" = "보수 볼";
+"Cable" = "케이블";
+"Dumbbell" = "덤벨";
+"Ez Barbell" = "이지 바벨";
+"Hammer" = "해머";
+"Kettlebell" = "케틀벨";
+"Leverage machine" = "레버리지 머신";
+"Medicine Ball" = "메디슨 볼";
+"Olympic marbell" = "올림픽 바벨";
+"Power Sled" = "파워 슬레드";
+"Resistance Band" = "저항 밴드";
+"Roll" = "롤";
+"Rollball" = "롤볼";
+"Rope" = "로프";
+"Sled machine" = "슬레드 머신";
+"Smith machine" = "스미스 머신";
+"Stability ball" = "스태빌리티 볼";
+"Stick" = "스틱";
+"Suspension" = "서스펜션";
+"Trap Bar" = "트랩 바";
+"Vibrate Plate" = "진동 판";
+"Weighted" = "웨이트";
+"Wheel roller" = "휠 롤러";

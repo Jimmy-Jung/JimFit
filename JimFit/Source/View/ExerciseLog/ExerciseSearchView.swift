@@ -13,13 +13,13 @@ final class ExerciseSearchView: UIView {
     var equipmentTypeList: [EquipmentType] = EquipmentType.allCases.dropLast()
     
     private lazy var likeButton: UIButton = makeButton(name: "0")
-        .setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        .setImage(K.Image.Like, for: .normal)
         .baseForegroundColor(.systemRed)
         .imagePadding(4)
     
     var likeCount: String = "0" {
         didSet {
-            likeButton.title(likeCount)
+            likeButton.titleWithFont(title: likeCount, font: K.Font.SubHeader)
         }
     }
     
@@ -29,11 +29,12 @@ final class ExerciseSearchView: UIView {
     
     /// UISearchBar 인스턴스 생성
     let searchBar: UISearchBar = UISearchBar().then {
-        $0.placeholder = "searchBar_placeholder"// 플레이스홀더 지정
+        $0.placeholder = "searchBar_placeholder".localized// 플레이스홀더 지정
         $0.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
-        $0.setValue("cancel", forKey: "cancelButtonText") // 취소 버튼 이름 변경
+        $0.setValue("cancel".localized, forKey: "cancelButtonText") // 취소 버튼 이름 변경
         $0.setShowsCancelButton(true, animated: true)
         $0.tintColor = .label // 커서 색상 지정
+        $0.autocapitalizationType = .none
     }
     
     private let bodyPartScrollView: UIScrollView = UIScrollView().then {
@@ -67,6 +68,7 @@ final class ExerciseSearchView: UIView {
         $0.rowHeight = UITableView.automaticDimension
         $0.separatorStyle = .none
         $0.allowsMultipleSelection = true
+        $0.keyboardDismissMode = .onDrag
     }
     
     private let addListButton = UIButton(configuration: .filled())
@@ -164,7 +166,7 @@ final class ExerciseSearchView: UIView {
         }
         
         for (index, bodyPart) in bodyPartList.enumerated() {
-            let button = makeButton(name: bodyPart.rawValue)
+            let button = makeButton(name: bodyPart.rawValue.localized)
             button.tag = index
             bodyPartStackView.addArrangedSubview(button)
             button.snp.makeConstraints { make in
@@ -174,7 +176,7 @@ final class ExerciseSearchView: UIView {
         }
         
         for (index, equipmentType) in equipmentTypeList.enumerated() {
-            let button = makeButton(name: equipmentType.rawValue)
+            let button = makeButton(name: equipmentType.rawValue.localized)
             button.tag = index
             equipmentTypeStackView.addArrangedSubview(button)
             button.snp.makeConstraints { make in

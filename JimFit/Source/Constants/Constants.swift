@@ -32,12 +32,14 @@ enum K {
     }
     
     enum Image {
-        static let checkBoxSelected = UIImage(systemName: "checkmark.square.fill")?
+        static let CheckBoxSelected = UIImage(systemName: "checkmark.square.fill")?
             .renderingColor(.paletteColors([.white, .clear, K.Color.Primary.Orange]))
         
-        static let checkBoxNormal = UIImage(systemName: "square")?
+        static let CheckBoxNormal = UIImage(systemName: "square")?
             .renderingColor(.monochrome)
             .font(.systemFont(ofSize: 17, weight: .bold))
+        
+        static let Like = UIImage(systemName: "heart.fill")
     }
     
     enum Font {

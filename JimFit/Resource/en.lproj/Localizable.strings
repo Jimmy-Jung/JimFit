@@ -6,4 +6,102 @@
   
 */
 
-"Hello" = "Hello";
+// System
+"searchBar_placeholder" = "Enter the exercise Name";
+"cancel" = "cancel";
+
+// BodyPart
+"Back" = "Back";
+"Calves" = "Calves";
+"Cardio" = "Cardio";
+"Chest" = "Chest";
+"Feet" = "Feet";
+"Forearms" = "Forearms";
+"Full body" = "Full body";
+"Hips" = "Hips";
+"Neck" = "Neck";
+"Plyometrics" = "Plyometrics";
+"Shoulders" = "Shoulders";
+"Stretching" = "Stretching";
+"Thighs" = "Thighs";
+"Upper Arms" = "Upper Arms";
+"Waist" = "Waist";
+"Weightlifting" = "Weightlifting";
+"Yoga" = "Yoga";
+
+// TargetMuscles
+"Obliques" = "Obliques";
+"Brachialis" = "Brachialis";
+"Deep Hip External Rotators" = "Deep Hip External Rotators";
+"Adductor Magnus" = "Adductor Magnus";
+"Trapezius Upper Fibers" = "Trapezius Upper Fibers";
+"Wrist Flexors" = "Wrist Flexors";
+"Sternocleidomastoid" = "Sternocleidomastoid";
+"Transverse Abdominus" = "Transverse Abdominus";
+"Deltoid Lateral" = "Deltoid Lateral";
+"Biceps Brachii" = "Biceps Brachii";
+"Deltoid Posterior" = "Deltoid Posterior";
+"Pectoralis Major Sternal Head" = "Pectoralis Major Sternal Head";
+"Brachioradialis" = "Brachioradialis";
+"Iliopsoas" = "Iliopsoas";
+"Adductor Brevis" = "Adductor Brevis";
+"Trapezius Lower Fibers" = "Trapezius Lower Fibers";
+"Serratus Anterior" = "Serratus Anterior";
+"Gluteus Minimus" = "Gluteus Minimus";
+"Latissimus Dorsi" = "Latissimus Dorsi";
+"Rectus Abdominis" = "Rectus Abdominis";
+"Quadriceps" = "Quadriceps";
+"Deltoid Anterior" = "Deltoid Anterior";
+"Teres Minor" = "Teres Minor";
+"Rhomboids" = "Rhomboids";
+"Hamstrings" = "Hamstrings";
+"Tibialis Anterior" = "Tibialis Anterior";
+"Subscapularis" = "Subscapularis";
+"Adductor Longus" = "Adductor Longus";
+"Triceps Brachii" = "Triceps Brachii";
+"Gracilis" = "Gracilis";
+"Soleus" = "Soleus";
+"Wrist Extensors" = "Wrist Extensors";
+"Sartorius" = "Sartorius";
+"Infraspinatus" = "Infraspinatus";
+"Gluteus Maximus" = "Gluteus Maximus";
+"Tensor Fasciae Latae" = "Tensor Fasciae Latae";
+"Pectineous" = "Pectineous";
+"Splenius" = "Splenius";
+"Pectoralis Major Clavicular Head" = "Pectoralis Major Clavicular Head";
+"Levator Scapulae" = "Levator Scapulae";
+"Erector Spinae" = "Erector Spinae";
+"Gastrocnemius" = "Gastrocnemius";
+"Trapezius Middle Fibers" = "Trapezius Middle Fibers";
+"Teres Major" = "Teres Major";
+"Gluteus Medius" = "Gluteus Medius";
+
+// EquipmentType
+"Assisted" = "Assisted";
+"Band" = "Band";
+"Barbell" = "Barbell";
+"Battling Rope" = "Battling Rope";
+"Body weight" = "Body weight";
+"Bosu ball" = "Bosu ball";
+"Cable" = "Cable";
+"Dumbbell" = "Dumbbell";
+"Ez Barbell" = "Ez Barbell";
+"Hammer" = "Hammer";
+"Kettlebell" = "Kettlebell";
+"Leverage machine" = "Leverage machine";
+"Medicine Ball" = "Medicine Ball";
+"Olympic marbell" = "Olympic marbell";
+"Power Sled" = "Power Sled";
+"Resistance Band" = "Resistance Band";
+"Roll" = "Roll";
+"Rollball" = "Rollball";
+"Rope" = "Rope";
+"Sled machine" = "Sled machine";
+"Smith machine" = "Smith machine";
+"Stability ball" = "Stability ball";
+"Stick" = "Stick";
+"Suspension" = "Suspension";
+"Trap Bar" = "Trap Bar";
+"Vibrate Plate" = "Vibrate Plate";
+"Weighted" = "Weighted";
+"Wheel roller" = "Wheel roller";

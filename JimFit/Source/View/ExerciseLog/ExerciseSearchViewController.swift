@@ -35,7 +35,12 @@ final class ExerciseSearchViewController: UIViewController, LikeUpdateDelegate {
         fetchSearchList()
         configureTableView()
         configureButtons()
+        configureSearchBar()
         updateLike()
+    }
+    
+    func configureSearchBar() {
+        searchView.searchBar.delegate = self
     }
     
     func updateLike() {
@@ -100,6 +105,32 @@ final class ExerciseSearchViewController: UIViewController, LikeUpdateDelegate {
     
             }
         }
+}
+
+extension ExerciseSearchViewController: UISearchBarDelegate {
+    /// 검색 버튼 클릭 시, 키보드를 내려준다.
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    /// 취소 버튼 클릭 시, 키보드를 내리고 검색 결과 초기호
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        searchBar.text = nil
+        updateList()
+    }
+    
+    
+    
+    /// 엔터 눌렀을 때 검색
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        // 검색어가 비어있는 경우, API 호출을 하지 않는다.
+        guard let term = searchBar.text, !term.isEmpty else { return }
+ 
+        // 검색어와 분류 정보를 전달하면서, API 호출을 한다.
+        self.list = self.list.filter("exerciseName CONTAINS %@", term)
+        self.searchView.tableView.reloadData()
+    }
 }
 
 extension ExerciseSearchViewController: UITableViewDelegate, UITableViewDataSource {

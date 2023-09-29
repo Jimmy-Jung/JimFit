@@ -13,9 +13,9 @@ class ExerciseListTableViewCell: UITableViewCell {
     var exercise: Exercise? {
         didSet {
             guard let exercise else { return }
-            let bodyPartList = exercise.bodyPart
+            let bodyPartList = exercise.bodyPart.map { $0.localized }
             let bodyPartString = bodyPartList.joined(separator: ", ")
-            let equipmentTypeString = exercise.equipmentType
+            let equipmentTypeString = exercise.equipmentType.localized
             var secondaryString: String {
                 if equipmentTypeString == "none" {
                     return bodyPartString

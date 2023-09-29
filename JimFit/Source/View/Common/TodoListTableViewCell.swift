@@ -12,8 +12,8 @@ final class TodoListTableViewCell: UITableViewCell {
         .cornerRadius(K.Size.cellRadius)
     
     lazy var checkButton = UIButton(configuration: .plain())
-        .setImage(K.Image.checkBoxNormal, for: .normal)
-        .setImage(K.Image.checkBoxSelected, for: .selected)
+        .setImage(K.Image.CheckBoxNormal, for: .normal)
+        .setImage(K.Image.CheckBoxSelected, for: .selected)
         .tintColor(K.Color.Grayscale.Tint)
         .addAction { [unowned self] in
             isChecked.toggle()
