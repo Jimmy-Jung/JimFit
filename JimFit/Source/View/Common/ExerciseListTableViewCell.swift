@@ -8,6 +8,8 @@
 import UIKit
 
 class ExerciseListTableViewCell: UITableViewCell {
+    
+    
 
     private let borderView = UIView()
         .cornerRadius(K.Size.cellRadius)
