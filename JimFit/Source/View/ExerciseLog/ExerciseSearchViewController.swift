@@ -106,20 +106,8 @@ extension ExerciseSearchViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ExerciseListTableViewCell.identifier, for: indexPath) as! ExerciseListTableViewCell
-        let bodyPartList = list[indexPath.row].bodyPart
-        let bodyPartString = bodyPartList.joined(separator: ", ")
-        let equipmentTypeString = list[indexPath.row].equipmentType
-        var secondaryString: String {
-            if equipmentTypeString == "none" {
-                return bodyPartString
-            } else {
-                return bodyPartString + " / " + equipmentTypeString
-            }
-        }
-        cell.titleLabel.text = list[indexPath.row].exerciseName
-        cell.secondaryLabel.text(secondaryString)
+        cell.exercise = list[indexPath.row]
         cell.selectionStyle = .none
-        
         return cell
     }
     

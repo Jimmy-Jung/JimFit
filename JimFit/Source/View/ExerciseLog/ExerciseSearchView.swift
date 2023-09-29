@@ -69,6 +69,12 @@ final class ExerciseSearchView: UIView {
         $0.allowsMultipleSelection = true
     }
     
+    private let addListButton = UIButton(configuration: .filled())
+        .baseForegroundColor(K.Color.Primary.White)
+        .baseBackgroundColor(K.Color.Primary.Orange)
+        .titleWithFont(title: "+  추가 완료", font: K.Font.Header2)
+        .cornerRadius(16)
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor(.systemBackground)
@@ -123,7 +129,15 @@ final class ExerciseSearchView: UIView {
         addSubView(tableView)
         tableView.snp.makeConstraints { make in
             make.top.equalTo(selectedLabel.snp.bottom).offset(20)
-            make.horizontalEdges.bottom.equalToSuperview()
+            make.horizontalEdges.equalToSuperview()
+        }
+        
+        addSubView(addListButton)
+        addListButton.snp.makeConstraints { make in
+            make.top.equalTo(tableView.snp.bottom)
+            make.horizontalEdges.equalToSuperview().inset(20)
+            make.bottom.equalTo(safeAreaLayoutGuide).inset(57)
+            make.height.equalTo(50)
         }
     }
     

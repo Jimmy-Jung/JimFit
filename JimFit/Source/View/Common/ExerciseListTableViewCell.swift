@@ -6,10 +6,27 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ExerciseListTableViewCell: UITableViewCell {
     
-    
+    var exercise: Exercise? {
+        didSet {
+            guard let exercise else { return }
+            let bodyPartList = exercise.bodyPart
+            let bodyPartString = bodyPartList.joined(separator: ", ")
+            let equipmentTypeString = exercise.equipmentType
+            var secondaryString: String {
+                if equipmentTypeString == "none" {
+                    return bodyPartString
+                } else {
+                    return bodyPartString + " / " + equipmentTypeString
+                }
+            }
+            titleLabel.text = exercise.exerciseName
+            secondaryLabel.text(secondaryString)
+        }
+    }
 
     private let borderView = UIView()
         .cornerRadius(K.Size.cellRadius)
