@@ -41,7 +41,7 @@ final class ExerciseSearchView: UIView {
         $0.showsHorizontalScrollIndicator = false
     }
     
-    private let bodyPartStackView = UIStackView()
+    let bodyPartStackView = UIStackView()
         .axis(.horizontal)
         .spacing(12)
         .alignment(.fill)
@@ -52,7 +52,7 @@ final class ExerciseSearchView: UIView {
         $0.showsHorizontalScrollIndicator = false
     }
     
-    private let equipmentTypeStackView = UIStackView()
+    let equipmentTypeStackView = UIStackView()
         .axis(.horizontal)
         .spacing(12)
         .alignment(.fill)
@@ -132,6 +132,7 @@ final class ExerciseSearchView: UIView {
             .baseForegroundColor(K.Color.Primary.Label)
             .titleWithFont(title: name, font: K.Font.SubHeader)
             .cornerStyle(.capsule)
+        
         button.layer.borderColor = K.Color.Grayscale.Tint.cgColor
         button.layer.borderWidth = K.Size.border_Medium
         button.layer.cornerRadius = 20
@@ -149,7 +150,6 @@ final class ExerciseSearchView: UIView {
         
         for bodyPart in bodyPartList {
             let button = makeButton(name: bodyPart.rawValue)
-            
             bodyPartStackView.addArrangedSubview(button)
             button.snp.makeConstraints { make in
                 make.height.equalTo(40)

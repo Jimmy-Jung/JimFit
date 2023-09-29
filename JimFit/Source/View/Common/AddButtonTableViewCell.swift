@@ -49,13 +49,7 @@ final class AddButtonTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        UIView.transition(with: addButton, duration: 0.1) {
-            self.addButton.layer.opacity = 0.8
-        } completion: { _ in
-            self.addButton.layer.opacity = 1
-        }
-        
+            self.addButton.isEnabled(!selected)
     }
     
 }

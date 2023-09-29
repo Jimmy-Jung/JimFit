@@ -46,7 +46,7 @@ enum K {
         static let SubHeader: UIFont = .systemFont(ofSize: 16, weight: .bold)
         static let Body: UIFont = .systemFont(ofSize: 16, weight: .medium)
         static let CellHeader: UIFont = .systemFont(ofSize: 15, weight: .bold)
-        static let CellBody: UIFont = .systemFont(ofSize: 14, weight: .bold)
+        static let CellBody: UIFont = .systemFont(ofSize: 13, weight: .bold)
     }
     enum Size {
         static let border_Thin: CGFloat = 1.0
