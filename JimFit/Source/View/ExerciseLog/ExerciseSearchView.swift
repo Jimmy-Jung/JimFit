@@ -9,8 +9,8 @@ import UIKit
 
 final class ExerciseSearchView: UIView {
     
-    var bodyPartList: [BodyPart] = BodyPart.allCases
-    var equipmentTypeList: [EquipmentType] = EquipmentType.allCases
+    var bodyPartList: [BodyPart] = BodyPart.allCases.dropLast()
+    var equipmentTypeList: [EquipmentType] = EquipmentType.allCases.dropLast()
     
     private lazy var likeButton: UIButton = makeButton(name: "0")
         .setImage(UIImage(systemName: "heart.fill"), for: .normal)
@@ -128,7 +128,8 @@ final class ExerciseSearchView: UIView {
     }
     
     private func makeButton(name: String) -> UIButton {
-        let button: UIButton = UIButton(configuration: .plain())
+        let button: UIButton = UIButton(configuration: .filled())
+            .baseBackgroundColor(.clear)
             .baseForegroundColor(K.Color.Primary.Label)
             .titleWithFont(title: name, font: K.Font.SubHeader)
             .cornerStyle(.capsule)
@@ -148,8 +149,9 @@ final class ExerciseSearchView: UIView {
             make.width.greaterThanOrEqualTo(40)
         }
         
-        for bodyPart in bodyPartList {
+        for (index, bodyPart) in bodyPartList.enumerated() {
             let button = makeButton(name: bodyPart.rawValue)
+            button.tag = index
             bodyPartStackView.addArrangedSubview(button)
             button.snp.makeConstraints { make in
                 make.height.equalTo(40)
@@ -157,9 +159,9 @@ final class ExerciseSearchView: UIView {
             }
         }
         
-        for equipmentType in equipmentTypeList {
+        for (index, equipmentType) in equipmentTypeList.enumerated() {
             let button = makeButton(name: equipmentType.rawValue)
-            
+            button.tag = index
             equipmentTypeStackView.addArrangedSubview(button)
             button.snp.makeConstraints { make in
                 make.height.equalTo(40)
