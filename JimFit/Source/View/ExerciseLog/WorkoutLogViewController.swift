@@ -1,5 +1,5 @@
 //
-//  ExerciseLogViewController.swift
+//  WorkoutLogViewController.swift
 //  JimFit
 //
 //  Created by 정준영 on 2023/09/26.
@@ -12,7 +12,11 @@ import SnapKit
 import JimmyKit
 import RealmSwift
 
-final class ExerciseLogViewController: UIViewController {
+protocol ReloadDelegate: AnyObject {
+    func reloadTableView()
+}
+
+final class WorkoutLogViewController: UIViewController {
     
     let calendar = FSCalendar()
     private lazy var headerTitle = UILabel()
@@ -21,29 +25,37 @@ final class ExerciseLogViewController: UIViewController {
     let grabberView = GrabberView()
     let tableView = UITableView()
     
+    
     private let headerDateFormatter = DateFormatter().then {
       $0.dateFormat = "yyyy년 MM월"
-      $0.locale = Locale(identifier: "ko_kr")
-//      $0.timeZone = TimeZone(identifier: "KST")
     }
     
     private let grabberDateFormatter = DateFormatter().then {
         $0.dateFormat = "MM월 dd일"
-        $0.locale = Locale(identifier: "ko_kr")
     }
     
-    private let primaryDateFormatter = DateFormatter().then {
+    private let pkDateFormatter = DateFormatter().then {
         $0.dateFormat = "yyyyMMdd"
     }
     
     var workoutLog: WorkoutLog?
     let realm = RealmManager.createRealm()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
         configureLayout()
         configureRealm()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print(#function)
+        tableView.reloadData()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print(#function)
     }
     
     func configureUI() {
@@ -122,9 +134,7 @@ final class ExerciseLogViewController: UIViewController {
     }
     
     func configureRealm() {
-        workoutLog = realm.objects(WorkoutLog.self).where {
-            $0.workoutDate == Date()
-        }.first
+        workoutLog = realm.object(ofType: WorkoutLog.self, forPrimaryKey: pkDateFormatter.string(from: calendar.selectedDate!))
     }
     
     func swipeGesture() {
@@ -166,7 +176,7 @@ final class ExerciseLogViewController: UIViewController {
     
 }
 
-extension ExerciseLogViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
+extension WorkoutLogViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
     // 주/월 단위 바뀔 때 애니메이션
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
         calendar.snp.updateConstraints { make in
@@ -185,15 +195,13 @@ extension ExerciseLogViewController: FSCalendarDelegate, FSCalendarDataSource, F
     }
     
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-        let numberOfEvents = realm.objects(WorkoutLog.self).where { $0.workoutDate == date}.count
-        return numberOfEvents
+        let event = realm.object(ofType: WorkoutLog.self, forPrimaryKey: pkDateFormatter.string(from: date))
+        return event != nil ? 1 : 0
     }
     
     // 날짜를 선택했을 때 할일을 지정
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        workoutLog = realm.objects(WorkoutLog.self).where {
-            $0.workoutDate == date
-        }.first
+        workoutLog = realm.object(ofType: WorkoutLog.self, forPrimaryKey: pkDateFormatter.string(from: date))
         let grabberString = grabberDateFormatter.string(from: date) + " 운동"
         grabberView.setTitle(grabberString)
         tableView.reloadData()
@@ -203,7 +211,7 @@ extension ExerciseLogViewController: FSCalendarDelegate, FSCalendarDataSource, F
 }
 
 
-extension ExerciseLogViewController: UITableViewDelegate, UITableViewDataSource {
+extension WorkoutLogViewController: UITableViewDelegate, UITableViewDataSource, ReloadDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -234,10 +242,17 @@ extension ExerciseLogViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if indexPath.section == 1 {
-            transition(viewController: ExerciseSearchViewController(), style: .present)
+            let date = pkDateFormatter.string(from: calendar.selectedDate!)
+            let exerciseSearchVC = ExerciseSearchViewController(date: date)
+            exerciseSearchVC.reloadDelegate = self
+            transition(viewController: exerciseSearchVC, style: .present)
             tableView.deselectRow(at: indexPath, animated: true)
         }
     }
     
-    
+    func reloadTableView() {
+        print(#function)
+        configureRealm()
+        self.tableView.reloadData()
+    }
 }

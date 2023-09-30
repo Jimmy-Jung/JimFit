@@ -19,7 +19,7 @@ final class TabBarController: UITabBarController {
     }
     
     private func configureTabBarController() {
-        let firstVC = ExerciseLogViewController()
+        let firstVC = WorkoutLogViewController()
         let firstNav = UINavigationController(rootViewController: firstVC)
         firstVC.title = "운동 기록"
         firstVC.tabBarItem.image = UIImage(systemName: "checklist.checked")

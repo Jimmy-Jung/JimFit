@@ -24,6 +24,7 @@ final class WorkoutListTableViewCell: UITableViewCell {
                 }
             }
             let weightDouble = workout.exerciseSets
+                .filter {$0.isFinished}
                 .map { $0.weight * Double($0.repetitionCount)}
                 .reduce(0.0,+)
             let setCount = workout.exerciseSets.count
@@ -34,7 +35,7 @@ final class WorkoutListTableViewCell: UITableViewCell {
             titleLabel.text(exercise.exerciseName)
             secondaryLabel.text(secondaryString)
             weightLabel.text(String(format: "%.1f", weightDouble) + " kg")
-            setLabel.text(String(describing: setCount))
+            setLabel.text(String(describing: setCount) + " set")
             progressLabel.text(String(Int(progression * 100)) + "%")
             progressBar.snp.updateConstraints { make in
                 make.width.equalTo(progressBar.frame.width * progression)
@@ -44,14 +45,6 @@ final class WorkoutListTableViewCell: UITableViewCell {
     
     let borderView = UIView()
         .cornerRadius(K.Size.cellRadius)
-    
-    lazy var checkButton = UIButton(configuration: .plain())
-        .setImage(K.Image.CheckBoxNormal, for: .normal)
-        .setImage(K.Image.CheckBoxSelected, for: .selected)
-        .tintColor(K.Color.Grayscale.Tint)
-        .addAction { [unowned self] in
-            isChecked.toggle()
-        }
     
     let titleLabel = UILabel()
         .text("BarBell Bench Press as BarBell Bench Press")
@@ -136,19 +129,9 @@ final class WorkoutListTableViewCell: UITableViewCell {
         .addArrangedSubview(titleStackView)
         .addArrangedSubview(infoStackView)
     
-    var isChecked: Bool = false {
-        didSet {
-            UIView.transition(with: checkButton, duration: 0.15, options: [.transitionCrossDissolve, .curveEaseInOut]) {
-                self.checkButton.isSelected = self.isChecked
-                self.checkButton.tintColor(self.isChecked ? .clear : .systemGray3)
-            }
-        }
-    }
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(borderView)
-        borderView.addSubview(checkButton)
         borderView.addSubview(progressBarBorder)
         progressBarBorder.addSubView(progressBar)
         borderView.addSubview(progressLabel)
@@ -157,12 +140,6 @@ final class WorkoutListTableViewCell: UITableViewCell {
         borderView.snp.makeConstraints { make in
             make.verticalEdges.equalToSuperview().inset(8)
             make.horizontalEdges.equalToSuperview().inset(20)
-        }
-        
-        checkButton.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.leading.equalToSuperview().inset(0)
-            make.size.equalTo(50)
         }
         
         weightLabel.snp.makeConstraints { make in
@@ -180,7 +157,7 @@ final class WorkoutListTableViewCell: UITableViewCell {
         }
         
         horizontalStackView.snp.makeConstraints { make in
-            make.leading.equalTo(checkButton.snp.trailing).offset(0)
+            make.leading.equalToSuperview().inset(16)
             make.top.equalToSuperview().inset(8)
             make.trailing.equalToSuperview().inset(8)
         }

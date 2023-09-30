@@ -11,18 +11,17 @@ import RealmSwift
 final class WorkoutLog: Object {
     @Persisted(primaryKey: true) var workoutDate: String
     @Persisted var workoutMemo: String
-    @Persisted var workouts: List<Workout>
+    @Persisted var workouts = List<Workout>()
     
-    convenience init(workoutDate: String, workoutMemo: String, workouts: List<Workout>) {
+    convenience init(workoutDate: String, workoutMemo: String) {
         self.init()
         self.workoutDate = workoutDate
         self.workoutMemo = workoutMemo
-        self.workouts = workouts
     }
 }
 
 final class Workout: Object {
-    @Persisted(primaryKey: true) var workoutId: ObjectId
+    @Persisted(primaryKey: true) var workoutId = ObjectId.generate()
     @Persisted var exercise: Exercise?
     @Persisted var exerciseTime: Int
     @Persisted var restTime: Int
@@ -61,7 +60,7 @@ final class Exercise: Object {
 }
 
 final class ExerciseSet: Object {
-    @Persisted(primaryKey: true) var setNumber: Int
+    @Persisted var setNumber: Int
     @Persisted var repetitionCount: Int
     @Persisted var weight: Double
     @Persisted var isFinished: Bool

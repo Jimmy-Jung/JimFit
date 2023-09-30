@@ -8,6 +8,8 @@
 import UIKit
 import RealmSwift
 
+
+
 protocol LikeUpdateDelegate: AnyObject {
     func updateLike()
 }
@@ -28,6 +30,7 @@ final class ExerciseSearchViewController: UIViewController, LikeUpdateDelegate {
     var isLikeButtonSelected: Bool = false
     
     var queryTuple: (NSPredicate?, NSPredicate?)
+    weak var reloadDelegate: ReloadDelegate?
     
     init(date: String) {
         self.date = date
@@ -57,7 +60,16 @@ final class ExerciseSearchViewController: UIViewController, LikeUpdateDelegate {
             try! realm.write {
                 workout.workouts.append(objectsIn: workouts)
             }
+        } else {
+            try! realm.write {
+                let workoutLog = WorkoutLog(workoutDate: date, workoutMemo: "")
+                workoutLog.workouts.append(objectsIn: workouts)
+                realm.add(workoutLog)
+            }
         }
+        
+        dismiss(animated: true)
+        reloadDelegate?.reloadTableView()
     }
     
     func configureSearchBar() {
