@@ -29,9 +29,10 @@
 		555E6B8A2AC55BCC00DCA052 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 555E6B892AC55BCC00DCA052 /* Realm */; };
 		555E6B8C2AC55BCC00DCA052 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 555E6B8B2AC55BCC00DCA052 /* RealmSwift */; };
 		555E6B8E2AC573AC00DCA052 /* ExerciseListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B8D2AC573AC00DCA052 /* ExerciseListTableViewCell.swift */; };
-		555E6B922AC5796F00DCA052 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B912AC5796F00DCA052 /* Exercise.swift */; };
+		555E6B922AC5796F00DCA052 /* ExerciseDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B912AC5796F00DCA052 /* ExerciseDetail.swift */; };
 		555E6B982AC723B000DCA052 /* Exercise.realm in Resources */ = {isa = PBXBuildFile; fileRef = 555E6B972AC7238E00DCA052 /* Exercise.realm */; };
 		555E6B9A2AC72ECF00DCA052 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B992AC72ECF00DCA052 /* RealmManager.swift */; };
+		555E6B9C2AC7F3B100DCA052 /* WorkoutLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B9B2AC7F3B100DCA052 /* WorkoutLog.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,9 +55,10 @@
 		555E6B842AC54EDB00DCA052 /* ExerciseSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSearchViewController.swift; sourceTree = "<group>"; };
 		555E6B862AC54FD000DCA052 /* ExerciseSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSearchView.swift; sourceTree = "<group>"; };
 		555E6B8D2AC573AC00DCA052 /* ExerciseListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseListTableViewCell.swift; sourceTree = "<group>"; };
-		555E6B912AC5796F00DCA052 /* Exercise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
+		555E6B912AC5796F00DCA052 /* ExerciseDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseDetail.swift; sourceTree = "<group>"; };
 		555E6B972AC7238E00DCA052 /* Exercise.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = Exercise.realm; sourceTree = "<group>"; };
 		555E6B992AC72ECF00DCA052 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		555E6B9B2AC7F3B100DCA052 /* WorkoutLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutLog.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,7 +191,8 @@
 		555E6B692AC32CF500DCA052 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				555E6B912AC5796F00DCA052 /* Exercise.swift */,
+				555E6B912AC5796F00DCA052 /* ExerciseDetail.swift */,
+				555E6B9B2AC7F3B100DCA052 /* WorkoutLog.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -317,12 +320,13 @@
 				555E6B782AC42CB500DCA052 /* GrabberView.swift in Sources */,
 				555E6B662AC3285B00DCA052 /* Constants.swift in Sources */,
 				555E6B7B2AC44D4700DCA052 /* TabBarController.swift in Sources */,
+				555E6B9C2AC7F3B100DCA052 /* WorkoutLog.swift in Sources */,
 				555E6B572AC3086500DCA052 /* ExerciseLogViewController.swift in Sources */,
 				555E6B8E2AC573AC00DCA052 /* ExerciseListTableViewCell.swift in Sources */,
 				555E6B852AC54EDB00DCA052 /* ExerciseSearchViewController.swift in Sources */,
 				555E6B7D2AC4663000DCA052 /* AddButtonTableViewCell.swift in Sources */,
 				555E6B3C2AC1D76B00DCA052 /* ViewController.swift in Sources */,
-				555E6B922AC5796F00DCA052 /* Exercise.swift in Sources */,
+				555E6B922AC5796F00DCA052 /* ExerciseDetail.swift in Sources */,
 				555E6B382AC1D76B00DCA052 /* AppDelegate.swift in Sources */,
 				555E6B712AC3459A00DCA052 /* String+Extension.swift in Sources */,
 				555E6B3A2AC1D76B00DCA052 /* SceneDelegate.swift in Sources */,

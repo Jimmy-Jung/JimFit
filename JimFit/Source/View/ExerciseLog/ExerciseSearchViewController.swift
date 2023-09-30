@@ -128,7 +128,7 @@ extension ExerciseSearchViewController: UISearchBarDelegate {
         guard let term = searchBar.text, !term.isEmpty else { return }
  
         // 검색어와 분류 정보를 전달하면서, API 호출을 한다.
-        self.list = self.list.filter("exerciseName CONTAINS %@", term)
+        self.list = self.list.filter("exerciseName CONTAINS[c] %@", term)
         self.searchView.tableView.reloadData()
     }
 }
