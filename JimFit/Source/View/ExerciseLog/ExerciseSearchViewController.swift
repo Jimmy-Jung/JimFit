@@ -17,7 +17,7 @@ final class ExerciseSearchViewController: UIViewController, LikeUpdateDelegate {
         case bodyPart
         case equipmentType
     }
-    
+    private var date: String
     private lazy var searchView = ExerciseSearchView(frame: view.frame)
     private var realm: Realm!
     private var list: Results<Exercise>!
@@ -29,6 +29,16 @@ final class ExerciseSearchViewController: UIViewController, LikeUpdateDelegate {
     
     var queryTuple: (NSPredicate?, NSPredicate?)
     
+    init(date: String) {
+        self.date = date
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(searchView)
@@ -37,6 +47,17 @@ final class ExerciseSearchViewController: UIViewController, LikeUpdateDelegate {
         configureButtons()
         configureSearchBar()
         updateLike()
+        searchView.addListButton.addTarget(self, action: #selector(addListButtonTapped(_:)), for: .touchUpInside)
+    }
+    
+    @objc func addListButtonTapped(_ sender: UIButton) {
+        guard let selectedCells = searchView.tableView.indexPathsForSelectedRows else { return }
+        let workouts = selectedCells.map { Workout(exercise: list[$0.row])}
+        if let workout = realm.object(ofType: WorkoutLog.self, forPrimaryKey: date) {
+            try! realm.write {
+                workout.workouts.append(objectsIn: workouts)
+            }
+        }
     }
     
     func configureSearchBar() {
@@ -148,7 +169,19 @@ extension ExerciseSearchViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        _ = tableView.dequeueReusableCell(withIdentifier: ExerciseListTableViewCell.identifier, for: indexPath) as! ExerciseListTableViewCell
+        updateAddListButtonState()
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        updateAddListButtonState()
+    }
+    
+    func updateAddListButtonState() {
+        if let selectedRows = searchView.tableView.indexPathsForSelectedRows {
+            searchView.addListButton.isEnabled(selectedRows.count > 0)
+        } else {
+            searchView.addListButton.isEnabled(false)
+        }
     }
 }
 

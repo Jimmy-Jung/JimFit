@@ -22,7 +22,7 @@ final class ExerciseLogViewController: UIViewController {
     let tableView = UITableView()
     
     private let headerDateFormatter = DateFormatter().then {
-      $0.dateFormat = "YYYY년 MM월"
+      $0.dateFormat = "yyyy년 MM월"
       $0.locale = Locale(identifier: "ko_kr")
 //      $0.timeZone = TimeZone(identifier: "KST")
     }
@@ -32,32 +32,19 @@ final class ExerciseLogViewController: UIViewController {
         $0.locale = Locale(identifier: "ko_kr")
     }
     
-    var events: [Date] = []
-    var selectedDate: Date!
-    var workoutLogs: Results<WorkoutLog>!
+    private let primaryDateFormatter = DateFormatter().then {
+        $0.dateFormat = "yyyyMMdd"
+    }
+    
+    var workoutLog: WorkoutLog?
     let realm = RealmManager.createRealm()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
         configureLayout()
-//        setEvents()
         configureRealm()
     }
-    
-//    func setEvents() {
-//        let dfMatter = DateFormatter()
-//        dfMatter.locale = Locale(identifier: "ko_KR")
-//        dfMatter.dateFormat = "yyyy-MM-dd"
-//
-//        // events
-//        let myFirstEvent = dfMatter.date(from: "2023-09-26")
-//        let mySecondEvent = dfMatter.date(from: "2023-09-27")
-//        let myThirdEvent = dfMatter.date(from: "2023-09-20")
-//
-//        events = [myFirstEvent!,myFirstEvent!, mySecondEvent!, myThirdEvent!]
-//
-//    }
     
     func configureUI() {
         view.backgroundColor(.secondarySystemGroupedBackground)
@@ -81,7 +68,7 @@ final class ExerciseLogViewController: UIViewController {
     func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(TodoListTableViewCell.self, forCellReuseIdentifier: TodoListTableViewCell.identifier)
+        tableView.register(WorkoutListTableViewCell.self, forCellReuseIdentifier: WorkoutListTableViewCell.identifier)
         tableView.register(AddButtonTableViewCell.self, forCellReuseIdentifier: AddButtonTableViewCell.identifier)
         tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorStyle = .none
@@ -129,15 +116,15 @@ final class ExerciseLogViewController: UIViewController {
         
         calendar.appearance.eventDefaultColor = K.Color.Primary.Orange
         calendar.appearance.eventSelectionColor = K.Color.Primary.Orange
+
         
-        selectedDate = calendar.today
-        calendar.select(calendar.today, scrollToDate: true)
+        calendar.select(Date(), scrollToDate: true)
     }
     
     func configureRealm() {
-        workoutLogs = realm.objects(WorkoutLog.self).where {
-            $0.workoutDate == selectedDate
-        }
+        workoutLog = realm.objects(WorkoutLog.self).where {
+            $0.workoutDate == Date()
+        }.first
     }
     
     func swipeGesture() {
@@ -193,24 +180,23 @@ extension ExerciseLogViewController: FSCalendarDelegate, FSCalendarDataSource, F
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
         let currentDate = calendar.currentPage
         let headerDateString = headerDateFormatter.string(from: currentDate)
-        let grabberString = grabberDateFormatter.string(from: currentDate) + " 운동"
+
         headerTitle.text(headerDateString)
-        grabberView.setTitle(grabberString)
     }
     
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-        let logsForDate = workoutLogs.where { $0.workoutDate == date}
-        return logsForDate.count
+        let numberOfEvents = realm.objects(WorkoutLog.self).where { $0.workoutDate == date}.count
+        return numberOfEvents
     }
     
     // 날짜를 선택했을 때 할일을 지정
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        selectedDate = date
-        workoutLogs = realm.objects(WorkoutLog.self).where {
-            $0.workoutDate == selectedDate
-            
-        }
-//        calendar.reloadData()
+        workoutLog = realm.objects(WorkoutLog.self).where {
+            $0.workoutDate == date
+        }.first
+        let grabberString = grabberDateFormatter.string(from: date) + " 운동"
+        grabberView.setTitle(grabberString)
+        tableView.reloadData()
     }
 
     
@@ -224,7 +210,7 @@ extension ExerciseLogViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return 5
+            return workoutLog?.workouts.count ?? 0
         } else {
             return 1
         }
@@ -233,7 +219,8 @@ extension ExerciseLogViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: TodoListTableViewCell.identifier, for: indexPath) as! TodoListTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: WorkoutListTableViewCell.identifier, for: indexPath) as! WorkoutListTableViewCell
+            cell.workout = workoutLog?.workouts[indexPath.row]
             cell.selectionStyle = .none
             return cell
         } else {

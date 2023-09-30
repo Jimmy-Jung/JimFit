@@ -9,12 +9,11 @@ import Foundation
 import RealmSwift
 
 final class WorkoutLog: Object {
-    @Persisted(primaryKey: true) var workoutLogId: ObjectId
-    @Persisted var workoutDate: Date
+    @Persisted(primaryKey: true) var workoutDate: String
     @Persisted var workoutMemo: String
     @Persisted var workouts: List<Workout>
     
-    convenience init(workoutLogId: ObjectId, workoutDate: Date, workoutMemo: String, workouts: List<Workout>) {
+    convenience init(workoutDate: String, workoutMemo: String, workouts: List<Workout>) {
         self.init()
         self.workoutDate = workoutDate
         self.workoutMemo = workoutMemo
@@ -27,14 +26,14 @@ final class Workout: Object {
     @Persisted var exercise: Exercise?
     @Persisted var exerciseTime: Int
     @Persisted var restTime: Int
-    @Persisted var exerciseSets: List<ExerciseSet>
+    @Persisted var exerciseSets = List<ExerciseSet>()
     
-    convenience init(exercise: Exercise?, exerciseTime: Int, restTime: Int, exerciseSets: List<ExerciseSet>) {
+    convenience init(exercise: Exercise?, exerciseTime: Int = 0, restTime: Int = 0) {
         self.init()
         self.exercise = exercise
         self.exerciseTime = exerciseTime
         self.restTime = restTime
-        self.exerciseSets = exerciseSets
+        self.exerciseSets.append(objectsIn: [ExerciseSet(setNumber: 1), ExerciseSet(setNumber: 2), ExerciseSet(setNumber: 3), ExerciseSet(setNumber: 4)])
     }
 }
 
@@ -62,16 +61,16 @@ final class Exercise: Object {
 }
 
 final class ExerciseSet: Object {
-    @Persisted var setNumber: Int
-    @Persisted var totalCount: Int
+    @Persisted(primaryKey: true) var setNumber: Int
     @Persisted var repetitionCount: Int
     @Persisted var weight: Double
+    @Persisted var isFinished: Bool
     
-    convenience init(setNumber: Int, totalCount: Int, repetitionCount: Int, weight: Double) {
+    convenience init(setNumber: Int, repetitionCount: Int = 12, weight: Double = 45, isFinished: Bool = false) {
         self.init()
         self.setNumber = setNumber
-        self.totalCount = totalCount
         self.repetitionCount = repetitionCount
         self.weight = weight
+        self.isFinished = isFinished
     }
 }

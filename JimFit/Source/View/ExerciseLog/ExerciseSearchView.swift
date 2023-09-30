@@ -64,18 +64,19 @@ final class ExerciseSearchView: UIView {
         .font(K.Font.SubHeader)
         .numberOfLines(2)
     
-    let tableView = UITableView().then {
+    let tableView: UITableView = UITableView().then {
         $0.rowHeight = UITableView.automaticDimension
         $0.separatorStyle = .none
         $0.allowsMultipleSelection = true
         $0.keyboardDismissMode = .onDrag
     }
     
-    private let addListButton = UIButton(configuration: .filled())
+    let addListButton = UIButton(configuration: .filled())
         .baseForegroundColor(K.Color.Primary.White)
         .baseBackgroundColor(K.Color.Primary.Orange)
         .titleWithFont(title: "+  추가 완료", font: K.Font.Header2)
         .cornerRadius(16)
+        .isEnabled(false)
     
     override init(frame: CGRect) {
         super.init(frame: frame)

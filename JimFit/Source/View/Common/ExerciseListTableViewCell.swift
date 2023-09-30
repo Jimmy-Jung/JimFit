@@ -23,7 +23,7 @@ class ExerciseListTableViewCell: UITableViewCell {
                     return bodyPartString + " / " + equipmentTypeString
                 }
             }
-            titleLabel.text = exercise.exerciseName
+            titleLabel.text(exercise.exerciseName)
             secondaryLabel.text(secondaryString)
             likeButton.isSelected = exercise.liked
             setupLikeButtonColor()
@@ -37,13 +37,11 @@ class ExerciseListTableViewCell: UITableViewCell {
         .setBorder(color: K.Color.Grayscale.border_Thin, width: K.Size.border_Thin)
  
     let titleLabel = UILabel()
-        .text("BarBell Bench Press as BarBell Bench Press")
         .font(K.Font.CellHeader)
         .numberOfLines(2)
         .textColor(K.Color.Primary.Label)
     
     let secondaryLabel = UILabel()
-        .text("Chest")
         .font(K.Font.CellBody)
         .numberOfLines(2)
         .textColor(K.Color.Grayscale.Label)
@@ -62,8 +60,8 @@ class ExerciseListTableViewCell: UITableViewCell {
         .axis(.vertical)
         .alignment(.fill)
         .distribution(.fill)
+        .spacing(4)
         .addArrangedSubview(titleLabel)
-        .addArrangedSubview(UIView())
         .addArrangedSubview(secondaryLabel)
     
    
@@ -120,7 +118,7 @@ class ExerciseListTableViewCell: UITableViewCell {
         }
         
         likeButton.snp.makeConstraints { make in
-            make.size.equalTo(50)
+            make.width.equalTo(likeButton.snp.height)
         }
 
         

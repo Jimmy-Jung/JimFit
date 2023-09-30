@@ -7,7 +7,41 @@
 
 import UIKit
 
-final class TodoListTableViewCell: UITableViewCell {
+final class WorkoutListTableViewCell: UITableViewCell {
+    
+    var workout: Workout? {
+        didSet {
+            guard let workout else { return }
+            guard let exercise = workout.exercise else { return }
+            let bodyPartList = exercise.bodyPart.map { $0.localized }
+            let bodyPartString = bodyPartList.joined(separator: ", ")
+            let equipmentTypeString = exercise.equipmentType.localized
+            var secondaryString: String {
+                if equipmentTypeString == "none" {
+                    return bodyPartString
+                } else {
+                    return bodyPartString + " / " + equipmentTypeString
+                }
+            }
+            let weightDouble = workout.exerciseSets
+                .map { $0.weight * Double($0.repetitionCount)}
+                .reduce(0.0,+)
+            let setCount = workout.exerciseSets.count
+            let setFinishedCount = workout.exerciseSets
+                .filter { $0.isFinished }
+                .count
+            let progression = Double(setFinishedCount) / Double(setCount)
+            titleLabel.text(exercise.exerciseName)
+            secondaryLabel.text(secondaryString)
+            weightLabel.text(String(format: "%.1f", weightDouble) + " kg")
+            setLabel.text(String(describing: setCount))
+            progressLabel.text(String(Int(progression * 100)) + "%")
+            progressBar.snp.updateConstraints { make in
+                make.width.equalTo(progressBar.frame.width * progression)
+            }
+        }
+    }
+    
     let borderView = UIView()
         .cornerRadius(K.Size.cellRadius)
     
@@ -25,7 +59,7 @@ final class TodoListTableViewCell: UITableViewCell {
         .numberOfLines(2)
         .textColor(K.Color.Primary.Label)
     
-    let bodyPartLabel = UILabel()
+    let secondaryLabel = UILabel()
         .text("Chest")
         .font(K.Font.CellBody)
         .textColor(K.Color.Grayscale.Label)
@@ -65,8 +99,9 @@ final class TodoListTableViewCell: UITableViewCell {
         .axis(.vertical)
         .alignment(.fill)
         .distribution(.fill)
+        .spacing(4)
         .addArrangedSubview(titleLabel)
-        .addArrangedSubview(bodyPartLabel)
+        .addArrangedSubview(secondaryLabel)
     
     lazy var weightStackView: UIStackView = UIStackView()
         .axis(.horizontal)
@@ -167,7 +202,7 @@ final class TodoListTableViewCell: UITableViewCell {
             make.centerY.equalToSuperview()
             make.leading.equalToSuperview()
             make.height.equalTo(4)
-            make.width.equalTo(100)
+            make.width.equalTo(0)
         }
         
     }
