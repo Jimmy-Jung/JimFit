@@ -10,10 +10,11 @@ import Then
 import FSCalendar
 import SnapKit
 import JimmyKit
+import RealmSwift
 
 final class ExerciseLogViewController: UIViewController {
     
-    let calendarView = FSCalendar()
+    let calendar = FSCalendar()
     private lazy var headerTitle = UILabel()
         .text(headerDateFormatter.string(from: Date()))
         .font(K.Font.Header1)
@@ -32,38 +33,41 @@ final class ExerciseLogViewController: UIViewController {
     }
     
     var events: [Date] = []
+    var selectedDate: Date!
+    var workoutLogs: Results<WorkoutLog>!
+    let realm = RealmManager.createRealm()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.scrollEdgeAppearance?.backgroundColor = .secondarySystemGroupedBackground
         configureUI()
         configureLayout()
-        setEvents()
+//        setEvents()
+        configureRealm()
     }
     
-    func setEvents() {
-        let dfMatter = DateFormatter()
-        dfMatter.locale = Locale(identifier: "ko_KR")
-        dfMatter.dateFormat = "yyyy-MM-dd"
-        
-        // events
-        let myFirstEvent = dfMatter.date(from: "2023-09-26")
-        let mySecondEvent = dfMatter.date(from: "2023-09-27")
-        let myThirdEvent = dfMatter.date(from: "2023-09-20")
-        
-        events = [myFirstEvent!,myFirstEvent!, mySecondEvent!, myThirdEvent!]
-
-    }
+//    func setEvents() {
+//        let dfMatter = DateFormatter()
+//        dfMatter.locale = Locale(identifier: "ko_KR")
+//        dfMatter.dateFormat = "yyyy-MM-dd"
+//
+//        // events
+//        let myFirstEvent = dfMatter.date(from: "2023-09-26")
+//        let mySecondEvent = dfMatter.date(from: "2023-09-27")
+//        let myThirdEvent = dfMatter.date(from: "2023-09-20")
+//
+//        events = [myFirstEvent!,myFirstEvent!, mySecondEvent!, myThirdEvent!]
+//
+//    }
     
     func configureUI() {
         view.backgroundColor(.secondarySystemGroupedBackground)
         configureCalendar()
         configureGrabberView()
         configureTableView()
-        view.addSubview(calendarView)
+        view.addSubview(calendar)
         view.addSubview(grabberView)
         view.addSubview(tableView)
-        calendarView.addSubView(headerTitle)
+        calendar.addSubView(headerTitle)
         swipeGesture()
         
         
@@ -85,7 +89,7 @@ final class ExerciseLogViewController: UIViewController {
     }
     
     func configureLayout() {
-        calendarView.snp.makeConstraints { make in
+        calendar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.horizontalEdges.equalToSuperview().inset(20)
             make.height.equalTo(300)
@@ -95,7 +99,7 @@ final class ExerciseLogViewController: UIViewController {
             make.leading.equalToSuperview().inset(10)
         }
         grabberView.snp.makeConstraints { make in
-            make.top.equalTo(calendarView.snp.bottom).offset(10)
+            make.top.equalTo(calendar.snp.bottom).offset(10)
             make.horizontalEdges.equalToSuperview()
             make.height.equalTo(64)
         }
@@ -107,25 +111,33 @@ final class ExerciseLogViewController: UIViewController {
     }
     
     func configureCalendar() {
-        calendarView.delegate = self
-        calendarView.dataSource = self
-        calendarView.locale = Locale(identifier: "ko_KR")
-        calendarView.appearance.headerTitleColor = .clear // 기본 헤더 타이틀 제거
-        calendarView.appearance.headerMinimumDissolvedAlpha = 0.0
-        calendarView.placeholderType = .fillHeadTail
-        calendarView.appearance.todayColor = K.Color.Grayscale.Tint
-        calendarView.appearance.selectionColor = K.Color.Primary.Orange
+        calendar.delegate = self
+        calendar.dataSource = self
+        calendar.locale = Locale(identifier: "ko_KR")
+        calendar.appearance.headerTitleColor = .clear // 기본 헤더 타이틀 제거
+        calendar.appearance.headerMinimumDissolvedAlpha = 0.0
+        calendar.placeholderType = .fillHeadTail
+        calendar.appearance.todayColor = K.Color.Grayscale.Tint
+        calendar.appearance.selectionColor = K.Color.Primary.Orange
         
-        calendarView.appearance.weekdayTextColor = K.Color.Grayscale.Label
-        calendarView.appearance.weekdayFont = K.Font.SubHeader
-        calendarView.appearance.titleDefaultColor = K.Color.Primary.Label
-        calendarView.appearance.titleWeekendColor = K.Color.Primary.Blue
+        calendar.appearance.weekdayTextColor = K.Color.Grayscale.Label
+        calendar.appearance.weekdayFont = K.Font.SubHeader
+        calendar.appearance.titleDefaultColor = K.Color.Primary.Label
+        calendar.appearance.titleWeekendColor = K.Color.Primary.Blue
         
-        calendarView.appearance.titleFont = K.Font.Body
+        calendar.appearance.titleFont = K.Font.Body
         
-        calendarView.appearance.eventDefaultColor = K.Color.Primary.Orange
-        calendarView.appearance.eventSelectionColor = K.Color.Primary.Orange
+        calendar.appearance.eventDefaultColor = K.Color.Primary.Orange
+        calendar.appearance.eventSelectionColor = K.Color.Primary.Orange
         
+        selectedDate = calendar.today
+        calendar.select(calendar.today, scrollToDate: true)
+    }
+    
+    func configureRealm() {
+        workoutLogs = realm.objects(WorkoutLog.self).where {
+            $0.workoutDate == selectedDate
+        }
     }
     
     func swipeGesture() {
@@ -134,14 +146,14 @@ final class ExerciseLogViewController: UIViewController {
         swipeUpForGrabber.direction = UISwipeGestureRecognizer.Direction.up
         swipeUpForCalendar.direction = UISwipeGestureRecognizer.Direction.up
         grabberView.addGestureRecognizer(swipeUpForGrabber)
-        calendarView.addGestureRecognizer(swipeUpForCalendar)
+        calendar.addGestureRecognizer(swipeUpForCalendar)
         let swipeDownForGrabber = UISwipeGestureRecognizer(target: self, action: #selector(swipe(_:)))
         let swipeDownForCalendar = UISwipeGestureRecognizer(target: self, action: #selector(swipe(_:)))
         swipeDownForGrabber.direction = UISwipeGestureRecognizer.Direction.down
         swipeDownForCalendar.direction = UISwipeGestureRecognizer.Direction.down
         
         grabberView.addGestureRecognizer(swipeDownForGrabber)
-        calendarView.addGestureRecognizer(swipeDownForCalendar)
+        calendar.addGestureRecognizer(swipeDownForCalendar)
     }
     
     @objc func swipe(_ gesture: UIGestureRecognizer) {
@@ -150,13 +162,13 @@ final class ExerciseLogViewController: UIViewController {
         }
         switch swipeGesture.direction {
         case .up :
-            self.calendarView.setScope(.week, animated: true)
+            self.calendar.setScope(.week, animated: true)
             UIView.transition(with: view, duration: 0.3) {
                 self.view.backgroundColor(.secondarySystemBackground)
             }
             
         case .down:
-            self.calendarView.setScope(.month, animated: true)
+            self.calendar.setScope(.month, animated: true)
             UIView.transition(with: view, duration: 0.3) {
                 self.view.backgroundColor(.secondarySystemGroupedBackground)
             }
@@ -170,7 +182,7 @@ final class ExerciseLogViewController: UIViewController {
 extension ExerciseLogViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
     // 주/월 단위 바뀔 때 애니메이션
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
-        calendarView.snp.updateConstraints { make in
+        calendar.snp.updateConstraints { make in
             make.height.equalTo(bounds.height)
         }
         UIView.animate(withDuration: 0.5) {
@@ -187,11 +199,18 @@ extension ExerciseLogViewController: FSCalendarDelegate, FSCalendarDataSource, F
     }
     
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-        return self.events.filter { $0 == date }.count
+        let logsForDate = workoutLogs.where { $0.workoutDate == date}
+        return logsForDate.count
     }
     
     // 날짜를 선택했을 때 할일을 지정
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        selectedDate = date
+        workoutLogs = realm.objects(WorkoutLog.self).where {
+            $0.workoutDate == selectedDate
+            
+        }
+//        calendar.reloadData()
     }
 
     

@@ -24,12 +24,12 @@ final class TabBarController: UITabBarController {
         firstVC.title = "운동 기록"
         firstVC.tabBarItem.image = UIImage(systemName: "checklist.checked")
         firstVC.tabBarItem.title = "기록"
-        
         let vc = UIViewController()
         vc.view.backgroundColor(.systemBackground)
         vc.title = "AS"
+        let nav = UINavigationController(rootViewController: vc)
         
-        setViewControllers([firstNav, vc], animated: true)
+        setViewControllers([firstNav, nav], animated: true)
     }
     
     private func setupTabBarController() {

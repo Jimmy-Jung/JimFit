@@ -24,12 +24,12 @@ final class WorkoutLog: Object {
 
 final class Workout: Object {
     @Persisted(primaryKey: true) var workoutId: ObjectId
-    @Persisted var exercise: Exercise
+    @Persisted var exercise: Exercise?
     @Persisted var exerciseTime: Int
     @Persisted var restTime: Int
     @Persisted var exerciseSets: List<ExerciseSet>
     
-    convenience init(exercise: Exercise, exerciseTime: Int, restTime: Int, exerciseSets: List<ExerciseSet>) {
+    convenience init(exercise: Exercise?, exerciseTime: Int, restTime: Int, exerciseSets: List<ExerciseSet>) {
         self.init()
         self.exercise = exercise
         self.exerciseTime = exerciseTime
