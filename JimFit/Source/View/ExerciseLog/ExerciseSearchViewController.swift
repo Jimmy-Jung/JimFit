@@ -124,7 +124,7 @@ final class ExerciseSearchViewController: UIViewController, LikeUpdateDelegate {
             sender.baseForegroundColor(.red)
             sender.layer.borderColor = K.Color.Grayscale.Tint.cgColor
         }
-        updateList()
+        updateLocalizedList()
         searchView.tableView.reloadData()
     }
     private func fetchSearchList() {
@@ -172,7 +172,7 @@ extension ExerciseSearchViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         searchBar.text = nil
-        updateList()
+        updateLocalizedList()
         searchView.tableView.reloadData()
     }
     
@@ -182,7 +182,7 @@ extension ExerciseSearchViewController: UISearchBarDelegate {
         guard let term = searchBar.text, !term.isEmpty else { return }
         let separatedString = term.components(separatedBy: " ")
         // 검색어와 분류 정보를 전달하면서, API 호출을 한다.
-        updateList()
+        updateLocalizedList()
         separatedString.forEach { query in
             self.localizedList = self.localizedList
                 .where {
@@ -241,7 +241,8 @@ extension ExerciseSearchViewController {
         }
         // 선택한 버튼에 저장 or 같은 버튼이면 nil할당
         saveSelectedButton(type: type, button: button)
-        updateList()
+        updateLocalizedList()
+        searchBarTextDidEndEditing(searchView.searchBar)
         searchView.tableView.reloadData()
     }
     
@@ -273,7 +274,7 @@ extension ExerciseSearchViewController {
         }
     }
     
-    func updateList() {
+    func updateLocalizedList() {
         if isLikeButtonSelected {
             switch queryTuple {
             case (nil, nil):
