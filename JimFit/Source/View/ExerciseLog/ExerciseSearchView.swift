@@ -9,8 +9,8 @@ import UIKit
 
 final class ExerciseSearchView: UIView {
     
-    var bodyPartList: [BodyPart] = BodyPart.allCases.dropLast()
-    var equipmentTypeList: [EquipmentType] = EquipmentType.allCases.dropLast()
+    var bodyPartList: [BodyPart] = BodyPart.allCases
+    var equipmentTypeList: [EquipmentType] = EquipmentType.allCases
     
     private lazy var likeButton: UIButton = makeButton(name: "0")
         .setImage(K.Image.Like, for: .normal)

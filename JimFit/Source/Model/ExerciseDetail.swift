@@ -19,19 +19,17 @@ enum BodyPart: String, CaseIterable {
     case calves = "Calves"
     case neck = "Neck"
     case weightlifting = "Weightlifting"
-    case plyometrics = "Plyometrics"
-    case cardio = "Cardio"
 }
 
 enum EquipmentType: String, CaseIterable {
     case Barbell = "Barbell"
     case Dumbbell = "Dumbbell"
-    case SmithMachine = "Smith machine"
     case Kettlebell = "Kettlebell"
-    case BodyWeight = "Body weight"
+    case Cable = "Cable"
+    case SmithMachine = "Smith machine"
     case Machine = "Machine"
     case Weighted = "Weighted"
-    case Cable = "Cable"
+    case BodyWeight = "Body weight"
 }
 
 enum TargetMuscles: String {

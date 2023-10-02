@@ -41,16 +41,14 @@ final class Exercise: Object {
     @Persisted var exerciseName: String
     @Persisted var bodyPart: List<String>
     @Persisted var equipmentType: String
-    @Persisted var exerciseType: String
     @Persisted var targetMuscles: List<String>
     @Persisted var synergistMuscles: List<String>
     @Persisted var liked: Bool
     
-    convenience init(bodyPart: List<String>, equipmentType: String, exerciseType: String, targetMuscles: List<String>, synergistMuscles: List<String>, reference: String, exerciseName: String, liked: Bool) {
+    convenience init(bodyPart: List<String>, equipmentType: String, targetMuscles: List<String>, synergistMuscles: List<String>, reference: String, exerciseName: String, liked: Bool) {
         self.init()
         self.bodyPart = bodyPart
         self.equipmentType = equipmentType
-        self.exerciseType = exerciseType
         self.targetMuscles = targetMuscles
         self.synergistMuscles = synergistMuscles
         self.reference = reference
@@ -65,7 +63,7 @@ final class ExerciseSet: Object {
     @Persisted var weight: Double
     @Persisted var isFinished: Bool
     
-    convenience init(setNumber: Int, repetitionCount: Int = 12, weight: Double = 45, isFinished: Bool = false) {
+    convenience init(setNumber: Int, repetitionCount: Int = 12, weight: Double = 0, isFinished: Bool = false) {
         self.init()
         self.setNumber = setNumber
         self.repetitionCount = repetitionCount

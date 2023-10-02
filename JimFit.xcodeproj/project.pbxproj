@@ -32,7 +32,7 @@
 		555E6B922AC5796F00DCA052 /* ExerciseDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B912AC5796F00DCA052 /* ExerciseDetail.swift */; };
 		555E6B9A2AC72ECF00DCA052 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B992AC72ECF00DCA052 /* RealmManager.swift */; };
 		555E6B9C2AC7F3B100DCA052 /* WorkoutLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B9B2AC7F3B100DCA052 /* WorkoutLog.swift */; };
-		555E6BA42ACB30DD00DCA052 /* Exercise.realm in Resources */ = {isa = PBXBuildFile; fileRef = 555E6BA32ACB30D500DCA052 /* Exercise.realm */; };
+		55A2ABF12ACB542D00927918 /* Exercise.realm in Resources */ = {isa = PBXBuildFile; fileRef = 55A2ABF02ACB541800927918 /* Exercise.realm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,7 +58,7 @@
 		555E6B912AC5796F00DCA052 /* ExerciseDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseDetail.swift; sourceTree = "<group>"; };
 		555E6B992AC72ECF00DCA052 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		555E6B9B2AC7F3B100DCA052 /* WorkoutLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutLog.swift; sourceTree = "<group>"; };
-		555E6BA32ACB30D500DCA052 /* Exercise.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = Exercise.realm; sourceTree = "<group>"; };
+		55A2ABF02ACB541800927918 /* Exercise.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = Exercise.realm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,7 +106,7 @@
 		555E6B5E2AC326CF00DCA052 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				555E6BA32ACB30D500DCA052 /* Exercise.realm */,
+				55A2ABF02ACB541800927918 /* Exercise.realm */,
 				555E6B402AC1D76C00DCA052 /* Assets.xcassets */,
 				555E6B422AC1D76C00DCA052 /* LaunchScreen.storyboard */,
 				555E6B452AC1D76C00DCA052 /* Info.plist */,
@@ -300,7 +300,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				555E6BA42ACB30DD00DCA052 /* Exercise.realm in Resources */,
+				55A2ABF12ACB542D00927918 /* Exercise.realm in Resources */,
 				555E6B442AC1D76C00DCA052 /* LaunchScreen.storyboard in Resources */,
 				555E6B6C2AC344CC00DCA052 /* Localizable.strings in Resources */,
 				555E6B412AC1D76C00DCA052 /* Assets.xcassets in Resources */,
