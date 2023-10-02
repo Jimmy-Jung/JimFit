@@ -39,7 +39,7 @@ final class WorkoutLogViewController: UIViewController {
     }
     
     var workoutLog: WorkoutLog?
-    let realm = RealmManager.createRealm()
+    let realm: Realm! = RealmManager.shared.realm
     
     
     override func viewDidLoad() {

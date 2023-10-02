@@ -128,17 +128,20 @@ final class ExerciseSearchViewController: UIViewController, LikeUpdateDelegate {
         searchView.tableView.reloadData()
     }
     private func fetchSearchList() {
-        realm = RealmManager.createRealm()
-        list = realm.objects(Exercise.self).sorted(byKeyPath: "reference", ascending: true)
+        realm = RealmManager.shared.realm
+        list = realm.objects(Exercise.self)
     }
     // 메모리 Realm만들고 번역해서 생성
     private func fetchLocalizedList() {
-        let configuration = Realm.Configuration(inMemoryIdentifier: "MemoryRealm")
-        localizedRealm = try! Realm(configuration: configuration)
-        list.forEach { item in
-            try! localizedRealm.write {
-                let localizedItem = Exercise(bodyPart: item.bodyPart, equipmentType: item.equipmentType, targetMuscles: item.targetMuscles, synergistMuscles: item.synergistMuscles, reference: item.reference, exerciseName: item.exerciseName.localized, liked: item.liked)
-                localizedRealm.add(localizedItem, update: .modified)
+        localizedRealm = RealmManager.shared.memoryRealm
+        print(localizedRealm.objects(Exercise.self))
+        if localizedRealm.objects(Exercise.self).isEmpty {
+            print("is not empty")
+            list.forEach { item in
+                try! localizedRealm.write {
+                    let localizedItem = Exercise(bodyPart: item.bodyPart, equipmentType: item.equipmentType, targetMuscles: item.targetMuscles, synergistMuscles: item.synergistMuscles, reference: item.reference, exerciseName: item.exerciseName.localized, liked: item.liked)
+                    localizedRealm.add(localizedItem, update: .modified)
+                }
             }
         }
         localizedList = localizedRealm.objects(Exercise.self).sorted(byKeyPath: "reference", ascending: true)

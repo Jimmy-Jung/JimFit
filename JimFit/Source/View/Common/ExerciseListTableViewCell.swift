@@ -78,7 +78,7 @@ class ExerciseListTableViewCell: UITableViewCell {
         UIView.transition(with: likeButton, duration: 0.15, options: [.transitionCrossDissolve, .curveEaseInOut]) {
             self.setupLikeButtonColor()
         }
-        let realm = RealmManager.createRealm()
+        let realm: Realm! = RealmManager.shared.realm
         guard let exercise else { return }
         if let update = realm.objects(Exercise.self).filter("reference == %@", exercise.reference).first {
             try! realm.write {
