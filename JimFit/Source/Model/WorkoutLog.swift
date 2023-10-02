@@ -37,7 +37,7 @@ final class Workout: Object {
 }
 
 final class Exercise: Object {
-    @Persisted var reference: String
+    @Persisted(primaryKey: true) var reference: String
     @Persisted var exerciseName: String
     @Persisted var bodyPart: List<String>
     @Persisted var equipmentType: String

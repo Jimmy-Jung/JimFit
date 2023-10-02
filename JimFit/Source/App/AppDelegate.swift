@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -34,18 +35,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func copyExerciseRealm() {
         let fileManager = FileManager.default
-        
+
         // 도큐먼트 디렉토리 경로
         let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
-        
+
         // 저장할 파일의 URL
         let fileURL = documentsDirectory.appendingPathComponent("Exercise.realm")
-        
+
         // 이미 파일이 존재하는지 확인
         if !fileManager.fileExists(atPath: fileURL.path) {
             // 프로젝트 폴더 내의 파일 URL
             let bundleURL = Bundle.main.url(forResource: "Exercise", withExtension: "realm")!
-            
+
             do {
                 // 프로젝트 폴더 내의 파일을 도큐먼트 디렉토리로 복사
                 try fileManager.copyItem(at: bundleURL, to: fileURL)
@@ -55,6 +56,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+  
+ 
     
 }
 

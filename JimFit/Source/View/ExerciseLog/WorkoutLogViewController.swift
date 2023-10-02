@@ -47,16 +47,9 @@ final class WorkoutLogViewController: UIViewController {
         configureUI()
         configureLayout()
         configureRealm()
+        print(realm.configuration.fileURL)
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print(#function)
-        tableView.reloadData()
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        print(#function)
-    }
+
     
     func configureUI() {
         view.backgroundColor(.secondarySystemGroupedBackground)
@@ -251,8 +244,8 @@ extension WorkoutLogViewController: UITableViewDelegate, UITableViewDataSource, 
     }
     
     func reloadTableView() {
-        print(#function)
         configureRealm()
         self.tableView.reloadData()
+        self.calendar.reloadData()
     }
 }

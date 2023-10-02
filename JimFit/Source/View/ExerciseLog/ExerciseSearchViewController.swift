@@ -116,6 +116,7 @@ final class ExerciseSearchViewController: UIViewController, LikeUpdateDelegate {
             sender.layer.borderColor = K.Color.Grayscale.Tint.cgColor
         }
         updateList()
+        searchView.tableView.reloadData()
     }
     private func fetchSearchList() {
         realm = RealmManager.createRealm()
@@ -151,6 +152,7 @@ extension ExerciseSearchViewController: UISearchBarDelegate {
         searchBar.resignFirstResponder()
         searchBar.text = nil
         updateList()
+        searchView.tableView.reloadData()
     }
     
     
@@ -161,7 +163,9 @@ extension ExerciseSearchViewController: UISearchBarDelegate {
         guard let term = searchBar.text, !term.isEmpty else { return }
  
         // 검색어와 분류 정보를 전달하면서, API 호출을 한다.
-        self.list = self.list.filter("exerciseName CONTAINS[c] %@", term)
+        updateList()
+        self.list = self.list
+            .filter("exerciseName CONTAINS[c] %@", term)
         self.searchView.tableView.reloadData()
     }
 }
@@ -210,6 +214,7 @@ extension ExerciseSearchViewController {
         // 선택한 버튼에 저장 or 같은 버튼이면 nil할당
         saveSelectedButton(type: type, button: button)
         updateList()
+        searchView.tableView.reloadData()
     }
     
     func isSameWithSelectedButton(type: ButtonType, button: UIButton) -> Bool {
@@ -284,7 +289,6 @@ extension ExerciseSearchViewController {
                     .sorted(byKeyPath: "reference", ascending: true)
             }
         }
-        searchView.tableView.reloadData()
     }
     
     func addSortToList(type: ButtonType, button: UIButton) {
