@@ -22,7 +22,9 @@ final class ExerciseSearchViewController: UIViewController, LikeUpdateDelegate {
     private var date: String
     private lazy var searchView = ExerciseSearchView(frame: view.frame)
     private var realm: Realm!
+    private var localizedRealm: Realm!
     private var list: Results<Exercise>!
+    private var localizedList: Results<Exercise>!
     private lazy var bodyPartButtons = searchView.bodyPartStackView.subviews as! [UIButton]
     private lazy var equipmentTypeButtons = searchView.equipmentTypeStackView.subviews as! [UIButton]
     var bodyPartSelectedButton: UIButton?
@@ -122,6 +124,21 @@ final class ExerciseSearchViewController: UIViewController, LikeUpdateDelegate {
         realm = RealmManager.createRealm()
         list = realm.objects(Exercise.self).sorted(byKeyPath: "reference", ascending: true)
     }
+    // 메모리 Realm만들고 번역해서 생성
+    private func fetchLocalizedList() {
+        let configuration = Realm.Configuration(inMemoryIdentifier: "MemoryRealm")
+        localizedRealm = try! Realm(configuration: configuration)
+        try! realm.write {
+            realm.deleteAll()
+        }
+        list.forEach { item in
+            try! realm.write {
+                let localizedItem = Exercise(bodyPart: item.bodyPart, equipmentType: item.equipmentType, targetMuscles: item.targetMuscles, synergistMuscles: item.synergistMuscles, reference: item.reference, exerciseName: item.exerciseName.localized, liked: item.liked)
+                realm.add(localizedItem)
+            }
+        }
+        localizedList = realm.objects(Exercise.self).sorted(byKeyPath: "reference", ascending: true)
+    }
     
         override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
             if self.traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
@@ -155,8 +172,6 @@ extension ExerciseSearchViewController: UISearchBarDelegate {
         searchView.tableView.reloadData()
     }
     
-    
-    
     /// 엔터 눌렀을 때 검색
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         // 검색어가 비어있는 경우, API 호출을 하지 않는다.
@@ -171,14 +186,15 @@ extension ExerciseSearchViewController: UISearchBarDelegate {
 }
 
 extension ExerciseSearchViewController: UITableViewDelegate, UITableViewDataSource {
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      
-        return list.count
+        fetchLocalizedList()
+        return localizedList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ExerciseListTableViewCell.identifier, for: indexPath) as! ExerciseListTableViewCell
-        cell.exercise = list[indexPath.row]
+        cell.exercise = localizedList[indexPath.row]
         cell.selectionStyle = .none
         cell.delegate = self
         return cell
@@ -195,8 +211,10 @@ extension ExerciseSearchViewController: UITableViewDelegate, UITableViewDataSour
     func updateAddListButtonState() {
         if let selectedRows = searchView.tableView.indexPathsForSelectedRows {
             searchView.addListButton.isEnabled(selectedRows.count > 0)
+            searchView.selectedLabel.text("선택항목 \(selectedRows.count)/10")
         } else {
             searchView.addListButton.isEnabled(false)
+            searchView.selectedLabel.text("선택항목 0/10")
         }
     }
 }

@@ -59,8 +59,8 @@ final class ExerciseSearchView: UIView {
         .alignment(.fill)
         .distribution(.fillProportionally)
     
-    private let selectedLabel = UILabel()
-        .text("선택항목 2/10")
+    let selectedLabel = UILabel()
+        .text("선택항목 0/10")
         .font(K.Font.SubHeader)
         .numberOfLines(2)
     

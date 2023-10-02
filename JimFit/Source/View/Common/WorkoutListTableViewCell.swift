@@ -32,7 +32,7 @@ final class WorkoutListTableViewCell: UITableViewCell {
                 .filter { $0.isFinished }
                 .count
             let progression = Double(setFinishedCount) / Double(setCount)
-            titleLabel.text(exercise.exerciseName)
+            titleLabel.text(exercise.exerciseName.localized)
             secondaryLabel.text(secondaryString)
             weightLabel.text(String(format: "%.1f", weightDouble) + " kg")
             setLabel.text(String(describing: setCount) + " set")
