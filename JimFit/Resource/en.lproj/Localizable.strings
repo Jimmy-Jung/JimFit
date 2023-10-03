@@ -10,6 +10,14 @@
 "searchBar_placeholder" = "Enter the exercise Name";
 "cancel" = "cancel";
 
+// Set
+"total_workout_time" = "Total Workout";
+"set_workout_time" = "Workout";
+"total_rest_time" = "Total Rest";
+"set_rest_time" = "Rest";
+"start_set" = "Start Set";
+"done_set" = "Done Set";
+
 // BodyPart
 "Waist" = "Waist";
 "Back" = "Back";

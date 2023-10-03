@@ -233,8 +233,9 @@ extension WorkoutLogViewController: UITableViewDelegate, UITableViewDataSource, 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if indexPath.section == 1 {
+        if indexPath.section == 0 {
+            transition(viewController: ExerciseSetViewController(), style: .pushNavigation)
+        } else {
             let date = pkDateFormatter.string(from: calendar.selectedDate!)
             let exerciseSearchVC = ExerciseSearchViewController(date: date)
             exerciseSearchVC.reloadDelegate = self

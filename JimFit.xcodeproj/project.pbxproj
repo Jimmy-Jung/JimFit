@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		555E6B382AC1D76B00DCA052 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B372AC1D76B00DCA052 /* AppDelegate.swift */; };
 		555E6B3A2AC1D76B00DCA052 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B392AC1D76B00DCA052 /* SceneDelegate.swift */; };
-		555E6B3C2AC1D76B00DCA052 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B3B2AC1D76B00DCA052 /* ViewController.swift */; };
 		555E6B412AC1D76C00DCA052 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 555E6B402AC1D76C00DCA052 /* Assets.xcassets */; };
 		555E6B442AC1D76C00DCA052 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 555E6B422AC1D76C00DCA052 /* LaunchScreen.storyboard */; };
 		555E6B4D2AC1D79900DCA052 /* JimmyKit in Frameworks */ = {isa = PBXBuildFile; productRef = 555E6B4C2AC1D79900DCA052 /* JimmyKit */; };
@@ -33,13 +32,16 @@
 		555E6B9A2AC72ECF00DCA052 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B992AC72ECF00DCA052 /* RealmManager.swift */; };
 		555E6B9C2AC7F3B100DCA052 /* WorkoutLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B9B2AC7F3B100DCA052 /* WorkoutLog.swift */; };
 		55A2ABF12ACB542D00927918 /* Exercise.realm in Resources */ = {isa = PBXBuildFile; fileRef = 55A2ABF02ACB541800927918 /* Exercise.realm */; };
+		55A2ABF42ACC187F00927918 /* ExerciseSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A2ABF32ACC187F00927918 /* ExerciseSetViewController.swift */; };
+		55A2ABF72ACC191700927918 /* StopWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A2ABF62ACC191700927918 /* StopWatchView.swift */; };
+		55A2ABF92ACC2F6100927918 /* ExerciseSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A2ABF82ACC2F6100927918 /* ExerciseSetView.swift */; };
+		55A2ABFB2ACC351C00927918 /* ExerciseSetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A2ABFA2ACC351C00927918 /* ExerciseSetTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		555E6B342AC1D76B00DCA052 /* JimFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JimFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		555E6B372AC1D76B00DCA052 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		555E6B392AC1D76B00DCA052 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		555E6B3B2AC1D76B00DCA052 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		555E6B402AC1D76C00DCA052 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		555E6B432AC1D76C00DCA052 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		555E6B452AC1D76C00DCA052 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -59,6 +61,10 @@
 		555E6B992AC72ECF00DCA052 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		555E6B9B2AC7F3B100DCA052 /* WorkoutLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutLog.swift; sourceTree = "<group>"; };
 		55A2ABF02ACB541800927918 /* Exercise.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = Exercise.realm; sourceTree = "<group>"; };
+		55A2ABF32ACC187F00927918 /* ExerciseSetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetViewController.swift; sourceTree = "<group>"; };
+		55A2ABF62ACC191700927918 /* StopWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatchView.swift; sourceTree = "<group>"; };
+		55A2ABF82ACC2F6100927918 /* ExerciseSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetView.swift; sourceTree = "<group>"; };
+		55A2ABFA2ACC351C00927918 /* ExerciseSetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,10 +133,11 @@
 		555E6B602AC326E900DCA052 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				555E6B3B2AC1D76B00DCA052 /* ViewController.swift */,
 				555E6B722AC34D9400DCA052 /* Common */,
 				555E6B792AC44CCB00DCA052 /* TabBar */,
-				555E6B832AC54E3A00DCA052 /* ExerciseLog */,
+				55A2ABF22ACC183400927918 /* Search */,
+				555E6B832AC54E3A00DCA052 /* Log */,
+				55A2ABF52ACC18BA00927918 /* Set */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -145,7 +152,6 @@
 				555E6B632AC3273500DCA052 /* Helper */,
 				555E6B692AC32CF500DCA052 /* Model */,
 				555E6B602AC326E900DCA052 /* View */,
-				555E6B682AC32CED00DCA052 /* ViewModel */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -200,10 +206,12 @@
 		555E6B722AC34D9400DCA052 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				55A2ABFA2ACC351C00927918 /* ExerciseSetTableViewCell.swift */,
 				555E6B8D2AC573AC00DCA052 /* ExerciseListTableViewCell.swift */,
 				555E6B732AC34DD900DCA052 /* WorkoutListTableViewCell.swift */,
 				555E6B7C2AC4663000DCA052 /* AddButtonTableViewCell.swift */,
 				555E6B772AC42CB500DCA052 /* GrabberView.swift */,
+				55A2ABF62ACC191700927918 /* StopWatchView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -216,14 +224,31 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
-		555E6B832AC54E3A00DCA052 /* ExerciseLog */ = {
+		555E6B832AC54E3A00DCA052 /* Log */ = {
+			isa = PBXGroup;
+			children = (
+				555E6B562AC3086500DCA052 /* WorkoutLogViewController.swift */,
+			);
+			path = Log;
+			sourceTree = "<group>";
+		};
+		55A2ABF22ACC183400927918 /* Search */ = {
 			isa = PBXGroup;
 			children = (
 				555E6B862AC54FD000DCA052 /* ExerciseSearchView.swift */,
 				555E6B842AC54EDB00DCA052 /* ExerciseSearchViewController.swift */,
-				555E6B562AC3086500DCA052 /* WorkoutLogViewController.swift */,
 			);
-			path = ExerciseLog;
+			path = Search;
+			sourceTree = "<group>";
+		};
+		55A2ABF52ACC18BA00927918 /* Set */ = {
+			isa = PBXGroup;
+			children = (
+				55A2ABF82ACC2F6100927918 /* ExerciseSetView.swift */,
+				55A2ABF32ACC187F00927918 /* ExerciseSetViewController.swift */,
+				555E6B682AC32CED00DCA052 /* ViewModel */,
+			);
+			path = Set;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -325,11 +350,14 @@
 				555E6B8E2AC573AC00DCA052 /* ExerciseListTableViewCell.swift in Sources */,
 				555E6B852AC54EDB00DCA052 /* ExerciseSearchViewController.swift in Sources */,
 				555E6B7D2AC4663000DCA052 /* AddButtonTableViewCell.swift in Sources */,
-				555E6B3C2AC1D76B00DCA052 /* ViewController.swift in Sources */,
 				555E6B922AC5796F00DCA052 /* ExerciseDetail.swift in Sources */,
 				555E6B382AC1D76B00DCA052 /* AppDelegate.swift in Sources */,
+				55A2ABF42ACC187F00927918 /* ExerciseSetViewController.swift in Sources */,
 				555E6B712AC3459A00DCA052 /* String+Extension.swift in Sources */,
+				55A2ABF92ACC2F6100927918 /* ExerciseSetView.swift in Sources */,
+				55A2ABF72ACC191700927918 /* StopWatchView.swift in Sources */,
 				555E6B3A2AC1D76B00DCA052 /* SceneDelegate.swift in Sources */,
+				55A2ABFB2ACC351C00927918 /* ExerciseSetTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

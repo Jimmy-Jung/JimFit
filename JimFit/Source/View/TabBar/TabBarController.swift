@@ -15,7 +15,7 @@ final class TabBarController: UITabBarController {
         tabBar.backgroundColor(.systemBackground)
         configureTabBarController()
         setupTabBarController()
-        configureTabBarShadow()
+//        configureTabBarShadow()
     }
     
     private func configureTabBarController() {
@@ -40,9 +40,9 @@ final class TabBarController: UITabBarController {
     
     private func configureTabBarShadow() {
         tabBar.layer.shadowColor = UIColor.label.cgColor
-        tabBar.layer.shadowOffset = .init(width: 0, height: -1)
-        tabBar.layer.shadowOpacity = 0.3
-        tabBar.layer.shadowRadius = 4
+        tabBar.layer.shadowOffset = .init(width: 0, height: -0.5)
+        tabBar.layer.shadowOpacity = 0.2
+        tabBar.layer.shadowRadius = 0.5
     }
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         if self.traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {

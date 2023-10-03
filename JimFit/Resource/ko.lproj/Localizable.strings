@@ -10,6 +10,14 @@
 "searchBar_placeholder" = "운동 이름을 입력하세요";
 "cancel" = "취소";
 
+// Set
+"total_workout_time" = "총 운동 시간";
+"set_workout_time" = "운동 시간";
+"total_rest_time" = "총 휴식 시간";
+"set_rest_time" = "휴식 시간";
+"start_set" = "세트 시작";
+"done_set" = "세트 완료";
+
 // BodyPart
 "Waist" = "허리";
 "Back" = "등";
