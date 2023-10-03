@@ -43,6 +43,7 @@ final class ExerciseSetView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor(.systemBackground)
         addSubView(stopWatchStackView)
         stopWatchStackView.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(18)
@@ -57,7 +58,7 @@ final class ExerciseSetView: UIView {
         addSubView(tableView)
         tableView.snp.makeConstraints { make in
             make.top.equalTo(grabberView.snp.bottom)
-            make.horizontalEdges.bottom.equalToSuperview()
+            make.horizontalEdges.equalToSuperview()
         }
         startWorkoutButton.snp.makeConstraints { make in
             make.height.equalTo(50)
@@ -70,6 +71,7 @@ final class ExerciseSetView: UIView {
             make.top.equalTo(tableView.snp.bottom)
             make.horizontalEdges.equalToSuperview().inset(20)
             make.bottom.equalToSuperview().inset(8)
+            make.height.equalTo(50)
         }
         
         

@@ -139,7 +139,7 @@ final class ExerciseSearchView: UIView {
         addListButton.snp.makeConstraints { make in
             make.top.equalTo(tableView.snp.bottom)
             make.horizontalEdges.equalToSuperview().inset(20)
-            make.bottom.equalTo(safeAreaLayoutGuide).inset(57)
+            make.bottom.equalTo(safeAreaLayoutGuide).inset(70)
             make.height.equalTo(50)
         }
     }
