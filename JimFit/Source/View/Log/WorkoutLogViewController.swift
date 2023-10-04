@@ -47,30 +47,23 @@ final class WorkoutLogViewController: UIViewController {
         configureUI()
         configureLayout()
         configureRealm()
+        configureGrabberView()
         print(realm.configuration.fileURL)
     }
 
-    
-    func configureUI() {
-        view.backgroundColor(.secondarySystemGroupedBackground)
-        configureCalendar()
-        configureGrabberView()
-        configureTableView()
-        view.addSubview(calendar)
-        view.addSubview(grabberView)
-        view.addSubview(tableView)
-        calendar.addSubView(headerTitle)
-        swipeGesture()
-        
-        
-    }
-    
-    func configureGrabberView() {
+    private func configureGrabberView() {
+        grabberView.delegate = self
         let grabberString = grabberDateFormatter.string(from: Date()) + " 운동"
         grabberView.setTitle(grabberString)
     }
     
-    func configureTableView() {
+    private func configureUI() {
+        view.backgroundColor(.secondarySystemGroupedBackground)
+        configureCalendar()
+        configureTableView()
+    }
+    
+    private func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(WorkoutListTableViewCell.self, forCellReuseIdentifier: WorkoutListTableViewCell.identifier)
@@ -80,29 +73,35 @@ final class WorkoutLogViewController: UIViewController {
         tableView.sectionHeaderTopPadding = 0
     }
     
-    func configureLayout() {
+    private func configureLayout() {
+        view.addSubview(calendar)
         calendar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.horizontalEdges.equalToSuperview().inset(20)
             make.height.equalTo(300)
         }
+        
+        calendar.addSubView(headerTitle)
         headerTitle.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(5)
             make.leading.equalToSuperview().inset(10)
         }
+        
+        view.addSubview(grabberView)
         grabberView.snp.makeConstraints { make in
             make.top.equalTo(calendar.snp.bottom).offset(10)
             make.horizontalEdges.equalToSuperview()
             make.height.equalTo(64)
         }
         
+        view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.top.equalTo(grabberView.snp.bottom)
             make.horizontalEdges.bottom.equalToSuperview()
         }
     }
     
-    func configureCalendar() {
+    private func configureCalendar() {
         calendar.delegate = self
         calendar.dataSource = self
         calendar.locale = Locale(identifier: "ko_KR")
@@ -126,31 +125,14 @@ final class WorkoutLogViewController: UIViewController {
         calendar.select(Date(), scrollToDate: true)
     }
     
-    func configureRealm() {
+    private func configureRealm() {
         workoutLog = realm.object(ofType: WorkoutLog.self, forPrimaryKey: pkDateFormatter.string(from: calendar.selectedDate!))
     }
-    
-    func swipeGesture() {
-        let swipeUpForGrabber = UISwipeGestureRecognizer(target: self, action: #selector(swipe(_:)))
-        let swipeUpForCalendar = UISwipeGestureRecognizer(target: self, action: #selector(swipe(_:)))
-        swipeUpForGrabber.direction = UISwipeGestureRecognizer.Direction.up
-        swipeUpForCalendar.direction = UISwipeGestureRecognizer.Direction.up
-        grabberView.addGestureRecognizer(swipeUpForGrabber)
-        calendar.addGestureRecognizer(swipeUpForCalendar)
-        let swipeDownForGrabber = UISwipeGestureRecognizer(target: self, action: #selector(swipe(_:)))
-        let swipeDownForCalendar = UISwipeGestureRecognizer(target: self, action: #selector(swipe(_:)))
-        swipeDownForGrabber.direction = UISwipeGestureRecognizer.Direction.down
-        swipeDownForCalendar.direction = UISwipeGestureRecognizer.Direction.down
-        
-        grabberView.addGestureRecognizer(swipeDownForGrabber)
-        calendar.addGestureRecognizer(swipeDownForCalendar)
-    }
-    
-    @objc func swipe(_ gesture: UIGestureRecognizer) {
-        guard let swipeGesture = gesture as? UISwipeGestureRecognizer else {
-            return
-        }
-        switch swipeGesture.direction {
+}
+
+extension WorkoutLogViewController: GrabberViewDelegate {
+    func grabber(swipeGestureFor direction: UISwipeGestureRecognizer.Direction) {
+        switch direction {
         case .up :
             self.calendar.setScope(.week, animated: true)
             UIView.transition(with: view, duration: 0.3) {
@@ -164,6 +146,9 @@ final class WorkoutLogViewController: UIViewController {
             }
         default: break
         }
+    }
+    func grabberDidTappedButton() {
+        
     }
     
     
@@ -183,7 +168,6 @@ extension WorkoutLogViewController: FSCalendarDelegate, FSCalendarDataSource, FS
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
         let currentDate = calendar.currentPage
         let headerDateString = headerDateFormatter.string(from: currentDate)
-
         headerTitle.text(headerDateString)
     }
     

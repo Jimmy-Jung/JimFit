@@ -19,15 +19,25 @@ final class ExerciseSetTableViewCell: UITableViewCell {
         .backgroundColor(K.Color.Grayscale.Tint)
         .textColor(.white)
         .font(K.Font.SubHeader)
-        .cornerRadius(16)
+        .cornerRadius(14)
         .clipsToBounds(true)
     
-    private let kgLabel = UILabel()
+    private let weightLabel = UILabel()
         .text("kg")
+        .font(K.Font.SubHeader)
+    
+    private let weighTextField = UITextField()
+        .placeholder("0")
+        .textAlignment(.right)
         .font(K.Font.SubHeader)
     
     private let repsLabel = UILabel()
         .text("reps")
+        .font(K.Font.SubHeader)
+    
+    private let repsTextField = UITextField()
+        .placeholder("0")
+        .textAlignment(.right)
         .font(K.Font.SubHeader)
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -48,12 +58,19 @@ final class ExerciseSetTableViewCell: UITableViewCell {
             make.width.equalTo(75)
         }
         
-        borderView.addSubview(kgLabel)
-        kgLabel.snp.makeConstraints { make in
+        borderView.addSubview(weightLabel)
+        weightLabel.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview().inset(4)
-            make.centerX.equalToSuperview().offset(18)
+            make.centerX.equalToSuperview().offset(16)
             make.height.equalTo(45)
-//            make.width.equalTo(75)
+        }
+        
+        borderView.addSubview(weighTextField)
+        weighTextField.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview().inset(4)
+            make.height.equalTo(45)
+//            make.leading.equalTo(setNumberLabel.snp.trailing).offset(8)
+            make.trailing.equalTo(weightLabel.snp.leading).offset(-4)
         }
         
         borderView.addSubview(repsLabel)
@@ -61,7 +78,14 @@ final class ExerciseSetTableViewCell: UITableViewCell {
             make.top.bottom.equalToSuperview().inset(4)
             make.trailing.equalToSuperview().inset(24)
             make.height.equalTo(45)
-//            make.width.equalTo(75)
+        }
+        
+        borderView.addSubview(repsTextField)
+        repsTextField.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview().inset(4)
+            make.height.equalTo(45)
+//            make.leading.equalTo(weightLabel.snp.trailing).offset(8)
+            make.trailing.equalTo(repsLabel.snp.leading).offset(-4)
         }
     }
     

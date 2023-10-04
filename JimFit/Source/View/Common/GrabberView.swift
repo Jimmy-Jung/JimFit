@@ -7,6 +7,16 @@
 
 import UIKit
 
+protocol GrabberViewDelegate: AnyObject {
+    func grabber(configureTitle label: UILabel)
+    func grabber(swipeGestureFor direction: UISwipeGestureRecognizer.Direction)
+    func grabberDidTappedButton()
+}
+
+extension GrabberViewDelegate {
+    func grabber(configureTitle label: UILabel) { }
+}
+
 final class GrabberView: UIView {
     private let backView = UIView()
         .backgroundColor(.systemBackground)
@@ -19,15 +29,27 @@ final class GrabberView: UIView {
         .font(K.Font.Header2)
         .textColor(K.Color.Primary.Label)
     
-    private let menuButton = UIButton(configuration: .plain())
+    private lazy var menuButton = UIButton(configuration: .plain())
         .image(UIImage(systemName: "arrow.up.arrow.down")?
             .font(.systemFont(ofSize: 14, weight: .medium)))
         .baseForegroundColor(K.Color.Primary.Label)
+    
+    weak var delegate: GrabberViewDelegate?
+    
+    func setTitle(_ title: String) {
+        titleLabel.text(title)
+    }
+    
+    func setImage(_ image: UIImage?) {
+        menuButton.image(image)
+        
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
         addShadow()
+        performDelegate()
     }
     
     @available(*, unavailable)
@@ -35,8 +57,24 @@ final class GrabberView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setTitle(_ text: String) {
-        titleLabel.text(text)
+    private func performDelegate() {
+        delegate?.grabber(configureTitle: titleLabel)
+        menuButton.addAction { [unowned self] in
+                self.delegate?.grabberDidTappedButton()
+            }
+        let swipeUpForGrabber = UISwipeGestureRecognizer(target: self, action: #selector(swipe(_:)))
+        swipeUpForGrabber.direction = UISwipeGestureRecognizer.Direction.up
+        let swipeDownForGrabber = UISwipeGestureRecognizer(target: self, action: #selector(swipe(_:)))
+        swipeDownForGrabber.direction = UISwipeGestureRecognizer.Direction.down
+        backView.addGestureRecognizer(swipeUpForGrabber)
+        backView.addGestureRecognizer(swipeDownForGrabber)
+    }
+    
+    @objc func swipe(_ gesture: UIGestureRecognizer) {
+        guard let swipeGesture = gesture as? UISwipeGestureRecognizer else {
+            return
+        }
+        delegate?.grabber(swipeGestureFor: swipeGesture.direction)
     }
     
     private func setupUI() {
@@ -82,7 +120,4 @@ final class GrabberView: UIView {
             layer.shadowColor = UIColor.label.cgColor
         }
     }
-    
-    
-    
 }
