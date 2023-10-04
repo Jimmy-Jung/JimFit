@@ -24,11 +24,11 @@ final class AddButtonTableViewCell: UITableViewCell {
         case .addList:
             addButton
                 .baseBackgroundColor(K.Color.Primary.Orange)
-                .titleWithFont(title: "+  운동 리스트 추가", font: K.Font.Header2)
+                .titleWithFont(title: "add_exercise_list".localized, font: K.Font.Header2)
         case .addSet:
             addButton
                 .baseBackgroundColor(K.Color.Grayscale.Background)
-                .titleWithFont(title: "+  운동 세트 추가", font: K.Font.Header2)
+                .titleWithFont(title: "add_exercise_set".localized, font: K.Font.Header2)
         }
     }
     

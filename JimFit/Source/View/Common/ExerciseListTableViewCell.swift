@@ -17,11 +17,7 @@ class ExerciseListTableViewCell: UITableViewCell {
             let bodyPartString = bodyPartList.joined(separator: ", ")
             let equipmentTypeString = exercise.equipmentType.localized
             var secondaryString: String {
-                if equipmentTypeString == "none" {
-                    return bodyPartString
-                } else {
-                    return bodyPartString + " / " + equipmentTypeString
-                }
+                return bodyPartString + " / " + equipmentTypeString
             }
             titleLabel.text(exercise.exerciseName)
             secondaryLabel.text(secondaryString)
@@ -36,19 +32,19 @@ class ExerciseListTableViewCell: UITableViewCell {
         .cornerRadius(K.Size.cellRadius)
         .setBorder(color: K.Color.Grayscale.border_Thin, width: K.Size.border_Thin)
  
-    let titleLabel = UILabel()
+    private let titleLabel = UILabel()
         .font(K.Font.CellHeader)
         .numberOfLines(2)
         .textColor(K.Color.Primary.Label)
     
-    let secondaryLabel = UILabel()
+    private let secondaryLabel = UILabel()
         .font(K.Font.CellBody)
         .numberOfLines(2)
         .textColor(K.Color.Grayscale.Label)
     
-    lazy var likeButton: UIButton = UIButton(configuration: .plain())
-        .setImage(UIImage(systemName: "heart"), for: .normal)
-        .setImage(UIImage(systemName: "heart.fill"), for: .selected)
+    private lazy var likeButton: UIButton = UIButton(configuration: .plain())
+        .setImage(K.Image.Heart, for: .normal)
+        .setImage(K.Image.HeartFill, for: .selected)
         .baseForegroundColor(K.Color.Grayscale.border_Medium)
         .baseBackgroundColor(.clear)
         .addAction { [unowned self] in

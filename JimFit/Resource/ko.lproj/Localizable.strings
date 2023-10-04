@@ -9,6 +9,18 @@
 // System
 "searchBar_placeholder" = "운동 이름을 입력하세요";
 "cancel" = "취소";
+"locale_identifier" = "ko_KR";
+
+// Log
+"header_date_formatter" = "yyyy년 MM월";
+"grabber_date_formatter" = "MM월 dd일";
+"workout" = " 운동";
+
+// Search
+"selection_list%@" = "선택항목 %@/12";
+"add_complete" = "+ 추가 완료";
+"add_exercise_list" = "+  운동 리스트 추가";
+"add_exercise_set" = "+  운동 세트 추가";
 
 // Set
 "total_workout_time" = "총 운동 시간";

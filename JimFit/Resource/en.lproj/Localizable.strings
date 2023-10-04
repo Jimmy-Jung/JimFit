@@ -9,6 +9,18 @@
 // System
 "searchBar_placeholder" = "Enter the exercise Name";
 "cancel" = "cancel";
+"locale_identifier" = "en_US";
+
+// Log
+"header_date_formatter" = "MMMM yyyy";
+"grabber_date_formatter" = "dd MMM";
+"workout" = " Workout";
+
+// Search
+"selection_list%@" = "Choices %@/12";
+"add_complete" = "+ Add Complete";
+"add_exercise_list" = "+ Add Exercise List";
+"add_exercise_set" = "+ Add Exercise Set";
 
 // Set
 "total_workout_time" = "Total Workout";

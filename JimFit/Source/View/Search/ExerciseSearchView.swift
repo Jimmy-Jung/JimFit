@@ -13,7 +13,7 @@ final class ExerciseSearchView: UIView {
     var equipmentTypeList: [EquipmentType] = EquipmentType.allCases
     
     private lazy var likeButton: UIButton = makeButton(name: "0")
-        .setImage(K.Image.Like, for: .normal)
+        .setImage(K.Image.HeartFill, for: .normal)
         .baseForegroundColor(.systemRed)
         .imagePadding(4)
     
@@ -60,8 +60,8 @@ final class ExerciseSearchView: UIView {
         .distribution(.fillProportionally)
     
     let selectedLabel = UILabel()
-        .text("선택항목 0/12")
-        .font(K.Font.SubHeader)
+        .text("selection_list%@".localized("0"))
+        .font(K.Font.Body3)
         .numberOfLines(2)
     
     let tableView: UITableView = UITableView().then {
@@ -74,7 +74,7 @@ final class ExerciseSearchView: UIView {
     let addListButton = UIButton(configuration: .filled())
         .baseForegroundColor(K.Color.Primary.White)
         .baseBackgroundColor(K.Color.Primary.Orange)
-        .titleWithFont(title: "+  추가 완료", font: K.Font.Header2)
+        .titleWithFont(title: "add_complete".localized, font: K.Font.Header2)
         .cornerRadius(16)
         .isEnabled(false)
     

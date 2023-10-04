@@ -43,52 +43,46 @@ final class WorkoutListTableViewCell: UITableViewCell {
         }
     }
     
-    let borderView = UIView()
+    private let borderView = UIView()
         .cornerRadius(K.Size.cellRadius)
     
-    let titleLabel = UILabel()
-        .text("BarBell Bench Press as BarBell Bench Press")
+    private let titleLabel = UILabel()
         .font(K.Font.CellHeader)
         .numberOfLines(2)
         .textColor(K.Color.Primary.Label)
     
-    let secondaryLabel = UILabel()
-        .text("Chest")
+    private let secondaryLabel = UILabel()
         .font(K.Font.CellBody)
         .textColor(K.Color.Grayscale.Label)
     
     let weightImage = UIImageView()
-        .image(UIImage(systemName: "dumbbell"))
         .tintColor(K.Color.Primary.Label)
     
-    let weightLabel = UILabel()
-        .text("1422 kg")
+    private let weightLabel = UILabel()
         .font(K.Font.CellBody)
         .textColor(K.Color.Primary.Label)
     
-    let setImage = UIImageView()
-        .image(UIImage(systemName: "bolt.fill"))
+    private let setImage = UIImageView()
+        .image(K.Image.Bolt)
         .tintColor(K.Color.Primary.Yellow)
     
-    let setLabel = UILabel()
-        .text("222 set")
+    private let setLabel = UILabel()
         .font(K.Font.CellBody)
         .textColor(K.Color.Primary.Label)
     
-    let progressBarBorder = UIView()
+    private let progressBarBorder = UIView()
         .setBorder(color: K.Color.Grayscale.border_Medium, width: K.Size.border_Medium)
         .cornerRadius(4)
     
-    let progressBar = UIView()
+    private let progressBar = UIView()
         .backgroundColor(K.Color.Primary.Green)
         .cornerRadius(2)
     
-    let progressLabel = UILabel()
-        .text("75%")
+    private let progressLabel = UILabel()
         .textColor(K.Color.Grayscale.Label)
-        .font(.systemFont(ofSize: 13, weight: .bold))
+        .font(K.Font.CellBody)
     
-    lazy var titleStackView: UIStackView = UIStackView()
+    private lazy var titleStackView: UIStackView = UIStackView()
         .axis(.vertical)
         .alignment(.fill)
         .distribution(.fill)
@@ -96,7 +90,7 @@ final class WorkoutListTableViewCell: UITableViewCell {
         .addArrangedSubview(titleLabel)
         .addArrangedSubview(secondaryLabel)
     
-    lazy var weightStackView: UIStackView = UIStackView()
+    private lazy var weightStackView: UIStackView = UIStackView()
         .axis(.horizontal)
         .alignment(.fill)
         .distribution(.fill)
@@ -104,7 +98,7 @@ final class WorkoutListTableViewCell: UITableViewCell {
         .addArrangedSubview(weightImage)
         .addArrangedSubview(weightLabel)
     
-    lazy var setStackView: UIStackView = UIStackView()
+    private lazy var setStackView: UIStackView = UIStackView()
         .axis(.horizontal)
         .alignment(.fill)
         .distribution(.fill)
@@ -112,7 +106,7 @@ final class WorkoutListTableViewCell: UITableViewCell {
         .addArrangedSubview(setImage)
         .addArrangedSubview(setLabel)
     
-    lazy var infoStackView: UIStackView = UIStackView()
+    private lazy var infoStackView: UIStackView = UIStackView()
         .axis(.vertical)
         .alignment(.fill)
         .distribution(.fill)
@@ -121,7 +115,7 @@ final class WorkoutListTableViewCell: UITableViewCell {
         .addArrangedSubview(setStackView)
         .addArrangedSubview(UIView())
     
-    lazy var horizontalStackView: UIStackView = UIStackView()
+    private lazy var horizontalStackView: UIStackView = UIStackView()
         .axis(.horizontal)
         .alignment(.fill)
         .distribution(.fill)

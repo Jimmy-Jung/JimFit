@@ -39,14 +39,17 @@ enum K {
             .renderingColor(.monochrome)
             .font(.systemFont(ofSize: 17, weight: .bold))
         
-        static let Like = UIImage(systemName: "heart.fill")
+        static let HeartFill = UIImage(systemName: "heart.fill")
+        static let Heart = UIImage(systemName: "heart")
+        static let Bolt = UIImage(systemName: "bolt.fill")
     }
     
     enum Font {
         static let Header1: UIFont = .systemFont(ofSize: 20, weight: .heavy)
         static let Header2: UIFont = .systemFont(ofSize: 18, weight: .heavy)
         static let SubHeader: UIFont = .systemFont(ofSize: 16, weight: .bold)
-        static let Body: UIFont = .systemFont(ofSize: 16, weight: .medium)
+        static let Body1: UIFont = .systemFont(ofSize: 16, weight: .medium)
+        static let Body3: UIFont = .systemFont(ofSize: 14, weight: .bold)
         static let CellHeader: UIFont = .systemFont(ofSize: 15, weight: .bold)
         static let CellBody: UIFont = .systemFont(ofSize: 13, weight: .bold)
     }

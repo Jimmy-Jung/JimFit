@@ -108,7 +108,7 @@ final class GrabberView: UIView {
     }
     
     private func addShadow() {
-        layer.shadowColor = UIColor.label.cgColor
+        layer.shadowColor = UIColor.darkGray.cgColor
         layer.shadowOpacity = 0.2
         layer.shadowOffset = CGSize(width: 0, height: -6)
         layer.shadowRadius = 4
@@ -117,7 +117,7 @@ final class GrabberView: UIView {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         if self.traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
-            layer.shadowColor = UIColor.label.cgColor
+            layer.shadowColor = UIColor.darkGray.cgColor
         }
     }
 }

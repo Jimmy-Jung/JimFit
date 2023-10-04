@@ -27,11 +27,11 @@ final class WorkoutLogViewController: UIViewController {
     
     
     private let headerDateFormatter = DateFormatter().then {
-      $0.dateFormat = "yyyy년 MM월"
+        $0.dateFormat = "header_date_formatter".localized
     }
     
     private let grabberDateFormatter = DateFormatter().then {
-        $0.dateFormat = "MM월 dd일"
+        $0.dateFormat = "grabber_date_formatter".localized
     }
     
     private let pkDateFormatter = DateFormatter().then {
@@ -53,7 +53,7 @@ final class WorkoutLogViewController: UIViewController {
 
     private func configureGrabberView() {
         grabberView.delegate = self
-        let grabberString = grabberDateFormatter.string(from: Date()) + " 운동"
+        let grabberString = grabberDateFormatter.string(from: Date()) + "workout".localized
         grabberView.setTitle(grabberString)
     }
     
@@ -104,7 +104,7 @@ final class WorkoutLogViewController: UIViewController {
     private func configureCalendar() {
         calendar.delegate = self
         calendar.dataSource = self
-        calendar.locale = Locale(identifier: "ko_KR")
+        calendar.locale = Locale(identifier: "locale_identifier".localized)
         calendar.appearance.headerTitleColor = .clear // 기본 헤더 타이틀 제거
         calendar.appearance.headerMinimumDissolvedAlpha = 0.0
         calendar.placeholderType = .fillHeadTail
@@ -116,7 +116,7 @@ final class WorkoutLogViewController: UIViewController {
         calendar.appearance.titleDefaultColor = K.Color.Primary.Label
         calendar.appearance.titleWeekendColor = K.Color.Primary.Blue
         
-        calendar.appearance.titleFont = K.Font.Body
+        calendar.appearance.titleFont = K.Font.Body1
         
         calendar.appearance.eventDefaultColor = K.Color.Primary.Orange
         calendar.appearance.eventSelectionColor = K.Color.Primary.Orange
@@ -179,7 +179,7 @@ extension WorkoutLogViewController: FSCalendarDelegate, FSCalendarDataSource, FS
     // 날짜를 선택했을 때 할일을 지정
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         workoutLog = realm.object(ofType: WorkoutLog.self, forPrimaryKey: pkDateFormatter.string(from: date))
-        let grabberString = grabberDateFormatter.string(from: date) + " 운동"
+        let grabberString = grabberDateFormatter.string(from: date) + "workout".localized
         grabberView.setTitle(grabberString)
         tableView.reloadData()
     }
