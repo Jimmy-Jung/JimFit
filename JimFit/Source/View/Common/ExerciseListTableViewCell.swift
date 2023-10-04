@@ -79,9 +79,15 @@ class ExerciseListTableViewCell: UITableViewCell {
             self.setupLikeButtonColor()
         }
         let realm: Realm! = RealmManager.shared.realm
+        let memoryRealm: Realm! = RealmManager.shared.memoryRealm
         guard let exercise else { return }
-        if let update = realm.objects(Exercise.self).filter("reference == %@", exercise.reference).first {
+        if let update = realm.object(ofType: Exercise.self, forPrimaryKey: exercise.reference) {
             try! realm.write {
+                update.liked = likeButton.isSelected
+            }
+        }
+        if let update = memoryRealm.object(ofType: Exercise.self, forPrimaryKey: exercise.reference) {
+            try! memoryRealm.write {
                 update.liked = likeButton.isSelected
             }
         }

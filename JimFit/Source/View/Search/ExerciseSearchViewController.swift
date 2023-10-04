@@ -134,9 +134,7 @@ final class ExerciseSearchViewController: UIViewController, LikeUpdateDelegate {
     // 메모리 Realm만들고 번역해서 생성
     private func fetchLocalizedList() {
         localizedRealm = RealmManager.shared.memoryRealm
-        print(localizedRealm.objects(Exercise.self))
         if localizedRealm.objects(Exercise.self).isEmpty {
-            print("is not empty")
             list.forEach { item in
                 try! localizedRealm.write {
                     let localizedItem = Exercise(bodyPart: item.bodyPart, equipmentType: item.equipmentType, targetMuscles: item.targetMuscles, synergistMuscles: item.synergistMuscles, reference: item.reference, exerciseName: item.exerciseName.localized, liked: item.liked)
@@ -166,6 +164,10 @@ final class ExerciseSearchViewController: UIViewController, LikeUpdateDelegate {
 }
 
 extension ExerciseSearchViewController: UISearchBarDelegate {
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.becomeFirstResponder()
+    }
     /// 검색 버튼 클릭 시, 키보드를 내려준다.
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
@@ -177,6 +179,22 @@ extension ExerciseSearchViewController: UISearchBarDelegate {
         searchBar.text = nil
         updateLocalizedList()
         searchView.tableView.reloadData()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        // 검색어가 비어있는 경우, API 호출을 하지 않는다.
+        guard let term = searchBar.text, !term.isEmpty else { return }
+        let separatedString = term.components(separatedBy: " ")
+        // 검색어와 분류 정보를 전달하면서, API 호출을 한다.
+        updateLocalizedList()
+        separatedString.forEach { query in
+            self.localizedList = self.localizedList
+                .where {
+                    $0.exerciseName.contains(query, options: .caseInsensitive)
+                }
+        }
+
+        self.searchView.tableView.reloadData()
     }
     
     /// 엔터 눌렀을 때 검색
@@ -278,6 +296,7 @@ extension ExerciseSearchViewController {
     }
     
     func updateLocalizedList() {
+        localizedRealm = RealmManager.shared.memoryRealm
         if isLikeButtonSelected {
             switch queryTuple {
             case (nil, nil):

@@ -240,8 +240,8 @@ extension WorkoutLogViewController: UITableViewDelegate, UITableViewDataSource, 
             let exerciseSearchVC = ExerciseSearchViewController(date: date)
             exerciseSearchVC.reloadDelegate = self
             transition(viewController: exerciseSearchVC, style: .present)
-            tableView.deselectRow(at: indexPath, animated: true)
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func reloadTableView() {
