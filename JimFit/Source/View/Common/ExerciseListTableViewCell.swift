@@ -8,6 +8,10 @@
 import UIKit
 import RealmSwift
 
+protocol ExerciseListTableViewCellDelegate: AnyObject {
+    func updateLike()
+}
+
 class ExerciseListTableViewCell: UITableViewCell {
     
     var exercise: Exercise? {
@@ -26,7 +30,7 @@ class ExerciseListTableViewCell: UITableViewCell {
         }
     }
     
-    weak var delegate: LikeUpdateDelegate?
+    weak var delegate: ExerciseListTableViewCellDelegate?
 
     private let borderView = UIView()
         .cornerRadius(K.Size.cellRadius)
@@ -39,7 +43,6 @@ class ExerciseListTableViewCell: UITableViewCell {
     
     private let secondaryLabel = UILabel()
         .font(K.Font.CellBody)
-        .numberOfLines(2)
         .textColor(K.Color.Grayscale.Label)
     
     private lazy var likeButton: UIButton = UIButton(configuration: .plain())

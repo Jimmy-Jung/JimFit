@@ -9,6 +9,13 @@ import UIKit
 
 final class ExerciseSetTableViewCell: UITableViewCell {
     
+    func configureCell(with exerciseSet: ExerciseSet, index: Int) {
+        self.setNumberLabel.text("\(index) Set")
+        self.setNumberLabel.backgroundColor(exerciseSet.isFinished ? K.Color.Primary.Orange : K.Color.Grayscale.Tint)
+        self.weighTextField.text(String(describing: exerciseSet.weight))
+        self.repsTextField.text(String(describing: exerciseSet.repetitionCount))
+    }
+    
     private let borderView = UIView()
         .cornerRadius(K.Size.cellRadius)
         .setBorder(color: K.Color.Grayscale.border_Thin, width: K.Size.border_Thin)
@@ -21,6 +28,10 @@ final class ExerciseSetTableViewCell: UITableViewCell {
         .font(K.Font.SubHeader)
         .cornerRadius(14)
         .clipsToBounds(true)
+    
+    func doneSet() {
+        setNumberLabel.backgroundColor(K.Color.Primary.Orange)
+    }
     
     private let weightLabel = UILabel()
         .text("kg")

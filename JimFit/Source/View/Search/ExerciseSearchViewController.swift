@@ -8,13 +8,7 @@
 import UIKit
 import RealmSwift
 
-
-
-protocol LikeUpdateDelegate: AnyObject {
-    func updateLike()
-}
-
-final class ExerciseSearchViewController: UIViewController, LikeUpdateDelegate {
+final class ExerciseSearchViewController: UIViewController, ExerciseListTableViewCellDelegate {
     enum ButtonType {
         case bodyPart
         case equipmentType

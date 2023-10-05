@@ -26,6 +26,7 @@ final class Workout: Object {
     @Persisted var exerciseTime: Int
     @Persisted var restTime: Int
     @Persisted var exerciseSets = List<ExerciseSet>()
+//    @Persisted(originProperty: "workouts") var OriginWorkout: LinkingObjects<WorkoutLog>
     
     convenience init(exercise: Exercise?, exerciseTime: Int = 0, restTime: Int = 0) {
         self.init()
@@ -58,6 +59,7 @@ final class Exercise: Object {
 }
 
 final class ExerciseSet: Object {
+//    @Persisted(originProperty: "exerciseSets") var OriginWorkout: LinkingObjects<Workout>
     @Persisted var repetitionCount: Int
     @Persisted var weight: Double
     @Persisted var isFinished: Bool

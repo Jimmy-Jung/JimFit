@@ -18,7 +18,7 @@ final class RealmManager {
         memoryRealm = self.createMemoryRealm()
     }
     
-    func createRealm() -> Realm {
+    private func createRealm() -> Realm {
         let fileManager = FileManager.default
         // 도큐먼트 디렉토리 경로
         let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -27,7 +27,7 @@ final class RealmManager {
         return try! Realm(fileURL: fileURL)
     }
     
-    func createMemoryRealm() -> Realm {
+    private func createMemoryRealm() -> Realm {
         let configuration = Realm.Configuration(inMemoryIdentifier: "MemoryRealm")
         return try! Realm(configuration: configuration)
     }

@@ -131,6 +131,7 @@ final class WorkoutLogViewController: UIViewController {
 }
 
 extension WorkoutLogViewController: GrabberViewDelegate {
+    
     func grabber(swipeGestureFor direction: UISwipeGestureRecognizer.Direction) {
         switch direction {
         case .up :
@@ -199,7 +200,6 @@ extension WorkoutLogViewController: UITableViewDelegate, UITableViewDataSource, 
         } else {
             return 1
         }
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -218,7 +218,8 @@ extension WorkoutLogViewController: UITableViewDelegate, UITableViewDataSource, 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
-            transition(viewController: ExerciseSetViewController(), style: .pushNavigation)
+            let workout = workoutLog?.workouts[indexPath.row]
+            transition(viewController: ExerciseSetViewController(workout: workout), style: .pushNavigation)
         } else {
             let date = pkDateFormatter.string(from: calendar.selectedDate!)
             let exerciseSearchVC = ExerciseSearchViewController(date: date)
