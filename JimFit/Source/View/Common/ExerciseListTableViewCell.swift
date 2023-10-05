@@ -95,7 +95,7 @@ class ExerciseListTableViewCell: UITableViewCell {
     
     private func setupLikeButtonColor() {
         if self.likeButton.isSelected {
-            self.likeButton.baseForegroundColor(.red)
+            self.likeButton.baseForegroundColor(K.Color.Primary.Red)
         } else {
             self.likeButton.baseForegroundColor(K.Color.Grayscale.border_Medium)
         }

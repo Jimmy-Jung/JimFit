@@ -43,7 +43,7 @@ final class ExerciseSetView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor(.systemBackground)
+        backgroundColor(K.Color.Grayscale.SecondaryBackground)
         addSubView(stopWatchStackView)
         stopWatchStackView.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(18)

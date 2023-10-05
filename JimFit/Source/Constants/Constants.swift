@@ -14,6 +14,7 @@ enum K {
             static let Orange = UIColor(named: "Orange")!
             static let Green = UIColor(named: "Green")!
             static let Blue = UIColor(named: "Blue")!
+            static let Red = UIColor(named: "Red")!
             static let Yellow = UIColor.systemYellow
             static let White = UIColor.white
             static let Label = UIColor.label
@@ -27,6 +28,7 @@ enum K {
             static let Tint = UIColor.systemGray3
             static let Selected = UIColor.systemGray5
             static let Background = UIColor.systemGray6
+            static let SecondaryBackground = UIColor.secondarySystemGroupedBackground
         }
         
     }
@@ -42,6 +44,7 @@ enum K {
         static let HeartFill = UIImage(systemName: "heart.fill")
         static let Heart = UIImage(systemName: "heart")
         static let Bolt = UIImage(systemName: "bolt.fill")
+        static let Dumbbell = UIImage(systemName: "dumbbell.fill")
     }
     
     enum Font {

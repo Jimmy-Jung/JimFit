@@ -115,7 +115,7 @@ final class ExerciseSearchViewController: UIViewController, ExerciseListTableVie
             sender.layer.borderColor = UIColor.clear.cgColor
         } else {
             sender.baseBackgroundColor(.clear)
-            sender.baseForegroundColor(.red)
+            sender.baseForegroundColor(K.Color.Primary.Red)
             sender.layer.borderColor = K.Color.Grayscale.Tint.cgColor
         }
         updateLocalizedList()
@@ -155,6 +155,10 @@ final class ExerciseSearchViewController: UIViewController, ExerciseListTableVie
     
             }
         }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }
 
 extension ExerciseSearchViewController: UISearchBarDelegate {

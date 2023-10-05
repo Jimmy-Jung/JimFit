@@ -24,7 +24,7 @@ final class ExerciseSetViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor(.systemBackground)
+        view.backgroundColor(K.Color.Grayscale.SecondaryBackground)
         view.addSubview(exerciseSetView)
         exerciseSetView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
@@ -61,7 +61,10 @@ final class ExerciseSetViewController: UIViewController {
         exerciseSetView.tableView.reloadData()
         
     }
-
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }
 
 extension ExerciseSetViewController: UITableViewDelegate, UITableViewDataSource {
@@ -72,6 +75,7 @@ extension ExerciseSetViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ExerciseSetTableViewCell.identifier, for: indexPath) as! ExerciseSetTableViewCell
         cell.configureCell(with: workout.exerciseSets[indexPath.row], index: indexPath.row)
+        cell.selectionStyle = .none
         return cell
     }
     

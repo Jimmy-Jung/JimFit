@@ -10,7 +10,7 @@ import UIKit
 final class ExerciseSetTableViewCell: UITableViewCell {
     
     func configureCell(with exerciseSet: ExerciseSet, index: Int) {
-        self.setNumberLabel.text("\(index) Set")
+        self.setNumberLabel.text("Set \(index + 1)")
         self.setNumberLabel.backgroundColor(exerciseSet.isFinished ? K.Color.Primary.Orange : K.Color.Grayscale.Tint)
         self.weighTextField.text(String(describing: exerciseSet.weight))
         self.repsTextField.text(String(describing: exerciseSet.repetitionCount))

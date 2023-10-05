@@ -38,7 +38,7 @@ final class WorkoutListTableViewCell: UITableViewCell {
             setLabel.text(String(describing: setCount) + " set")
             progressLabel.text(String(Int(progression * 100)) + "%")
             progressBar.snp.updateConstraints { make in
-                make.width.equalTo(progressBar.frame.width * progression)
+                make.width.equalTo((UIScreen.main.bounds.width - 160) * progression)
             }
         }
     }
@@ -56,7 +56,8 @@ final class WorkoutListTableViewCell: UITableViewCell {
         .textColor(K.Color.Grayscale.Label)
     
     let weightImage = UIImageView()
-        .tintColor(K.Color.Primary.Label)
+        .image(K.Image.Dumbbell)
+        .tintColor(K.Color.Grayscale.border_Medium)
     
     private let weightLabel = UILabel()
         .font(K.Font.CellBody)
@@ -127,7 +128,7 @@ final class WorkoutListTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(borderView)
         borderView.addSubview(progressBarBorder)
-        progressBarBorder.addSubView(progressBar)
+        borderView.addSubView(progressBar)
         borderView.addSubview(progressLabel)
         borderView.addSubview(horizontalStackView)
         
@@ -141,13 +142,17 @@ final class WorkoutListTableViewCell: UITableViewCell {
         }
         
         weightImage.snp.makeConstraints { make in
-            make.size.equalTo(18)
+            make.width.equalTo(weightImage.snp.height)
         }
         setLabel.snp.makeConstraints { make in
             make.width.equalTo(70)
         }
         setImage.snp.makeConstraints { make in
-            make.size.equalTo(18)
+            make.width.equalTo(setImage.snp.height)
+        }
+        
+        titleStackView.snp.makeConstraints { make in
+            make.height.equalTo(2 + 15 + 2 + 15 + 2 + 13 + 2)
         }
         
         horizontalStackView.snp.makeConstraints { make in
@@ -161,17 +166,17 @@ final class WorkoutListTableViewCell: UITableViewCell {
             make.leading.equalTo(horizontalStackView)
             make.bottom.equalToSuperview().inset(8)
             make.height.equalTo(6)
+            make.width.equalTo(UIScreen.main.bounds.width - 160)
         }
         
         progressLabel.snp.makeConstraints { make in
             make.centerY.equalTo(progressBarBorder).offset(-3)
             make.leading.equalTo(progressBarBorder.snp.trailing).offset(8)
-            make.trailing.equalToSuperview().inset(48)
         }
         
         progressBar.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.leading.equalToSuperview()
+            make.centerY.equalTo(progressBarBorder.snp.centerY)
+            make.leading.equalTo(progressBarBorder)
             make.height.equalTo(4)
             make.width.equalTo(0)
         }

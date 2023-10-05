@@ -17,7 +17,7 @@ final class StopWatchView: UIView {
     private let borderView = UIView()
         .cornerRadius(K.Size.cellRadius)
         .setBorder(color: .clear, width: 0)
-        .backgroundColor(K.Color.Grayscale.Background)
+        .backgroundColor(.secondarySystemFill)
  
     private let totalTimeTextLabel = UILabel()
         .font(.systemFont(ofSize: 16, weight: .bold))

@@ -50,6 +50,12 @@ final class WorkoutLogViewController: UIViewController {
         configureGrabberView()
         print(realm.configuration.fileURL)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+        calendar.reloadData()
+    }
 
     private func configureGrabberView() {
         grabberView.delegate = self
@@ -58,7 +64,7 @@ final class WorkoutLogViewController: UIViewController {
     }
     
     private func configureUI() {
-        view.backgroundColor(.secondarySystemGroupedBackground)
+        view.backgroundColor(K.Color.Grayscale.SecondaryBackground)
         configureCalendar()
         configureTableView()
     }
@@ -137,13 +143,13 @@ extension WorkoutLogViewController: GrabberViewDelegate {
         case .up :
             self.calendar.setScope(.week, animated: true)
             UIView.transition(with: view, duration: 0.3) {
-                self.view.backgroundColor(.secondarySystemBackground)
+                self.view.backgroundColor(K.Color.Grayscale.Background)
             }
             
         case .down:
             self.calendar.setScope(.month, animated: true)
             UIView.transition(with: view, duration: 0.3) {
-                self.view.backgroundColor(.secondarySystemGroupedBackground)
+                self.view.backgroundColor(K.Color.Grayscale.SecondaryBackground)
             }
         default: break
         }
