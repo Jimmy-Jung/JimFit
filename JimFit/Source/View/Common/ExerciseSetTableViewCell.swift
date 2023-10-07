@@ -37,7 +37,7 @@ final class ExerciseSetTableViewCell: UITableViewCell {
         .text("kg")
         .font(K.Font.SubHeader)
     
-    private let weighTextField = UITextField()
+    let weighTextField = UITextField()
         .placeholder("0")
         .textAlignment(.right)
         .font(K.Font.SubHeader)
@@ -46,10 +46,13 @@ final class ExerciseSetTableViewCell: UITableViewCell {
         .text("reps")
         .font(K.Font.SubHeader)
     
-    private let repsTextField = UITextField()
+    let repsTextField = UITextField()
         .placeholder("0")
         .textAlignment(.right)
         .font(K.Font.SubHeader)
+        .keyboardType(.numberPad)
+        .autocapitalizationType(.none)
+        
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -80,8 +83,8 @@ final class ExerciseSetTableViewCell: UITableViewCell {
         weighTextField.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview().inset(4)
             make.height.equalTo(45)
-//            make.leading.equalTo(setNumberLabel.snp.trailing).offset(8)
             make.trailing.equalTo(weightLabel.snp.leading).offset(-4)
+            make.width.greaterThanOrEqualTo(80)
         }
         
         borderView.addSubview(repsLabel)
@@ -95,8 +98,8 @@ final class ExerciseSetTableViewCell: UITableViewCell {
         repsTextField.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview().inset(4)
             make.height.equalTo(45)
-//            make.leading.equalTo(weightLabel.snp.trailing).offset(8)
             make.trailing.equalTo(repsLabel.snp.leading).offset(-4)
+            make.width.greaterThanOrEqualTo(80)
         }
     }
     

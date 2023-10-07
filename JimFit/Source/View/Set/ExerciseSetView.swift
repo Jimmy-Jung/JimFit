@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import SnapKit
 
 final class ExerciseSetView: UIView {
-    private let workoutStopWatch = StopWatchView(type: .workout)
-    private let restStopWatch = StopWatchView(type: .rest)
-    private lazy var stopWatchStackView: UIStackView = UIStackView()
+    let workoutStopWatch = StopWatchView(type: .workout)
+    let restStopWatch = StopWatchView(type: .rest)
+    lazy var stopWatchStackView: UIStackView = UIStackView()
         .axis(.vertical)
         .spacing(10)
         .alignment(.fill)
@@ -20,6 +21,8 @@ final class ExerciseSetView: UIView {
     
     let grabberView = GrabberView()
     let tableView = UITableView()
+    
+    var grabberViewTopOffset: Constraint!
     
     let startWorkoutButton = UIButton(configuration: .filled())
         .baseForegroundColor(K.Color.Primary.White)
@@ -51,7 +54,7 @@ final class ExerciseSetView: UIView {
         }
         addSubView(grabberView)
         grabberView.snp.makeConstraints { make in
-            make.top.equalTo(stopWatchStackView.snp.bottom).offset(18)
+            grabberViewTopOffset = make.top.equalTo(stopWatchStackView.snp.bottom).offset(16).constraint
             make.horizontalEdges.equalToSuperview()
             make.height.equalTo(64)
         }
@@ -59,6 +62,7 @@ final class ExerciseSetView: UIView {
         tableView.snp.makeConstraints { make in
             make.top.equalTo(grabberView.snp.bottom)
             make.horizontalEdges.equalToSuperview()
+            make.bottom.equalTo(keyboardLayoutGuide.snp.top)
         }
         startWorkoutButton.snp.makeConstraints { make in
             make.height.equalTo(50)
@@ -68,7 +72,7 @@ final class ExerciseSetView: UIView {
         }
         addSubView(buttonStackView)
         buttonStackView.snp.makeConstraints { make in
-            make.top.equalTo(tableView.snp.bottom)
+            make.top.equalTo(keyboardLayoutGuide.snp.bottom)
             make.horizontalEdges.equalToSuperview().inset(20)
             make.bottom.equalToSuperview().inset(8)
             make.height.equalTo(50)

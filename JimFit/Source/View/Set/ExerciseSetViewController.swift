@@ -24,21 +24,31 @@ final class ExerciseSetViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureView()
+        addButtonsAction()
+        configureTableView()
+    }
+    
+    private func configureView() {
         view.backgroundColor(K.Color.Grayscale.SecondaryBackground)
         view.addSubview(exerciseSetView)
         exerciseSetView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
-        
+        exerciseSetView.grabberView.delegate = self
+    }
+    
+    private func addButtonsAction() {
+        exerciseSetView.startWorkoutButton.addAction { [weak self] in self?.startWorkoutButtonTapped() }
+        exerciseSetView.doneSetButton.addAction { [weak self] in self?.doneSetButtonTapped() }
+    }
+    
+    private func configureTableView() {
         exerciseSetView.tableView.dataSource = self
         exerciseSetView.tableView.delegate = self
         exerciseSetView.tableView.register(ExerciseSetTableViewCell.self, forCellReuseIdentifier: ExerciseSetTableViewCell.identifier)
         exerciseSetView.tableView.rowHeight = UITableView.automaticDimension
         exerciseSetView.tableView.separatorStyle = .none
-        
-        
-        exerciseSetView.startWorkoutButton.addAction { [weak self] in self?.startWorkoutButtonTapped() }
-        exerciseSetView.doneSetButton.addAction { [weak self] in self?.doneSetButtonTapped() }
     }
     
     private func startWorkoutButtonTapped() {
@@ -53,7 +63,6 @@ final class ExerciseSetViewController: UIViewController {
                 let realm = RealmManager.shared.realm!
                 try! realm.write {
                     value.isFinished = true
-//                    realm.add(workout, update: .modified)
                 }
                 return
             }
@@ -75,9 +84,43 @@ extension ExerciseSetViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ExerciseSetTableViewCell.identifier, for: indexPath) as! ExerciseSetTableViewCell
         cell.configureCell(with: workout.exerciseSets[indexPath.row], index: indexPath.row)
+        cell.weighTextField.delegate = self
+        cell.repsTextField.delegate = self
         cell.selectionStyle = .none
         return cell
     }
+}
+
+extension ExerciseSetViewController: GrabberViewDelegate {
+    func grabber(swipeGestureFor direction: UISwipeGestureRecognizer.Direction) {
+        switch direction {
+        case .up:
+            
+            UIView.transition(with: view, duration: 0.3) {
+                self.exerciseSetView.grabberViewTopOffset.update(offset: -self.exerciseSetView.stopWatchStackView.frame.height/2 + 4)
+                self.view.layoutIfNeeded()
+            }
+            
+        case .down:
+            UIView.transition(with: view, duration: 0.3) {
+                self.exerciseSetView.grabberViewTopOffset.update(offset: 16)
+                self.view.layoutIfNeeded()
+            }
+        default:
+            break
+        }
+    }
+    
+    func grabberDidTappedButton() {
+        
+    }
     
     
+}
+
+extension ExerciseSetViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.selectAll(nil)
+        grabber(swipeGestureFor: .up)
+    }
 }
