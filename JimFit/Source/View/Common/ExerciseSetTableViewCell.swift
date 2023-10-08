@@ -33,6 +33,8 @@ final class ExerciseSetTableViewCell: UITableViewCell {
         }
     
     var setButtonHandler: () -> Void = { }
+    var textFieldDidBeginEditingHandler: () -> Void = { }
+    var textFieldDidEndEditingHandler: () -> Void = { }
     
     private func setButtonTapped() {
         setButtonHandler()
@@ -138,9 +140,11 @@ final class ExerciseSetTableViewCell: UITableViewCell {
 extension ExerciseSetTableViewCell: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.selectAll(nil)
+        textFieldDidBeginEditingHandler()
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        textFieldDidEndEditingHandler()
         guard let text = textField.text, !text.isEmpty, let numberText = Int(text) else { return }
         if textField == weighTextField {
             try! realm.write {
@@ -152,7 +156,6 @@ extension ExerciseSetTableViewCell: UITextFieldDelegate {
             }
         }
     }
-    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         // Allow only digits from 0 to 9
         let allowedCharacters = CharacterSet.decimalDigits

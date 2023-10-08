@@ -97,7 +97,6 @@ final class WorkoutLogViewController: UIViewController {
         grabberView.snp.makeConstraints { make in
             make.top.equalTo(calendar.snp.bottom).offset(10)
             make.horizontalEdges.equalToSuperview()
-            make.height.equalTo(64)
         }
         
         view.addSubview(tableView)

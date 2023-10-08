@@ -9,6 +9,8 @@
 // System
 "searchBar_placeholder" = "Enter the exercise Name";
 "cancel" = "cancel";
+"Edit" = "Edit";
+"Done" = "Done";
 "locale_identifier" = "en_US";
 
 // Log

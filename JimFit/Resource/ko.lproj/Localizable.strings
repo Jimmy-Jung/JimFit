@@ -9,6 +9,8 @@
 // System
 "searchBar_placeholder" = "운동 이름을 입력하세요";
 "cancel" = "취소";
+"Edit" = "수정";
+"Done" = "완료";
 "locale_identifier" = "ko_KR";
 
 // Log

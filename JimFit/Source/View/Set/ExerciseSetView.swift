@@ -56,7 +56,6 @@ final class ExerciseSetView: UIView {
         grabberView.snp.makeConstraints { make in
             grabberViewTopOffset = make.top.equalTo(stopWatchStackView.snp.bottom).offset(16).constraint
             make.horizontalEdges.equalToSuperview()
-            make.height.equalTo(64)
         }
         addSubView(tableView)
         tableView.snp.makeConstraints { make in

@@ -11,7 +11,7 @@ import RealmSwift
 final class ExerciseSetViewController: UIViewController {
     private lazy var exerciseSetView = ExerciseSetView()
     var workout: Workout!
-    
+    let realm = RealmManager.shared.realm
     init(workout: Workout?) {
         super.init(nibName: nil, bundle: nil)
         self.workout = workout
@@ -57,20 +57,15 @@ final class ExerciseSetViewController: UIViewController {
         
     }
     private func doneSetButtonTapped() {
-        for (index, value) in workout.exerciseSets.enumerated() {
-            if value.isFinished == false {
-                let cell = exerciseSetView.tableView.cellForRow(at: IndexPath(row: index, section: 0)) as! ExerciseSetTableViewCell
-                cell.doneSet()
-                
-                let realm = RealmManager.shared.realm
-                try! realm.write {
-                    value.isFinished = true
-                }
-                return
-            }
+        guard let set = workout.exerciseSets.first(where: { $0.isFinished == false })
+        else {
+            return
+        }
+        
+        try! realm.write {
+            set.isFinished = true
         }
         exerciseSetView.tableView.reloadData()
-        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -96,8 +91,6 @@ extension ExerciseSetViewController: UITableViewDelegate, UITableViewDataSource 
                 guard let self else { return }
                 if workout.exerciseSets[indexPath.row].isFinished {
                     let index = workout.exerciseSets.lastIndex { $0.isFinished }
-//                    let index = workout.exerciseSets.count - 1
-                    let realm = RealmManager.shared.realm
                     try! realm.write {
                         self.workout.exerciseSets.move(from: indexPath.row, to: index ?? indexPath.row)
                     }
@@ -105,8 +98,14 @@ extension ExerciseSetViewController: UITableViewDelegate, UITableViewDataSource 
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                         tableView.reloadData()
                     }
-                    
                 }
+            }
+            cell.textFieldDidBeginEditingHandler = { [weak self] in
+                self?.grabber(swipeGestureFor: .up)
+            }
+            cell.textFieldDidEndEditingHandler = { [weak self] in
+                self?.grabber(swipeGestureFor: .down)
+                tableView.scrollToRow(at: indexPath, at: .top, animated: true)
             }
             return cell
         } else {
@@ -121,10 +120,51 @@ extension ExerciseSetViewController: UITableViewDelegate, UITableViewDataSource 
                 try! realm.write {
                     self.workout.exerciseSets.append(ExerciseSet(repetitionCount: repetitionCount, weight: weight))
                 }
-                tableView.reloadData()
+                tableView.insertRows(at: [IndexPath(row: workout.exerciseSets.count - 1, section: 0)], with: .automatic)
                 tableView.scrollToRow(at: indexPath, at: .top, animated: true)
             }
             return cell
+        }
+    }
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return indexPath.section == 0
+    }
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return indexPath.section == 0
+    }
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        try! realm.write {
+            workout.exerciseSets.move(from: sourceIndexPath.row, to: destinationIndexPath.row)
+        }
+    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard editingStyle == .delete else { return }
+        try! realm.write {
+            workout.exerciseSets.remove(at: indexPath.row)
+        }
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            tableView.reloadData()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
+        // 0번 섹션의 셀만 이동 가능하도록 설정
+        if proposedDestinationIndexPath.section != 0 {
+            return sourceIndexPath
+        }
+        return proposedDestinationIndexPath
+    }
+    
+    func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
+            cell.isUserInteractionEnabled = false
+        }
+    }
+
+    func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
+        if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) {
+            cell.isUserInteractionEnabled = true
         }
     }
 }
@@ -148,7 +188,15 @@ extension ExerciseSetViewController: GrabberViewDelegate {
         }
     }
     func grabberDidTappedButton() {
-        
+        let shouldBeEdited = !exerciseSetView.tableView.isEditing
+        exerciseSetView.tableView.setEditing(shouldBeEdited, animated: true)
+        if !shouldBeEdited {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.exerciseSetView.tableView.reloadData()
+            }
+            
+        }
+        exerciseSetView.grabberView.isMenuButtonSelected = shouldBeEdited
     }
     
     

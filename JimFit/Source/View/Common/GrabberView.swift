@@ -28,11 +28,19 @@ final class GrabberView: UIView {
     private let titleLabel = UILabel()
         .font(K.Font.Header2)
         .textColor(K.Color.Primary.Label)
-    
-    private lazy var menuButton = UIButton(configuration: .plain())
-        .image(UIImage(systemName: "arrow.up.arrow.down")?
-            .font(.systemFont(ofSize: 14, weight: .medium)))
+
+    private lazy var menuButton: UIButton = UIButton(configuration: .plain())
+    .image(UIImage(systemName: "slider.horizontal.3"))
+        .addConfigurationUpdateHandler { button in
+            switch button.state {
+            case .selected:
+                button.baseBackgroundColor(K.Color.Primary.Orange)
+            default:
+                button.baseBackgroundColor(.clear)
+            }
+        }
         .baseForegroundColor(K.Color.Primary.Label)
+        .cornerStyle(.large)
     
     weak var delegate: GrabberViewDelegate?
     
@@ -42,6 +50,15 @@ final class GrabberView: UIView {
     
     func setImage(_ image: UIImage?) {
         menuButton.image(image)
+        
+    }
+    var isMenuButtonSelected: Bool {
+        get {
+            return menuButton.isSelected
+        }
+        set {
+            menuButton.isSelected = newValue
+        }
         
     }
     
@@ -97,13 +114,15 @@ final class GrabberView: UIView {
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(grabberView.snp.bottom).offset(12)
             make.leading.equalToSuperview().offset(30)
+            make.bottom.equalToSuperview()
         }
         
         backView.addSubview(menuButton)
         menuButton.snp.makeConstraints { make in
             make.centerY.equalTo(titleLabel)
             make.trailing.equalToSuperview().inset(20)
-            make.size.equalTo(50)
+            make.height.equalTo(50)
+            make.bottom.equalToSuperview()
         }
     }
     
