@@ -26,7 +26,7 @@ final class ExerciseSetTableViewCell: UITableViewCell {
     
     lazy var setButton = UIButton(configuration: .filled())
         .baseForegroundColor(.white)
-        .baseBackgroundColor(K.Color.Grayscale.Tint)
+        .baseBackgroundColor(K.Color.Grayscale.SecondaryBackground)
         .cornerRadius(14)
         .addAction { [unowned self] in
             setButtonTapped()
@@ -53,6 +53,7 @@ final class ExerciseSetTableViewCell: UITableViewCell {
         .font(K.Font.SubHeader)
         .keyboardType(.numberPad)
         .autocapitalizationType(.none)
+        .addDoneButtonToKeyboard()
         .delegate(self)
     
     private let repsLabel = UILabel()
@@ -65,6 +66,7 @@ final class ExerciseSetTableViewCell: UITableViewCell {
         .font(K.Font.SubHeader)
         .keyboardType(.numberPad)
         .autocapitalizationType(.none)
+        .addDoneButtonToKeyboard()
         .delegate(self)
         
 

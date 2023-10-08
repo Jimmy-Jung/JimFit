@@ -29,18 +29,10 @@ final class AddButtonTableViewCell: UITableViewCell {
             addButton
                 .baseBackgroundColor(K.Color.Primary.Orange)
                 .titleWithFont(title: "add_exercise_list".localized, font: K.Font.Header2)
-            
-            addButton.snp.makeConstraints { make in
-                make.height.equalTo(50)
-            }
         case .addSet:
             addButton
                 .baseBackgroundColor(K.Color.Primary.Orange)
                 .titleWithFont(title: "add_exercise_set".localized, font: K.Font.Header2)
-            
-            addButton.snp.makeConstraints { make in
-                make.height.equalTo(45)
-            }
         }
     }
     
@@ -50,6 +42,7 @@ final class AddButtonTableViewCell: UITableViewCell {
         addButton.snp.makeConstraints { make in
             make.verticalEdges.equalToSuperview().inset(8)
             make.horizontalEdges.equalToSuperview().inset(20)
+            make.height.equalTo(50)
         }
     }
     

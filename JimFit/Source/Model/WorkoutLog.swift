@@ -33,7 +33,7 @@ final class Workout: Object {
         self.exercise = exercise
         self.exerciseTime = exerciseTime
         self.restTime = restTime
-        self.exerciseSets.append(objectsIn: [ExerciseSet(), ExerciseSet(), ExerciseSet(), ExerciseSet()])
+        self.exerciseSets.append(ExerciseSet(repetitionCount: 0, weight: 0))
     }
 }
 
@@ -64,7 +64,7 @@ final class ExerciseSet: Object {
     @Persisted var weight: Int
     @Persisted var isFinished: Bool
     
-    convenience init(repetitionCount: Int = 12, weight: Int = 0, isFinished: Bool = false) {
+    convenience init(repetitionCount: Int, weight: Int, isFinished: Bool = false) {
         self.init()
         self.repetitionCount = repetitionCount
         self.weight = weight

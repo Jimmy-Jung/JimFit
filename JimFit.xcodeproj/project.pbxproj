@@ -31,6 +31,7 @@
 		555E6B922AC5796F00DCA052 /* ExerciseDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B912AC5796F00DCA052 /* ExerciseDetail.swift */; };
 		555E6B9A2AC72ECF00DCA052 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B992AC72ECF00DCA052 /* RealmManager.swift */; };
 		555E6B9C2AC7F3B100DCA052 /* WorkoutLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B9B2AC7F3B100DCA052 /* WorkoutLog.swift */; };
+		5570E1A62AD2F52400350AF3 /* UITextField+Exension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5570E1A52AD2F52400350AF3 /* UITextField+Exension.swift */; };
 		55A2ABF12ACB542D00927918 /* Exercise.realm in Resources */ = {isa = PBXBuildFile; fileRef = 55A2ABF02ACB541800927918 /* Exercise.realm */; };
 		55A2ABF42ACC187F00927918 /* ExerciseSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A2ABF32ACC187F00927918 /* ExerciseSetViewController.swift */; };
 		55A2ABF72ACC191700927918 /* StopWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A2ABF62ACC191700927918 /* StopWatchView.swift */; };
@@ -60,6 +61,7 @@
 		555E6B912AC5796F00DCA052 /* ExerciseDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseDetail.swift; sourceTree = "<group>"; };
 		555E6B992AC72ECF00DCA052 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		555E6B9B2AC7F3B100DCA052 /* WorkoutLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutLog.swift; sourceTree = "<group>"; };
+		5570E1A52AD2F52400350AF3 /* UITextField+Exension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Exension.swift"; sourceTree = "<group>"; };
 		55A2ABF02ACB541800927918 /* Exercise.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = Exercise.realm; sourceTree = "<group>"; };
 		55A2ABF32ACC187F00927918 /* ExerciseSetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetViewController.swift; sourceTree = "<group>"; };
 		55A2ABF62ACC191700927918 /* StopWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatchView.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				555E6B702AC3459A00DCA052 /* String+Extension.swift */,
+				5570E1A52AD2F52400350AF3 /* UITextField+Exension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				555E6B852AC54EDB00DCA052 /* ExerciseSearchViewController.swift in Sources */,
 				555E6B7D2AC4663000DCA052 /* AddButtonTableViewCell.swift in Sources */,
 				555E6B922AC5796F00DCA052 /* ExerciseDetail.swift in Sources */,
+				5570E1A62AD2F52400350AF3 /* UITextField+Exension.swift in Sources */,
 				555E6B382AC1D76B00DCA052 /* AppDelegate.swift in Sources */,
 				55A2ABF42ACC187F00927918 /* ExerciseSetViewController.swift in Sources */,
 				555E6B712AC3459A00DCA052 /* String+Extension.swift in Sources */,

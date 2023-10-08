@@ -36,6 +36,7 @@ final class ExerciseSetViewController: UIViewController {
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
         exerciseSetView.grabberView.delegate = self
+        exerciseSetView.grabberView.setTitle(workout.exercise?.exerciseName.localized ?? "")
     }
     
     private func addButtonsAction() {
@@ -97,9 +98,12 @@ extension ExerciseSetViewController: UITableViewDelegate, UITableViewDataSource 
             cell.primaryButtonSet(state: .addSet)
             cell.selectionStyle = .none
             cell.addButtonHandler = { [weak self] in
+                guard let self else { return }
                 let realm = RealmManager.shared.realm
+                let repetitionCount = workout.exerciseSets.last?.repetitionCount ?? 0
+                let weight = workout.exerciseSets.last?.weight ?? 0
                 try! realm.write {
-                    self?.workout.exerciseSets.append(ExerciseSet())
+                    self.workout.exerciseSets.append(ExerciseSet(repetitionCount: repetitionCount, weight: weight))
                 }
                 tableView.reloadData()
                 tableView.scrollToRow(at: indexPath, at: .top, animated: true)
@@ -113,7 +117,6 @@ extension ExerciseSetViewController: GrabberViewDelegate {
     func grabber(swipeGestureFor direction: UISwipeGestureRecognizer.Direction) {
         switch direction {
         case .up:
-            
             UIView.transition(with: view, duration: 0.3) {
                 self.exerciseSetView.grabberViewTopOffset.update(offset: -self.exerciseSetView.stopWatchStackView.frame.height/2 + 4)
                 self.view.layoutIfNeeded()
@@ -128,7 +131,6 @@ extension ExerciseSetViewController: GrabberViewDelegate {
             break
         }
     }
-    
     func grabberDidTappedButton() {
         
     }
