@@ -92,6 +92,22 @@ extension ExerciseSetViewController: UITableViewDelegate, UITableViewDataSource 
             let cell = tableView.dequeueReusableCell(withIdentifier: ExerciseSetTableViewCell.identifier, for: indexPath) as! ExerciseSetTableViewCell
             cell.configureCell(with: workout.exerciseSets[indexPath.row], index: indexPath.row)
             cell.selectionStyle = .none
+            cell.setButtonHandler = { [weak self] in
+                guard let self else { return }
+                if workout.exerciseSets[indexPath.row].isFinished {
+                    let index = workout.exerciseSets.lastIndex { $0.isFinished }
+//                    let index = workout.exerciseSets.count - 1
+                    let realm = RealmManager.shared.realm
+                    try! realm.write {
+                        self.workout.exerciseSets.move(from: indexPath.row, to: index ?? indexPath.row)
+                    }
+                    tableView.moveRow(at: indexPath, to: IndexPath(row: index ?? indexPath.row, section: 0))
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        tableView.reloadData()
+                    }
+                    
+                }
+            }
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: AddButtonTableViewCell.identifier, for: indexPath) as! AddButtonTableViewCell

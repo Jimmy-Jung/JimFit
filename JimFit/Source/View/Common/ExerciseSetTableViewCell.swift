@@ -9,7 +9,7 @@ import UIKit
 import RealmSwift
 
 final class ExerciseSetTableViewCell: UITableViewCell {
-    let realm = RealmManager.shared.realm
+    private let realm = RealmManager.shared.realm
     private var exerciseSet: ExerciseSet!
     func configureCell(with exerciseSet: ExerciseSet, index: Int) {
         self.exerciseSet = exerciseSet
@@ -24,7 +24,7 @@ final class ExerciseSetTableViewCell: UITableViewCell {
         .cornerRadius(K.Size.cellRadius)
         .setBorder(color: K.Color.Grayscale.border_Thin, width: K.Size.border_Thin)
     
-    lazy var setButton = UIButton(configuration: .filled())
+    private lazy var setButton = UIButton(configuration: .filled())
         .baseForegroundColor(.white)
         .baseBackgroundColor(K.Color.Grayscale.SecondaryBackground)
         .cornerRadius(14)
@@ -32,12 +32,16 @@ final class ExerciseSetTableViewCell: UITableViewCell {
             setButtonTapped()
         }
     
-    func setButtonTapped() {
+    var setButtonHandler: () -> Void = { }
+    
+    private func setButtonTapped() {
+        setButtonHandler()
         setButton.isSelected.toggle()
         setButton.baseBackgroundColor(setButton.isSelected ? K.Color.Primary.Orange : K.Color.Grayscale.Tint)
         try! realm.write {
             exerciseSet.isFinished = setButton.isSelected
         }
+        
     }
     func doneSet() {
         setButton.backgroundColor(K.Color.Primary.Orange)
@@ -47,7 +51,7 @@ final class ExerciseSetTableViewCell: UITableViewCell {
         .text("kg")
         .font(K.Font.SubHeader)
     
-    lazy var weighTextField = UITextField()
+    private lazy var weighTextField = UITextField()
         .placeholder("0")
         .textAlignment(.right)
         .font(K.Font.SubHeader)
@@ -60,7 +64,7 @@ final class ExerciseSetTableViewCell: UITableViewCell {
         .text("reps")
         .font(K.Font.SubHeader)
     
-    lazy var repsTextField = UITextField()
+    private lazy var repsTextField = UITextField()
         .placeholder("0")
         .textAlignment(.right)
         .font(K.Font.SubHeader)
