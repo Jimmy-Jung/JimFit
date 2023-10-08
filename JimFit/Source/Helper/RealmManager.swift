@@ -11,14 +11,14 @@ import RealmSwift
 final class RealmManager {
     
     static let shared = RealmManager()
-    var realm: Realm!
-    var memoryRealm: Realm!
+    var realm: Realm
+    var memoryRealm: Realm
     private init() {
-        realm = self.createRealm()
-        memoryRealm = self.createMemoryRealm()
+        realm = RealmManager.createRealm()
+        memoryRealm = RealmManager.createMemoryRealm()
     }
     
-    private func createRealm() -> Realm {
+    private static func createRealm() -> Realm {
         let fileManager = FileManager.default
         // 도큐먼트 디렉토리 경로
         let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -27,7 +27,7 @@ final class RealmManager {
         return try! Realm(fileURL: fileURL)
     }
     
-    private func createMemoryRealm() -> Realm {
+    private static func createMemoryRealm() -> Realm {
         let configuration = Realm.Configuration(inMemoryIdentifier: "MemoryRealm")
         return try! Realm(configuration: configuration)
     }

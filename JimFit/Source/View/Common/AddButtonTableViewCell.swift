@@ -14,10 +14,14 @@ final class AddButtonTableViewCell: UITableViewCell {
         case addSet
     }
     
+    var addButtonHandler: (() -> Void) = { }
+    
     private lazy var addButton = UIButton(configuration: .filled())
         .baseForegroundColor(K.Color.Primary.White)
         .cornerRadius(16)
-        .isUserInteractionEnabled(false)
+        .addAction { [weak self] in
+            self?.addButtonHandler()
+        }
     
     func primaryButtonSet(state: State) {
         switch state {
@@ -25,10 +29,18 @@ final class AddButtonTableViewCell: UITableViewCell {
             addButton
                 .baseBackgroundColor(K.Color.Primary.Orange)
                 .titleWithFont(title: "add_exercise_list".localized, font: K.Font.Header2)
+            
+            addButton.snp.makeConstraints { make in
+                make.height.equalTo(50)
+            }
         case .addSet:
             addButton
-                .baseBackgroundColor(K.Color.Grayscale.Background)
+                .baseBackgroundColor(K.Color.Primary.Orange)
                 .titleWithFont(title: "add_exercise_set".localized, font: K.Font.Header2)
+            
+            addButton.snp.makeConstraints { make in
+                make.height.equalTo(45)
+            }
         }
     }
     
@@ -38,7 +50,6 @@ final class AddButtonTableViewCell: UITableViewCell {
         addButton.snp.makeConstraints { make in
             make.verticalEdges.equalToSuperview().inset(8)
             make.horizontalEdges.equalToSuperview().inset(20)
-            make.height.equalTo(50)
         }
     }
     
@@ -47,9 +58,5 @@ final class AddButtonTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-            self.addButton.isEnabled(!selected)
-    }
     
 }

@@ -72,7 +72,7 @@ final class ExerciseSetView: UIView {
         }
         addSubView(buttonStackView)
         buttonStackView.snp.makeConstraints { make in
-            make.top.equalTo(keyboardLayoutGuide.snp.bottom)
+            make.top.greaterThanOrEqualTo(tableView.snp.bottom)
             make.horizontalEdges.equalToSuperview().inset(20)
             make.bottom.equalToSuperview().inset(8)
             make.height.equalTo(50)

@@ -47,6 +47,7 @@ final class ExerciseSetViewController: UIViewController {
         exerciseSetView.tableView.dataSource = self
         exerciseSetView.tableView.delegate = self
         exerciseSetView.tableView.register(ExerciseSetTableViewCell.self, forCellReuseIdentifier: ExerciseSetTableViewCell.identifier)
+        exerciseSetView.tableView.register(AddButtonTableViewCell.self, forCellReuseIdentifier: AddButtonTableViewCell.identifier)
         exerciseSetView.tableView.rowHeight = UITableView.automaticDimension
         exerciseSetView.tableView.separatorStyle = .none
     }
@@ -60,7 +61,7 @@ final class ExerciseSetViewController: UIViewController {
                 let cell = exerciseSetView.tableView.cellForRow(at: IndexPath(row: index, section: 0)) as! ExerciseSetTableViewCell
                 cell.doneSet()
                 
-                let realm = RealmManager.shared.realm!
+                let realm = RealmManager.shared.realm
                 try! realm.write {
                     value.isFinished = true
                 }
@@ -77,17 +78,34 @@ final class ExerciseSetViewController: UIViewController {
 }
 
 extension ExerciseSetViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return workout.exerciseSets.count
+        return section == 0 ? workout.exerciseSets.count : 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ExerciseSetTableViewCell.identifier, for: indexPath) as! ExerciseSetTableViewCell
-        cell.configureCell(with: workout.exerciseSets[indexPath.row], index: indexPath.row)
-        cell.weighTextField.delegate = self
-        cell.repsTextField.delegate = self
-        cell.selectionStyle = .none
-        return cell
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: ExerciseSetTableViewCell.identifier, for: indexPath) as! ExerciseSetTableViewCell
+            cell.configureCell(with: workout.exerciseSets[indexPath.row], index: indexPath.row)
+            cell.selectionStyle = .none
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: AddButtonTableViewCell.identifier, for: indexPath) as! AddButtonTableViewCell
+            cell.primaryButtonSet(state: .addSet)
+            cell.selectionStyle = .none
+            cell.addButtonHandler = { [weak self] in
+                let realm = RealmManager.shared.realm
+                try! realm.write {
+                    self?.workout.exerciseSets.append(ExerciseSet())
+                }
+                tableView.reloadData()
+                tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+            }
+            return cell
+        }
     }
 }
 
@@ -116,11 +134,4 @@ extension ExerciseSetViewController: GrabberViewDelegate {
     }
     
     
-}
-
-extension ExerciseSetViewController: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.selectAll(nil)
-        grabber(swipeGestureFor: .up)
-    }
 }

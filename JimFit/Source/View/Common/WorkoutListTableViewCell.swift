@@ -25,8 +25,8 @@ final class WorkoutListTableViewCell: UITableViewCell {
             }
             let weightDouble = workout.exerciseSets
                 .filter {$0.isFinished}
-                .map { $0.weight * Double($0.repetitionCount)}
-                .reduce(0.0,+)
+                .map { $0.weight * $0.repetitionCount}
+                .reduce(0,+)
             let setCount = workout.exerciseSets.count
             let setFinishedCount = workout.exerciseSets
                 .filter { $0.isFinished }
@@ -34,7 +34,7 @@ final class WorkoutListTableViewCell: UITableViewCell {
             let progression = Double(setFinishedCount) / Double(setCount)
             titleLabel.text(exercise.exerciseName.localized)
             secondaryLabel.text(secondaryString)
-            weightLabel.text(String(format: "%.1f", weightDouble) + " kg")
+            weightLabel.text(String(describing: weightDouble) + " kg")
             setLabel.text(String(describing: setCount) + " set")
             progressLabel.text(String(Int(progression * 100)) + "%")
             progressBar.snp.updateConstraints { make in

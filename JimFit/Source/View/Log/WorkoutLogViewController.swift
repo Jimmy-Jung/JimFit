@@ -39,7 +39,7 @@ final class WorkoutLogViewController: UIViewController {
     }
     
     var workoutLog: WorkoutLog?
-    let realm: Realm! = RealmManager.shared.realm
+    let realm: Realm = RealmManager.shared.realm
     
     
     override func viewDidLoad() {
@@ -218,21 +218,20 @@ extension WorkoutLogViewController: UITableViewDelegate, UITableViewDataSource, 
             let cell = tableView.dequeueReusableCell(withIdentifier: AddButtonTableViewCell.identifier, for: indexPath) as! AddButtonTableViewCell
             cell.primaryButtonSet(state: .addList)
             cell.selectionStyle = .none
+            cell.addButtonHandler = { [weak self] in
+                guard let self else { return }
+                let date = pkDateFormatter.string(from: calendar.selectedDate!)
+                let exerciseSearchVC = ExerciseSearchViewController(date: date)
+                exerciseSearchVC.reloadDelegate = self
+                transition(viewController: exerciseSearchVC, style: .present)
+            }
             return cell
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
-            let workout = workoutLog?.workouts[indexPath.row]
-            transition(viewController: ExerciseSetViewController(workout: workout), style: .pushNavigation)
-        } else {
-            let date = pkDateFormatter.string(from: calendar.selectedDate!)
-            let exerciseSearchVC = ExerciseSearchViewController(date: date)
-            exerciseSearchVC.reloadDelegate = self
-            transition(viewController: exerciseSearchVC, style: .present)
-        }
-        tableView.deselectRow(at: indexPath, animated: true)
+        let workout = workoutLog?.workouts[indexPath.row]
+        transition(viewController: ExerciseSetViewController(workout: workout), style: .pushNavigation)
     }
     
     func reloadTableView() {

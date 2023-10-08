@@ -61,10 +61,10 @@ final class Exercise: Object {
 final class ExerciseSet: Object {
 //    @Persisted(originProperty: "exerciseSets") var OriginWorkout: LinkingObjects<Workout>
     @Persisted var repetitionCount: Int
-    @Persisted var weight: Double
+    @Persisted var weight: Int
     @Persisted var isFinished: Bool
     
-    convenience init(repetitionCount: Int = 12, weight: Double = 0, isFinished: Bool = false) {
+    convenience init(repetitionCount: Int = 12, weight: Int = 0, isFinished: Bool = false) {
         self.init()
         self.repetitionCount = repetitionCount
         self.weight = weight
