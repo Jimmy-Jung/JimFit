@@ -14,6 +14,8 @@ final class TimerView: UIView {
         case rest
     }
     
+    private var timerType: TimerType!
+    
     private let borderView = UIView()
         .cornerRadius(K.Size.cellRadius)
         .setBorder(color: .clear, width: 0)
@@ -63,7 +65,16 @@ final class TimerView: UIView {
         .addArrangedSubview(totalStackView)
         .addArrangedSubview(setStackView)
     
-    func activateColor(tintColor: UIColor) {
+    func fetchTotalTime(_ timeInterval: TimeInterval) {
+        totalTimeLabel.text(timeInterval.formattedTime())
+    }
+    
+    func fetchSetTime(_ timeInterval: TimeInterval) {
+        setTimeLabel.text(timeInterval.formattedTime())
+    }
+    
+    func activateColor() {
+        let tintColor = timerType == .workout ? K.Color.Primary.Blue : K.Color.Primary.Green
         borderView
             .setBorder(color: tintColor, width: K.Size.border_Thin)
             .backgroundColor(.clear)
@@ -76,7 +87,7 @@ final class TimerView: UIView {
     func deactivateColor() {
         borderView
             .setBorder(color: .clear, width: 0)
-            .backgroundColor(K.Color.Grayscale.Background)
+            .backgroundColor(.secondarySystemFill)
         totalTimeTextLabel.textColor(K.Color.Grayscale.Label)
         totalTimeLabel.textColor(K.Color.Grayscale.Label)
         setTimeTextLabel.textColor(K.Color.Grayscale.Label)
@@ -89,13 +100,15 @@ final class TimerView: UIView {
         case .workout:
             totalTimeTextLabel.text("total_workout_time".localized)
             setTimeTextLabel.text("set_workout_time".localized)
+            timerType = .workout
         case .rest:
             totalTimeTextLabel.text("total_rest_time".localized)
             setTimeTextLabel.text("set_rest_time".localized)
+            timerType = .rest
         }
     }
     
-    override init(frame: CGRect) {
+    override private init(frame: CGRect) {
         super.init(frame: frame)
         
         addSubView(borderView)

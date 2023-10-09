@@ -6,41 +6,43 @@
 //
 
 import Foundation
+import RxSwift
 
 final class TimerManager {
     
-    enum TimerStatus {
-        case exercise
-        case rest
-        case none
-    }
-    
     static let shared = TimerManager()
-    var exerciseStartTime: Date? // 운동 시작 시간을 저장하는 변수
-    var restStartTime: Date? // 휴식 시작 시간을 저장하는 변수
-    var totalExerciseTime: TimeInterval = 0 // 총 운동시간을 저장하는 변수
-    var setExerciseTime: TimeInterval = 0 // 세트 운동시간을 저장하는 변수
-    var totalRestTime: TimeInterval = 0 // 총 휴식시간을 저장하는 변수
-    var setRestTime: TimeInterval = 0 // 세트 휴식시간을 저장하는 변수
-    var exerciseTimer: Timer? // 운동 타이머
-    var restTimer: Timer? // 휴식 타이머
-    var timetStatus: TimerStatus = .none
+    
+    var totalExerciseTimePublisher = PublishSubject<TimeInterval>()
+    var setExerciseTimePublisher = PublishSubject<TimeInterval>()
+    var totalRestTimePublisher = PublishSubject<TimeInterval>()
+    var setRestTimePublisher = PublishSubject<TimeInterval>()
+    private var totalExerciseTime: TimeInterval = 0 { didSet { totalExerciseTimePublisher.onNext(totalExerciseTime) } }
+    private var setExerciseTime: TimeInterval = 0 { didSet { setExerciseTimePublisher.onNext(setExerciseTime) } }
+    private var totalRestTime: TimeInterval = 0 { didSet { totalRestTimePublisher.onNext(totalRestTime) } }
+    private var setRestTime: TimeInterval = 0 { didSet { setRestTimePublisher.onNext(setRestTime) } }
+    private var exerciseStartTime: Date?
+    private var restStartTime: Date?
+    private var exerciseTimer: Timer?
+    private var restTimer: Timer?
+    private var timetStatus: TimerStatus = .none
     
     private init() {
         self.restoreTimers()
     }
     
     func startExerciseTimer() {
-        timetStatus = .exercise
-        setExerciseTime = 0
-        exerciseStartTime = Date()
-        exerciseTimer = Timer.scheduledTimer(
-            timeInterval: 1,
-            target: self,
-            selector: #selector(updateExerciseTime),
-            userInfo: nil,
-            repeats: true
-        )
+        if exerciseStartTime == nil {
+            timetStatus = .exercise
+            setExerciseTime = 0
+            exerciseStartTime = Date()
+            exerciseTimer = Timer.scheduledTimer(
+                timeInterval: 1,
+                target: self,
+                selector: #selector(updateExerciseTime),
+                userInfo: nil,
+                repeats: true
+            )
+        }
         restTimer?.invalidate()
         restStartTime = nil
     }
@@ -50,16 +52,18 @@ final class TimerManager {
         totalExerciseTime += 1
     }
     
-    func completeExercise() {
-        timetStatus = .rest
-        restStartTime = Date()
-        restTimer = Timer.scheduledTimer(
-            timeInterval: 1,
-            target: self,
-            selector: #selector(updateRestTime),
-            userInfo: nil,
-            repeats: true
-        )
+    func doneExercise() {
+        if restStartTime == nil {
+            timetStatus = .rest
+            restStartTime = Date()
+            restTimer = Timer.scheduledTimer(
+                timeInterval: 1,
+                target: self,
+                selector: #selector(updateRestTime),
+                userInfo: nil,
+                repeats: true
+            )
+        }
         exerciseTimer?.invalidate()
         exerciseStartTime = nil
     }
@@ -86,5 +90,13 @@ final class TimerManager {
         if let storedRestStartTime = UM.restStartTime {
             restStartTime = storedRestStartTime
         }
+    }
+}
+
+extension TimerManager {
+    enum TimerStatus {
+        case exercise
+        case rest
+        case none
     }
 }

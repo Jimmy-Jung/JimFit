@@ -7,11 +7,14 @@
 
 import UIKit
 import RealmSwift
+import RxSwift
 
 final class ExerciseSetViewController: UIViewController {
     private lazy var exerciseSetView = ExerciseSetView()
     var workout: Workout!
     let realm = RealmManager.shared.realm
+    let timer = TimerManager.shared
+    let disposeBag = DisposeBag()
     init(workout: Workout?) {
         super.init(nibName: nil, bundle: nil)
         self.workout = workout
@@ -27,6 +30,33 @@ final class ExerciseSetViewController: UIViewController {
         configureView()
         addButtonsAction()
         configureTableView()
+        setupBindings()
+    }
+    
+    private func setupBindings() {
+        timer.totalExerciseTimePublisher
+            .subscribe { [weak self] in
+                self?.exerciseSetView.workoutTimer.fetchTotalTime($0)
+            }
+            .disposed(by: disposeBag)
+        
+        timer.totalRestTimePublisher
+            .subscribe { [weak self] in
+                self?.exerciseSetView.restTimer.fetchTotalTime($0)
+            }
+            .disposed(by: disposeBag)
+        
+        timer.setExerciseTimePublisher
+            .subscribe { [weak self] in
+                self?.exerciseSetView.workoutTimer.fetchSetTime($0)
+            }
+            .disposed(by: disposeBag)
+        
+        timer.setRestTimePublisher
+            .subscribe { [weak self] in
+                self?.exerciseSetView.restTimer.fetchSetTime($0)
+            }
+            .disposed(by: disposeBag)
     }
     
     private func configureView() {
@@ -54,9 +84,14 @@ final class ExerciseSetViewController: UIViewController {
     }
     
     private func startWorkoutButtonTapped() {
-        
+        timer.startExerciseTimer()
+        exerciseSetView.workoutTimer.activateColor()
+        exerciseSetView.restTimer.deactivateColor()
     }
     private func doneSetButtonTapped() {
+        timer.doneExercise()
+        exerciseSetView.restTimer.activateColor()
+        exerciseSetView.workoutTimer.deactivateColor()
         guard let set = workout.exerciseSets.first(where: { $0.isFinished == false })
         else {
             return
