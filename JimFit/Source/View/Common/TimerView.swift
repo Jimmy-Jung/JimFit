@@ -1,5 +1,5 @@
 //
-//  StopWatchView.swift
+//  TimerView.swift
 //  JimFit
 //
 //  Created by 정준영 on 2023/10/03.
@@ -7,9 +7,9 @@
 
 import UIKit
 
-final class StopWatchView: UIView {
+final class TimerView: UIView {
     
-    enum StopWathchType {
+    enum TimerType {
         case workout
         case rest
     }
@@ -83,7 +83,7 @@ final class StopWatchView: UIView {
         setTimeLabel.textColor(K.Color.Grayscale.Label)
     }
     
-    convenience init(type: StopWathchType) {
+    convenience init(type: TimerType) {
         self.init()
         switch type {
         case .workout:

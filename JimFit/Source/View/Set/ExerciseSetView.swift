@@ -9,15 +9,15 @@ import UIKit
 import SnapKit
 
 final class ExerciseSetView: UIView {
-    let workoutStopWatch = StopWatchView(type: .workout)
-    let restStopWatch = StopWatchView(type: .rest)
-    lazy var stopWatchStackView: UIStackView = UIStackView()
+    let workoutTimer = TimerView(type: .workout)
+    let restTimer = TimerView(type: .rest)
+    lazy var timerStackView: UIStackView = UIStackView()
         .axis(.vertical)
         .spacing(10)
         .alignment(.fill)
         .distribution(.fill)
-        .addArrangedSubview(workoutStopWatch)
-        .addArrangedSubview(restStopWatch)
+        .addArrangedSubview(workoutTimer)
+        .addArrangedSubview(restTimer)
     
     let grabberView = GrabberView()
     let tableView = UITableView()
@@ -47,14 +47,14 @@ final class ExerciseSetView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor(K.Color.Grayscale.SecondaryBackground)
-        addSubView(stopWatchStackView)
-        stopWatchStackView.snp.makeConstraints { make in
+        addSubView(timerStackView)
+        timerStackView.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(18)
             make.horizontalEdges.equalToSuperview().inset(20)
         }
         addSubView(grabberView)
         grabberView.snp.makeConstraints { make in
-            grabberViewTopOffset = make.top.equalTo(stopWatchStackView.snp.bottom).offset(16).constraint
+            grabberViewTopOffset = make.top.equalTo(timerStackView.snp.bottom).offset(16).constraint
             make.horizontalEdges.equalToSuperview()
         }
         addSubView(tableView)

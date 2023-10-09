@@ -61,7 +61,6 @@ final class ExerciseSetViewController: UIViewController {
         else {
             return
         }
-        
         try! realm.write {
             set.isFinished = true
         }
@@ -174,7 +173,7 @@ extension ExerciseSetViewController: GrabberViewDelegate {
         switch direction {
         case .up:
             UIView.transition(with: view, duration: 0.3) {
-                self.exerciseSetView.grabberViewTopOffset.update(offset: -self.exerciseSetView.stopWatchStackView.frame.height/2 + 4)
+                self.exerciseSetView.grabberViewTopOffset.update(offset: -self.exerciseSetView.timerStackView.frame.height/2 + 4)
                 self.view.layoutIfNeeded()
             }
             

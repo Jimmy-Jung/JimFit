@@ -23,12 +23,12 @@ final class WorkoutLog: Object {
 final class Workout: Object {
     @Persisted(primaryKey: true) var workoutId = ObjectId.generate()
     @Persisted var exercise: Exercise?
-    @Persisted var exerciseTime: Int
-    @Persisted var restTime: Int
+    @Persisted var exerciseTime: TimeInterval
+    @Persisted var restTime: TimeInterval
     @Persisted var exerciseSets = List<ExerciseSet>()
 //    @Persisted(originProperty: "workouts") var OriginWorkout: LinkingObjects<WorkoutLog>
     
-    convenience init(exercise: Exercise?, exerciseTime: Int = 0, restTime: Int = 0) {
+    convenience init(exercise: Exercise?, exerciseTime: TimeInterval = 0, restTime: TimeInterval = 0) {
         self.init()
         self.exercise = exercise
         self.exerciseTime = exerciseTime
