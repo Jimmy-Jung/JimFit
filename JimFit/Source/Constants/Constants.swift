@@ -29,6 +29,7 @@ enum K {
             static let Selected = UIColor.systemGray5
             static let Background = UIColor.systemGray6
             static let SecondaryBackground = UIColor.secondarySystemGroupedBackground
+            static let SecondaryFill = UIColor(named: "SecondaryFill")!
         }
         
     }

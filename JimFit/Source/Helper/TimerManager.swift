@@ -7,15 +7,16 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 final class TimerManager {
     
     static let shared = TimerManager()
     
-    var totalExerciseTimePublisher = PublishSubject<TimeInterval>()
-    var setExerciseTimePublisher = PublishSubject<TimeInterval>()
-    var totalRestTimePublisher = PublishSubject<TimeInterval>()
-    var setRestTimePublisher = PublishSubject<TimeInterval>()
+    var totalExerciseTimePublisher = BehaviorSubject<TimeInterval>(value: 0)
+    var setExerciseTimePublisher = BehaviorSubject<TimeInterval>(value: 0)
+    var totalRestTimePublisher = BehaviorSubject<TimeInterval>(value: 0)
+    var setRestTimePublisher = BehaviorSubject<TimeInterval>(value: 0)
     private var totalExerciseTime: TimeInterval = 0 { didSet { totalExerciseTimePublisher.onNext(totalExerciseTime) } }
     private var setExerciseTime: TimeInterval = 0 { didSet { setExerciseTimePublisher.onNext(setExerciseTime) } }
     private var totalRestTime: TimeInterval = 0 { didSet { totalRestTimePublisher.onNext(totalRestTime) } }
@@ -24,7 +25,7 @@ final class TimerManager {
     private var restStartTime: Date?
     private var exerciseTimer: Timer?
     private var restTimer: Timer?
-    private var timetStatus: TimerStatus = .none
+    var timerStatus: TimerStatus = .none
     
     private init() {
         self.restoreTimers()
@@ -32,7 +33,7 @@ final class TimerManager {
     
     func startExerciseTimer() {
         if exerciseStartTime == nil {
-            timetStatus = .exercise
+            timerStatus = .exercise
             setExerciseTime = 0
             exerciseStartTime = Date()
             exerciseTimer = Timer.scheduledTimer(
@@ -54,7 +55,7 @@ final class TimerManager {
     
     func doneExercise() {
         if restStartTime == nil {
-            timetStatus = .rest
+            timerStatus = .rest
             restStartTime = Date()
             restTimer = Timer.scheduledTimer(
                 timeInterval: 1,

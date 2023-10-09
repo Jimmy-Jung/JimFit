@@ -11,6 +11,7 @@ import RxSwift
 
 final class ExerciseSetViewController: UIViewController {
     private lazy var exerciseSetView = ExerciseSetView()
+    private let titleTimerView = TitleTimerView()
     var workout: Workout!
     let realm = RealmManager.shared.realm
     let timer = TimerManager.shared
@@ -57,6 +58,14 @@ final class ExerciseSetViewController: UIViewController {
                 self?.exerciseSetView.restTimer.fetchSetTime($0)
             }
             .disposed(by: disposeBag)
+        
+        Observable
+            .combineLatest(timer.totalExerciseTimePublisher, timer.totalRestTimePublisher)
+            .map { $0 + $1 }
+            .subscribe { [weak self] in
+                self?.titleTimerView.fetchTitleTime($0)
+            }
+            .disposed(by: disposeBag)
     }
     
     private func configureView() {
@@ -67,6 +76,17 @@ final class ExerciseSetViewController: UIViewController {
         }
         exerciseSetView.grabberView.delegate = self
         exerciseSetView.grabberView.setTitle(workout.exercise?.exerciseName.localized ?? "")
+        navigationItem.titleView = titleTimerView
+        switch timer.timerStatus {
+        case .exercise:
+            exerciseSetView.workoutTimer.activateColor()
+            titleTimerView.fetchColor(.exercise)
+        case .rest:
+            exerciseSetView.restTimer.activateColor()
+            titleTimerView.fetchColor(.rest)
+        case .none:
+            break
+        }
     }
     
     private func addButtonsAction() {
@@ -85,13 +105,21 @@ final class ExerciseSetViewController: UIViewController {
     
     private func startWorkoutButtonTapped() {
         timer.startExerciseTimer()
-        exerciseSetView.workoutTimer.activateColor()
-        exerciseSetView.restTimer.deactivateColor()
+        
+        UIView.transition(with: exerciseSetView.timerStackView, duration: 0.3, options: [.transitionCrossDissolve, .curveEaseOut]) {
+            self.exerciseSetView.workoutTimer.activateColor()
+            self.exerciseSetView.restTimer.deactivateColor()
+        }
+        titleTimerView.fetchColor(.exercise)
     }
     private func doneSetButtonTapped() {
         timer.doneExercise()
-        exerciseSetView.restTimer.activateColor()
-        exerciseSetView.workoutTimer.deactivateColor()
+        
+        UIView.transition(with: exerciseSetView.timerStackView, duration: 0.3, options: [.transitionCrossDissolve, .curveEaseOut]) {
+            self.exerciseSetView.restTimer.activateColor()
+            self.exerciseSetView.workoutTimer.deactivateColor()
+        }
+        titleTimerView.fetchColor(.rest)
         guard let set = workout.exerciseSets.first(where: { $0.isFinished == false })
         else {
             return
@@ -207,14 +235,22 @@ extension ExerciseSetViewController: GrabberViewDelegate {
     func grabber(swipeGestureFor direction: UISwipeGestureRecognizer.Direction) {
         switch direction {
         case .up:
-            UIView.transition(with: view, duration: 0.3) {
+            if timer.timerStatus == .rest {
+                exerciseSetView.timerStackView.arrangedSubviews[0].isHidden(true)
+                self.exerciseSetView.grabberViewTopOffset.update(offset: 8)
+            } else {
                 self.exerciseSetView.grabberViewTopOffset.update(offset: -self.exerciseSetView.timerStackView.frame.height/2 + 4)
+            }
+            UIView.transition(with: exerciseSetView.timerStackView, duration: 0.3, options: [.transitionCrossDissolve, .curveEaseOut]) {
                 self.view.layoutIfNeeded()
             }
             
         case .down:
-            UIView.transition(with: view, duration: 0.3) {
-                self.exerciseSetView.grabberViewTopOffset.update(offset: 16)
+            self.exerciseSetView.grabberViewTopOffset.update(offset: 16)
+            if exerciseSetView.timerStackView.arrangedSubviews[0].isHidden {
+                exerciseSetView.timerStackView.arrangedSubviews[0].isHidden(false)
+            }
+            UIView.transition(with: exerciseSetView.timerStackView, duration: 0.3, options: .curveEaseOut) {
                 self.view.layoutIfNeeded()
             }
         default:

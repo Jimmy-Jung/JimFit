@@ -19,7 +19,7 @@ final class TimerView: UIView {
     private let borderView = UIView()
         .cornerRadius(K.Size.cellRadius)
         .setBorder(color: .clear, width: 0)
-        .backgroundColor(.secondarySystemFill)
+        .backgroundColor(K.Color.Grayscale.SecondaryFill)
  
     private let totalTimeTextLabel = UILabel()
         .font(.systemFont(ofSize: 16, weight: .bold))
@@ -87,7 +87,7 @@ final class TimerView: UIView {
     func deactivateColor() {
         borderView
             .setBorder(color: .clear, width: 0)
-            .backgroundColor(.secondarySystemFill)
+            .backgroundColor(K.Color.Grayscale.SecondaryFill)
         totalTimeTextLabel.textColor(K.Color.Grayscale.Label)
         totalTimeLabel.textColor(K.Color.Grayscale.Label)
         setTimeTextLabel.textColor(K.Color.Grayscale.Label)
