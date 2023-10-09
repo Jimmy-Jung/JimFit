@@ -72,7 +72,7 @@ final class ExerciseSearchViewController: UIViewController, ExerciseListTableVie
         }
         
         dismiss(animated: true)
-        reloadDelegate?.reloadTableView()
+        reloadDelegate?.reloadData()
     }
     
     func configureSearchBar() {

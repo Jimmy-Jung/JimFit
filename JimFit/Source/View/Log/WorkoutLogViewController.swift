@@ -6,132 +6,57 @@
 //
 
 import UIKit
-import Then
 import FSCalendar
-import SnapKit
-import JimmyKit
 import RealmSwift
 
 protocol ReloadDelegate: AnyObject {
-    func reloadTableView()
+    func reloadData()
 }
 
 final class WorkoutLogViewController: UIViewController {
-    
-    let calendar = FSCalendar()
-    private lazy var headerTitle = UILabel()
-        .text(headerDateFormatter.string(from: Date()))
-        .font(K.Font.Header1)
-    let grabberView = GrabberView()
-    let tableView = UITableView()
-    
-    
-    private let headerDateFormatter = DateFormatter().then {
-        $0.dateFormat = "header_date_formatter".localized
-    }
-    
-    private let grabberDateFormatter = DateFormatter().then {
-        $0.dateFormat = "grabber_date_formatter".localized
-    }
-    
-    private let pkDateFormatter = DateFormatter().then {
-        $0.dateFormat = "yyyyMMdd"
-    }
-    
-    var workoutLog: WorkoutLog?
-    let realm: Realm = RealmManager.shared.realm
+    private let workoutLogView = WorkoutLogView()
+    private var workoutLog: WorkoutLog?
+    private let realm: Realm = RealmManager.shared.realm
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
-        configureLayout()
+        configureView()
         configureRealm()
-        configureGrabberView()
-        print(realm.configuration.fileURL)
+        registerDelegate()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
-        calendar.reloadData()
+        reloadTableView()
+        reloadCalendar()
     }
-
-    private func configureGrabberView() {
-        grabberView.delegate = self
-        let grabberString = grabberDateFormatter.string(from: Date()) + "workout".localized
-        grabberView.setTitle(grabberString)
-    }
-    
-    private func configureUI() {
-        view.backgroundColor(K.Color.Grayscale.SecondaryBackground)
-        configureCalendar()
-        configureTableView()
-    }
-    
-    private func configureTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(WorkoutListTableViewCell.self, forCellReuseIdentifier: WorkoutListTableViewCell.identifier)
-        tableView.register(AddButtonTableViewCell.self, forCellReuseIdentifier: AddButtonTableViewCell.identifier)
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.separatorStyle = .none
-        tableView.sectionHeaderTopPadding = 0
-    }
-    
-    private func configureLayout() {
-        view.addSubview(calendar)
-        calendar.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
-            make.horizontalEdges.equalToSuperview().inset(20)
-            make.height.equalTo(300)
-        }
-        
-        calendar.addSubView(headerTitle)
-        headerTitle.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(5)
-            make.leading.equalToSuperview().inset(10)
-        }
-        
-        view.addSubview(grabberView)
-        grabberView.snp.makeConstraints { make in
-            make.top.equalTo(calendar.snp.bottom).offset(10)
-            make.horizontalEdges.equalToSuperview()
-        }
-        
-        view.addSubview(tableView)
-        tableView.snp.makeConstraints { make in
-            make.top.equalTo(grabberView.snp.bottom)
-            make.horizontalEdges.bottom.equalToSuperview()
+    private func configureView() {
+        view.addSubview(workoutLogView)
+        workoutLogView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
     }
-    
-    private func configureCalendar() {
-        calendar.delegate = self
-        calendar.dataSource = self
-        calendar.locale = Locale(identifier: "locale_identifier".localized)
-        calendar.appearance.headerTitleColor = .clear // 기본 헤더 타이틀 제거
-        calendar.appearance.headerMinimumDissolvedAlpha = 0.0
-        calendar.placeholderType = .fillHeadTail
-        calendar.appearance.todayColor = K.Color.Grayscale.Tint
-        calendar.appearance.selectionColor = K.Color.Primary.Orange
-        
-        calendar.appearance.weekdayTextColor = K.Color.Grayscale.Label
-        calendar.appearance.weekdayFont = K.Font.SubHeader
-        calendar.appearance.titleDefaultColor = K.Color.Primary.Label
-        calendar.appearance.titleWeekendColor = K.Color.Primary.Blue
-        
-        calendar.appearance.titleFont = K.Font.Body1
-        
-        calendar.appearance.eventDefaultColor = K.Color.Primary.Orange
-        calendar.appearance.eventSelectionColor = K.Color.Primary.Orange
-
-        
-        calendar.select(Date(), scrollToDate: true)
+    private func registerDelegate() {
+        workoutLogView.tableView.delegate = self
+        workoutLogView.tableView.dataSource = self
+        workoutLogView.calendar.delegate = self
+        workoutLogView.calendar.dataSource = self
+        workoutLogView.grabberView.delegate = self
     }
     
     private func configureRealm() {
-        workoutLog = realm.object(ofType: WorkoutLog.self, forPrimaryKey: pkDateFormatter.string(from: calendar.selectedDate!))
+        let primaryKey = DateFormatter.format(with: .primaryKey, from: workoutLogView.calendar.selectedDate!)
+        workoutLog = realm.object(ofType: WorkoutLog.self, forPrimaryKey: primaryKey)
+        print(realm.configuration.fileURL)
+    }
+    
+    private func reloadTableView() {
+        workoutLogView.tableView.reloadData()
+    }
+
+    private func reloadCalendar() {
+        workoutLogView.calendar.reloadData()
     }
 }
 
@@ -140,19 +65,19 @@ extension WorkoutLogViewController: GrabberViewDelegate {
     func grabber(swipeGestureFor direction: UISwipeGestureRecognizer.Direction) {
         switch direction {
         case .up :
-            self.calendar.setScope(.week, animated: true)
+            self.workoutLogView.calendar.setScope(.week, animated: true)
             UIView.transition(with: view, duration: 0.3) {
                 self.view.backgroundColor(K.Color.Grayscale.Background)
             }
-            
         case .down:
-            self.calendar.setScope(.month, animated: true)
+            self.workoutLogView.calendar.setScope(.month, animated: true)
             UIView.transition(with: view, duration: 0.3) {
                 self.view.backgroundColor(K.Color.Grayscale.SecondaryBackground)
             }
         default: break
         }
     }
+    
     func grabberDidTappedButton() {
         
     }
@@ -173,24 +98,22 @@ extension WorkoutLogViewController: FSCalendarDelegate, FSCalendarDataSource, FS
     
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
         let currentDate = calendar.currentPage
-        let headerDateString = headerDateFormatter.string(from: currentDate)
-        headerTitle.text(headerDateString)
+        let headerDateString = DateFormatter.format(with: .headerDate, from: currentDate)
+        workoutLogView.headerTitle.text(headerDateString)
     }
     
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-        let event = realm.object(ofType: WorkoutLog.self, forPrimaryKey: pkDateFormatter.string(from: date))
+        let event = realm.object(ofType: WorkoutLog.self, forPrimaryKey: DateFormatter.format(with: .primaryKey, from: date))
         return event != nil ? 1 : 0
     }
     
     // 날짜를 선택했을 때 할일을 지정
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        workoutLog = realm.object(ofType: WorkoutLog.self, forPrimaryKey: pkDateFormatter.string(from: date))
-        let grabberString = grabberDateFormatter.string(from: date) + "workout".localized
-        grabberView.setTitle(grabberString)
-        tableView.reloadData()
+        workoutLog = realm.object(ofType: WorkoutLog.self, forPrimaryKey: DateFormatter.format(with: .primaryKey, from: date))
+        let grabberString = DateFormatter.format(with: .grabberDate, from: date) + "workout".localized
+        workoutLogView.grabberView.setTitle(grabberString)
+        reloadTableView()
     }
-
-    
 }
 
 
@@ -219,7 +142,7 @@ extension WorkoutLogViewController: UITableViewDelegate, UITableViewDataSource, 
             cell.selectionStyle = .none
             cell.addButtonHandler = { [weak self] in
                 guard let self else { return }
-                let date = pkDateFormatter.string(from: calendar.selectedDate!)
+                let date = DateFormatter.format(with: .primaryKey, from: workoutLogView.calendar.selectedDate!)
                 let exerciseSearchVC = ExerciseSearchViewController(date: date)
                 exerciseSearchVC.reloadDelegate = self
                 transition(viewController: exerciseSearchVC, style: .present)
@@ -233,9 +156,9 @@ extension WorkoutLogViewController: UITableViewDelegate, UITableViewDataSource, 
         transition(viewController: ExerciseSetViewController(workout: workout), style: .pushNavigation)
     }
     
-    func reloadTableView() {
+    func reloadData() {
         configureRealm()
-        self.tableView.reloadData()
-        self.calendar.reloadData()
+        reloadTableView()
+        reloadCalendar()
     }
 }

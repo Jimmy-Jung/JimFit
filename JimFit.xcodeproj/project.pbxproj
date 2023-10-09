@@ -38,6 +38,8 @@
 		5570E1AF2AD3D1C900350AF3 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5570E1AE2AD3D1C900350AF3 /* RxSwift */; };
 		5570E1B12AD3E57100350AF3 /* Timeinterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5570E1B02AD3E57100350AF3 /* Timeinterval+Extension.swift */; };
 		5570E1B32AD3F03300350AF3 /* TitleTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5570E1B22AD3F03300350AF3 /* TitleTimerView.swift */; };
+		5570E1B52AD438F500350AF3 /* WorkoutLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5570E1B42AD438F500350AF3 /* WorkoutLogView.swift */; };
+		5570E1B72AD43CFB00350AF3 /* DateFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5570E1B62AD43CFB00350AF3 /* DateFormatter+Extension.swift */; };
 		55A2ABF12ACB542D00927918 /* Exercise.realm in Resources */ = {isa = PBXBuildFile; fileRef = 55A2ABF02ACB541800927918 /* Exercise.realm */; };
 		55A2ABF42ACC187F00927918 /* ExerciseSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A2ABF32ACC187F00927918 /* ExerciseSetViewController.swift */; };
 		55A2ABF72ACC191700927918 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A2ABF62ACC191700927918 /* TimerView.swift */; };
@@ -72,6 +74,8 @@
 		5570E1A92AD3CB5700350AF3 /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
 		5570E1B02AD3E57100350AF3 /* Timeinterval+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Timeinterval+Extension.swift"; sourceTree = "<group>"; };
 		5570E1B22AD3F03300350AF3 /* TitleTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTimerView.swift; sourceTree = "<group>"; };
+		5570E1B42AD438F500350AF3 /* WorkoutLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutLogView.swift; sourceTree = "<group>"; };
+		5570E1B62AD43CFB00350AF3 /* DateFormatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extension.swift"; sourceTree = "<group>"; };
 		55A2ABF02ACB541800927918 /* Exercise.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = Exercise.realm; sourceTree = "<group>"; };
 		55A2ABF32ACC187F00927918 /* ExerciseSetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetViewController.swift; sourceTree = "<group>"; };
 		55A2ABF62ACC191700927918 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
@@ -176,6 +180,7 @@
 				555E6B702AC3459A00DCA052 /* String+Extension.swift */,
 				5570E1A52AD2F52400350AF3 /* UITextField+Exension.swift */,
 				5570E1B02AD3E57100350AF3 /* Timeinterval+Extension.swift */,
+				5570E1B62AD43CFB00350AF3 /* DateFormatter+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -246,6 +251,7 @@
 		555E6B832AC54E3A00DCA052 /* Log */ = {
 			isa = PBXGroup;
 			children = (
+				5570E1B42AD438F500350AF3 /* WorkoutLogView.swift */,
 				555E6B562AC3086500DCA052 /* WorkoutLogViewController.swift */,
 			);
 			path = Log;
@@ -373,6 +379,7 @@
 				555E6B8E2AC573AC00DCA052 /* ExerciseListTableViewCell.swift in Sources */,
 				555E6B852AC54EDB00DCA052 /* ExerciseSearchViewController.swift in Sources */,
 				555E6B7D2AC4663000DCA052 /* AddButtonTableViewCell.swift in Sources */,
+				5570E1B72AD43CFB00350AF3 /* DateFormatter+Extension.swift in Sources */,
 				555E6B922AC5796F00DCA052 /* ExerciseDetail.swift in Sources */,
 				5570E1A82AD3AFEB00350AF3 /* TimerManager.swift in Sources */,
 				5570E1A62AD2F52400350AF3 /* UITextField+Exension.swift in Sources */,
@@ -381,6 +388,7 @@
 				555E6B712AC3459A00DCA052 /* String+Extension.swift in Sources */,
 				55A2ABF92ACC2F6100927918 /* ExerciseSetView.swift in Sources */,
 				5570E1AA2AD3CB5700350AF3 /* UserDefaultManager.swift in Sources */,
+				5570E1B52AD438F500350AF3 /* WorkoutLogView.swift in Sources */,
 				55A2ABF72ACC191700927918 /* TimerView.swift in Sources */,
 				5570E1B12AD3E57100350AF3 /* Timeinterval+Extension.swift in Sources */,
 				555E6B3A2AC1D76B00DCA052 /* SceneDelegate.swift in Sources */,
