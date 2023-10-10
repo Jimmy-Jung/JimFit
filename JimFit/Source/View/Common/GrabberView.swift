@@ -10,7 +10,7 @@ import UIKit
 protocol GrabberViewDelegate: AnyObject {
     func grabber(configureTitle label: UILabel)
     func grabber(swipeGestureFor direction: UISwipeGestureRecognizer.Direction)
-    func grabberDidTappedButton()
+    func grabberButtonTapped()
 }
 
 extension GrabberViewDelegate {
@@ -29,8 +29,8 @@ final class GrabberView: UIView {
         .font(K.Font.Header2)
         .textColor(K.Color.Primary.Label)
 
-    private lazy var menuButton: UIButton = UIButton(configuration: .plain())
-    .image(UIImage(systemName: "slider.horizontal.3"))
+    private lazy var rightBarButton: UIButton = UIButton(configuration: .plain())
+        .image(UIImage(systemName: "slider.horizontal.3"))
         .addConfigurationUpdateHandler { button in
             switch button.state {
             case .selected:
@@ -49,17 +49,16 @@ final class GrabberView: UIView {
     }
     
     func setImage(_ image: UIImage?) {
-        menuButton.image(image)
+        rightBarButton.image(image)
         
     }
     var isMenuButtonSelected: Bool {
         get {
-            return menuButton.isSelected
+            return rightBarButton.isSelected
         }
         set {
-            menuButton.isSelected = newValue
+            rightBarButton.isSelected = newValue
         }
-        
     }
     
     override init(frame: CGRect) {
@@ -76,8 +75,8 @@ final class GrabberView: UIView {
     
     private func performDelegate() {
         delegate?.grabber(configureTitle: titleLabel)
-        menuButton.addAction { [unowned self] in
-                self.delegate?.grabberDidTappedButton()
+        rightBarButton.addAction { [unowned self] in
+                self.delegate?.grabberButtonTapped()
             }
         let swipeUpForGrabber = UISwipeGestureRecognizer(target: self, action: #selector(swipe(_:)))
         swipeUpForGrabber.direction = UISwipeGestureRecognizer.Direction.up
@@ -117,8 +116,8 @@ final class GrabberView: UIView {
             make.bottom.equalToSuperview()
         }
         
-        backView.addSubview(menuButton)
-        menuButton.snp.makeConstraints { make in
+        backView.addSubview(rightBarButton)
+        rightBarButton.snp.makeConstraints { make in
             make.centerY.equalTo(titleLabel)
             make.trailing.equalToSuperview().inset(20)
             make.height.equalTo(50)

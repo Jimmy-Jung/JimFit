@@ -76,7 +76,7 @@ final class TimerView: UIView {
     func activateColor() {
         let tintColor = timerType == .workout ? K.Color.Primary.Blue : K.Color.Primary.Green
         borderView
-            .setBorder(color: tintColor, width: K.Size.border_Thin)
+            .setBorder(color: tintColor, width: K.Size.border_Medium)
             .backgroundColor(.clear)
         totalTimeTextLabel.textColor(K.Color.Primary.Label)
         totalTimeLabel.textColor(K.Color.Primary.Label)

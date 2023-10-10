@@ -23,23 +23,24 @@ final class WorkoutListTableViewCell: UITableViewCell {
                     return bodyPartString + " / " + equipmentTypeString
                 }
             }
-            let weightDouble = workout.exerciseSets
+            let weightFloat = workout.exerciseSets
                 .filter {$0.isFinished}
                 .map { $0.weight * $0.repetitionCount}
+                .map { Float($0) }
                 .reduce(0,+)
             let setCount = workout.exerciseSets.count
             let setFinishedCount = workout.exerciseSets
                 .filter { $0.isFinished }
                 .count
-            let progression = Double(setFinishedCount) / Double(setCount)
+            let progression = Float(setFinishedCount) / Float(setCount)
             titleLabel.text(exercise.exerciseName.localized)
             secondaryLabel.text(secondaryString)
-            weightLabel.text(String(describing: weightDouble) + " kg")
+            let weightInTons = weightFloat > 999 ? weightFloat / 1000 : weightFloat
+            let weightUnit = weightFloat > 999 ? "ton" : "kg"
+            weightLabel.text = String(format: "%.0f", weightInTons) + " " + weightUnit
             setLabel.text(String(describing: setCount) + " set")
             progressLabel.text(String(Int(progression * 100)) + "%")
-            progressBar.snp.updateConstraints { make in
-                make.width.equalTo((UIScreen.main.bounds.width - 160) * progression)
-            }
+            progressView.progress = progression
         }
     }
     
@@ -71,13 +72,11 @@ final class WorkoutListTableViewCell: UITableViewCell {
         .font(K.Font.CellBody)
         .textColor(K.Color.Primary.Label)
     
-    private let progressBarBorder = UIView()
-        .setBorder(color: K.Color.Grayscale.border_Medium, width: K.Size.border_Medium)
-        .cornerRadius(4)
-    
-    private let progressBar = UIView()
-        .backgroundColor(K.Color.Primary.Green)
-        .cornerRadius(2)
+    private let progressView: UIProgressView = UIProgressView().then {
+        $0.trackTintColor = K.Color.Grayscale.SecondaryFill
+        $0.progressTintColor = K.Color.Primary.Green
+        $0.progress = 0.01
+    }
     
     private let progressLabel = UILabel()
         .textColor(K.Color.Grayscale.Label)
@@ -127,8 +126,7 @@ final class WorkoutListTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(borderView)
-        borderView.addSubview(progressBarBorder)
-        borderView.addSubView(progressBar)
+        borderView.addSubview(progressView)
         borderView.addSubview(progressLabel)
         borderView.addSubview(horizontalStackView)
         
@@ -161,7 +159,7 @@ final class WorkoutListTableViewCell: UITableViewCell {
             make.trailing.equalToSuperview().inset(8)
         }
         
-        progressBarBorder.snp.makeConstraints { make in
+        progressView.snp.makeConstraints { make in
             make.top.equalTo(horizontalStackView.snp.bottom).offset(8)
             make.leading.equalTo(horizontalStackView)
             make.bottom.equalToSuperview().inset(8)
@@ -170,15 +168,8 @@ final class WorkoutListTableViewCell: UITableViewCell {
         }
         
         progressLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(progressBarBorder).offset(-3)
-            make.leading.equalTo(progressBarBorder.snp.trailing).offset(8)
-        }
-        
-        progressBar.snp.makeConstraints { make in
-            make.centerY.equalTo(progressBarBorder.snp.centerY)
-            make.leading.equalTo(progressBarBorder)
-            make.height.equalTo(4)
-            make.width.equalTo(0)
+            make.centerY.equalTo(progressView).offset(-3)
+            make.leading.equalTo(progressView.snp.trailing).offset(8)
         }
         
     }

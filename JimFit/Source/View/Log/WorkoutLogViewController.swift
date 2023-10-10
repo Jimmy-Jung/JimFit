@@ -8,6 +8,7 @@
 import UIKit
 import FSCalendar
 import RealmSwift
+import RxSwift
 
 protocol ReloadDelegate: AnyObject {
     func reloadData()
@@ -15,26 +16,57 @@ protocol ReloadDelegate: AnyObject {
 
 final class WorkoutLogViewController: UIViewController {
     private let workoutLogView = WorkoutLogView()
+    private let titleTimerView = TitleTimerView()
+    private let timer = TimerManager.shared
     private var workoutLog: WorkoutLog?
     private let realm: Realm = RealmManager.shared.realm
-    
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
         configureRealm()
         registerDelegate()
+        setupBindings()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         reloadTableView()
         reloadCalendar()
+        fetchTimerStatus()
+    }
+    
+    private func setupBindings() {
+        Observable
+            .combineLatest(timer.totalExerciseTimePublisher, timer.totalRestTimePublisher)
+            .map { $0 + $1 }
+            .subscribe { [weak self] in
+                self?.titleTimerView.fetchTitleTime($0)
+            }
+            .disposed(by: disposeBag)
     }
     private func configureView() {
         view.addSubview(workoutLogView)
         workoutLogView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+        fetchTimerStatus()
+    }
+    
+    func fetchTimerStatus() {
+        navigationItem.titleView = nil
+        switch timer.timerStatus {
+        case .exercise:
+            titleTimerView.fetchColor(.exercise)
+            navigationItem.titleView = titleTimerView
+        case .rest:
+            titleTimerView.fetchColor(.rest)
+            navigationItem.titleView = titleTimerView
+        case .none:
+            titleTimerView.fetchColor(.none)
+            navigationItem.titleView = nil
+            break
         }
     }
     private func registerDelegate() {
@@ -78,7 +110,7 @@ extension WorkoutLogViewController: GrabberViewDelegate {
         }
     }
     
-    func grabberDidTappedButton() {
+    func grabberButtonTapped() {
         
     }
     

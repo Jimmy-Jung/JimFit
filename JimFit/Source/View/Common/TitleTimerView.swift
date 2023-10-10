@@ -41,10 +41,13 @@ final class TitleTimerView: UIView {
         switch timerStatus {
         case .exercise:
             indicatorView.backgroundColor(K.Color.Primary.Blue)
+            self.isHidden(false)
         case .rest:
             indicatorView.backgroundColor(K.Color.Primary.Green)
+            self.isHidden(false)
         case .none:
             indicatorView.backgroundColor(.clear)
+            self.isHidden(true)
         }
     }
     

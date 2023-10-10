@@ -12,10 +12,11 @@ import RxSwift
 final class ExerciseSetViewController: UIViewController {
     private lazy var exerciseSetView = ExerciseSetView()
     private let titleTimerView = TitleTimerView()
-    var workout: Workout!
-    let realm = RealmManager.shared.realm
-    let timer = TimerManager.shared
-    let disposeBag = DisposeBag()
+    private var workout: Workout!
+    private let realm = RealmManager.shared.realm
+    private let timer = TimerManager.shared
+    private let disposeBag = DisposeBag()
+    
     init(workout: Workout?) {
         super.init(nibName: nil, bundle: nil)
         self.workout = workout
@@ -77,6 +78,10 @@ final class ExerciseSetViewController: UIViewController {
         exerciseSetView.grabberView.delegate = self
         exerciseSetView.grabberView.setTitle(workout.exercise?.exerciseName.localized ?? "")
         navigationItem.titleView = titleTimerView
+        fetchTimerStatus()
+    }
+    
+    func fetchTimerStatus() {
         switch timer.timerStatus {
         case .exercise:
             exerciseSetView.workoutTimer.activateColor()
@@ -85,6 +90,7 @@ final class ExerciseSetViewController: UIViewController {
             exerciseSetView.restTimer.activateColor()
             titleTimerView.fetchColor(.rest)
         case .none:
+            titleTimerView.fetchColor(.none)
             break
         }
     }
@@ -110,7 +116,11 @@ final class ExerciseSetViewController: UIViewController {
             self.exerciseSetView.workoutTimer.activateColor()
             self.exerciseSetView.restTimer.deactivateColor()
         }
-        titleTimerView.fetchColor(.exercise)
+        UIView.transition(with: titleTimerView, duration: 0.3, options: .transitionCrossDissolve) {
+            self.titleTimerView.fetchColor(.exercise)
+            self.titleTimerView.setNeedsDisplay()
+        }
+        
     }
     private func doneSetButtonTapped() {
         timer.doneExercise()
@@ -119,7 +129,10 @@ final class ExerciseSetViewController: UIViewController {
             self.exerciseSetView.restTimer.activateColor()
             self.exerciseSetView.workoutTimer.deactivateColor()
         }
-        titleTimerView.fetchColor(.rest)
+        UIView.transition(with: titleTimerView, duration: 0.3, options: .transitionCrossDissolve) {
+            self.titleTimerView.fetchColor(.rest)
+            self.titleTimerView.setNeedsDisplay()
+        }
         guard let set = workout.exerciseSets.first(where: { $0.isFinished == false })
         else {
             return
@@ -257,7 +270,7 @@ extension ExerciseSetViewController: GrabberViewDelegate {
             break
         }
     }
-    func grabberDidTappedButton() {
+    func grabberButtonTapped() {
         let shouldBeEdited = !exerciseSetView.tableView.isEditing
         exerciseSetView.tableView.setEditing(shouldBeEdited, animated: true)
         if !shouldBeEdited {
