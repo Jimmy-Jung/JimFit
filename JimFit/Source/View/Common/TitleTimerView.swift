@@ -15,7 +15,7 @@ final class TitleTimerView: UIView {
         .cornerRadius(3)
         .clipsToBounds(true)
     
-    private let title = UILabel()
+    let title = UILabel()
         .font(K.Font.SubHeader)
     
     // MARK: - Init

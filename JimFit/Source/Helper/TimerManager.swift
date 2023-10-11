@@ -12,20 +12,24 @@ import RxRelay
 final class TimerManager {
     
     static let shared = TimerManager()
-    
-    var totalExerciseTimePublisher = BehaviorRelay<TimeInterval>(value: 0)
-    var setExerciseTimePublisher = BehaviorRelay<TimeInterval>(value: 0)
-    var totalRestTimePublisher = BehaviorRelay<TimeInterval>(value: 0)
-    var setRestTimePublisher = BehaviorRelay<TimeInterval>(value: 0)
+    var totalTimePublisher = PublishRelay<TimeInterval>()
+    var totalTime: TimeInterval = 0 {
+        didSet {totalTimePublisher.accept(totalTime)}
+    }
+    var totalExerciseTimePublisher = PublishRelay<TimeInterval>()
+    var setExerciseTimePublisher = PublishRelay<TimeInterval>()
+    var totalRestTimePublisher = PublishRelay<TimeInterval>()
+    var setRestTimePublisher = PublishRelay<TimeInterval>()
     var totalExerciseTime: TimeInterval = 0 { didSet { totalExerciseTimePublisher.accept(totalExerciseTime) } }
-    private var setExerciseTime: TimeInterval = 0 { didSet { setExerciseTimePublisher.accept(setExerciseTime) } }
-    private var totalRestTime: TimeInterval = 0 { didSet { totalRestTimePublisher.accept(totalRestTime) } }
-    private var setRestTime: TimeInterval = 0 { didSet { setRestTimePublisher.accept(setRestTime) } }
+    var setExerciseTime: TimeInterval = 0 { didSet { setExerciseTimePublisher.accept(setExerciseTime) } }
+    var totalRestTime: TimeInterval = 0 { didSet { totalRestTimePublisher.accept(totalRestTime) } }
+    var setRestTime: TimeInterval = 0 { didSet { setRestTimePublisher.accept(setRestTime) } }
     private var exerciseStartTime: Date?
     private var restStartTime: Date?
     private var exerciseTimer: Timer?
     private var restTimer: Timer?
-    var timerStatus: TimerStatus = .none
+    var timerStatus = PublishRelay<TimerStatus>()
+    var latestTimerStatus: TimerStatus = .none
     
     private init() {
         self.restoreTimers()
@@ -38,7 +42,8 @@ final class TimerManager {
     
     func startExerciseTimer() {
         if exerciseStartTime == nil {
-            timerStatus = .exercise
+            latestTimerStatus = .exercise
+            timerStatus.accept(.exercise)
             setExerciseTime = 0
             exerciseStartTime = Date()
             exerciseTimer = Timer.scheduledTimer(
@@ -56,12 +61,14 @@ final class TimerManager {
     @objc private func updateExerciseTime() {
         setExerciseTime += 1
         totalExerciseTime += 1
-        totalExerciseTimePublisher
+        totalTime += 1
     }
     
     func doneExercise() {
         if restStartTime == nil {
-            timerStatus = .rest
+            latestTimerStatus = .rest
+            timerStatus.accept(.rest)
+            setRestTime = 0
             restStartTime = Date()
             restTimer = Timer.scheduledTimer(
                 timeInterval: 1,
@@ -78,6 +85,7 @@ final class TimerManager {
     @objc private func updateRestTime() {
         setRestTime += 1
         totalRestTime += 1
+        totalTime += 1
     }
     
     // 앱이 꺼졌을 때 타이머 저장

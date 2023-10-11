@@ -26,22 +26,22 @@ final class TimerView: UIView {
         .textColor(K.Color.Grayscale.Label)
         .textAlignment(.left)
     
-    private let totalTimeLabel = UILabel()
+    let totalTimeLabel = UILabel()
         .font(.systemFont(ofSize: 16, weight: .bold))
         .textColor(K.Color.Grayscale.Label)
         .textAlignment(.right)
-        .text("0:00:00:00")
+        .text("00:00:00")
     
     private let setTimeTextLabel = UILabel()
         .font(.systemFont(ofSize: 28, weight: .heavy))
         .textColor(K.Color.Grayscale.Label)
         .textAlignment(.left)
     
-    private let setTimeLabel = UILabel()
+    let setTimeLabel = UILabel()
         .font(.systemFont(ofSize: 28, weight: .bold))
         .textColor(K.Color.Grayscale.Label)
         .textAlignment(.right)
-        .text("0:00:00:00")
+        .text("00:00:00")
     
     private lazy var totalStackView: UIStackView = UIStackView()
         .axis(.horizontal)
@@ -64,14 +64,6 @@ final class TimerView: UIView {
         .spacing(8)
         .addArrangedSubview(totalStackView)
         .addArrangedSubview(setStackView)
-    
-    func fetchTotalTime(_ timeInterval: TimeInterval) {
-        totalTimeLabel.text(timeInterval.formattedTime())
-    }
-    
-    func fetchSetTime(_ timeInterval: TimeInterval) {
-        setTimeLabel.text(timeInterval.formattedTime())
-    }
     
     func activateColor() {
         let tintColor = timerType == .workout ? K.Color.Primary.Blue : K.Color.Primary.Green

@@ -18,6 +18,7 @@ final class WorkoutLogViewController: UIViewController {
     private let workoutLogView = WorkoutLogView()
     private let titleTimerView = TitleTimerView()
     private let timer = TimerManager.shared
+    private var timerStatus: TimerManager.TimerStatus = .none
     private var workoutLog: WorkoutLog?
     private let realm: Realm = RealmManager.shared.realm
     private let disposeBag = DisposeBag()
@@ -38,12 +39,19 @@ final class WorkoutLogViewController: UIViewController {
     }
     
     private func setupBindings() {
-        Observable
-            .combineLatest(timer.totalExerciseTimePublisher, timer.totalRestTimePublisher)
-            .map { $0 + $1 }
+        timer.totalTimePublisher
+            .map { $0.formattedTime() }
             .subscribe { [weak self] in
-                self?.titleTimerView.fetchTitleTime($0)
+                print($0)
+                self?.titleTimerView.title.text($0)
             }
+            .disposed(by: disposeBag)
+        
+        timer.timerStatus
+            .subscribe (onNext: { [weak self] in
+                self?.timerStatus = $0
+                self?.fetchTimerStatus()
+            })
             .disposed(by: disposeBag)
     }
     private func configureView() {
@@ -51,12 +59,11 @@ final class WorkoutLogViewController: UIViewController {
         workoutLogView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        fetchTimerStatus()
     }
     
     func fetchTimerStatus() {
         navigationItem.titleView = nil
-        switch timer.timerStatus {
+        switch timerStatus {
         case .exercise:
             titleTimerView.fetchColor(.exercise)
             navigationItem.titleView = titleTimerView
@@ -194,8 +201,8 @@ extension WorkoutLogViewController: UITableViewDelegate, UITableViewDataSource, 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let workout = workoutLog?.workouts[indexPath.row]
-        transition(viewController: ExerciseSetViewController(workout: workout), style: .pushNavigation)
+        guard let workout = workoutLog?.workouts[indexPath.row] else { return }
+        transition(viewController: ExerciseSetViewController(viewModel: ExerciseSetViewModel(workout: workout)), style: .pushNavigation)
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

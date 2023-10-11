@@ -8,64 +8,91 @@
 import UIKit
 import RealmSwift
 import RxSwift
+import RxCocoa
 
 final class ExerciseSetViewController: UIViewController {
     private lazy var exerciseSetView = ExerciseSetView()
     private let titleTimerView = TitleTimerView()
-    private var workout: Workout!
+    private var viewModel: ExerciseSetViewModelProtocol!
     private let realm = RealmManager.shared.realm
-    private let timer = TimerManager.shared
+    private var timerStatus: TimerManager.TimerStatus = .none
     private let disposeBag = DisposeBag()
     
-    init(workout: Workout?) {
+    init(viewModel: ExerciseSetViewModelProtocol) {
         super.init(nibName: nil, bundle: nil)
-        self.workout = workout
-    }
-    
-    @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        self.viewModel = viewModel
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
-        addButtonsAction()
         configureTableView()
-        setupBindings()
+        BindingViewModel()
+        bindingView()
     }
     
-    private func setupBindings() {
-        timer.totalExerciseTimePublisher
+    private func BindingViewModel() {
+        
+        viewModel.totalExerciseTime
             .subscribe { [weak self] in
-                self?.exerciseSetView.workoutTimer.fetchTotalTime($0)
+                self?.exerciseSetView.workoutTimer.totalTimeLabel.text($0)
             }
             .disposed(by: disposeBag)
         
-        timer.totalRestTimePublisher
+        viewModel.totalRestTime
             .subscribe { [weak self] in
-                self?.exerciseSetView.restTimer.fetchTotalTime($0)
+                self?.exerciseSetView.restTimer.totalTimeLabel.text($0)
             }
             .disposed(by: disposeBag)
         
-        timer.setExerciseTimePublisher
+        viewModel.setExerciseTime
             .subscribe { [weak self] in
-                self?.exerciseSetView.workoutTimer.fetchSetTime($0)
+                self?.exerciseSetView.workoutTimer.setTimeLabel.text($0)
             }
             .disposed(by: disposeBag)
         
-        timer.setRestTimePublisher
+        viewModel.setRestTime
             .subscribe { [weak self] in
-                self?.exerciseSetView.restTimer.fetchSetTime($0)
+                self?.exerciseSetView.restTimer.setTimeLabel.text($0)
             }
             .disposed(by: disposeBag)
         
-        Observable
-            .combineLatest(timer.totalExerciseTimePublisher, timer.totalRestTimePublisher)
-            .map { $0 + $1 }
-            .subscribe { [weak self] in
-                self?.titleTimerView.fetchTitleTime($0)
+        viewModel.totalTime
+            .asDriver()
+            .drive { [weak self] in
+                print($0)
+                self?.titleTimerView.title.text($0)
             }
+            .disposed(by: disposeBag)
+        
+        viewModel.timerStatus
+            .subscribe { [weak self] in
+                self?.timerStatus = $0
+                switch $0 {
+                case .exercise:
+                    self?.exerciseSetView.workoutTimer.activateColor()
+                    self?.titleTimerView.fetchColor(.exercise)
+                case .rest:
+                    self?.exerciseSetView.restTimer.activateColor()
+                    self?.titleTimerView.fetchColor(.rest)
+                case .none:
+                    self?.titleTimerView.fetchColor(.none)
+                }
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    func bindingView() {
+        exerciseSetView.startWorkoutButton.rx.tap
+            .subscribe(onNext:  { [weak self] in
+                self?.startWorkoutButtonTapped()
+            })
+            .disposed(by: disposeBag)
+        
+        exerciseSetView.doneSetButton.rx.tap
+            .subscribe(onNext:  { [weak self] in
+                self?.doneSetButtonTapped()
+            })
             .disposed(by: disposeBag)
     }
     
@@ -76,28 +103,8 @@ final class ExerciseSetViewController: UIViewController {
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
         exerciseSetView.grabberView.delegate = self
-        exerciseSetView.grabberView.setTitle(workout.exercise?.exerciseName.localized ?? "")
+        exerciseSetView.grabberView.setTitle(viewModel.grabberTitle)
         navigationItem.titleView = titleTimerView
-        fetchTimerStatus()
-    }
-    
-    func fetchTimerStatus() {
-        switch timer.timerStatus {
-        case .exercise:
-            exerciseSetView.workoutTimer.activateColor()
-            titleTimerView.fetchColor(.exercise)
-        case .rest:
-            exerciseSetView.restTimer.activateColor()
-            titleTimerView.fetchColor(.rest)
-        case .none:
-            titleTimerView.fetchColor(.none)
-            break
-        }
-    }
-    
-    private func addButtonsAction() {
-        exerciseSetView.startWorkoutButton.addAction { [weak self] in self?.startWorkoutButtonTapped() }
-        exerciseSetView.doneSetButton.addAction { [weak self] in self?.doneSetButtonTapped() }
     }
     
     private func configureTableView() {
@@ -110,8 +117,7 @@ final class ExerciseSetViewController: UIViewController {
     }
     
     private func startWorkoutButtonTapped() {
-        timer.startExerciseTimer()
-        
+        viewModel.startExerciseTimer()
         UIView.transition(with: exerciseSetView.timerStackView, duration: 0.3, options: [.transitionCrossDissolve, .curveEaseOut]) {
             self.exerciseSetView.workoutTimer.activateColor()
             self.exerciseSetView.restTimer.deactivateColor()
@@ -120,11 +126,9 @@ final class ExerciseSetViewController: UIViewController {
             self.titleTimerView.fetchColor(.exercise)
             self.titleTimerView.setNeedsDisplay()
         }
-        
     }
     private func doneSetButtonTapped() {
-        timer.doneExercise()
-        
+        viewModel.doneExercise()
         UIView.transition(with: exerciseSetView.timerStackView, duration: 0.3, options: [.transitionCrossDissolve, .curveEaseOut]) {
             self.exerciseSetView.restTimer.activateColor()
             self.exerciseSetView.workoutTimer.deactivateColor()
@@ -133,18 +137,16 @@ final class ExerciseSetViewController: UIViewController {
             self.titleTimerView.fetchColor(.rest)
             self.titleTimerView.setNeedsDisplay()
         }
-        guard let set = workout.exerciseSets.first(where: { $0.isFinished == false })
-        else {
-            return
-        }
-        try! realm.write {
-            set.isFinished = true
-        }
         exerciseSetView.tableView.reloadData()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
@@ -154,27 +156,24 @@ extension ExerciseSetViewController: UITableViewDelegate, UITableViewDataSource 
         return 2
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? workout.exerciseSets.count : 1
+        return section == 0 ? viewModel.exerciseSetsCount : 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: ExerciseSetTableViewCell.identifier, for: indexPath) as! ExerciseSetTableViewCell
-            cell.configureCell(with: workout.exerciseSets[indexPath.row], index: indexPath.row)
+            cell.configureCell(with: viewModel.exerciseSet(at: indexPath.row), index: indexPath.row)
             cell.selectionStyle = .none
             cell.setButtonHandler = { [weak self] in
                 guard let self else { return }
-                if workout.exerciseSets[indexPath.row].isFinished {
-                    let index = workout.exerciseSets.lastIndex { $0.isFinished }
-                    try! realm.write {
-                        self.workout.exerciseSets.move(from: indexPath.row, to: index ?? indexPath.row)
-                    }
-                    tableView.moveRow(at: indexPath, to: IndexPath(row: index ?? indexPath.row, section: 0))
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                        tableView.reloadData()
-                    }
+                viewModel.arrangeExerciseSet(at: indexPath.row)
+                let lastIndex = viewModel.lastFinishedExerciseSetIndex
+                tableView.moveRow(at: indexPath, to: IndexPath(row: lastIndex ?? indexPath.row, section: 0))
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    tableView.reloadData()
                 }
             }
+            
             cell.textFieldDidBeginEditingHandler = { [weak self] in
                 self?.grabber(swipeGestureFor: .up)
             }
@@ -189,13 +188,8 @@ extension ExerciseSetViewController: UITableViewDelegate, UITableViewDataSource 
             cell.selectionStyle = .none
             cell.addButtonHandler = { [weak self] in
                 guard let self else { return }
-                let realm = RealmManager.shared.realm
-                let repetitionCount = workout.exerciseSets.last?.repetitionCount ?? 0
-                let weight = workout.exerciseSets.last?.weight ?? 0
-                try! realm.write {
-                    self.workout.exerciseSets.append(ExerciseSet(repetitionCount: repetitionCount, weight: weight))
-                }
-                tableView.insertRows(at: [IndexPath(row: workout.exerciseSets.count - 1, section: 0)], with: .automatic)
+                viewModel.appendExerciseSet()
+                tableView.insertRows(at: [IndexPath(row: viewModel.exerciseSetsCount - 1, section: 0)], with: .automatic)
                 tableView.scrollToRow(at: indexPath, at: .top, animated: true)
             }
             return cell
@@ -208,15 +202,11 @@ extension ExerciseSetViewController: UITableViewDelegate, UITableViewDataSource 
         return indexPath.section == 0
     }
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        try! realm.write {
-            workout.exerciseSets.move(from: sourceIndexPath.row, to: destinationIndexPath.row)
-        }
+        viewModel.moveExerciseSet(from: sourceIndexPath.row, to: destinationIndexPath.row)
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
-        try! realm.write {
-            workout.exerciseSets.remove(at: indexPath.row)
-        }
+        viewModel.removeExerciseSet(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .automatic)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             tableView.reloadData()
@@ -248,7 +238,7 @@ extension ExerciseSetViewController: GrabberViewDelegate {
     func grabber(swipeGestureFor direction: UISwipeGestureRecognizer.Direction) {
         switch direction {
         case .up:
-            if timer.timerStatus == .rest {
+            if timerStatus == .rest {
                 exerciseSetView.timerStackView.arrangedSubviews[0].isHidden(true)
                 self.exerciseSetView.grabberViewTopOffset.update(offset: 8)
             } else {
