@@ -18,6 +18,8 @@ extension GrabberViewDelegate {
 }
 
 final class GrabberView: UIView {
+    
+    private let shadowView = UIView()
     private let backView = UIView()
         .backgroundColor(.systemBackground)
     
@@ -103,8 +105,8 @@ final class GrabberView: UIView {
     
     private func setupUI() {
         addSubView(backView)
-        backView.layer.cornerRadius = 30
-        backView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        backView.roundCorners(corners: [.layerMinXMinYCorner, .layerMaxXMinYCorner], radius: 30)
+        backView.layer.masksToBounds = true
         backView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }

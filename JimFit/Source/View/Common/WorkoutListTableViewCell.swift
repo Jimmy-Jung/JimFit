@@ -34,18 +34,23 @@ final class WorkoutListTableViewCell: UITableViewCell {
                 .count
             let progression = Float(setFinishedCount) / Float(setCount)
             titleLabel.text(exercise.exerciseName.localized)
+            titleLabel.sizeToFit()
             secondaryLabel.text(secondaryString)
             let weightInTons = weightFloat > 999 ? weightFloat / 1000 : weightFloat
             let weightUnit = weightFloat > 999 ? "ton" : "kg"
             weightLabel.text = String(format: "%.0f", weightInTons) + " " + weightUnit
             setLabel.text(String(describing: setCount) + " set")
-            progressLabel.text(String(Int(progression * 100)) + "%")
-            progressView.setProgress(progression, animated: true)
+            progressLabel.text(" " + String(Int(progression * 100)) + "%")
+            DispatchQueue.main.async {
+                self.progressView.setProgress(progression, animated: true)
+            }
+            
         }
     }
     
     private let borderView = UIView()
         .cornerRadius(K.Size.cellRadius)
+        .clipsToBounds(true)
     
     private let titleLabel = UILabel()
         .font(K.Font.CellHeader)
@@ -58,6 +63,7 @@ final class WorkoutListTableViewCell: UITableViewCell {
     
     let weightImage = UIImageView()
         .image(K.Image.Dumbbell)
+        .contentMode(.scaleAspectFit)
         .tintColor(K.Color.Grayscale.border_Medium)
     
     private let weightLabel = UILabel()
@@ -66,6 +72,7 @@ final class WorkoutListTableViewCell: UITableViewCell {
     
     private let setImage = UIImageView()
         .image(K.Image.Bolt)
+        .contentMode(.scaleAspectFit)
         .tintColor(K.Color.Primary.Yellow)
     
     private let setLabel = UILabel()
@@ -89,6 +96,7 @@ final class WorkoutListTableViewCell: UITableViewCell {
         .spacing(4)
         .addArrangedSubview(titleLabel)
         .addArrangedSubview(secondaryLabel)
+        .addArrangedSubview(progressView)
     
     private lazy var weightStackView: UIStackView = UIStackView()
         .axis(.horizontal)
@@ -97,6 +105,7 @@ final class WorkoutListTableViewCell: UITableViewCell {
         .spacing(4)
         .addArrangedSubview(weightImage)
         .addArrangedSubview(weightLabel)
+        
     
     private lazy var setStackView: UIStackView = UIStackView()
         .axis(.horizontal)
@@ -113,7 +122,8 @@ final class WorkoutListTableViewCell: UITableViewCell {
         .spacing(8)
         .addArrangedSubview(weightStackView)
         .addArrangedSubview(setStackView)
-        .addArrangedSubview(UIView())
+        .addArrangedSubview(progressLabel)
+        
     
     private lazy var horizontalStackView: UIStackView = UIStackView()
         .axis(.horizontal)
@@ -125,56 +135,39 @@ final class WorkoutListTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        progressView.progress = 0
+        progressView.setProgress(0, animated: true)
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(borderView)
-        borderView.addSubview(progressView)
-        borderView.addSubview(progressLabel)
-        borderView.addSubview(horizontalStackView)
         
         borderView.snp.makeConstraints { make in
             make.verticalEdges.equalToSuperview().inset(8)
             make.horizontalEdges.equalToSuperview().inset(20)
         }
         
-        weightLabel.snp.makeConstraints { make in
-            make.width.equalTo(70)
+        borderView.addSubview(horizontalStackView)
+        horizontalStackView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().inset(16)
+            make.top.bottom.equalToSuperview().inset(8)
+            make.trailing.equalToSuperview().inset(8)
         }
         
+        infoStackView.snp.makeConstraints { make in
+            make.width.equalTo(94)
+        }
         weightImage.snp.makeConstraints { make in
             make.width.equalTo(weightImage.snp.height)
-        }
-        setLabel.snp.makeConstraints { make in
-            make.width.equalTo(70)
         }
         setImage.snp.makeConstraints { make in
             make.width.equalTo(setImage.snp.height)
         }
-        
-        titleStackView.snp.makeConstraints { make in
-            make.height.equalTo(2 + 15 + 2 + 15 + 2 + 13 + 2)
+        titleLabel.snp.makeConstraints { make in
+            make.height.equalTo(36)
         }
-        
-        horizontalStackView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(16)
-            make.top.equalToSuperview().inset(8)
-            make.trailing.equalToSuperview().inset(8)
-        }
-        
         progressView.snp.makeConstraints { make in
-            make.top.equalTo(horizontalStackView.snp.bottom).offset(8)
-            make.leading.equalTo(horizontalStackView)
-            make.bottom.equalToSuperview().inset(8)
             make.height.equalTo(6)
-            make.width.equalTo(UIScreen.main.bounds.width - 160)
-        }
-        
-        progressLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(progressView).offset(-3)
-            make.leading.equalTo(progressView.snp.trailing).offset(8)
         }
         
     }
