@@ -113,7 +113,15 @@ extension WorkoutLogViewController: GrabberViewDelegate {
     }
     
     func grabberButtonTapped() {
-        
+        let shouldBeEdited = !workoutLogView.tableView.isEditing
+        workoutLogView.tableView.setEditing(shouldBeEdited, animated: true)
+        if !shouldBeEdited {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.workoutLogView.tableView.reloadData()
+            }
+            
+        }
+        workoutLogView.grabberView.isMenuButtonSelected = shouldBeEdited
     }
     
     
@@ -188,6 +196,48 @@ extension WorkoutLogViewController: UITableViewDelegate, UITableViewDataSource, 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let workout = workoutLog?.workouts[indexPath.row]
         transition(viewController: ExerciseSetViewController(workout: workout), style: .pushNavigation)
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return indexPath.section == 0
+    }
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return indexPath.section == 0
+    }
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        try! realm.write {
+            workoutLog?.workouts.move(from: sourceIndexPath.row, to: destinationIndexPath.row)
+        }
+    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard editingStyle == .delete else { return }
+        try! realm.write {
+            workoutLog?.workouts.remove(at: indexPath.row)
+        }
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            tableView.reloadData()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
+        // 0번 섹션의 셀만 이동 가능하도록 설정
+        if proposedDestinationIndexPath.section != 0 {
+            return sourceIndexPath
+        }
+        return proposedDestinationIndexPath
+    }
+    
+    func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
+            cell.isUserInteractionEnabled = false
+        }
+    }
+
+    func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
+        if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) {
+            cell.isUserInteractionEnabled = true
+        }
     }
     
     func reloadData() {

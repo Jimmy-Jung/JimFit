@@ -36,6 +36,10 @@ final class AddButtonTableViewCell: UITableViewCell {
         }
     }
     
+    func buttonEnable(_ bool: Bool) {
+        addButton.isEnabled(bool)
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(addButton)

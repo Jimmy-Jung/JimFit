@@ -41,10 +41,9 @@ final class WorkoutListTableViewCell: UITableViewCell {
             weightLabel.text = String(format: "%.0f", weightInTons) + " " + weightUnit
             setLabel.text(String(describing: setCount) + " set")
             progressLabel.text(" " + String(Int(progression * 100)) + "%")
-            DispatchQueue.main.async {
-                self.progressView.setProgress(progression, animated: true)
+                DispatchQueue.main.async {
+                    self.progressView.setProgress(progression, animated: true)
             }
-            
         }
     }
     
