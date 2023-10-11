@@ -60,9 +60,11 @@ final class WorkoutLogViewController: UIViewController {
         case .exercise:
             titleTimerView.fetchColor(.exercise)
             navigationItem.titleView = titleTimerView
+            titleTimerView.startBlinkingAnimation()
         case .rest:
             titleTimerView.fetchColor(.rest)
             navigationItem.titleView = titleTimerView
+            titleTimerView.startBlinkingAnimation()
         case .none:
             titleTimerView.fetchColor(.none)
             navigationItem.titleView = nil

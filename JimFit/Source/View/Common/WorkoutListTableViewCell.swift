@@ -40,7 +40,7 @@ final class WorkoutListTableViewCell: UITableViewCell {
             weightLabel.text = String(format: "%.0f", weightInTons) + " " + weightUnit
             setLabel.text(String(describing: setCount) + " set")
             progressLabel.text(String(Int(progression * 100)) + "%")
-            progressView.progress = progression
+            progressView.setProgress(progression, animated: true)
         }
     }
     
@@ -75,7 +75,7 @@ final class WorkoutListTableViewCell: UITableViewCell {
     private let progressView: UIProgressView = UIProgressView().then {
         $0.trackTintColor = K.Color.Grayscale.SecondaryFill
         $0.progressTintColor = K.Color.Primary.Green
-        $0.progress = 0.01
+        $0.progress = 0
     }
     
     private let progressLabel = UILabel()
@@ -122,6 +122,11 @@ final class WorkoutListTableViewCell: UITableViewCell {
         .spacing(8)
         .addArrangedSubview(titleStackView)
         .addArrangedSubview(infoStackView)
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        progressView.progress = 0
+    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

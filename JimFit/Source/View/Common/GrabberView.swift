@@ -27,6 +27,7 @@ final class GrabberView: UIView {
     
     private let titleLabel = UILabel()
         .font(K.Font.Header2)
+        .numberOfLines(2)
         .textColor(K.Color.Primary.Label)
 
     private lazy var rightBarButton: UIButton = UIButton(configuration: .plain())
@@ -41,6 +42,13 @@ final class GrabberView: UIView {
         }
         .baseForegroundColor(K.Color.Primary.Label)
         .cornerStyle(.large)
+    
+    private lazy var horizontalStackView: UIStackView = UIStackView()
+        .axis(.horizontal)
+        .alignment(.center)
+        .distribution(.fill)
+        .addArrangedSubview(titleLabel)
+        .addArrangedSubview(rightBarButton)
     
     weak var delegate: GrabberViewDelegate?
     
@@ -109,19 +117,15 @@ final class GrabberView: UIView {
             make.top.equalToSuperview().inset(16)
         }
         
-        backView.addSubview(titleLabel)
-        titleLabel.snp.makeConstraints { make in
+        backView.addSubview(horizontalStackView)
+        horizontalStackView.snp.makeConstraints { make in
             make.top.equalTo(grabberView.snp.bottom).offset(12)
-            make.leading.equalToSuperview().offset(30)
+            make.horizontalEdges.equalToSuperview().inset(20)
             make.bottom.equalToSuperview()
         }
         
-        backView.addSubview(rightBarButton)
         rightBarButton.snp.makeConstraints { make in
-            make.centerY.equalTo(titleLabel)
-            make.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(50)
-            make.bottom.equalToSuperview()
+            make.size.equalTo(50)
         }
     }
     

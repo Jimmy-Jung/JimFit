@@ -13,14 +13,14 @@ final class TimerManager {
     
     static let shared = TimerManager()
     
-    var totalExerciseTimePublisher = BehaviorSubject<TimeInterval>(value: 0)
-    var setExerciseTimePublisher = BehaviorSubject<TimeInterval>(value: 0)
-    var totalRestTimePublisher = BehaviorSubject<TimeInterval>(value: 0)
-    var setRestTimePublisher = BehaviorSubject<TimeInterval>(value: 0)
-    private var totalExerciseTime: TimeInterval = 0 { didSet { totalExerciseTimePublisher.onNext(totalExerciseTime) } }
-    private var setExerciseTime: TimeInterval = 0 { didSet { setExerciseTimePublisher.onNext(setExerciseTime) } }
-    private var totalRestTime: TimeInterval = 0 { didSet { totalRestTimePublisher.onNext(totalRestTime) } }
-    private var setRestTime: TimeInterval = 0 { didSet { setRestTimePublisher.onNext(setRestTime) } }
+    var totalExerciseTimePublisher = BehaviorRelay<TimeInterval>(value: 0)
+    var setExerciseTimePublisher = BehaviorRelay<TimeInterval>(value: 0)
+    var totalRestTimePublisher = BehaviorRelay<TimeInterval>(value: 0)
+    var setRestTimePublisher = BehaviorRelay<TimeInterval>(value: 0)
+    var totalExerciseTime: TimeInterval = 0 { didSet { totalExerciseTimePublisher.accept(totalExerciseTime) } }
+    private var setExerciseTime: TimeInterval = 0 { didSet { setExerciseTimePublisher.accept(setExerciseTime) } }
+    private var totalRestTime: TimeInterval = 0 { didSet { totalRestTimePublisher.accept(totalRestTime) } }
+    private var setRestTime: TimeInterval = 0 { didSet { setRestTimePublisher.accept(setRestTime) } }
     private var exerciseStartTime: Date?
     private var restStartTime: Date?
     private var exerciseTimer: Timer?
@@ -29,6 +29,11 @@ final class TimerManager {
     
     private init() {
         self.restoreTimers()
+    }
+    
+    func stopTimer() {
+        exerciseTimer?.invalidate()
+        restTimer?.invalidate()
     }
     
     func startExerciseTimer() {
@@ -51,6 +56,7 @@ final class TimerManager {
     @objc private func updateExerciseTime() {
         setExerciseTime += 1
         totalExerciseTime += 1
+        totalExerciseTimePublisher
     }
     
     func doneExercise() {
