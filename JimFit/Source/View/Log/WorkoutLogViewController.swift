@@ -31,6 +31,7 @@ final class WorkoutLogViewController: UIViewController {
                 self.workoutLog?.exerciseTime = self.timer.totalExerciseTime
                 self.workoutLog?.restTime = self.timer.totalRestTime
             }
+            self.reloadCalendar()
         })
     }
     
@@ -171,6 +172,13 @@ extension WorkoutLogViewController: FSCalendarDelegate, FSCalendarDataSource, FS
         let grabberString = date.convert(to: .grabberDate) + "workout".localized
         workoutLogView.grabberView.setTitle(grabberString)
         reloadTableView()
+    }
+    
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventDefaultColorsFor date: Date) -> [UIColor]? {
+        if let recordingDay = timer.recordingDay, date.convert(to: .primaryKey) == recordingDay {
+            return [K.Color.Primary.Blue]
+        }
+        return nil
     }
 }
 
