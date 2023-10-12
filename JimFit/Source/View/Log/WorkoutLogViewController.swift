@@ -57,7 +57,7 @@ final class WorkoutLogViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
-        timer.timerStatus
+        timer.timerStatusPublisher
             .subscribe (onNext: { [weak self] in
                 self?.timerStatus = $0
                 self?.fetchTimerStatus()

@@ -13,6 +13,7 @@ import RxRelay
 final class TimerManager {
     
     static let shared = TimerManager()
+    let realm = RealmManager.shared.realm
     var workoutLog: WorkoutLog?
     var recordingDay: String?
     var totalTimePublisher = PublishRelay<TimeInterval>()
@@ -25,18 +26,16 @@ final class TimerManager {
     var setExerciseTime: TimeInterval = 0 { didSet { setExerciseTimePublisher.accept(setExerciseTime) } }
     var totalRestTime: TimeInterval = 0 { didSet { totalRestTimePublisher.accept(totalRestTime) } }
     var setRestTime: TimeInterval = 0 { didSet { setRestTimePublisher.accept(setRestTime) } }
-    private var exerciseStartTime: Date?
-    private var restStartTime: Date?
     private var exerciseTimer: Timer?
     private var restTimer: Timer?
-    var timerStatus = PublishRelay<TimerStatus>()
-    var latestTimerStatus: TimerStatus = .paused
+    var timerStatusPublisher = PublishRelay<TimerStatus>()
+    var timerStatus: TimerStatus = .paused { didSet{ timerStatusPublisher.accept(timerStatus)}}
     
     private init() {
         self.restoreTimers()
     }
     
-    func resetTimer(with workoutLog: WorkoutLog) {
+    func fetchTimer(with workoutLog: WorkoutLog) {
         self.workoutLog = workoutLog
         totalExerciseTime = workoutLog.exerciseTime
         totalRestTime = workoutLog.restTime
@@ -46,10 +45,7 @@ final class TimerManager {
     func stopTimer() {
         exerciseTimer?.invalidate()
         restTimer?.invalidate()
-        restStartTime = nil
-        exerciseStartTime = nil
-        latestTimerStatus = .paused
-        timerStatus.accept(.paused)
+        timerStatus = .paused
         setExerciseTime = 0
         setRestTime = 0
         recordingDay = nil
@@ -57,11 +53,9 @@ final class TimerManager {
     }
     
     func startExerciseTimer() {
-        if exerciseStartTime == nil {
-            latestTimerStatus = .exercise
-            timerStatus.accept(.exercise)
+        if timerStatus != .exercise {
+            timerStatus = .exercise
             setExerciseTime = 0
-            exerciseStartTime = Date()
             exerciseTimer = Timer.scheduledTimer(
                 timeInterval: 1,
                 target: self,
@@ -69,10 +63,9 @@ final class TimerManager {
                 userInfo: nil,
                 repeats: true
             )
+            restTimer?.invalidate()
+            recordingDay = workoutLog?.workoutDate
         }
-        restTimer?.invalidate()
-        restStartTime = nil
-        recordingDay = workoutLog?.workoutDate
     }
     
     @objc private func updateExerciseTime() {
@@ -82,11 +75,9 @@ final class TimerManager {
     }
     
     func doneExercise() {
-        if restStartTime == nil {
-            latestTimerStatus = .rest
-            timerStatus.accept(.rest)
+        if timerStatus != .rest {
+            timerStatus = .rest
             setRestTime = 0
-            restStartTime = Date()
             restTimer = Timer.scheduledTimer(
                 timeInterval: 1,
                 target: self,
@@ -94,10 +85,9 @@ final class TimerManager {
                 userInfo: nil,
                 repeats: true
             )
+            exerciseTimer?.invalidate()
+            recordingDay = workoutLog?.workoutDate
         }
-        exerciseTimer?.invalidate()
-        exerciseStartTime = nil
-        recordingDay = workoutLog?.workoutDate
     }
     
     @objc private func updateRestTime() {
@@ -108,21 +98,41 @@ final class TimerManager {
     
     // 앱이 꺼졌을 때 타이머 저장
     func saveTimers() {
-        UM.exerciseStartTime = exerciseStartTime
-        UM.restStartTime = restStartTime
-        UM.totalExerciseTime = totalExerciseTime
-        UM.setExerciseTime = setExerciseTime
-        UM.totalRestTime = totalRestTime
-        UM.setRestTime = setRestTime
+        exerciseTimer?.invalidate()
+        restTimer?.invalidate()
+        UM.savedExerciseStartTime = Date()
+        UM.savedRestStartTime = Date()
+        try! realm.write {
+            workoutLog?.exerciseTime = totalExerciseTime
+            workoutLog?.restTime = totalRestTime
+        }
     }
     
     func restoreTimers() {
-        if let storedExerciseStartTime = UM.exerciseStartTime {
-            exerciseStartTime = storedExerciseStartTime
+        if timerStatus == .exercise {
+            let setTimeInterval = Date().timeIntervalSince(UM.savedExerciseStartTime)
+            totalExerciseTime += setTimeInterval
+            setExerciseTime += setTimeInterval
+            exerciseTimer = Timer.scheduledTimer(
+                timeInterval: 1,
+                target: self,
+                selector: #selector(updateExerciseTime),
+                userInfo: nil,
+                repeats: true
+            )
+        } else if timerStatus == .rest {
+            let setTimeInterval = Date().timeIntervalSince(UM.savedRestStartTime)
+            totalRestTime += setTimeInterval
+            setRestTime += setTimeInterval
+            restTimer = Timer.scheduledTimer(
+                timeInterval: 1,
+                target: self,
+                selector: #selector(updateRestTime),
+                userInfo: nil,
+                repeats: true
+            )
         }
-        if let storedRestStartTime = UM.restStartTime {
-            restStartTime = storedRestStartTime
-        }
+        totalTime = totalExerciseTime + totalRestTime
     }
 }
 

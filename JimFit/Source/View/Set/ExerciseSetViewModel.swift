@@ -46,7 +46,7 @@ final class ExerciseSetViewModel: ExerciseSetViewModelProtocol {
     lazy var setExerciseTime = BehaviorRelay<String>(value: timer.setExerciseTime.formattedTime())
     lazy var setRestTime = BehaviorRelay<String>(value: timer.setRestTime.formattedTime())
     lazy var totalTime = BehaviorRelay<String>(value: timer.totalTime.formattedTime())
-    lazy var timerStatus = BehaviorRelay<TimerManager.TimerStatus>(value: timer.latestTimerStatus)
+    lazy var timerStatus = BehaviorRelay<TimerManager.TimerStatus>(value: timer.timerStatus)
     var grabberTitle: String {
         return workout.exercise?.exerciseName.localized ?? ""
     }
@@ -64,17 +64,17 @@ final class ExerciseSetViewModel: ExerciseSetViewModelProtocol {
     init(workout: Workout) {
         self.workout = workout
         guard let workoutLog = workout.OriginWorkoutLog.first else { return }
-        if timer.latestTimerStatus == .paused {
-            timer.resetTimer(with: workoutLog)
+        if timer.timerStatus == .paused {
+            timer.fetchTimer(with: workoutLog)
             self.setUpBinding_Today()
             self.isActiveTimerButton = true
         } else {
             if timer.recordingDay == workoutLog.workoutDate {
-                timer.resetTimer(with: workoutLog)
+                timer.fetchTimer(with: workoutLog)
                 self.setUpBinding_Today()
                 self.isActiveTimerButton = true
             } else {
-                timer.resetTimer(with: workoutLog)
+                timer.fetchTimer(with: workoutLog)
                 self.setUpBinding_NotToday()
                 self.isActiveTimerButton = false
             }
@@ -169,7 +169,7 @@ final class ExerciseSetViewModel: ExerciseSetViewModelProtocol {
             .bind(to: totalTime)
             .disposed(by: disposeBag)
         
-        timer.timerStatus
+        timer.timerStatusPublisher
             .bind(to: timerStatus)
             .disposed(by: disposeBag)
     }

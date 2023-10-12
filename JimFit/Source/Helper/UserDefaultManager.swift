@@ -11,31 +11,15 @@ typealias UM = UserDefaultManager
 
 struct UserDefaultManager {
     
-    @OptionalUserDefault(key: KeyEnum.exerciseStartTime.rawValue)
-    static var exerciseStartTime: Date?
+    @UserDefault(key: KeyEnum.savedExerciseStartTime.rawValue, defaultValue: Date())
+    static var savedExerciseStartTime: Date
     
-    @OptionalUserDefault(key: KeyEnum.restStartTime.rawValue)
-    static var restStartTime: Date?
-    
-    @UserDefault(key: KeyEnum.totalExerciseTime.rawValue, defaultValue: 0)
-    static var totalExerciseTime: TimeInterval
-    
-    @UserDefault(key: KeyEnum.setExerciseTime.rawValue, defaultValue: 0)
-    static var setExerciseTime: TimeInterval
-    
-    @UserDefault(key: KeyEnum.totalRestTime.rawValue, defaultValue: 0)
-    static var totalRestTime: TimeInterval
-    
-    @UserDefault(key: KeyEnum.setRestTime.rawValue, defaultValue: 0)
-    static var setRestTime: TimeInterval
+    @UserDefault(key: KeyEnum.savedRestStartTime.rawValue, defaultValue: Date())
+    static var savedRestStartTime: Date
     
     enum KeyEnum: String {
-        case exerciseStartTime
-        case restStartTime
-        case totalExerciseTime
-        case setExerciseTime
-        case totalRestTime
-        case setRestTime
+        case savedExerciseStartTime
+        case savedRestStartTime
     }
 }
 
