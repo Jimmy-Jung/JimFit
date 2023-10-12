@@ -13,10 +13,10 @@ import RxRelay
 final class TimerManager {
     
     static let shared = TimerManager()
+    var workoutLog: WorkoutLog?
+    var recordingDay: String?
     var totalTimePublisher = PublishRelay<TimeInterval>()
-    var totalTime: TimeInterval = 0 {
-        didSet {totalTimePublisher.accept(totalTime)}
-    }
+    var totalTime: TimeInterval = 0 { didSet { totalTimePublisher.accept(totalTime) } }
     var totalExerciseTimePublisher = PublishRelay<TimeInterval>()
     var setExerciseTimePublisher = PublishRelay<TimeInterval>()
     var totalRestTimePublisher = PublishRelay<TimeInterval>()
@@ -37,8 +37,10 @@ final class TimerManager {
     }
     
     func resetTimer(with workoutLog: WorkoutLog) {
+        self.workoutLog = workoutLog
         totalExerciseTime = workoutLog.exerciseTime
         totalRestTime = workoutLog.restTime
+        totalTime = totalExerciseTime + totalRestTime
     }
     
     func stopTimer() {
@@ -48,6 +50,10 @@ final class TimerManager {
         exerciseStartTime = nil
         latestTimerStatus = .paused
         timerStatus.accept(.paused)
+        setExerciseTime = 0
+        setRestTime = 0
+        recordingDay = nil
+        workoutLog = nil
     }
     
     func startExerciseTimer() {
@@ -66,6 +72,7 @@ final class TimerManager {
         }
         restTimer?.invalidate()
         restStartTime = nil
+        recordingDay = workoutLog?.workoutDate
     }
     
     @objc private func updateExerciseTime() {
@@ -90,6 +97,7 @@ final class TimerManager {
         }
         exerciseTimer?.invalidate()
         exerciseStartTime = nil
+        recordingDay = workoutLog?.workoutDate
     }
     
     @objc private func updateRestTime() {

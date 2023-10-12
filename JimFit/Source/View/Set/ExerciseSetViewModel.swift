@@ -64,14 +64,26 @@ final class ExerciseSetViewModel: ExerciseSetViewModelProtocol {
     init(workout: Workout) {
         self.workout = workout
         guard let workoutLog = workout.OriginWorkoutLog.first else { return }
-        timer.resetTimer(with: workoutLog)
-        if let date = workout.OriginWorkoutLog.first?.workoutDate, date == Date().convert(to: .primaryKey) {
+        print("workoutLog: \(workoutLog.workoutDate)")
+        if timer.latestTimerStatus == .paused {
+            timer.resetTimer(with: workoutLog)
             self.setUpBinding_Today()
             self.isActiveTimerButton = true
         } else {
-            self.setUpBinding_NotToday()
-            self.isActiveTimerButton = false
+            if timer.recordingDay == workoutLog.workoutDate {
+                print("today")
+                timer.resetTimer(with: workoutLog)
+                self.setUpBinding_Today()
+                self.isActiveTimerButton = true
+            } else {
+                print("notToday")
+                timer.resetTimer(with: workoutLog)
+                self.setUpBinding_NotToday()
+                self.isActiveTimerButton = false
+            }
         }
+        
+        
     }
     
     // MARK: - Methods
@@ -135,6 +147,7 @@ final class ExerciseSetViewModel: ExerciseSetViewModelProtocol {
     // MARK: - Private Methods
 
     private func setUpBinding_Today() {
+        guard let workoutLog = workout.OriginWorkoutLog.first else { return }
         
         timer.totalExerciseTimePublisher
             .map { $0.formattedTime() }
