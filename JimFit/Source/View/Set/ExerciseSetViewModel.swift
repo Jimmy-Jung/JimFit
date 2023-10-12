@@ -64,26 +64,21 @@ final class ExerciseSetViewModel: ExerciseSetViewModelProtocol {
     init(workout: Workout) {
         self.workout = workout
         guard let workoutLog = workout.OriginWorkoutLog.first else { return }
-        print("workoutLog: \(workoutLog.workoutDate)")
         if timer.latestTimerStatus == .paused {
             timer.resetTimer(with: workoutLog)
             self.setUpBinding_Today()
             self.isActiveTimerButton = true
         } else {
             if timer.recordingDay == workoutLog.workoutDate {
-                print("today")
                 timer.resetTimer(with: workoutLog)
                 self.setUpBinding_Today()
                 self.isActiveTimerButton = true
             } else {
-                print("notToday")
                 timer.resetTimer(with: workoutLog)
                 self.setUpBinding_NotToday()
                 self.isActiveTimerButton = false
             }
         }
-        
-        
     }
     
     // MARK: - Methods
