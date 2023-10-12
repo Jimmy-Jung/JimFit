@@ -42,7 +42,6 @@ final class WorkoutLogViewController: UIViewController {
         timer.totalTimePublisher
             .map { $0.formattedTime() }
             .subscribe { [weak self] in
-                print($0)
                 self?.titleTimerView.title.text($0)
             }
             .disposed(by: disposeBag)

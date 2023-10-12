@@ -168,7 +168,8 @@ final class WorkoutListTableViewCell: UITableViewCell {
         progressView.snp.makeConstraints { make in
             make.height.equalTo(6)
         }
-        
+        // 코너 부드럽게
+        borderView.layer.cornerCurve = .continuous
     }
     
     @available(*, unavailable)

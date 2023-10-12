@@ -20,6 +20,7 @@ protocol ExerciseSetViewModelProtocol {
     var grabberTitle: String { get }
     var exerciseSetsCount: Int { get }
     var lastFinishedExerciseSetIndex: Int? { get }
+    var isActiveTimerButton: Bool { get set }
     func exerciseSet(at index: Int) -> ExerciseSet
     func arrangeExerciseSet(at index: Int)
     func moveExerciseSet(from source: Int, to destination: Int)
@@ -55,11 +56,19 @@ final class ExerciseSetViewModel: ExerciseSetViewModelProtocol {
         return workout.exerciseSets.lastIndex { $0.isFinished }
     }
     
+    var isActiveTimerButton: Bool = false
+    
     // MARK: - Init
 
     init(workout: Workout) {
         self.workout = workout
-        self.setupBindings()
+        if let date = workout.OriginWorkoutLog.first?.workoutDate, date == Date().convertToTimeString() {
+            self.setUpBinding_Today()
+            self.isActiveTimerButton = true
+        } else {
+            self.setUpBinding_NotToday()
+            self.isActiveTimerButton = false
+        }
     }
     
     // MARK: - Methods
@@ -113,7 +122,7 @@ final class ExerciseSetViewModel: ExerciseSetViewModelProtocol {
     
     // MARK: - Private Methods
 
-    private func setupBindings() {
+    private func setUpBinding_Today() {
         
         timer.totalExerciseTimePublisher
             .map { $0.formattedTime() }
@@ -141,6 +150,39 @@ final class ExerciseSetViewModel: ExerciseSetViewModelProtocol {
             .disposed(by: disposeBag)
         
         timer.timerStatus
+            .bind(to: timerStatus)
+            .disposed(by: disposeBag)
+    }
+    
+    private func setUpBinding_NotToday() {
+        Observable<String>
+            .just(workout.exerciseTime.formattedTime())
+            .bind(to: totalExerciseTime)
+            .disposed(by: disposeBag)
+        
+        Observable<String>
+            .just(workout.restTime.formattedTime())
+            .bind(to: totalRestTime)
+            .disposed(by: disposeBag)
+        
+        Observable<String>
+            .just(0.formattedTime())
+            .bind(to: setExerciseTime)
+            .disposed(by: disposeBag)
+        
+        Observable<String>
+            .just(0.formattedTime())
+            .bind(to: setRestTime)
+            .disposed(by: disposeBag)
+        
+        Observable<TimeInterval>
+            .just(workout.exerciseTime + workout.restTime)
+            .map { $0.formattedTime()}
+            .bind(to: totalTime)
+            .disposed(by: disposeBag)
+        
+        Observable<TimerManager.TimerStatus>
+            .just(.none)
             .bind(to: timerStatus)
             .disposed(by: disposeBag)
     }

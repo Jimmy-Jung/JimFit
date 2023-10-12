@@ -21,3 +21,9 @@ extension DateFormatter {
         return dateFormatter.string(from: date)
     }
 }
+
+extension Date {
+    func convertToTimeString() -> String {
+        DateFormatter.format(with: .primaryKey, from: self)
+    }
+}

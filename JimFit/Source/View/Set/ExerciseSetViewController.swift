@@ -60,7 +60,6 @@ final class ExerciseSetViewController: UIViewController {
         viewModel.totalTime
             .asDriver()
             .drive { [weak self] in
-                print($0)
                 self?.titleTimerView.title.text($0)
             }
             .disposed(by: disposeBag)
@@ -83,6 +82,9 @@ final class ExerciseSetViewController: UIViewController {
     }
     
     func bindingView() {
+        exerciseSetView.startWorkoutButton.isEnabled = viewModel.isActiveTimerButton
+        exerciseSetView.doneSetButton.isEnabled = viewModel.isActiveTimerButton
+        
         exerciseSetView.startWorkoutButton.rx.tap
             .subscribe(onNext:  { [weak self] in
                 self?.startWorkoutButtonTapped()
