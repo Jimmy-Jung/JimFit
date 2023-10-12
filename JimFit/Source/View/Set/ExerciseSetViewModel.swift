@@ -63,6 +63,8 @@ final class ExerciseSetViewModel: ExerciseSetViewModelProtocol {
 
     init(workout: Workout) {
         self.workout = workout
+        guard let workoutLog = workout.OriginWorkoutLog.first else { return }
+        timer.resetTimer(with: workoutLog)
         if let date = workout.OriginWorkoutLog.first?.workoutDate, date == Date().convert(to: .primaryKey) {
             self.setUpBinding_Today()
             self.isActiveTimerButton = true
@@ -124,8 +126,9 @@ final class ExerciseSetViewModel: ExerciseSetViewModelProtocol {
     func stopExercise() {
         self.timer.stopTimer()
         try! realm.write {
-            workout.exerciseTime = timer.totalExerciseTime
-            workout.restTime = timer.totalRestTime
+            guard let workoutLog = workout.OriginWorkoutLog.first else { return }
+            workoutLog.exerciseTime = timer.totalExerciseTime
+            workoutLog.restTime = timer.totalRestTime
         }
     }
     
@@ -164,13 +167,14 @@ final class ExerciseSetViewModel: ExerciseSetViewModelProtocol {
     }
     
     private func setUpBinding_NotToday() {
+        guard let workoutLog = workout.OriginWorkoutLog.first else { return }
         Observable<String>
-            .just(workout.exerciseTime.formattedTime())
+            .just(workoutLog.exerciseTime.formattedTime())
             .bind(to: totalExerciseTime)
             .disposed(by: disposeBag)
         
         Observable<String>
-            .just(workout.restTime.formattedTime())
+            .just(workoutLog.restTime.formattedTime())
             .bind(to: totalRestTime)
             .disposed(by: disposeBag)
         
@@ -185,7 +189,7 @@ final class ExerciseSetViewModel: ExerciseSetViewModelProtocol {
             .disposed(by: disposeBag)
         
         Observable<TimeInterval>
-            .just(workout.exerciseTime + workout.restTime)
+            .just(workoutLog.exerciseTime + workoutLog.restTime)
             .map { $0.formattedTime()}
             .bind(to: totalTime)
             .disposed(by: disposeBag)

@@ -23,7 +23,7 @@ final class ExerciseSetViewController: UIViewController {
         self?.startWorkoutButtonTapped()
     }
     private lazy var pause = UIAction { [weak self] _ in
-        self?.showAlert(title: "운동 기록 완료", message: "운동을 완료하셨나요?", preferredStyle: .alert, doneHandler: { _ in
+        self?.showAlert(title: "done_workout_title".localized, message: "done_workout_message".localized, preferredStyle: .alert, doneHandler: { _ in
             self?.viewModel.stopExercise()
         })
     }

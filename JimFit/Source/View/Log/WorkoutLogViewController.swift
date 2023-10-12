@@ -22,6 +22,17 @@ final class WorkoutLogViewController: UIViewController {
     private var workoutLog: WorkoutLog?
     private let realm: Realm = RealmManager.shared.realm
     private let disposeBag = DisposeBag()
+    private lazy var pauseButton: UIBarButtonItem? = UIBarButtonItem(systemItem: .pause, primaryAction: pause)
+    private lazy var pause: UIAction = UIAction { [weak self] _ in
+        guard let self else { return }
+        showAlert(title: "운동 기록 완료", message: "운동을 완료하셨나요?", preferredStyle: .alert, doneHandler: { _ in
+            self.timer.stopTimer()
+            try! self.realm.write {
+                self.workoutLog?.exerciseTime = self.timer.totalExerciseTime
+                self.workoutLog?.restTime = self.timer.totalRestTime
+            }
+        })
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,13 +78,16 @@ final class WorkoutLogViewController: UIViewController {
             titleTimerView.fetchColor(.exercise)
             navigationItem.titleView = titleTimerView
             titleTimerView.startBlinkingAnimation()
+            navigationItem.rightBarButtonItem = pauseButton
         case .rest:
             titleTimerView.fetchColor(.rest)
             navigationItem.titleView = titleTimerView
             titleTimerView.startBlinkingAnimation()
+            navigationItem.rightBarButtonItem = pauseButton
         case .paused:
             titleTimerView.fetchColor(.paused)
             navigationItem.titleView = nil
+            navigationItem.rightBarButtonItem = nil
         }
     }
     private func registerDelegate() {

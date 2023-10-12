@@ -13,6 +13,8 @@
 "edit" = "수정";
 "done" = "완료";
 "locale_identifier" = "ko_KR";
+"done_workout_title" = "운동 기록 완료";
+"done_workout_message" = "운동을 완료하셨나요?";
 
 // Log
 "header_date_formatter" = "yyyy년 MM월";

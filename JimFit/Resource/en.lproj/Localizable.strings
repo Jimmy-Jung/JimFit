@@ -13,6 +13,8 @@
 "edit" = "Edit";
 "done" = "Done";
 "locale_identifier" = "en_US";
+"done_workout_title" = "Workout Record Complete";
+"done_workout_message" = "Have you completed your workout?";
 
 // Log
 "header_date_formatter" = "MMMM yyyy";

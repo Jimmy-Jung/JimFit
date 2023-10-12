@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RealmSwift
 import RxSwift
 import RxRelay
 
@@ -33,6 +34,11 @@ final class TimerManager {
     
     private init() {
         self.restoreTimers()
+    }
+    
+    func resetTimer(with workoutLog: WorkoutLog) {
+        totalExerciseTime = workoutLog.exerciseTime
+        totalRestTime = workoutLog.restTime
     }
     
     func stopTimer() {
