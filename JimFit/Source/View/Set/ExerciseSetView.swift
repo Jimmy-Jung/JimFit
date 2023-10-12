@@ -44,6 +44,9 @@ final class ExerciseSetView: UIView {
         .addArrangedSubview(startWorkoutButton)
         .addArrangedSubview(doneSetButton)
     
+    private lazy var buttonStackViewBackgroundView: UIView = UIView()
+        .backgroundColor(K.Color.Primary.Background)
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor(K.Color.Grayscale.SecondaryBackground)
@@ -69,15 +72,20 @@ final class ExerciseSetView: UIView {
         doneSetButton.snp.makeConstraints { make in
             make.height.equalTo(50)
         }
-        addSubView(buttonStackView)
+        
+        buttonStackViewBackgroundView.addSubView(buttonStackView)
         buttonStackView.snp.makeConstraints { make in
-            make.top.greaterThanOrEqualTo(tableView.snp.bottom)
+            make.top.equalToSuperview()
             make.horizontalEdges.equalToSuperview().inset(20)
             make.bottom.equalToSuperview().inset(8)
             make.height.equalTo(50)
         }
-        
-        
+        addSubView(buttonStackViewBackgroundView)
+        buttonStackViewBackgroundView.snp.makeConstraints { make in
+            make.top.greaterThanOrEqualTo(tableView.snp.bottom)
+            make.horizontalEdges.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
     }
     
     @available(*, unavailable)

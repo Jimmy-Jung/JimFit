@@ -27,7 +27,7 @@ final class ExerciseSetTableViewCell: UITableViewCell {
     private lazy var setButton = UIButton(configuration: .filled())
         .baseForegroundColor(.white)
         .baseBackgroundColor(K.Color.Grayscale.SecondaryBackground)
-        .cornerRadius(14)
+        .cornerRadius(12)
         .addAction { [unowned self] in
             setButtonTapped()
         }
@@ -122,6 +122,8 @@ final class ExerciseSetTableViewCell: UITableViewCell {
             make.trailing.equalTo(repsLabel.snp.leading).offset(-4)
             make.width.greaterThanOrEqualTo(80)
         }
+        
+        borderView.layer.cornerCurve = .continuous
     }
     
     @available(*, unavailable)

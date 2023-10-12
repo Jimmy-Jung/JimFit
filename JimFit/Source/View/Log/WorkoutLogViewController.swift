@@ -18,7 +18,7 @@ final class WorkoutLogViewController: UIViewController {
     private let workoutLogView = WorkoutLogView()
     private let titleTimerView = TitleTimerView()
     private let timer = TimerManager.shared
-    private var timerStatus: TimerManager.TimerStatus = .none
+    private var timerStatus: TimerManager.TimerStatus = .paused
     private var workoutLog: WorkoutLog?
     private let realm: Realm = RealmManager.shared.realm
     private let disposeBag = DisposeBag()
@@ -71,10 +71,9 @@ final class WorkoutLogViewController: UIViewController {
             titleTimerView.fetchColor(.rest)
             navigationItem.titleView = titleTimerView
             titleTimerView.startBlinkingAnimation()
-        case .none:
-            titleTimerView.fetchColor(.none)
+        case .paused:
+            titleTimerView.fetchColor(.paused)
             navigationItem.titleView = nil
-            break
         }
     }
     private func registerDelegate() {
@@ -86,7 +85,7 @@ final class WorkoutLogViewController: UIViewController {
     }
     
     private func configureRealm() {
-        let primaryKey = DateFormatter.format(with: .primaryKey, from: workoutLogView.calendar.selectedDate!)
+        let primaryKey = workoutLogView.calendar.selectedDate!.convert(to: .primaryKey)
         workoutLog = realm.object(ofType: WorkoutLog.self, forPrimaryKey: primaryKey)
         print(realm.configuration.fileURL)
     }
@@ -125,12 +124,9 @@ extension WorkoutLogViewController: GrabberViewDelegate {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 self.workoutLogView.tableView.reloadData()
             }
-            
         }
         workoutLogView.grabberView.isMenuButtonSelected = shouldBeEdited
     }
-    
-    
 }
 
 extension WorkoutLogViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
@@ -146,19 +142,19 @@ extension WorkoutLogViewController: FSCalendarDelegate, FSCalendarDataSource, FS
     
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
         let currentDate = calendar.currentPage
-        let headerDateString = DateFormatter.format(with: .headerDate, from: currentDate)
+        let headerDateString = currentDate.convert(to: .headerDate)
         workoutLogView.headerTitle.text(headerDateString)
     }
     
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-        let event = realm.object(ofType: WorkoutLog.self, forPrimaryKey: DateFormatter.format(with: .primaryKey, from: date))
+        let event = realm.object(ofType: WorkoutLog.self, forPrimaryKey: date.convert(to: .primaryKey))
         return event != nil ? 1 : 0
     }
     
     // 날짜를 선택했을 때 할일을 지정
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        workoutLog = realm.object(ofType: WorkoutLog.self, forPrimaryKey: DateFormatter.format(with: .primaryKey, from: date))
-        let grabberString = DateFormatter.format(with: .grabberDate, from: date) + "workout".localized
+        workoutLog = realm.object(ofType: WorkoutLog.self, forPrimaryKey: date.convert(to: .primaryKey))
+        let grabberString = date.convert(to: .grabberDate) + "workout".localized
         workoutLogView.grabberView.setTitle(grabberString)
         reloadTableView()
     }
@@ -190,7 +186,7 @@ extension WorkoutLogViewController: UITableViewDelegate, UITableViewDataSource, 
             cell.selectionStyle = .none
             cell.addButtonHandler = { [weak self] in
                 guard let self else { return }
-                let date = DateFormatter.format(with: .primaryKey, from: workoutLogView.calendar.selectedDate!)
+                let date = workoutLogView.calendar.selectedDate!.convert(to: .primaryKey)
                 let exerciseSearchVC = ExerciseSearchViewController(date: date)
                 exerciseSearchVC.reloadDelegate = self
                 transition(viewController: exerciseSearchVC, style: .present)
@@ -201,7 +197,9 @@ extension WorkoutLogViewController: UITableViewDelegate, UITableViewDataSource, 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let workout = workoutLog?.workouts[indexPath.row] else { return }
-        transition(viewController: ExerciseSetViewController(viewModel: ExerciseSetViewModel(workout: workout)), style: .pushNavigation)
+        let exerciseSetViewController = ExerciseSetViewController(viewModel: ExerciseSetViewModel(workout: workout))
+        exerciseSetViewController.title = workoutLogView.calendar.selectedDate?.convert(to: .grabberDate)
+        transition(viewController: exerciseSetViewController, style: .pushNavigation)
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

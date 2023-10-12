@@ -14,7 +14,7 @@ import JimmyKit
 final class WorkoutLogView: UIView {
     
     let headerTitle = UILabel()
-        .text(DateFormatter.format(with: .headerDate, from: Date()))
+        .text(Date().convert(to: .headerDate))
         .font(K.Font.Header1)
     let calendar = FSCalendar()
     let grabberView = GrabberView()
@@ -35,7 +35,7 @@ final class WorkoutLogView: UIView {
     }
     
     private func configureGrabberView() {
-        let grabberString = DateFormatter.format(with: .grabberDate, from: Date()) + "workout".localized
+        let grabberString = Date().convert(to: .grabberDate) + "workout".localized
         grabberView.setTitle(grabberString)
     }
     

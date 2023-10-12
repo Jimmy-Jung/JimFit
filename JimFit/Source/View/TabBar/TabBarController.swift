@@ -21,8 +21,8 @@ final class TabBarController: UITabBarController {
     private func configureTabBarController() {
         let firstVC = WorkoutLogViewController()
         let firstNav = UINavigationController(rootViewController: firstVC)
-        firstVC.title = "운동 기록"
-        firstVC.tabBarItem.image = UIImage(systemName: "checklist.checked")
+        firstVC.title = "workout_log".localized
+        firstVC.tabBarItem.image = K.Image.Calendar
         firstVC.tabBarItem.title = "기록"
         let vc = UIViewController()
         vc.view.backgroundColor(.systemBackground)

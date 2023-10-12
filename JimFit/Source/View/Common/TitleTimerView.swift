@@ -37,13 +37,25 @@ final class TitleTimerView: UIView {
         case .exercise:
             indicatorView.backgroundColor(K.Color.Primary.Blue)
             self.isHidden(false)
+            startBlinkingAnimation()
         case .rest:
             indicatorView.backgroundColor(K.Color.Primary.Green)
             self.isHidden(false)
-        case .none:
+            startBlinkingAnimation()
+        default:
             indicatorView.backgroundColor(.clear)
             self.isHidden(true)
         }
+    }
+    
+    func startBlinkingAnimation() {
+        let animation = CABasicAnimation(keyPath: "opacity")
+            animation.fromValue = 1.0
+            animation.toValue = 0.0
+            animation.duration = 1.0
+            animation.autoreverses = true
+            animation.repeatCount = .infinity
+            indicatorView.layer.add(animation, forKey: "blinkingAnimation")
     }
     
     // MARK: - Private Methods
@@ -60,16 +72,6 @@ final class TitleTimerView: UIView {
             make.leading.equalTo(indicatorView.snp.trailing).offset(8)
             make.top.bottom.trailing.equalToSuperview()
         }
-    }
-    
-    func startBlinkingAnimation() {
-        let animation = CABasicAnimation(keyPath: "opacity")
-            animation.fromValue = 1.0
-            animation.toValue = 0.0
-            animation.duration = 1.0
-            animation.autoreverses = true
-            animation.repeatCount = .infinity
-            indicatorView.layer.add(animation, forKey: "blinkingAnimation")
     }
     
     @available(*, unavailable)

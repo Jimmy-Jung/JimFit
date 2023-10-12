@@ -28,6 +28,7 @@ protocol ExerciseSetViewModelProtocol {
     func appendExerciseSet()
     func startExerciseTimer()
     func doneExercise()
+    func stopExercise()
 }
 
 final class ExerciseSetViewModel: ExerciseSetViewModelProtocol {
@@ -62,7 +63,7 @@ final class ExerciseSetViewModel: ExerciseSetViewModelProtocol {
 
     init(workout: Workout) {
         self.workout = workout
-        if let date = workout.OriginWorkoutLog.first?.workoutDate, date == Date().convertToTimeString() {
+        if let date = workout.OriginWorkoutLog.first?.workoutDate, date == Date().convert(to: .primaryKey) {
             self.setUpBinding_Today()
             self.isActiveTimerButton = true
         } else {
@@ -117,6 +118,14 @@ final class ExerciseSetViewModel: ExerciseSetViewModelProtocol {
         else { return }
         try! realm.write {
             set.isFinished = true
+        }
+    }
+    
+    func stopExercise() {
+        self.timer.stopTimer()
+        try! realm.write {
+            workout.exerciseTime = timer.totalExerciseTime
+            workout.restTime = timer.totalRestTime
         }
     }
     
@@ -182,7 +191,7 @@ final class ExerciseSetViewModel: ExerciseSetViewModelProtocol {
             .disposed(by: disposeBag)
         
         Observable<TimerManager.TimerStatus>
-            .just(.none)
+            .just(.paused)
             .bind(to: timerStatus)
             .disposed(by: disposeBag)
     }

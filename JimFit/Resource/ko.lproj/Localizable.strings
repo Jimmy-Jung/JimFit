@@ -8,15 +8,17 @@
 
 // System
 "searchBar_placeholder" = "운동 이름을 입력하세요";
+"ok" = "확인";
 "cancel" = "취소";
-"Edit" = "수정";
-"Done" = "완료";
+"edit" = "수정";
+"done" = "완료";
 "locale_identifier" = "ko_KR";
 
 // Log
 "header_date_formatter" = "yyyy년 MM월";
 "grabber_date_formatter" = "MM월 dd일";
 "workout" = " 운동";
+"workout_log" = "운동 기록";
 
 // Search
 "selection_list%@" = "선택항목 %@/12";

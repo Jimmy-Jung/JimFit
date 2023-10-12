@@ -15,8 +15,18 @@ final class ExerciseSetViewController: UIViewController {
     private let titleTimerView = TitleTimerView()
     private var viewModel: ExerciseSetViewModelProtocol!
     private let realm = RealmManager.shared.realm
-    private var timerStatus: TimerManager.TimerStatus = .none
+    private var timerStatus: TimerManager.TimerStatus = .paused
     private let disposeBag = DisposeBag()
+    private lazy var pauseButton: UIBarButtonItem? = UIBarButtonItem(systemItem: .pause, primaryAction: pause)
+    private lazy var playButton: UIBarButtonItem? = UIBarButtonItem(systemItem: .play, primaryAction: play)
+    private lazy var play: UIAction = UIAction { [weak self] _ in
+        self?.startWorkoutButtonTapped()
+    }
+    private lazy var pause = UIAction { [weak self] _ in
+        self?.showAlert(title: "운동 기록 완료", message: "운동을 완료하셨나요?", preferredStyle: .alert, doneHandler: { _ in
+            self?.viewModel.stopExercise()
+        })
+    }
     
     init(viewModel: ExerciseSetViewModelProtocol) {
         super.init(nibName: nil, bundle: nil)
@@ -27,8 +37,10 @@ final class ExerciseSetViewController: UIViewController {
         super.viewDidLoad()
         configureView()
         configureTableView()
-        BindingViewModel()
         bindingView()
+        BindingViewModel()
+        
+        navigationItem.titleView = timerStatus == .paused ? nil : titleTimerView
     }
     
     private func BindingViewModel() {
@@ -65,17 +77,27 @@ final class ExerciseSetViewController: UIViewController {
             .disposed(by: disposeBag)
         
         viewModel.timerStatus
-            .subscribe { [weak self] in
-                self?.timerStatus = $0
+            .asDriver()
+            .drive { [weak self] in
+                guard let self else { return }
+                timerStatus = $0
                 switch $0 {
                 case .exercise:
-                    self?.exerciseSetView.workoutTimer.activateColor()
-                    self?.titleTimerView.fetchColor(.exercise)
+                    exerciseSetView.workoutTimer.activateColor()
+                    navigationItem.titleView = titleTimerView
+                    titleTimerView.fetchColor(.exercise)
+                    navigationItem.rightBarButtonItem = pauseButton
                 case .rest:
-                    self?.exerciseSetView.restTimer.activateColor()
-                    self?.titleTimerView.fetchColor(.rest)
-                case .none:
-                    self?.titleTimerView.fetchColor(.none)
+                    exerciseSetView.restTimer.activateColor()
+                    navigationItem.titleView = titleTimerView
+                    titleTimerView.fetchColor(.rest)
+                    navigationItem.rightBarButtonItem = pauseButton
+                case .paused:
+                    exerciseSetView.restTimer.deactivateColor()
+                    exerciseSetView.workoutTimer.deactivateColor()
+                    navigationItem.titleView = nil
+                    titleTimerView.fetchColor(.paused)
+                    navigationItem.rightBarButtonItem = playButton
                 }
             }
             .disposed(by: disposeBag)
@@ -84,7 +106,10 @@ final class ExerciseSetViewController: UIViewController {
     func bindingView() {
         exerciseSetView.startWorkoutButton.isEnabled = viewModel.isActiveTimerButton
         exerciseSetView.doneSetButton.isEnabled = viewModel.isActiveTimerButton
-        
+        if !viewModel.isActiveTimerButton {
+            playButton = nil
+            pauseButton = nil
+        }
         exerciseSetView.startWorkoutButton.rx.tap
             .subscribe(onNext:  { [weak self] in
                 self?.startWorkoutButtonTapped()
@@ -99,6 +124,7 @@ final class ExerciseSetViewController: UIViewController {
     }
     
     private func configureView() {
+        navigationController?.navigationBar.tintColor = .label
         view.backgroundColor(K.Color.Grayscale.SecondaryBackground)
         view.addSubview(exerciseSetView)
         exerciseSetView.snp.makeConstraints { make in
@@ -106,8 +132,10 @@ final class ExerciseSetViewController: UIViewController {
         }
         exerciseSetView.grabberView.delegate = self
         exerciseSetView.grabberView.setTitle(viewModel.grabberTitle)
-        navigationItem.titleView = titleTimerView
+        
     }
+    
+    
     
     private func configureTableView() {
         exerciseSetView.tableView.dataSource = self

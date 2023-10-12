@@ -8,15 +8,17 @@
 
 // System
 "searchBar_placeholder" = "Enter the exercise Name";
-"cancel" = "cancel";
-"Edit" = "Edit";
-"Done" = "Done";
+"ok" = "OK";
+"cancel" = "Cancel";
+"edit" = "Edit";
+"done" = "Done";
 "locale_identifier" = "en_US";
 
 // Log
 "header_date_formatter" = "MMMM yyyy";
 "grabber_date_formatter" = "dd MMM";
 "workout" = " Workout";
+"workout_log" = "Workout Log";
 
 // Search
 "selection_list%@" = "Choices %@/12";

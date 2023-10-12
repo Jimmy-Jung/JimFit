@@ -47,6 +47,7 @@ enum K {
         static let Bolt = UIImage(systemName: "bolt.fill")?.font(Font.Body3)
         static let Dumbbell = UIImage(systemName: "dumbbell.fill")?
             .font(Font.Body3)
+        static let Calendar = UIImage(systemName: "calendar")
     }
     
     enum Font {

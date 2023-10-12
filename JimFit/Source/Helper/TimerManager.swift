@@ -29,7 +29,7 @@ final class TimerManager {
     private var exerciseTimer: Timer?
     private var restTimer: Timer?
     var timerStatus = PublishRelay<TimerStatus>()
-    var latestTimerStatus: TimerStatus = .none
+    var latestTimerStatus: TimerStatus = .paused
     
     private init() {
         self.restoreTimers()
@@ -38,6 +38,10 @@ final class TimerManager {
     func stopTimer() {
         exerciseTimer?.invalidate()
         restTimer?.invalidate()
+        restStartTime = nil
+        exerciseStartTime = nil
+        latestTimerStatus = .paused
+        timerStatus.accept(.paused)
     }
     
     func startExerciseTimer() {
@@ -112,6 +116,6 @@ extension TimerManager {
     enum TimerStatus {
         case exercise
         case rest
-        case none
+        case paused
     }
 }
