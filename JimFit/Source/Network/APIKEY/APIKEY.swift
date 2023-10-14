@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+enum APIKEY {
+    static let GoogleDriveURL = "ㅁㄴㅇ"
+}
