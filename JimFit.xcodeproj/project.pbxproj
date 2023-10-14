@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		550BA7722AD7DE2F00475042 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550BA7712AD7DE2F00475042 /* UIViewController+Extension.swift */; };
+		550BA7782ADA9AEC00475042 /* APIKEY.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550BA7772ADA9AEC00475042 /* APIKEY.swift */; };
+		550BA77C2ADA9BB700475042 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 550BA77B2ADA9BB700475042 /* .gitignore */; };
 		555E6B382AC1D76B00DCA052 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B372AC1D76B00DCA052 /* AppDelegate.swift */; };
 		555E6B3A2AC1D76B00DCA052 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B392AC1D76B00DCA052 /* SceneDelegate.swift */; };
 		555E6B412AC1D76C00DCA052 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 555E6B402AC1D76C00DCA052 /* Assets.xcassets */; };
@@ -52,6 +54,8 @@
 
 /* Begin PBXFileReference section */
 		550BA7712AD7DE2F00475042 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		550BA7772ADA9AEC00475042 /* APIKEY.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKEY.swift; sourceTree = "<group>"; };
+		550BA77B2ADA9BB700475042 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		555E6B342AC1D76B00DCA052 /* JimFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JimFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		555E6B372AC1D76B00DCA052 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		555E6B392AC1D76B00DCA052 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -108,6 +112,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		550BA77A2ADA9B9D00475042 /* APIKEY */ = {
+			isa = PBXGroup;
+			children = (
+				550BA7772ADA9AEC00475042 /* APIKEY.swift */,
+				550BA77B2ADA9BB700475042 /* .gitignore */,
+			);
+			path = APIKEY;
+			sourceTree = "<group>";
+		};
 		555E6B2B2AC1D76B00DCA052 = {
 			isa = PBXGroup;
 			children = (
@@ -214,6 +227,7 @@
 		555E6B672AC32CDC00DCA052 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				550BA77A2ADA9B9D00475042 /* APIKEY */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -354,6 +368,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				550BA77C2ADA9BB700475042 /* .gitignore in Resources */,
 				55A2ABF12ACB542D00927918 /* Exercise.realm in Resources */,
 				555E6B442AC1D76C00DCA052 /* LaunchScreen.storyboard in Resources */,
 				555E6B6C2AC344CC00DCA052 /* Localizable.strings in Resources */,
@@ -372,6 +387,7 @@
 				555E6B742AC34DD900DCA052 /* WorkoutListTableViewCell.swift in Sources */,
 				555E6B9A2AC72ECF00DCA052 /* RealmManager.swift in Sources */,
 				555E6B782AC42CB500DCA052 /* GrabberView.swift in Sources */,
+				550BA7782ADA9AEC00475042 /* APIKEY.swift in Sources */,
 				550BA7722AD7DE2F00475042 /* UIViewController+Extension.swift in Sources */,
 				555E6B662AC3285B00DCA052 /* Constants.swift in Sources */,
 				555E6B7B2AC44D4700DCA052 /* TabBarController.swift in Sources */,

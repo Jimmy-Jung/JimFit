@@ -64,11 +64,4 @@ enum K {
         static let border_Medium: CGFloat = 1.5
         static let cellRadius :CGFloat = 16
     }
-    
-    
-    
-    
-    enum API {
-        
-    }
 }
