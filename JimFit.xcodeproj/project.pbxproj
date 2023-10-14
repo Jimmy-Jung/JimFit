@@ -172,7 +172,6 @@
 				555E6B5F2AC326E000DCA052 /* App */,
 				555E6B642AC3276000DCA052 /* Constants */,
 				555E6B622AC3272E00DCA052 /* Extension */,
-				555E6B672AC32CDC00DCA052 /* Network */,
 				555E6B632AC3273500DCA052 /* Helper */,
 				555E6B692AC32CF500DCA052 /* Model */,
 				555E6B602AC326E900DCA052 /* View */,
@@ -209,13 +208,6 @@
 				555E6B652AC3285B00DCA052 /* Constants.swift */,
 			);
 			path = Constants;
-			sourceTree = "<group>";
-		};
-		555E6B672AC32CDC00DCA052 /* Network */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Network;
 			sourceTree = "<group>";
 		};
 		555E6B692AC32CF500DCA052 /* Model */ = {
