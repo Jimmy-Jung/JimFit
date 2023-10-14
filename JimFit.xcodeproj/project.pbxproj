@@ -10,6 +10,7 @@
 		550BA7722AD7DE2F00475042 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550BA7712AD7DE2F00475042 /* UIViewController+Extension.swift */; };
 		550BA77C2ADA9BB700475042 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 550BA77B2ADA9BB700475042 /* .gitignore */; };
 		550BA7932ADAF82300475042 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 550BA7922ADAF82300475042 /* GoogleService-Info.plist */; };
+		550BA7982ADAF96400475042 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550BA7972ADAF96400475042 /* APIKey.swift */; };
 		555E6B382AC1D76B00DCA052 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B372AC1D76B00DCA052 /* AppDelegate.swift */; };
 		555E6B3A2AC1D76B00DCA052 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B392AC1D76B00DCA052 /* SceneDelegate.swift */; };
 		555E6B412AC1D76C00DCA052 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 555E6B402AC1D76C00DCA052 /* Assets.xcassets */; };
@@ -56,6 +57,7 @@
 		550BA7712AD7DE2F00475042 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		550BA77B2ADA9BB700475042 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		550BA7922ADAF82300475042 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		550BA7972ADAF96400475042 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		555E6B342AC1D76B00DCA052 /* JimFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JimFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		555E6B372AC1D76B00DCA052 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		555E6B392AC1D76B00DCA052 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -112,11 +114,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		550BA77A2ADA9B9D00475042 /* APIKEY */ = {
+		550BA7962ADAF95A00475042 /* APIKey */ = {
 			isa = PBXGroup;
 			children = (
+				550BA7972ADAF96400475042 /* APIKey.swift */,
 			);
-			path = APIKEY;
+			path = APIKey;
 			sourceTree = "<group>";
 		};
 		555E6B2B2AC1D76B00DCA052 = {
@@ -227,7 +230,7 @@
 		555E6B672AC32CDC00DCA052 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				550BA77A2ADA9B9D00475042 /* APIKEY */,
+				550BA7962ADAF95A00475042 /* APIKey */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -388,6 +391,7 @@
 				555E6B742AC34DD900DCA052 /* WorkoutListTableViewCell.swift in Sources */,
 				555E6B9A2AC72ECF00DCA052 /* RealmManager.swift in Sources */,
 				555E6B782AC42CB500DCA052 /* GrabberView.swift in Sources */,
+				550BA7982ADAF96400475042 /* APIKey.swift in Sources */,
 				550BA7722AD7DE2F00475042 /* UIViewController+Extension.swift in Sources */,
 				555E6B662AC3285B00DCA052 /* Constants.swift in Sources */,
 				555E6B7B2AC44D4700DCA052 /* TabBarController.swift in Sources */,
