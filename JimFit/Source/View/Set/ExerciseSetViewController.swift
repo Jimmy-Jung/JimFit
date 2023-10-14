@@ -134,11 +134,7 @@ final class ExerciseSetViewController: UIViewController {
         exerciseSetView.grabberView.setTitle(viewModel.grabberTitle)
         
     }
-//    func example() {
-//        realm.objects(Workout.self).where { workout in
-//            workout.exerciseSets.weight == 1
-//        }
-//    }
+    
     
     
     private func configureTableView() {
@@ -200,10 +196,9 @@ extension ExerciseSetViewController: UITableViewDelegate, UITableViewDataSource 
             cell.selectionStyle = .none
             cell.setButtonHandler = { [weak self] in
                 guard let self else { return }
-                if let lastIndex = viewModel.lastFinishedExerciseSetIndex , indexPath.row < lastIndex {
-                    tableView.moveRow(at: indexPath, to: IndexPath(row: lastIndex, section: 0))
-                    viewModel.moveExerciseSet(from: indexPath.row, to: lastIndex)
-                }
+                viewModel.arrangeExerciseSet(at: indexPath.row)
+                let lastIndex = viewModel.lastFinishedExerciseSetIndex
+                tableView.moveRow(at: indexPath, to: IndexPath(row: lastIndex ?? indexPath.row, section: 0))
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     tableView.reloadData()
                 }

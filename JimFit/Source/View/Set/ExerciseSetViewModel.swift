@@ -21,9 +21,8 @@ protocol ExerciseSetViewModelProtocol {
     var exerciseSetsCount: Int { get }
     var lastFinishedExerciseSetIndex: Int? { get }
     var isActiveTimerButton: Bool { get set }
-    func isExerciseSetFinished(at index: Int) -> Bool
     func exerciseSet(at index: Int) -> ExerciseSet
-    func toggleExerciseSetFinished(at index: Int)
+    func arrangeExerciseSet(at index: Int)
     func moveExerciseSet(from source: Int, to destination: Int)
     func removeExerciseSet(at index: Int)
     func appendExerciseSet()
@@ -84,17 +83,16 @@ final class ExerciseSetViewModel: ExerciseSetViewModelProtocol {
     
     // MARK: - Methods
 
-    func isExerciseSetFinished(at index: Int) -> Bool {
-        return workout.exerciseSets[index].isFinished
-    }
-    
     func exerciseSet(at index: Int) -> ExerciseSet {
         return workout.exerciseSets[index]
     }
     
-    func toggleExerciseSetFinished(at index: Int) {
-        try! realm.write {
-            workout.exerciseSets[index].isFinished.toggle()
+    func arrangeExerciseSet(at index: Int) {
+        if workout.exerciseSets[index].isFinished {
+            let lastIndex = lastFinishedExerciseSetIndex
+            try! realm.write {
+                self.workout.exerciseSets.move(from: index, to: lastIndex ?? index)
+            }
         }
     }
     
