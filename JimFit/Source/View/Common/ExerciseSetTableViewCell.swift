@@ -37,13 +37,16 @@ final class ExerciseSetTableViewCell: UITableViewCell {
     var textFieldDidEndEditingHandler: () -> Void = { }
     
     private func setButtonTapped() {
-        setButtonHandler()
         setButton.isSelected.toggle()
         setButton.baseBackgroundColor(setButton.isSelected ? K.Color.Primary.Orange : K.Color.Grayscale.Tint)
         try! realm.write {
-            exerciseSet.isFinished = setButton.isSelected
+            exerciseSet.isFinished.toggle()
         }
-        
+        setButtonHandler()
+        setButton.isUserInteractionEnabled(false)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.setButton.isUserInteractionEnabled(true)
+        }
     }
     func doneSet() {
         setButton.backgroundColor(K.Color.Primary.Orange)
