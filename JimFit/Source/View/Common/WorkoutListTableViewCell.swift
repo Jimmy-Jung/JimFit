@@ -12,7 +12,7 @@ final class WorkoutListTableViewCell: UITableViewCell {
     var workout: Workout? {
         didSet {
             guard let workout else { return }
-            guard let exercise = workout.exercise else { return }
+            guard let exercise = RealmManager.shared.oldRealm.object(ofType: Exercise.self, forPrimaryKey: workout.exerciseReference) else { return }
             let bodyPartList = exercise.bodyPart.map { $0.localized }
             let bodyPartString = bodyPartList.joined(separator: ", ")
             let equipmentTypeString = exercise.equipmentType.localized
