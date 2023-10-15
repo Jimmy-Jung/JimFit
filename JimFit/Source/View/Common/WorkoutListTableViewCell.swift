@@ -33,7 +33,7 @@ final class WorkoutListTableViewCell: UITableViewCell {
                 .filter { $0.isFinished }
                 .count
             let progression = Float(setFinishedCount) / Float(setCount)
-            titleLabel.text(exercise.exerciseName.localized)
+            titleLabel.text(exercise.exerciseName)
             titleLabel.sizeToFit()
             secondaryLabel.text(secondaryString)
             let weightInTons = weightFloat > 999 ? weightFloat / 1000 : weightFloat

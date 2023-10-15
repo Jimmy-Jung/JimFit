@@ -17,9 +17,17 @@ struct UserDefaultManager {
     @UserDefault(key: KeyEnum.savedRestStartTime.rawValue, defaultValue: Date())
     static var savedRestStartTime: Date
     
+    @UserDefault(key: KeyEnum.ETag.rawValue, defaultValue: "")
+    static var ETag: String
+    
+    @UserDefault(key: KeyEnum.currentLanguage.rawValue, defaultValue: "")
+    static var currentLanguage: String
+    
     enum KeyEnum: String {
         case savedExerciseStartTime
         case savedRestStartTime
+        case ETag
+        case currentLanguage
     }
 }
 

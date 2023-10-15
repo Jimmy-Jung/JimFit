@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseCore
+import FirebaseRemoteConfig
 import RealmSwift
 
 @main
@@ -14,9 +16,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        FirebaseApp.configure()
+        fetchRemoteConfig()
+        RealmManager.shared.localizeRealm()
         
-        copyExerciseRealm()
         return true
+    }
+    
+    func fetchRemoteConfig() {
+        let remoteConfig = RemoteConfig.remoteConfig()
+        let settings = RemoteConfigSettings()
+        settings.minimumFetchInterval = 0
+        remoteConfig.configSettings = settings
+        remoteConfig.setDefaults(fromPlist: "remote_config_defaults")
+        remoteConfig.fetch { (status, error) -> Void in
+            if status == .success {
+                remoteConfig.activate { changed, error in
+                    if changed || APIKEY.ExerciseDataURL.isEmpty {
+                        guard let exerciseDataURL = remoteConfig["ExerciseDataURL"].stringValue else { return }
+                        APIKEY.ExerciseDataURL = exerciseDataURL
+                        FireStorage().checkETagFromFireStore()
+                    }
+                }
+            }
+            if error != nil {
+                print(error)
+            }
+        }
     }
     
     // MARK: UISceneSession Lifecycle

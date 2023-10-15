@@ -13,7 +13,7 @@ import RxRelay
 final class TimerManager {
     
     static let shared = TimerManager()
-    let realm = RealmManager.shared.realm
+    let realm = RealmManager.shared.oldRealm
     var workoutLog: WorkoutLog?
     var recordingDay: String?
     var totalTimePublisher = PublishRelay<TimeInterval>()

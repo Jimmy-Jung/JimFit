@@ -37,7 +37,7 @@ final class Workout: Object {
     }
 }
 
-final class Exercise: Object {
+final class Exercise: Object, Codable {
     @Persisted(primaryKey: true) var reference: String
     @Persisted var exerciseName: String
     @Persisted var bodyPart: List<String>

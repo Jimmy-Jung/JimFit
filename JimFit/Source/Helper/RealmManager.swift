@@ -11,24 +11,71 @@ import RealmSwift
 final class RealmManager {
     
     static let shared = RealmManager()
-    var realm: Realm
-    var memoryRealm: Realm
-    private init() {
-        realm = RealmManager.createRealm()
-        memoryRealm = RealmManager.createMemoryRealm()
+    lazy var oldRealm: Realm = { return createOldRealm() }()
+    lazy var newRealm: Realm = { return createNewRealm() }()
+//    lazy var memoryRealm: Realm = createMemoryRealm()
+    
+    private lazy var fileManager = FileManager.default
+    // 도큐먼트 디렉토리 경로
+    private lazy var documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
+    
+    // 저장할 파일의 URL
+    private lazy var newFileURL = documentsDirectory.appendingPathComponent("NewExercise.realm")
+    
+    private lazy var oldFileURL = documentsDirectory.appendingPathComponent("OldExercise.realm")
+    
+    private init() {}
+    
+    private func createOldRealm() -> Realm {
+        return try! Realm(fileURL: oldFileURL)
     }
     
-    private static func createRealm() -> Realm {
-        let fileManager = FileManager.default
-        // 도큐먼트 디렉토리 경로
-        let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
-        // 저장할 파일의 URL
-        let fileURL = documentsDirectory.appendingPathComponent("Exercise.realm")
-        return try! Realm(fileURL: fileURL)
+    private func createNewRealm() -> Realm {
+        return try! Realm(fileURL: newFileURL)
     }
     
-    private static func createMemoryRealm() -> Realm {
-        let configuration = Realm.Configuration(inMemoryIdentifier: "MemoryRealm")
-        return try! Realm(configuration: configuration)
+    func copyLikeAndRemoveOldRealm() {
+        let new = newRealm.objects(Exercise.self)
+        let old = oldRealm.objects(Exercise.self)
+        
+        try! newRealm.write {
+            for i in old {
+                let object = newRealm.object(ofType: Exercise.self, forPrimaryKey: i.reference)
+                object?.liked = i.liked
+            }
+        }
+        
+        try! oldRealm.write {
+            oldRealm.deleteAll()
+            for i in new {
+                let newObject = oldRealm.create(Exercise.self, value: i)
+                newObject.exerciseName = i.exerciseName.localized
+                oldRealm.add(newObject)
+            }
+            
+        }
+        
+    }
+    
+    func localizeRealm() {
+        print(#function)
+        let new = newRealm.objects(Exercise.self)
+        let old = oldRealm.objects(Exercise.self)
+        
+        try! newRealm.write {
+            for i in old {
+                let object = newRealm.object(ofType: Exercise.self, forPrimaryKey: i.reference)
+                object?.liked = i.liked
+            }
+        }
+        try! oldRealm.write {
+            oldRealm.deleteAll()
+            for i in new {
+                let newObject = oldRealm.create(Exercise.self, value: i)
+                newObject.exerciseName = i.exerciseName.localized
+                oldRealm.add(newObject)
+            }
+            
+        }
     }
 }

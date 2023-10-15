@@ -8,11 +8,11 @@
 import UIKit
 import RealmSwift
 
-protocol ExerciseListTableViewCellDelegate: AnyObject {
+protocol ExerciseSearchTableViewCellDelegate: AnyObject {
     func updateLike()
 }
 
-class ExerciseListTableViewCell: UITableViewCell {
+class ExerciseSearchTableViewCell: UITableViewCell {
     
     var exercise: Exercise? {
         didSet {
@@ -30,7 +30,7 @@ class ExerciseListTableViewCell: UITableViewCell {
         }
     }
     
-    weak var delegate: ExerciseListTableViewCellDelegate?
+    weak var delegate: ExerciseSearchTableViewCellDelegate?
 
     private let borderView = UIView()
         .cornerRadius(K.Size.cellRadius)
@@ -77,16 +77,10 @@ class ExerciseListTableViewCell: UITableViewCell {
         UIView.transition(with: likeButton, duration: 0.15, options: [.transitionCrossDissolve, .curveEaseInOut]) {
             self.setupLikeButtonColor()
         }
-        let realm: Realm! = RealmManager.shared.realm
-        let memoryRealm: Realm! = RealmManager.shared.memoryRealm
+        let realm: Realm! = RealmManager.shared.oldRealm
         guard let exercise else { return }
         if let update = realm.object(ofType: Exercise.self, forPrimaryKey: exercise.reference) {
             try! realm.write {
-                update.liked = likeButton.isSelected
-            }
-        }
-        if let update = memoryRealm.object(ofType: Exercise.self, forPrimaryKey: exercise.reference) {
-            try! memoryRealm.write {
                 update.liked = likeButton.isSelected
             }
         }

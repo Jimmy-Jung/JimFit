@@ -14,7 +14,7 @@ final class ExerciseSetViewController: UIViewController {
     private lazy var exerciseSetView = ExerciseSetView()
     private let titleTimerView = TitleTimerView()
     private var viewModel: ExerciseSetViewModelProtocol!
-    private let realm = RealmManager.shared.realm
+    private let realm = RealmManager.shared.oldRealm
     private var timerStatus: TimerManager.TimerStatus = .paused
     private let disposeBag = DisposeBag()
     private lazy var pauseButton: UIBarButtonItem? = UIBarButtonItem(systemItem: .pause, primaryAction: pause)

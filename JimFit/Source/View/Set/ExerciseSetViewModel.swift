@@ -36,7 +36,7 @@ final class ExerciseSetViewModel: ExerciseSetViewModelProtocol {
     // MARK: - Private Properties
 
     private var workout: Workout
-    private let realm = RealmManager.shared.realm
+    private let realm = RealmManager.shared.oldRealm
     private let timer = TimerManager.shared
     private let disposeBag = DisposeBag()
    

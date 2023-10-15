@@ -8,7 +8,7 @@
 import UIKit
 import RealmSwift
 
-final class ExerciseSearchViewController: UIViewController, ExerciseListTableViewCellDelegate {
+final class ExerciseSearchViewController: UIViewController, ExerciseSearchTableViewCellDelegate {
     enum ButtonType {
         case bodyPart
         case equipmentType
@@ -16,9 +16,7 @@ final class ExerciseSearchViewController: UIViewController, ExerciseListTableVie
     private var date: String
     private lazy var searchView = ExerciseSearchView(frame: view.frame)
     private var realm: Realm!
-    private var localizedRealm: Realm!
     private var list: Results<Exercise>!
-    private var localizedList: Results<Exercise>!
     private lazy var bodyPartButtons = searchView.bodyPartStackView.subviews as! [UIButton]
     private lazy var equipmentTypeButtons = searchView.equipmentTypeStackView.subviews as! [UIButton]
     var bodyPartSelectedButton: UIButton?
@@ -44,7 +42,6 @@ final class ExerciseSearchViewController: UIViewController, ExerciseListTableVie
         super.viewDidLoad()
         view.addSubview(searchView)
         fetchSearchList()
-        fetchLocalizedList()
         configureTableView()
         configureButtons()
         configureSearchBar()
@@ -55,7 +52,7 @@ final class ExerciseSearchViewController: UIViewController, ExerciseListTableVie
     @objc func addListButtonTapped(_ sender: UIButton) {
         guard let selectedCells = searchView.tableView.indexPathsForSelectedRows else { return }
         let workouts = selectedCells.map {
-            let object = realm.object(ofType: Exercise.self, forPrimaryKey: localizedList[$0.row].reference)
+            let object = realm.object(ofType: Exercise.self, forPrimaryKey: list[$0.row].reference)
             return Workout(exercise: object)
             
         }
@@ -86,7 +83,7 @@ final class ExerciseSearchViewController: UIViewController, ExerciseListTableVie
     func configureTableView() {
         searchView.tableView.delegate = self
         searchView.tableView.dataSource = self
-        searchView.tableView.register(ExerciseListTableViewCell.self, forCellReuseIdentifier: ExerciseListTableViewCell.identifier)
+        searchView.tableView.register(ExerciseSearchTableViewCell.self, forCellReuseIdentifier: ExerciseSearchTableViewCell.identifier)
     }
     func configureButtons() {
         bodyPartButtons.dropFirst().forEach { //dropFirst() 는 like버튼 제외
@@ -122,21 +119,8 @@ final class ExerciseSearchViewController: UIViewController, ExerciseListTableVie
         searchView.tableView.reloadData()
     }
     private func fetchSearchList() {
-        realm = RealmManager.shared.realm
+        realm = RealmManager.shared.oldRealm
         list = realm.objects(Exercise.self)
-    }
-    // 메모리 Realm만들고 번역해서 생성
-    private func fetchLocalizedList() {
-        localizedRealm = RealmManager.shared.memoryRealm
-        if localizedRealm.objects(Exercise.self).isEmpty {
-            list.forEach { item in
-                try! localizedRealm.write {
-                    let localizedItem = Exercise(bodyPart: item.bodyPart, equipmentType: item.equipmentType, targetMuscles: item.targetMuscles, synergistMuscles: item.synergistMuscles, reference: item.reference, exerciseName: item.exerciseName.localized, liked: item.liked)
-                    localizedRealm.add(localizedItem, update: .modified)
-                }
-            }
-        }
-        localizedList = localizedRealm.objects(Exercise.self).sorted(byKeyPath: "reference", ascending: true)
     }
     
         override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -186,7 +170,7 @@ extension ExerciseSearchViewController: UISearchBarDelegate {
         // 검색어와 분류 정보를 전달하면서, API 호출을 한다.
         updateLocalizedList()
         separatedString.forEach { query in
-            self.localizedList = self.localizedList
+            self.list = self.list
                 .where {
                     $0.exerciseName.contains(query, options: .caseInsensitive)
                 }
@@ -203,7 +187,7 @@ extension ExerciseSearchViewController: UISearchBarDelegate {
         // 검색어와 분류 정보를 전달하면서, API 호출을 한다.
         updateLocalizedList()
         separatedString.forEach { query in
-            self.localizedList = self.localizedList
+            self.list = self.list
                 .where {
                     $0.exerciseName.contains(query, options: .caseInsensitive)
                 }
@@ -216,12 +200,12 @@ extension ExerciseSearchViewController: UISearchBarDelegate {
 extension ExerciseSearchViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return localizedList.count
+        return list.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ExerciseListTableViewCell.identifier, for: indexPath) as! ExerciseListTableViewCell
-        cell.exercise = localizedList[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: ExerciseSearchTableViewCell.identifier, for: indexPath) as! ExerciseSearchTableViewCell
+        cell.exercise = list[indexPath.row]
         cell.selectionStyle = .none
         cell.delegate = self
         return cell
@@ -294,25 +278,25 @@ extension ExerciseSearchViewController {
     }
     
     func updateLocalizedList() {
-        localizedRealm = RealmManager.shared.memoryRealm
+        realm = RealmManager.shared.oldRealm
         if isLikeButtonSelected {
             switch queryTuple {
             case (nil, nil):
-                localizedList = localizedRealm.objects(Exercise.self)
+                list = realm.objects(Exercise.self)
                     .filter("liked == %@", true)
                     .sorted(byKeyPath: "reference", ascending: true)
             case (let predicate1?, nil):
-                localizedList = localizedRealm.objects(Exercise.self)
+                list = realm.objects(Exercise.self)
                     .filter("liked == %@", true)
                     .filter(predicate1)
                     .sorted(byKeyPath: "reference", ascending: true)
             case (nil, let predicate2?):
-                localizedList = localizedRealm.objects(Exercise.self)
+                list = realm.objects(Exercise.self)
                     .filter("liked == %@", true)
                     .filter(predicate2)
                     .sorted(byKeyPath: "reference", ascending: true)
             case (let predicate1?, let predicate2?):
-                localizedList = localizedRealm.objects(Exercise.self)
+                list = realm.objects(Exercise.self)
                     .filter("liked == %@", true)
                     .filter(predicate1)
                     .filter(predicate2)
@@ -321,18 +305,18 @@ extension ExerciseSearchViewController {
         } else {
             switch queryTuple {
             case (nil, nil):
-                localizedList = localizedRealm.objects(Exercise.self)
+                list = realm.objects(Exercise.self)
                     .sorted(byKeyPath: "reference", ascending: true)
             case (let predicate1?, nil):
-                localizedList = localizedRealm.objects(Exercise.self)
+                list = realm.objects(Exercise.self)
                     .filter(predicate1)
                     .sorted(byKeyPath: "reference", ascending: true)
             case (nil, let predicate2?):
-                localizedList = localizedRealm.objects(Exercise.self)
+                list = realm.objects(Exercise.self)
                     .filter(predicate2)
                     .sorted(byKeyPath: "reference", ascending: true)
             case (let predicate1?, let predicate2?):
-                localizedList = localizedRealm.objects(Exercise.self)
+                list = realm.objects(Exercise.self)
                     .filter(predicate1)
                     .filter(predicate2)
                     .sorted(byKeyPath: "reference", ascending: true)
