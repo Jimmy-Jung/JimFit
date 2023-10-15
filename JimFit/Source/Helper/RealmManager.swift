@@ -13,7 +13,6 @@ final class RealmManager {
     static let shared = RealmManager()
     lazy var oldRealm: Realm = { return createOldRealm() }()
     lazy var newRealm: Realm = { return createNewRealm() }()
-//    lazy var memoryRealm: Realm = createMemoryRealm()
     
     private lazy var fileManager = FileManager.default
     // 도큐먼트 디렉토리 경로
@@ -23,7 +22,7 @@ final class RealmManager {
     private lazy var newFileURL = documentsDirectory.appendingPathComponent("NewExercise.realm")
     
     private lazy var oldFileURL = documentsDirectory.appendingPathComponent("OldExercise.realm")
-    
+        
     private init() {}
     
     private func createOldRealm() -> Realm {
@@ -32,6 +31,13 @@ final class RealmManager {
     
     private func createNewRealm() -> Realm {
         return try! Realm(fileURL: newFileURL)
+    }
+    
+    func saveNewRealm(exercises: [Exercise]) {
+        try! newRealm.write {
+            newRealm.deleteAll()
+            newRealm.add(exercises)
+        }
     }
     
     func copyLikeAndRemoveOldRealm() {
@@ -44,38 +50,23 @@ final class RealmManager {
                 object?.liked = i.liked
             }
         }
-        
+       
         try! oldRealm.write {
-            oldRealm.deleteAll()
+            oldRealm.delete(oldRealm.objects(Exercise.self))
             for i in new {
                 let newObject = oldRealm.create(Exercise.self, value: i)
                 newObject.exerciseName = i.exerciseName.localized
                 oldRealm.add(newObject)
             }
-            
         }
-        
     }
     
     func localizeRealm() {
-        print(#function)
-        let new = newRealm.objects(Exercise.self)
         let old = oldRealm.objects(Exercise.self)
-        
-        try! newRealm.write {
-            for i in old {
-                let object = newRealm.object(ofType: Exercise.self, forPrimaryKey: i.reference)
-                object?.liked = i.liked
-            }
-        }
         try! oldRealm.write {
-            oldRealm.deleteAll()
-            for i in new {
-                let newObject = oldRealm.create(Exercise.self, value: i)
-                newObject.exerciseName = i.exerciseName.localized
-                oldRealm.add(newObject)
+            for i in old {
+                i.exerciseName = i.exerciseName.localized
             }
-            
         }
     }
 }

@@ -17,7 +17,7 @@ protocol ExerciseSetViewModelProtocol {
     var setRestTime: BehaviorRelay<String> { get set }
     var totalTime: BehaviorRelay<String> { get set }
     var timerStatus: BehaviorRelay<TimerManager.TimerStatus> { get set }
-    var grabberTitle: String { get }
+    var grabberTitle: String? { get }
     var exerciseSetsCount: Int { get }
     var lastFinishedExerciseSetIndex: Int? { get }
     var isActiveTimerButton: Bool { get set }
@@ -48,8 +48,8 @@ final class ExerciseSetViewModel: ExerciseSetViewModelProtocol {
     lazy var setRestTime = BehaviorRelay<String>(value: timer.setRestTime.formattedTime())
     lazy var totalTime = BehaviorRelay<String>(value: timer.totalTime.formattedTime())
     lazy var timerStatus = BehaviorRelay<TimerManager.TimerStatus>(value: timer.timerStatus)
-    var grabberTitle: String {
-        return workout.exercise?.exerciseName.localized ?? ""
+    var grabberTitle: String? {
+        return realm.object(ofType: Exercise.self, forPrimaryKey: workout.exerciseReference)?.exerciseName
     }
     var exerciseSetsCount: Int {
         return workout.exerciseSets.count

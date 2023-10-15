@@ -14,7 +14,6 @@ final class ExerciseSetViewController: UIViewController {
     private lazy var exerciseSetView = ExerciseSetView()
     private let titleTimerView = TitleTimerView()
     private var viewModel: ExerciseSetViewModelProtocol!
-    private let realm = RealmManager.shared.oldRealm
     private var timerStatus: TimerManager.TimerStatus = .paused
     private let disposeBag = DisposeBag()
     private lazy var pauseButton: UIBarButtonItem? = UIBarButtonItem(systemItem: .pause, primaryAction: pause)
@@ -134,12 +133,6 @@ final class ExerciseSetViewController: UIViewController {
         exerciseSetView.grabberView.setTitle(viewModel.grabberTitle)
         
     }
-//    func example() {
-//        realm.objects(Workout.self).where { workout in
-//            workout.exerciseSets.weight == 1
-//        }
-//    }
-    
     
     private func configureTableView() {
         exerciseSetView.tableView.dataSource = self

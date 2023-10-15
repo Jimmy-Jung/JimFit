@@ -26,13 +26,13 @@ final class WorkoutLog: Object {
 
 final class Workout: Object {
     @Persisted(primaryKey: true) var workoutId = ObjectId.generate()
-    @Persisted var exercise: Exercise?
+    @Persisted var exerciseReference: String
     @Persisted var exerciseSets = List<ExerciseSet>()
     @Persisted(originProperty: "workouts") var OriginWorkoutLog: LinkingObjects<WorkoutLog>
     
-    convenience init(exercise: Exercise?) {
+    convenience init(exerciseReference: String) {
         self.init()
-        self.exercise = exercise
+        self.exerciseReference = exerciseReference
         self.exerciseSets.append(ExerciseSet(repetitionCount: 0, weight: 0))
     }
 }

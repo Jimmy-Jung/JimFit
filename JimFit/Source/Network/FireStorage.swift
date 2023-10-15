@@ -24,7 +24,7 @@ enum FireStoreRouter: URLRequestConvertible {
     var method: HTTPMethod {
         switch self {
         case .checkETag:
-            return .head
+            return .get
         case .fetchData:
             return .get
         }
@@ -42,6 +42,7 @@ enum FireStoreRouter: URLRequestConvertible {
     func asURLRequest() throws -> URLRequest {
         guard let url = baseURL else { throw FireStoreError.url}
         var urlRequest = try URLRequest(url: url, method: method, headers: headers)
+        urlRequest.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
         urlRequest = try URLEncoding.default.encode(urlRequest, with: nil)
         return urlRequest
     }
@@ -83,12 +84,7 @@ final class FireStorage {
             let jsonDecoder = JSONDecoder()
             let exercises = try jsonDecoder.decode([Exercise].self, from: jsonData)
             // Realm에 저장
-            let newRealm = realmManager.newRealm
-            try! newRealm.write {
-                newRealm.deleteAll()
-                newRealm.add(exercises)
-            }
-            
+            realmManager.saveNewRealm(exercises: exercises)
             realmManager.copyLikeAndRemoveOldRealm()
         } catch {
             print("Error: Parsing exercise data")

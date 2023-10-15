@@ -15,7 +15,7 @@ final class ExerciseSearchViewController: UIViewController, ExerciseSearchTableV
     }
     private var date: String
     private lazy var searchView = ExerciseSearchView(frame: view.frame)
-    private var realm: Realm!
+    private var oldRealm: Realm!
     private var list: Results<Exercise>!
     private lazy var bodyPartButtons = searchView.bodyPartStackView.subviews as! [UIButton]
     private lazy var equipmentTypeButtons = searchView.equipmentTypeStackView.subviews as! [UIButton]
@@ -52,19 +52,18 @@ final class ExerciseSearchViewController: UIViewController, ExerciseSearchTableV
     @objc func addListButtonTapped(_ sender: UIButton) {
         guard let selectedCells = searchView.tableView.indexPathsForSelectedRows else { return }
         let workouts = selectedCells.map {
-            let object = realm.object(ofType: Exercise.self, forPrimaryKey: list[$0.row].reference)
-            return Workout(exercise: object)
+            return Workout(exerciseReference: list[$0.row].reference)
             
         }
-        if let workout = realm.object(ofType: WorkoutLog.self, forPrimaryKey: date) {
-            try! realm.write {
+        if let workout = oldRealm.object(ofType: WorkoutLog.self, forPrimaryKey: date) {
+            try! oldRealm.write {
                 workout.workouts.append(objectsIn: workouts)
             }
         } else {
-            try! realm.write {
+            try! oldRealm.write {
                 let workoutLog = WorkoutLog(workoutDate: date, workoutMemo: "")
                 workoutLog.workouts.append(objectsIn: workouts)
-                realm.add(workoutLog)
+                oldRealm.add(workoutLog)
             }
         }
         
@@ -77,7 +76,7 @@ final class ExerciseSearchViewController: UIViewController, ExerciseSearchTableV
     }
     
     func updateLike() {
-        let likeCount = realm.objects(Exercise.self).filter("liked == %@", true).count
+        let likeCount = oldRealm.objects(Exercise.self).filter("liked == %@", true).count
         searchView.likeCount =  String(likeCount)
     }
     func configureTableView() {
@@ -119,8 +118,8 @@ final class ExerciseSearchViewController: UIViewController, ExerciseSearchTableV
         searchView.tableView.reloadData()
     }
     private func fetchSearchList() {
-        realm = RealmManager.shared.oldRealm
-        list = realm.objects(Exercise.self)
+        oldRealm = RealmManager.shared.oldRealm
+        list = oldRealm.objects(Exercise.self)
     }
     
         override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -278,25 +277,25 @@ extension ExerciseSearchViewController {
     }
     
     func updateLocalizedList() {
-        realm = RealmManager.shared.oldRealm
+        oldRealm = RealmManager.shared.oldRealm
         if isLikeButtonSelected {
             switch queryTuple {
             case (nil, nil):
-                list = realm.objects(Exercise.self)
+                list = oldRealm.objects(Exercise.self)
                     .filter("liked == %@", true)
                     .sorted(byKeyPath: "reference", ascending: true)
             case (let predicate1?, nil):
-                list = realm.objects(Exercise.self)
+                list = oldRealm.objects(Exercise.self)
                     .filter("liked == %@", true)
                     .filter(predicate1)
                     .sorted(byKeyPath: "reference", ascending: true)
             case (nil, let predicate2?):
-                list = realm.objects(Exercise.self)
+                list = oldRealm.objects(Exercise.self)
                     .filter("liked == %@", true)
                     .filter(predicate2)
                     .sorted(byKeyPath: "reference", ascending: true)
             case (let predicate1?, let predicate2?):
-                list = realm.objects(Exercise.self)
+                list = oldRealm.objects(Exercise.self)
                     .filter("liked == %@", true)
                     .filter(predicate1)
                     .filter(predicate2)
@@ -305,18 +304,18 @@ extension ExerciseSearchViewController {
         } else {
             switch queryTuple {
             case (nil, nil):
-                list = realm.objects(Exercise.self)
+                list = oldRealm.objects(Exercise.self)
                     .sorted(byKeyPath: "reference", ascending: true)
             case (let predicate1?, nil):
-                list = realm.objects(Exercise.self)
+                list = oldRealm.objects(Exercise.self)
                     .filter(predicate1)
                     .sorted(byKeyPath: "reference", ascending: true)
             case (nil, let predicate2?):
-                list = realm.objects(Exercise.self)
+                list = oldRealm.objects(Exercise.self)
                     .filter(predicate2)
                     .sorted(byKeyPath: "reference", ascending: true)
             case (let predicate1?, let predicate2?):
-                list = realm.objects(Exercise.self)
+                list = oldRealm.objects(Exercise.self)
                     .filter(predicate1)
                     .filter(predicate2)
                     .sorted(byKeyPath: "reference", ascending: true)

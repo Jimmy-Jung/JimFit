@@ -54,7 +54,7 @@ final class GrabberView: UIView {
     
     weak var delegate: GrabberViewDelegate?
     
-    func setTitle(_ title: String) {
+    func setTitle(_ title: String?) {
         titleLabel.text(title)
     }
     
