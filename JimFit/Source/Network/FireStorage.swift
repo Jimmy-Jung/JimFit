@@ -53,15 +53,18 @@ final class FireStorage {
     let realmManager = RealmManager.shared
     
     func checkETagFromFireStore() {
+
         AF.request(FireStoreRouter.checkETag).response { response in
             switch response.result {
             case .success(_):
-                print(response.response?.statusCode)
                 if response.response?.statusCode != 304 {
                     self.fetchDataFromFireStore()
+                } else {
+                    UM.finishedLaunch = true
                 }
             case .failure(let error):
                 print("Error: checking ETag - \(error)")
+                UM.finishedLaunch = true
             }
         }
     }
@@ -75,6 +78,7 @@ final class FireStorage {
                 UM.ETag = response.response?.allHeaderFields["Etag"] as? String ?? ""
             case .failure(let error):
                 print("Error: fetching FireStore Data - \(error)")
+                UM.finishedLaunch = true
             }
         }
     }
@@ -88,6 +92,7 @@ final class FireStorage {
             realmManager.copyLikeAndRemoveOldRealm()
         } catch {
             print("Error: Parsing exercise data")
+            UM.finishedLaunch = true
         }
     }
 }

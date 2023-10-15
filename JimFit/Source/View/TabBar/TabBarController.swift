@@ -16,6 +16,7 @@ final class TabBarController: UITabBarController {
         configureTabBarController()
         setupTabBarController()
 //        configureTabBarShadow()
+        
     }
     
     private func configureTabBarController() {

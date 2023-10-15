@@ -59,6 +59,8 @@ final class RealmManager {
                 oldRealm.add(newObject)
             }
         }
+        UM.finishedLaunch = true
+
     }
     
     func localizeRealm() {

@@ -14,10 +14,12 @@ import RealmSwift
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        UM.finishedLaunch = false
+
         FirebaseApp.configure()
         fetchRemoteConfig()
         RealmManager.shared.localizeRealm()
-        
+
         return true
     }
     
@@ -34,11 +36,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         guard let exerciseDataURL = remoteConfig["ExerciseDataURL"].stringValue else { return }
                         APIKEY.ExerciseDataURL = exerciseDataURL
                         FireStorage().checkETagFromFireStore()
+                    } else {
+                        UM.finishedLaunch = true
                     }
                 }
             }
             if error != nil {
                 print(error)
+                UM.finishedLaunch = true
             }
         }
     }

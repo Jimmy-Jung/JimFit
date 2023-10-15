@@ -18,6 +18,7 @@
 		550BA7AC2ADB1CB600475042 /* FireStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550BA7AB2ADB1CB600475042 /* FireStorage.swift */; };
 		550BA7AF2ADB2E7F00475042 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 550BA7AE2ADB2E7F00475042 /* Alamofire */; };
 		550BA7B12ADB500C00475042 /* JSONExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550BA7B02ADB500C00475042 /* JSONExercise.swift */; };
+		550BA7B42ADC424100475042 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550BA7B32ADC424100475042 /* LoadingViewController.swift */; };
 		555E6B382AC1D76B00DCA052 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B372AC1D76B00DCA052 /* AppDelegate.swift */; };
 		555E6B3A2AC1D76B00DCA052 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B392AC1D76B00DCA052 /* SceneDelegate.swift */; };
 		555E6B412AC1D76C00DCA052 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 555E6B402AC1D76C00DCA052 /* Assets.xcassets */; };
@@ -68,6 +69,7 @@
 		550BA7A92ADB166800475042 /* remote_config_defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = remote_config_defaults.plist; sourceTree = "<group>"; };
 		550BA7AB2ADB1CB600475042 /* FireStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStorage.swift; sourceTree = "<group>"; };
 		550BA7B02ADB500C00475042 /* JSONExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONExercise.swift; sourceTree = "<group>"; };
+		550BA7B32ADC424100475042 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		555E6B342AC1D76B00DCA052 /* JimFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JimFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		555E6B372AC1D76B00DCA052 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		555E6B392AC1D76B00DCA052 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -152,6 +154,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		550BA7B22ADC422A00475042 /* Loading */ = {
+			isa = PBXGroup;
+			children = (
+				550BA7B32ADC424100475042 /* LoadingViewController.swift */,
+			);
+			path = Loading;
+			sourceTree = "<group>";
+		};
 		555E6B2B2AC1D76B00DCA052 = {
 			isa = PBXGroup;
 			children = (
@@ -205,6 +215,7 @@
 		555E6B602AC326E900DCA052 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				550BA7B22ADC422A00475042 /* Loading */,
 				555E6B722AC34D9400DCA052 /* Common */,
 				555E6B792AC44CCB00DCA052 /* TabBar */,
 				55A2ABF22ACC183400927918 /* Search */,
@@ -427,6 +438,7 @@
 				550BA7722AD7DE2F00475042 /* UIViewController+Extension.swift in Sources */,
 				555E6B662AC3285B00DCA052 /* Constants.swift in Sources */,
 				555E6B7B2AC44D4700DCA052 /* TabBarController.swift in Sources */,
+				550BA7B42ADC424100475042 /* LoadingViewController.swift in Sources */,
 				5570E1BC2AD65DC100350AF3 /* UIVIew+Extension.swift in Sources */,
 				5570E1B32AD3F03300350AF3 /* TitleTimerView.swift in Sources */,
 				555E6B9C2AC7F3B100DCA052 /* WorkoutLog.swift in Sources */,
