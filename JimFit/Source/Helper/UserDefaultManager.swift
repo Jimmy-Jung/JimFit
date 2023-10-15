@@ -23,11 +23,15 @@ struct UserDefaultManager {
     @UserDefault(key: KeyEnum.currentLanguage.rawValue, defaultValue: "")
     static var currentLanguage: String
     
+    @UserDefault(key: KeyEnum.finishedLaunch.rawValue, defaultValue: false)
+    static var finishedLaunch: Bool
+    
     enum KeyEnum: String {
         case savedExerciseStartTime
         case savedRestStartTime
         case ETag
         case currentLanguage
+        case finishedLaunch
     }
 }
 
