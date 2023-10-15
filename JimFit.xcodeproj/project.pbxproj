@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		550BA7722AD7DE2F00475042 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550BA7712AD7DE2F00475042 /* UIViewController+Extension.swift */; };
+		550BA79A2ADB045700475042 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 550BA7992ADB045700475042 /* .gitignore */; };
+		550BA79C2ADB04A500475042 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 550BA79B2ADB04A500475042 /* GoogleService-Info.plist */; };
+		550BA79E2ADB04BF00475042 /* APIKEY.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550BA79D2ADB04BF00475042 /* APIKEY.swift */; };
+		550BA7A32ADB065800475042 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 550BA7A22ADB065800475042 /* FirebaseAnalytics */; };
+		550BA7A52ADB065800475042 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 550BA7A42ADB065800475042 /* FirebaseCrashlytics */; };
+		550BA7A82ADB152200475042 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 550BA7A72ADB152200475042 /* FirebaseRemoteConfig */; };
+		550BA7AA2ADB166900475042 /* remote_config_defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 550BA7A92ADB166800475042 /* remote_config_defaults.plist */; };
+		550BA7AC2ADB1CB600475042 /* FireStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550BA7AB2ADB1CB600475042 /* FireStorage.swift */; };
+		550BA7AF2ADB2E7F00475042 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 550BA7AE2ADB2E7F00475042 /* Alamofire */; };
+		550BA7B12ADB500C00475042 /* JSONExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550BA7B02ADB500C00475042 /* JSONExercise.swift */; };
 		555E6B382AC1D76B00DCA052 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B372AC1D76B00DCA052 /* AppDelegate.swift */; };
 		555E6B3A2AC1D76B00DCA052 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B392AC1D76B00DCA052 /* SceneDelegate.swift */; };
 		555E6B412AC1D76C00DCA052 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 555E6B402AC1D76C00DCA052 /* Assets.xcassets */; };
@@ -28,7 +38,7 @@
 		555E6B872AC54FD000DCA052 /* ExerciseSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B862AC54FD000DCA052 /* ExerciseSearchView.swift */; };
 		555E6B8A2AC55BCC00DCA052 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 555E6B892AC55BCC00DCA052 /* Realm */; };
 		555E6B8C2AC55BCC00DCA052 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 555E6B8B2AC55BCC00DCA052 /* RealmSwift */; };
-		555E6B8E2AC573AC00DCA052 /* ExerciseListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B8D2AC573AC00DCA052 /* ExerciseListTableViewCell.swift */; };
+		555E6B8E2AC573AC00DCA052 /* ExerciseSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B8D2AC573AC00DCA052 /* ExerciseSearchTableViewCell.swift */; };
 		555E6B922AC5796F00DCA052 /* ExerciseDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B912AC5796F00DCA052 /* ExerciseDetail.swift */; };
 		555E6B9A2AC72ECF00DCA052 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B992AC72ECF00DCA052 /* RealmManager.swift */; };
 		555E6B9C2AC7F3B100DCA052 /* WorkoutLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B9B2AC7F3B100DCA052 /* WorkoutLog.swift */; };
@@ -52,6 +62,12 @@
 
 /* Begin PBXFileReference section */
 		550BA7712AD7DE2F00475042 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		550BA7992ADB045700475042 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		550BA79B2ADB04A500475042 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		550BA79D2ADB04BF00475042 /* APIKEY.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKEY.swift; sourceTree = "<group>"; };
+		550BA7A92ADB166800475042 /* remote_config_defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = remote_config_defaults.plist; sourceTree = "<group>"; };
+		550BA7AB2ADB1CB600475042 /* FireStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStorage.swift; sourceTree = "<group>"; };
+		550BA7B02ADB500C00475042 /* JSONExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONExercise.swift; sourceTree = "<group>"; };
 		555E6B342AC1D76B00DCA052 /* JimFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JimFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		555E6B372AC1D76B00DCA052 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		555E6B392AC1D76B00DCA052 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,7 +85,7 @@
 		555E6B7C2AC4663000DCA052 /* AddButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButtonTableViewCell.swift; sourceTree = "<group>"; };
 		555E6B842AC54EDB00DCA052 /* ExerciseSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSearchViewController.swift; sourceTree = "<group>"; };
 		555E6B862AC54FD000DCA052 /* ExerciseSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSearchView.swift; sourceTree = "<group>"; };
-		555E6B8D2AC573AC00DCA052 /* ExerciseListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseListTableViewCell.swift; sourceTree = "<group>"; };
+		555E6B8D2AC573AC00DCA052 /* ExerciseSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSearchTableViewCell.swift; sourceTree = "<group>"; };
 		555E6B912AC5796F00DCA052 /* ExerciseDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseDetail.swift; sourceTree = "<group>"; };
 		555E6B992AC72ECF00DCA052 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		555E6B9B2AC7F3B100DCA052 /* WorkoutLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutLog.swift; sourceTree = "<group>"; };
@@ -94,6 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				550BA7A82ADB152200475042 /* FirebaseRemoteConfig in Frameworks */,
 				555E6B8C2AC55BCC00DCA052 /* RealmSwift in Frameworks */,
 				555E6B4D2AC1D79900DCA052 /* JimmyKit in Frameworks */,
 				555E6B5A2AC30C3A00DCA052 /* FSCalendar in Frameworks */,
@@ -101,18 +118,46 @@
 				555E6B502AC1D7C800DCA052 /* SnapKit in Frameworks */,
 				555E6B5D2AC3198700DCA052 /* Then in Frameworks */,
 				5570E1AF2AD3D1C900350AF3 /* RxSwift in Frameworks */,
+				550BA7A52ADB065800475042 /* FirebaseCrashlytics in Frameworks */,
+				550BA7AF2ADB2E7F00475042 /* Alamofire in Frameworks */,
 				555E6B8A2AC55BCC00DCA052 /* Realm in Frameworks */,
+				550BA7A32ADB065800475042 /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		550BA79F2ADB04D600475042 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				550BA7A02ADB04E100475042 /* APIKEY */,
+				550BA7AB2ADB1CB600475042 /* FireStorage.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		550BA7A02ADB04E100475042 /* APIKEY */ = {
+			isa = PBXGroup;
+			children = (
+				550BA79D2ADB04BF00475042 /* APIKEY.swift */,
+			);
+			path = APIKEY;
+			sourceTree = "<group>";
+		};
+		550BA7A62ADB152200475042 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		555E6B2B2AC1D76B00DCA052 = {
 			isa = PBXGroup;
 			children = (
 				555E6B362AC1D76B00DCA052 /* JimFit */,
 				555E6B352AC1D76B00DCA052 /* Products */,
+				550BA7A62ADB152200475042 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -140,6 +185,9 @@
 				555E6B402AC1D76C00DCA052 /* Assets.xcassets */,
 				555E6B422AC1D76C00DCA052 /* LaunchScreen.storyboard */,
 				555E6B452AC1D76C00DCA052 /* Info.plist */,
+				550BA7992ADB045700475042 /* .gitignore */,
+				550BA7A92ADB166800475042 /* remote_config_defaults.plist */,
+				550BA79B2ADB04A500475042 /* GoogleService-Info.plist */,
 				555E6B6E2AC344CC00DCA052 /* Localizable.strings */,
 			);
 			path = Resource;
@@ -172,7 +220,7 @@
 				555E6B5F2AC326E000DCA052 /* App */,
 				555E6B642AC3276000DCA052 /* Constants */,
 				555E6B622AC3272E00DCA052 /* Extension */,
-				555E6B672AC32CDC00DCA052 /* Network */,
+				550BA79F2ADB04D600475042 /* Network */,
 				555E6B632AC3273500DCA052 /* Helper */,
 				555E6B692AC32CF500DCA052 /* Model */,
 				555E6B602AC326E900DCA052 /* View */,
@@ -211,18 +259,12 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
-		555E6B672AC32CDC00DCA052 /* Network */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Network;
-			sourceTree = "<group>";
-		};
 		555E6B692AC32CF500DCA052 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				555E6B912AC5796F00DCA052 /* ExerciseDetail.swift */,
 				555E6B9B2AC7F3B100DCA052 /* WorkoutLog.swift */,
+				550BA7B02ADB500C00475042 /* JSONExercise.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -231,7 +273,7 @@
 			isa = PBXGroup;
 			children = (
 				55A2ABFA2ACC351C00927918 /* ExerciseSetTableViewCell.swift */,
-				555E6B8D2AC573AC00DCA052 /* ExerciseListTableViewCell.swift */,
+				555E6B8D2AC573AC00DCA052 /* ExerciseSearchTableViewCell.swift */,
 				555E6B732AC34DD900DCA052 /* WorkoutListTableViewCell.swift */,
 				555E6B7C2AC4663000DCA052 /* AddButtonTableViewCell.swift */,
 				555E6B772AC42CB500DCA052 /* GrabberView.swift */,
@@ -302,6 +344,10 @@
 				555E6B8B2AC55BCC00DCA052 /* RealmSwift */,
 				5570E1AC2AD3D1C900350AF3 /* RxCocoa */,
 				5570E1AE2AD3D1C900350AF3 /* RxSwift */,
+				550BA7A22ADB065800475042 /* FirebaseAnalytics */,
+				550BA7A42ADB065800475042 /* FirebaseCrashlytics */,
+				550BA7A72ADB152200475042 /* FirebaseRemoteConfig */,
+				550BA7AE2ADB2E7F00475042 /* Alamofire */,
 			);
 			productName = JimFit;
 			productReference = 555E6B342AC1D76B00DCA052 /* JimFit.app */;
@@ -339,6 +385,8 @@
 				555E6B5B2AC3198700DCA052 /* XCRemoteSwiftPackageReference "Then" */,
 				555E6B882AC55BCC00DCA052 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				5570E1AB2AD3D1C900350AF3 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				550BA7A12ADB065800475042 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				550BA7AD2ADB2E7F00475042 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 555E6B352AC1D76B00DCA052 /* Products */;
 			projectDirPath = "";
@@ -354,10 +402,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				550BA7AA2ADB166900475042 /* remote_config_defaults.plist in Resources */,
+				550BA79A2ADB045700475042 /* .gitignore in Resources */,
 				55A2ABF12ACB542D00927918 /* Exercise.realm in Resources */,
 				555E6B442AC1D76C00DCA052 /* LaunchScreen.storyboard in Resources */,
 				555E6B6C2AC344CC00DCA052 /* Localizable.strings in Resources */,
 				555E6B412AC1D76C00DCA052 /* Assets.xcassets in Resources */,
+				550BA79C2ADB04A500475042 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,6 +422,7 @@
 				555E6B872AC54FD000DCA052 /* ExerciseSearchView.swift in Sources */,
 				555E6B742AC34DD900DCA052 /* WorkoutListTableViewCell.swift in Sources */,
 				555E6B9A2AC72ECF00DCA052 /* RealmManager.swift in Sources */,
+				550BA7AC2ADB1CB600475042 /* FireStorage.swift in Sources */,
 				555E6B782AC42CB500DCA052 /* GrabberView.swift in Sources */,
 				550BA7722AD7DE2F00475042 /* UIViewController+Extension.swift in Sources */,
 				555E6B662AC3285B00DCA052 /* Constants.swift in Sources */,
@@ -379,7 +431,8 @@
 				5570E1B32AD3F03300350AF3 /* TitleTimerView.swift in Sources */,
 				555E6B9C2AC7F3B100DCA052 /* WorkoutLog.swift in Sources */,
 				555E6B572AC3086500DCA052 /* WorkoutLogViewController.swift in Sources */,
-				555E6B8E2AC573AC00DCA052 /* ExerciseListTableViewCell.swift in Sources */,
+				555E6B8E2AC573AC00DCA052 /* ExerciseSearchTableViewCell.swift in Sources */,
+				550BA79E2ADB04BF00475042 /* APIKEY.swift in Sources */,
 				555E6B852AC54EDB00DCA052 /* ExerciseSearchViewController.swift in Sources */,
 				555E6B7D2AC4663000DCA052 /* AddButtonTableViewCell.swift in Sources */,
 				5570E1B72AD43CFB00350AF3 /* DateFormatter+Extension.swift in Sources */,
@@ -397,6 +450,7 @@
 				5570E1B12AD3E57100350AF3 /* Timeinterval+Extension.swift in Sources */,
 				555E6B3A2AC1D76B00DCA052 /* SceneDelegate.swift in Sources */,
 				55A2ABFB2ACC351C00927918 /* ExerciseSetTableViewCell.swift in Sources */,
+				550BA7B12ADB500C00475042 /* JSONExercise.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -623,6 +677,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		550BA7A12ADB065800475042 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
+		550BA7AD2ADB2E7F00475042 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		555E6B4B2AC1D79900DCA052 /* XCRemoteSwiftPackageReference "JimmyKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Jimmy-Jung/JimmyKit";
@@ -674,6 +744,26 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		550BA7A22ADB065800475042 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 550BA7A12ADB065800475042 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		550BA7A42ADB065800475042 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 550BA7A12ADB065800475042 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		550BA7A72ADB152200475042 /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 550BA7A12ADB065800475042 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+		550BA7AE2ADB2E7F00475042 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 550BA7AD2ADB2E7F00475042 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
 		555E6B4C2AC1D79900DCA052 /* JimmyKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 555E6B4B2AC1D79900DCA052 /* XCRemoteSwiftPackageReference "JimmyKit" */;

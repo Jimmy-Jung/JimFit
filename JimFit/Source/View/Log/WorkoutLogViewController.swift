@@ -20,7 +20,7 @@ final class WorkoutLogViewController: UIViewController {
     private let timer = TimerManager.shared
     private var timerStatus: TimerManager.TimerStatus = .paused
     private var workoutLog: WorkoutLog?
-    private let realm: Realm = RealmManager.shared.realm
+    private let realm: Realm = RealmManager.shared.oldRealm
     private let disposeBag = DisposeBag()
     private lazy var pauseButton: UIBarButtonItem? = UIBarButtonItem(systemItem: .pause, primaryAction: pause)
     private lazy var pause: UIAction = UIAction { [weak self] _ in

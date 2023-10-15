@@ -9,7 +9,7 @@ import UIKit
 import RealmSwift
 
 final class ExerciseSetTableViewCell: UITableViewCell {
-    private let realm = RealmManager.shared.realm
+    private let realm = RealmManager.shared.oldRealm
     private var exerciseSet: ExerciseSet!
     func configureCell(with exerciseSet: ExerciseSet, index: Int) {
         self.exerciseSet = exerciseSet
