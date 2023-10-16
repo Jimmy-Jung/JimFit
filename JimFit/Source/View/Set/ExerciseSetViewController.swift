@@ -19,10 +19,17 @@ final class ExerciseSetViewController: UIViewController {
     private lazy var pauseButton: UIBarButtonItem? = UIBarButtonItem(systemItem: .pause, primaryAction: pause)
     private lazy var playButton: UIBarButtonItem? = UIBarButtonItem(systemItem: .play, primaryAction: play)
     private lazy var play: UIAction = UIAction { [weak self] _ in
+        HapticsManager.shared.vibrateForInteraction(style: .medium)
         self?.startWorkoutButtonTapped()
     }
     private lazy var pause = UIAction { [weak self] _ in
-        self?.showAlert(title: "done_workout_title".localized, message: "done_workout_message".localized, preferredStyle: .alert, doneHandler: { _ in
+        HapticsManager.shared.vibrateForNotification(style: .error)
+        self?.showAlert(
+            title: "done_workout_title".localized,
+            message: "done_workout_message".localized,
+            preferredStyle: .alert,
+            doneHandler: { _ in
+                HapticsManager.shared.vibrateForSelection()
             self?.viewModel.stopExercise()
         })
     }
@@ -144,6 +151,7 @@ final class ExerciseSetViewController: UIViewController {
     }
     
     private func startWorkoutButtonTapped() {
+        HapticsManager.shared.vibrateForInteraction(style: .medium)
         viewModel.startExerciseTimer()
         UIView.transition(with: exerciseSetView.timerStackView, duration: 0.3, options: [.transitionCrossDissolve, .curveEaseOut]) {
             self.exerciseSetView.workoutTimer.activateColor()
@@ -155,6 +163,7 @@ final class ExerciseSetViewController: UIViewController {
         }
     }
     private func doneSetButtonTapped() {
+        HapticsManager.shared.vibrateForInteraction(style: .medium)
         viewModel.doneExercise()
         UIView.transition(with: exerciseSetView.timerStackView, duration: 0.3, options: [.transitionCrossDissolve, .curveEaseOut]) {
             self.exerciseSetView.restTimer.activateColor()
@@ -289,6 +298,7 @@ extension ExerciseSetViewController: GrabberViewDelegate {
         }
     }
     func grabberButtonTapped() {
+        HapticsManager.shared.vibrateForInteraction(style: .heavy)
         let shouldBeEdited = !exerciseSetView.tableView.isEditing
         exerciseSetView.tableView.setEditing(shouldBeEdited, animated: true)
         if !shouldBeEdited {

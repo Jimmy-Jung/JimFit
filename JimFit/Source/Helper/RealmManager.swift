@@ -64,11 +64,16 @@ final class RealmManager {
     }
     
     func localizeRealm() {
+        let new = newRealm.objects(Exercise.self)
         let old = oldRealm.objects(Exercise.self)
-        try! oldRealm.write {
-            for i in old {
-                i.exerciseName = i.exerciseName.localized
+        let firstReference = "0001"
+        if newRealm.object(ofType: Exercise.self, forPrimaryKey: firstReference) != oldRealm.object(ofType: Exercise.self, forPrimaryKey: firstReference) {
+            try! oldRealm.write {
+                for i in old {
+                    i.exerciseName = newRealm.object(ofType: Exercise.self, forPrimaryKey: i.reference)?.exerciseName.localized ?? ""
+                }
             }
         }
     }
+    
 }

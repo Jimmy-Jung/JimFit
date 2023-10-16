@@ -21,6 +21,7 @@
 "grabber_date_formatter" = "MM월 dd일";
 "workout" = " 운동";
 "workout_log" = "운동 기록";
+"log" = "기록";
 
 // Search
 "selection_list%@" = "선택항목 %@/12";

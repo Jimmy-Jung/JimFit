@@ -1,14 +1,14 @@
 //
-//  UITextField+Exension.swift
+//  UISearchBar+Extension.swift
 //  JimFit
 //
-//  Created by 정준영 on 2023/10/08.
+//  Created by 정준영 on 2023/10/16.
 //
 
 import UIKit
 
-extension UITextField {
-    func addDoneButtonToKeyboard() -> Self {
+extension UISearchBar {
+    func addDoneButtonToKeyboard() {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         
@@ -18,12 +18,9 @@ extension UITextField {
         toolbar.setItems([flexibleSpace, doneButton], animated: false)
         
         self.inputAccessoryView = toolbar
-        return self
     }
     
     @objc private func doneButtonTapped() {
         self.resignFirstResponder()
     }
 }
-
-

@@ -100,6 +100,7 @@ final class GrabberView: UIView {
         guard let swipeGesture = gesture as? UISwipeGestureRecognizer else {
             return
         }
+        HapticsManager.shared.vibrateForInteraction(style: .soft)
         delegate?.grabber(swipeGestureFor: swipeGesture.direction)
     }
     
