@@ -53,8 +53,19 @@ class LoadingViewController: UIViewController {
                 self.imageView.image = self.imageArray[self.imageIndex]
             }, completion: nil)
             if UM.finishedLaunch {
-                self.dismiss(animated: true)
+//                self.dismiss(animated: true)
+                changeRootViewController()
             }
         }
+    }
+    
+    /// 루트 뷰컨트롤러 교체 메서드
+    private func changeRootViewController() {
+        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        let sceneDelegate = windowScene?.delegate as? SceneDelegate
+        let vc = TabBarController()
+        vc.modalTransitionStyle = .crossDissolve
+        sceneDelegate?.window?.rootViewController = vc
+        sceneDelegate?.window?.makeKeyAndVisible()
     }
 }

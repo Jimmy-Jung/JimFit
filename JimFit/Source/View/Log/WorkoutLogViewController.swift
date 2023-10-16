@@ -37,9 +37,9 @@ final class WorkoutLogViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        transition(viewController: LoadingViewController(), style: .presentFull) {
-            $0.modalTransitionStyle = .crossDissolve
-        }
+//        transition(viewController: LoadingViewController(), style: .presentFull) {
+//            $0.modalTransitionStyle = .crossDissolve
+//        }
         configureView()
         configureRealm()
         registerDelegate()
