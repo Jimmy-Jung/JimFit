@@ -37,6 +37,7 @@ final class ExerciseSetTableViewCell: UITableViewCell {
     var textFieldDidEndEditingHandler: () -> Void = { }
     
     private func setButtonTapped() {
+        HapticsManager.shared.vibrateForSelection()
         setButton.isSelected.toggle()
         setButton.baseBackgroundColor(setButton.isSelected ? K.Color.Primary.Orange : K.Color.Grayscale.Tint)
         try! realm.write {
@@ -144,6 +145,7 @@ final class ExerciseSetTableViewCell: UITableViewCell {
 
 extension ExerciseSetTableViewCell: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        HapticsManager.shared.vibrateForSelection()
         textField.selectAll(nil)
         textFieldDidBeginEditingHandler()
     }

@@ -51,6 +51,7 @@ class ExerciseSearchTableViewCell: UITableViewCell {
         .baseForegroundColor(K.Color.Grayscale.border_Medium)
         .baseBackgroundColor(.clear)
         .addAction { [unowned self] in
+            HapticsManager.shared.vibrateForSelection()
             likeButtonTapped()
         }
     

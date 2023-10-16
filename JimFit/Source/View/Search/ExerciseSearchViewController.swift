@@ -50,6 +50,7 @@ final class ExerciseSearchViewController: UIViewController, ExerciseSearchTableV
     }
     
     @objc func addListButtonTapped(_ sender: UIButton) {
+        HapticsManager.shared.vibrateForInteraction(style: .medium)
         guard let selectedCells = searchView.tableView.indexPathsForSelectedRows else { return }
         let workouts = selectedCells.map {
             return Workout(exerciseReference: list[$0.row].reference)
@@ -96,14 +97,17 @@ final class ExerciseSearchViewController: UIViewController, ExerciseSearchTableV
     }
     
     @objc func bodyPartButtonTapped(_ sender: UIButton) {
+        HapticsManager.shared.vibrateForSelection()
         selectButton(type: .bodyPart, button: sender)
     }
     
     @objc func equipmentTypeButtonsTapped(_ sender: UIButton) {
+        HapticsManager.shared.vibrateForSelection()
         selectButton(type: .equipmentType, button: sender)
     }
     
     @objc func likeButtonTapped(_ sender: UIButton) {
+        HapticsManager.shared.vibrateForSelection()
         isLikeButtonSelected.toggle()
         if isLikeButtonSelected {
             sender.baseBackgroundColor(K.Color.Primary.Blue)
@@ -156,6 +160,7 @@ extension ExerciseSearchViewController: UISearchBarDelegate {
     
     /// 취소 버튼 클릭 시, 키보드를 내리고 검색 결과 초기호
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        HapticsManager.shared.vibrateForSelection()
         searchBar.resignFirstResponder()
         searchBar.text = nil
         updateLocalizedList()
@@ -211,6 +216,7 @@ extension ExerciseSearchViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        HapticsManager.shared.vibrateForSelection()
         guard selectedIndexes.count < maxSelectionCount else {
             searchView.tableView.deselectRow(at: indexPath, animated: true)
             return
@@ -221,6 +227,7 @@ extension ExerciseSearchViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        HapticsManager.shared.vibrateForSelection()
         selectedIndexes.remove(indexPath.row)
         guard selectedIndexes.count > 0 else {
             searchView.addListButton.isEnabled(false)

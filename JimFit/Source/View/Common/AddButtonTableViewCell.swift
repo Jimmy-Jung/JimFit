@@ -20,6 +20,7 @@ final class AddButtonTableViewCell: UITableViewCell {
         .baseForegroundColor(K.Color.Primary.White)
         .cornerRadius(16)
         .addAction { [weak self] in
+            HapticsManager.shared.vibrateForInteraction(style: .medium)
             self?.addButtonHandler()
         }
     

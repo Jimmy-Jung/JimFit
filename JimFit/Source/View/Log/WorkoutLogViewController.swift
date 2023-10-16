@@ -37,9 +37,6 @@ final class WorkoutLogViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        transition(viewController: LoadingViewController(), style: .presentFull) {
-//            $0.modalTransitionStyle = .crossDissolve
-//        }
         configureView()
         configureRealm()
         registerDelegate()
@@ -136,6 +133,7 @@ extension WorkoutLogViewController: GrabberViewDelegate {
     }
     
     func grabberButtonTapped() {
+        HapticsManager.shared.vibrateForInteraction(style: .heavy)
         let shouldBeEdited = !workoutLogView.tableView.isEditing
         workoutLogView.tableView.setEditing(shouldBeEdited, animated: true)
         if !shouldBeEdited {
@@ -183,6 +181,9 @@ extension WorkoutLogViewController: FSCalendarDelegate, FSCalendarDataSource, FS
         }
         return nil
     }
+    func calendar(_ calendar: FSCalendar, didDeselect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        HapticsManager.shared.vibrateForSelection()
+    }
 }
 
 
@@ -221,10 +222,14 @@ extension WorkoutLogViewController: UITableViewDelegate, UITableViewDataSource, 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        HapticsManager.shared.vibrateForSelection()
         guard let workout = workoutLog?.workouts[indexPath.row] else { return }
         let exerciseSetViewController = ExerciseSetViewController(viewModel: ExerciseSetViewModel(workout: workout))
         exerciseSetViewController.title = workoutLogView.calendar.selectedDate?.convert(to: .grabberDate)
         transition(viewController: exerciseSetViewController, style: .pushNavigation)
+    }
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        HapticsManager.shared.vibrateForSelection()
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

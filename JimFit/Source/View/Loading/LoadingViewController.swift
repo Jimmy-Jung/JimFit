@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoadingViewController: UIViewController {
+final class LoadingViewController: UIViewController {
     private var imageArray: [UIImage] = []
     private var imageView: UIImageView!
     private var imageIndex = 0

@@ -15,8 +15,7 @@ final class TabBarController: UITabBarController {
         tabBar.backgroundColor(.systemBackground)
         configureTabBarController()
         setupTabBarController()
-//        configureTabBarShadow()
-        
+        configureTabBarShadow()
     }
     
     private func configureTabBarController() {
@@ -24,13 +23,9 @@ final class TabBarController: UITabBarController {
         let firstNav = UINavigationController(rootViewController: firstVC)
         firstVC.title = "workout_log".localized
         firstVC.tabBarItem.image = K.Image.Calendar
-        firstVC.tabBarItem.title = "기록"
-        let vc = UIViewController()
-        vc.view.backgroundColor(.systemBackground)
-        vc.title = "AS"
-        let nav = UINavigationController(rootViewController: vc)
+        firstVC.tabBarItem.title = "log".localized
         
-        setViewControllers([firstNav, nav], animated: true)
+        setViewControllers([firstNav], animated: true)
     }
     
     private func setupTabBarController() {

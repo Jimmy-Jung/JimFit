@@ -35,6 +35,7 @@ final class ExerciseSearchView: UIView {
         $0.setShowsCancelButton(true, animated: true)
         $0.tintColor = .label // 커서 색상 지정
         $0.autocapitalizationType = .none
+        $0.addDoneButtonToKeyboard()
     }
     
     private let bodyPartScrollView: UIScrollView = UIScrollView().then {
