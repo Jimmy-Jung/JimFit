@@ -63,15 +63,15 @@
 "Adductor Longus" = "척추내전근";
 "Iliopsoas" = "허벅지내전근";
 "Splenius" = "머리둘레근";
-"Teres Minor" = "소퇴근";
-"Teres Major" = "대퇴근";
+"Teres Minor" = "소원근";
+"Teres Major" = "대원근";
 "Pectoralis Major Sternal Head" = "가슴근육";
 "Adductor Magnus" = "대퇴내전근";
 "Erector Spinae" = "척추기립근";
 "Gastrocnemius" = "종아리근육";
 "Tibialis Anterior" = "비골근";
-"Deltoid Lateral" = "상완이두근";
-"Rectus Abdominis" = "직장근";
+"Deltoid Lateral" = "이두근";
+"Rectus Abdominis" = "복직근";
 "Serratus Anterior" = "전강근";
 "Adductor Brevis" = "대퇴내전근";
 "Subscapularis" = "인갑근";
@@ -82,7 +82,7 @@
 "Wrist Extensors" = "손목신근";
 "Infraspinatus" = "하방근";
 "Deltoid Posterior" = "후측근";
-"Levator Scapulae" = "승모근";
+"Levator Scapulae" = "견갑거근";
 "Transverse Abdominus" = "횡경근";
 "Gluteus Medius" = "중둔근";
 "Quadriceps" = "대퇴사두근";
@@ -92,7 +92,7 @@
 "Soleus" = "종아리근육";
 "Tensor Fasciae Latae" = "허벅지외전근";
 "Brachioradialis" = "완골근";
-"Hamstrings" = "대퇴이두근";
+"Hamstrings" = "햄스트링";
 "Wrist Flexors" = "손목 굽히는근";
 "Trapezius Middle Fibers" = "승모근";
 "Trapezius Upper Fibers" = "승모근";
@@ -100,7 +100,7 @@
 "Sternocleidomastoid" = "목갈비근";
 "Latissimus Dorsi" = "광배근";
 "Gluteus Maximus" = "대둔근";
-"Biceps Brachii" = "상완이두근";
+"Biceps Brachii" = "이두근";
 "Pectineous" = "내전근";
 
 // SynergistMuscles
@@ -148,7 +148,7 @@
 "Soleus" = "종아리근";
 
 // ExerciseName
-"3/4 Sit-up" = "3/4 싯-업";
+"3/4 Sit-up" = "3/4 싯업";
 "45 degree Bycicle Twisting Crunch" = "45도 바이시클 트위스팅 크런치";
 "45 Degree Side Bend" = "45도 사이드 벤드";
 "45 degrees Back Extension" = "45도 백 익스텐션";
