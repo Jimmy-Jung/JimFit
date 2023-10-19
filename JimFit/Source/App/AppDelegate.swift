@@ -42,7 +42,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
             if error != nil {
-                print(error)
                 UM.finishedLaunch = true
             }
         }

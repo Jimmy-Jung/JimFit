@@ -16,6 +16,9 @@
 "done_workout_title" = "Workout Record Complete";
 "done_workout_message" = "Have you completed your workout?";
 
+// Analysis
+"cool_down" = "Cool Down";
+
 // Log
 "header_date_formatter" = "MMMM yyyy";
 "grabber_date_formatter" = "dd MMM";
