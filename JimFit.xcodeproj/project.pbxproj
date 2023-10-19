@@ -9,12 +9,10 @@
 /* Begin PBXBuildFile section */
 		550BA7722AD7DE2F00475042 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550BA7712AD7DE2F00475042 /* UIViewController+Extension.swift */; };
 		550BA79A2ADB045700475042 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 550BA7992ADB045700475042 /* .gitignore */; };
-		550BA79C2ADB04A500475042 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 550BA79B2ADB04A500475042 /* GoogleService-Info.plist */; };
 		550BA79E2ADB04BF00475042 /* APIKEY.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550BA79D2ADB04BF00475042 /* APIKEY.swift */; };
 		550BA7A32ADB065800475042 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 550BA7A22ADB065800475042 /* FirebaseAnalytics */; };
 		550BA7A52ADB065800475042 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 550BA7A42ADB065800475042 /* FirebaseCrashlytics */; };
 		550BA7A82ADB152200475042 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 550BA7A72ADB152200475042 /* FirebaseRemoteConfig */; };
-		550BA7AA2ADB166900475042 /* remote_config_defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 550BA7A92ADB166800475042 /* remote_config_defaults.plist */; };
 		550BA7AC2ADB1CB600475042 /* FireStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550BA7AB2ADB1CB600475042 /* FireStorage.swift */; };
 		550BA7AF2ADB2E7F00475042 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 550BA7AE2ADB2E7F00475042 /* Alamofire */; };
 		550BA7B12ADB500C00475042 /* JSONExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550BA7B02ADB500C00475042 /* JSONExercise.swift */; };
@@ -43,6 +41,8 @@
 		555E6B922AC5796F00DCA052 /* ExerciseDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B912AC5796F00DCA052 /* ExerciseDetail.swift */; };
 		555E6B9A2AC72ECF00DCA052 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B992AC72ECF00DCA052 /* RealmManager.swift */; };
 		555E6B9C2AC7F3B100DCA052 /* WorkoutLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B9B2AC7F3B100DCA052 /* WorkoutLog.swift */; };
+		556717132AE11718002430E0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 556717112AE11718002430E0 /* GoogleService-Info.plist */; };
+		556717142AE11718002430E0 /* remote_config_defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 556717122AE11718002430E0 /* remote_config_defaults.plist */; };
 		5570E1A62AD2F52400350AF3 /* UITextField+Exension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5570E1A52AD2F52400350AF3 /* UITextField+Exension.swift */; };
 		5570E1A82AD3AFEB00350AF3 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5570E1A72AD3AFEB00350AF3 /* TimerManager.swift */; };
 		5570E1AA2AD3CB5700350AF3 /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5570E1A92AD3CB5700350AF3 /* UserDefaultManager.swift */; };
@@ -56,7 +56,6 @@
 		5570E1BC2AD65DC100350AF3 /* UIVIew+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5570E1BB2AD65DC100350AF3 /* UIVIew+Extension.swift */; };
 		55936CCC2ADD64EE00F2E7E6 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55936CCB2ADD64EE00F2E7E6 /* HapticManager.swift */; };
 		55936CCE2ADD6AD300F2E7E6 /* UISearchBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55936CCD2ADD6AD300F2E7E6 /* UISearchBar+Extension.swift */; };
-		55A2ABF12ACB542D00927918 /* Exercise.realm in Resources */ = {isa = PBXBuildFile; fileRef = 55A2ABF02ACB541800927918 /* Exercise.realm */; };
 		55A2ABF42ACC187F00927918 /* ExerciseSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A2ABF32ACC187F00927918 /* ExerciseSetViewController.swift */; };
 		55A2ABF72ACC191700927918 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A2ABF62ACC191700927918 /* TimerView.swift */; };
 		55A2ABF92ACC2F6100927918 /* ExerciseSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A2ABF82ACC2F6100927918 /* ExerciseSetView.swift */; };
@@ -66,9 +65,7 @@
 /* Begin PBXFileReference section */
 		550BA7712AD7DE2F00475042 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		550BA7992ADB045700475042 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		550BA79B2ADB04A500475042 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		550BA79D2ADB04BF00475042 /* APIKEY.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKEY.swift; sourceTree = "<group>"; };
-		550BA7A92ADB166800475042 /* remote_config_defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = remote_config_defaults.plist; sourceTree = "<group>"; };
 		550BA7AB2ADB1CB600475042 /* FireStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStorage.swift; sourceTree = "<group>"; };
 		550BA7B02ADB500C00475042 /* JSONExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONExercise.swift; sourceTree = "<group>"; };
 		550BA7B32ADC424100475042 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
@@ -93,6 +90,8 @@
 		555E6B912AC5796F00DCA052 /* ExerciseDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseDetail.swift; sourceTree = "<group>"; };
 		555E6B992AC72ECF00DCA052 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		555E6B9B2AC7F3B100DCA052 /* WorkoutLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutLog.swift; sourceTree = "<group>"; };
+		556717112AE11718002430E0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		556717122AE11718002430E0 /* remote_config_defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = remote_config_defaults.plist; sourceTree = "<group>"; };
 		5570E1A52AD2F52400350AF3 /* UITextField+Exension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Exension.swift"; sourceTree = "<group>"; };
 		5570E1A72AD3AFEB00350AF3 /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		5570E1A92AD3CB5700350AF3 /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
@@ -104,7 +103,6 @@
 		5570E1BB2AD65DC100350AF3 /* UIVIew+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVIew+Extension.swift"; sourceTree = "<group>"; };
 		55936CCB2ADD64EE00F2E7E6 /* HapticManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		55936CCD2ADD6AD300F2E7E6 /* UISearchBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Extension.swift"; sourceTree = "<group>"; };
-		55A2ABF02ACB541800927918 /* Exercise.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = Exercise.realm; sourceTree = "<group>"; };
 		55A2ABF32ACC187F00927918 /* ExerciseSetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetViewController.swift; sourceTree = "<group>"; };
 		55A2ABF62ACC191700927918 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		55A2ABF82ACC2F6100927918 /* ExerciseSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetView.swift; sourceTree = "<group>"; };
@@ -195,13 +193,12 @@
 		555E6B5E2AC326CF00DCA052 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				55A2ABF02ACB541800927918 /* Exercise.realm */,
 				555E6B402AC1D76C00DCA052 /* Assets.xcassets */,
 				555E6B422AC1D76C00DCA052 /* LaunchScreen.storyboard */,
 				555E6B452AC1D76C00DCA052 /* Info.plist */,
 				550BA7992ADB045700475042 /* .gitignore */,
-				550BA7A92ADB166800475042 /* remote_config_defaults.plist */,
-				550BA79B2ADB04A500475042 /* GoogleService-Info.plist */,
+				556717112AE11718002430E0 /* GoogleService-Info.plist */,
+				556717122AE11718002430E0 /* remote_config_defaults.plist */,
 				555E6B6E2AC344CC00DCA052 /* Localizable.strings */,
 			);
 			path = Resource;
@@ -420,13 +417,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				550BA7AA2ADB166900475042 /* remote_config_defaults.plist in Resources */,
+				556717142AE11718002430E0 /* remote_config_defaults.plist in Resources */,
 				550BA79A2ADB045700475042 /* .gitignore in Resources */,
-				55A2ABF12ACB542D00927918 /* Exercise.realm in Resources */,
 				555E6B442AC1D76C00DCA052 /* LaunchScreen.storyboard in Resources */,
 				555E6B6C2AC344CC00DCA052 /* Localizable.strings in Resources */,
 				555E6B412AC1D76C00DCA052 /* Assets.xcassets in Resources */,
-				550BA79C2ADB04A500475042 /* GoogleService-Info.plist in Resources */,
+				556717132AE11718002430E0 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

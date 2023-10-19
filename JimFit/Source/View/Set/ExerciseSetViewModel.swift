@@ -28,7 +28,7 @@ protocol ExerciseSetViewModelProtocol {
     func removeExerciseSet(at index: Int)
     func appendExerciseSet()
     func startExerciseTimer()
-    func doneExercise()
+    func startRestTimer()
     func stopExercise()
 }
 
@@ -122,8 +122,8 @@ final class ExerciseSetViewModel: ExerciseSetViewModelProtocol {
         self.timer.startExerciseTimer()
     }
     
-    func doneExercise() {
-        self.timer.doneExercise()
+    func startRestTimer() {
+        self.timer.startRestTimer()
         guard let set = workout.exerciseSets
             .first(where: { $0.isFinished == false })
         else { return }
@@ -134,11 +134,6 @@ final class ExerciseSetViewModel: ExerciseSetViewModelProtocol {
     
     func stopExercise() {
         self.timer.stopTimer()
-        try! realm.write {
-            guard let workoutLog = workout.OriginWorkoutLog.first else { return }
-            workoutLog.exerciseTime = timer.totalExerciseTime
-            workoutLog.restTime = timer.totalRestTime
-        }
     }
     
     // MARK: - Private Methods
