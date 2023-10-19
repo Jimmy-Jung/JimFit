@@ -16,6 +16,9 @@
 "done_workout_title" = "운동 기록 완료";
 "done_workout_message" = "운동을 완료하셨나요?";
 
+// Analysis
+"cool_down" = "쿨다운";
+
 // Log
 "header_date_formatter" = "yyyy년 MM월";
 "grabber_date_formatter" = "MM월 dd일";
