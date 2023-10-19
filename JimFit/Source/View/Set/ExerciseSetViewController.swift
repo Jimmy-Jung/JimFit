@@ -155,7 +155,7 @@ final class ExerciseSetViewController: UIViewController {
         }
     }
     private func doneSetButtonTapped() {
-        viewModel.doneExercise()
+        viewModel.startRestTimer()
         UIView.transition(with: exerciseSetView.timerStackView, duration: 0.3, options: [.transitionCrossDissolve, .curveEaseOut]) {
             self.exerciseSetView.restTimer.activateColor()
             self.exerciseSetView.workoutTimer.deactivateColor()

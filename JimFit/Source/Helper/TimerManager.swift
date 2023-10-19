@@ -43,6 +43,11 @@ final class TimerManager {
     }
     
     func stopTimer() {
+        try! realm.write {
+            workoutLog?.exerciseTime = totalExerciseTime
+            workoutLog?.restTime = totalRestTime
+            workoutLog?.completedTime = Date()
+        }
         exerciseTimer?.invalidate()
         restTimer?.invalidate()
         timerStatus = .paused
@@ -74,7 +79,7 @@ final class TimerManager {
         totalTime += 1
     }
     
-    func doneExercise() {
+    func startRestTimer() {
         if timerStatus != .rest {
             timerStatus = .rest
             setRestTime = 0
@@ -100,17 +105,18 @@ final class TimerManager {
     func saveTimers() {
         exerciseTimer?.invalidate()
         restTimer?.invalidate()
-        UM.savedExerciseStartTime = Date()
-        UM.savedRestStartTime = Date()
+        let now = Date()
+        UM.savedTime = now
         try! realm.write {
             workoutLog?.exerciseTime = totalExerciseTime
             workoutLog?.restTime = totalRestTime
+            workoutLog?.completedTime = now
         }
     }
     
     func restoreTimers() {
         if timerStatus == .exercise {
-            let setTimeInterval = Date().timeIntervalSince(UM.savedExerciseStartTime)
+            let setTimeInterval = Date().timeIntervalSince(UM.savedTime)
             totalExerciseTime += setTimeInterval
             setExerciseTime += setTimeInterval
             exerciseTimer = Timer.scheduledTimer(
@@ -121,7 +127,7 @@ final class TimerManager {
                 repeats: true
             )
         } else if timerStatus == .rest {
-            let setTimeInterval = Date().timeIntervalSince(UM.savedRestStartTime)
+            let setTimeInterval = Date().timeIntervalSince(UM.savedTime)
             totalRestTime += setTimeInterval
             setRestTime += setTimeInterval
             restTimer = Timer.scheduledTimer(

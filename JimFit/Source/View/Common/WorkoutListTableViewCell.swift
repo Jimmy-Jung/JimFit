@@ -6,46 +6,9 @@
 //
 
 import UIKit
+import RealmSwift
 
 final class WorkoutListTableViewCell: UITableViewCell {
-    
-    var workout: Workout? {
-        didSet {
-            guard let workout else { return }
-            guard let exercise = RealmManager.shared.oldRealm.object(ofType: Exercise.self, forPrimaryKey: workout.exerciseReference) else { return }
-            let bodyPartList = exercise.bodyPart.map { $0.localized }
-            let bodyPartString = bodyPartList.joined(separator: ", ")
-            let equipmentTypeString = exercise.equipmentType.localized
-            var secondaryString: String {
-                if equipmentTypeString == "none" {
-                    return bodyPartString
-                } else {
-                    return bodyPartString + " / " + equipmentTypeString
-                }
-            }
-            let weightFloat = workout.exerciseSets
-                .filter {$0.isFinished}
-                .map { $0.weight * $0.repetitionCount}
-                .map { Float($0) }
-                .reduce(0,+)
-            let setCount = workout.exerciseSets.count
-            let setFinishedCount = workout.exerciseSets
-                .filter { $0.isFinished }
-                .count
-            let progression = Float(setFinishedCount) / Float(setCount)
-            titleLabel.text(exercise.exerciseName)
-            titleLabel.sizeToFit()
-            secondaryLabel.text(secondaryString)
-            let weightInTons = weightFloat > 999 ? weightFloat / 1000 : weightFloat
-            let weightUnit = weightFloat > 999 ? "ton" : "kg"
-            weightLabel.text = String(format: "%.0f", weightInTons) + " " + weightUnit
-            setLabel.text(String(describing: setCount) + " set")
-            progressLabel.text(" " + String(Int(progression * 100)) + "%")
-                DispatchQueue.main.async {
-                    self.progressView.setProgress(progression, animated: true)
-            }
-        }
-    }
     
     private let borderView = UIView()
         .cornerRadius(K.Size.cellRadius)
@@ -104,7 +67,7 @@ final class WorkoutListTableViewCell: UITableViewCell {
         .spacing(4)
         .addArrangedSubview(weightImage)
         .addArrangedSubview(weightLabel)
-        
+    
     
     private lazy var setStackView: UIStackView = UIStackView()
         .axis(.horizontal)
@@ -122,7 +85,7 @@ final class WorkoutListTableViewCell: UITableViewCell {
         .addArrangedSubview(weightStackView)
         .addArrangedSubview(setStackView)
         .addArrangedSubview(progressLabel)
-        
+    
     
     private lazy var horizontalStackView: UIStackView = UIStackView()
         .axis(.horizontal)
@@ -132,6 +95,68 @@ final class WorkoutListTableViewCell: UITableViewCell {
         .addArrangedSubview(titleStackView)
         .addArrangedSubview(infoStackView)
     
+    var workout: Workout? {
+        didSet {
+            guard let workout else { return }
+            updateUI(with: workout)
+        }
+    }
+    
+    private func updateUI(with workout: Workout) {
+        guard let exercise = RealmManager.shared
+            .oldRealm
+            .object(ofType: Exercise.self, forPrimaryKey: workout.exerciseReference) else { return }
+        updateTitleLabel(with: exercise.exerciseName)
+        updateSecondaryLabel(with: exercise.bodyPart, equipmentType: exercise.equipmentType)
+        updateWeightLabel(with: workout.exerciseSets)
+        updateSetLabel(with: workout.exerciseSets)
+        updateProgress(with: workout.exerciseSets)
+    }
+    
+    private func updateTitleLabel(with exerciseName: String) {
+        titleLabel.text = exerciseName
+        titleLabel.sizeToFit()
+    }
+    
+    private func updateSecondaryLabel(with bodyPart: List<String>, equipmentType: String) {
+        let bodyPartString = bodyPart.map { $0.localized }.joined(separator: ", ")
+        var secondaryString: String {
+            if equipmentType == "none" {
+                return bodyPartString
+            } else {
+                return bodyPartString + " / " + equipmentType.localized
+            }
+        }
+        secondaryLabel.text = secondaryString
+    }
+    
+    private func updateWeightLabel(with exerciseSets: List<ExerciseSet>) {
+        let weightFloat = exerciseSets
+            .filter { $0.isFinished }
+            .map { $0.weight * $0.repetitionCount }
+            .map { Float($0) }
+            .reduce(0, +)
+        
+        let weightInTons = weightFloat > 999 ? weightFloat / 1000 : weightFloat
+        let weightUnit = weightFloat > 999 ? "ton" : "kg"
+        weightLabel.text = String(format: "%.0f", weightInTons) + " " + weightUnit
+    }
+    
+    private func updateSetLabel(with exerciseSets: List<ExerciseSet>) {
+        let setCount = exerciseSets.count
+        setLabel.text = String(describing: setCount) + " set"
+    }
+    
+    private func updateProgress(with exerciseSets: List<ExerciseSet>) {
+        let setCount = exerciseSets.count
+        let setFinishedCount = exerciseSets.filter { $0.isFinished }.count
+        let progression = Float(setFinishedCount) / Float(setCount)
+        progressLabel.text = " " + String(Int(progression * 100)) + "%"
+        DispatchQueue.main.async {
+            self.progressView.setProgress(progression, animated: true)
+        }
+    }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         progressView.setProgress(0, animated: true)
@@ -139,6 +164,10 @@ final class WorkoutListTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        configureUI()
+    }
+    
+    private func configureUI() {
         contentView.addSubview(borderView)
         
         borderView.snp.makeConstraints { make in
@@ -195,5 +224,9 @@ final class WorkoutListTableViewCell: UITableViewCell {
             }
         }
     }
+    
+}
 
+extension WorkoutListTableViewCell {
+    
 }
