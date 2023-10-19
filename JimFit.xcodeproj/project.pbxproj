@@ -43,6 +43,8 @@
 		555E6B9C2AC7F3B100DCA052 /* WorkoutLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E6B9B2AC7F3B100DCA052 /* WorkoutLog.swift */; };
 		556717132AE11718002430E0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 556717112AE11718002430E0 /* GoogleService-Info.plist */; };
 		556717142AE11718002430E0 /* remote_config_defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 556717122AE11718002430E0 /* remote_config_defaults.plist */; };
+		556717182AE11ADB002430E0 /* RecoveryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556717162AE11ADB002430E0 /* RecoveryViewModel.swift */; };
+		556717192AE11ADB002430E0 /* RecoveryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556717172AE11ADB002430E0 /* RecoveryView.swift */; };
 		5570E1A62AD2F52400350AF3 /* UITextField+Exension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5570E1A52AD2F52400350AF3 /* UITextField+Exension.swift */; };
 		5570E1A82AD3AFEB00350AF3 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5570E1A72AD3AFEB00350AF3 /* TimerManager.swift */; };
 		5570E1AA2AD3CB5700350AF3 /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5570E1A92AD3CB5700350AF3 /* UserDefaultManager.swift */; };
@@ -92,6 +94,8 @@
 		555E6B9B2AC7F3B100DCA052 /* WorkoutLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutLog.swift; sourceTree = "<group>"; };
 		556717112AE11718002430E0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		556717122AE11718002430E0 /* remote_config_defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = remote_config_defaults.plist; sourceTree = "<group>"; };
+		556717162AE11ADB002430E0 /* RecoveryViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecoveryViewModel.swift; sourceTree = "<group>"; };
+		556717172AE11ADB002430E0 /* RecoveryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecoveryView.swift; sourceTree = "<group>"; };
 		5570E1A52AD2F52400350AF3 /* UITextField+Exension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Exension.swift"; sourceTree = "<group>"; };
 		5570E1A72AD3AFEB00350AF3 /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		5570E1A92AD3CB5700350AF3 /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
@@ -216,6 +220,7 @@
 		555E6B602AC326E900DCA052 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				556717152AE11ADB002430E0 /* Analysis */,
 				550BA7B22ADC422A00475042 /* Loading */,
 				555E6B722AC34D9400DCA052 /* Common */,
 				555E6B792AC44CCB00DCA052 /* TabBar */,
@@ -312,6 +317,15 @@
 				555E6B562AC3086500DCA052 /* WorkoutLogViewController.swift */,
 			);
 			path = Log;
+			sourceTree = "<group>";
+		};
+		556717152AE11ADB002430E0 /* Analysis */ = {
+			isa = PBXGroup;
+			children = (
+				556717162AE11ADB002430E0 /* RecoveryViewModel.swift */,
+				556717172AE11ADB002430E0 /* RecoveryView.swift */,
+			);
+			path = Analysis;
 			sourceTree = "<group>";
 		};
 		55A2ABF22ACC183400927918 /* Search */ = {
@@ -467,6 +481,7 @@
 				55936CCE2ADD6AD300F2E7E6 /* UISearchBar+Extension.swift in Sources */,
 				555E6B662AC3285B00DCA052 /* Constants.swift in Sources */,
 				555E6B7B2AC44D4700DCA052 /* TabBarController.swift in Sources */,
+				556717192AE11ADB002430E0 /* RecoveryView.swift in Sources */,
 				550BA7B42ADC424100475042 /* LoadingViewController.swift in Sources */,
 				5570E1BC2AD65DC100350AF3 /* UIVIew+Extension.swift in Sources */,
 				5570E1B32AD3F03300350AF3 /* TitleTimerView.swift in Sources */,
@@ -479,6 +494,7 @@
 				555E6B7D2AC4663000DCA052 /* AddButtonTableViewCell.swift in Sources */,
 				5570E1B72AD43CFB00350AF3 /* DateFormatter+Extension.swift in Sources */,
 				555E6B922AC5796F00DCA052 /* ExerciseDetail.swift in Sources */,
+				556717182AE11ADB002430E0 /* RecoveryViewModel.swift in Sources */,
 				5570E1A82AD3AFEB00350AF3 /* TimerManager.swift in Sources */,
 				5570E1A62AD2F52400350AF3 /* UITextField+Exension.swift in Sources */,
 				555E6B382AC1D76B00DCA052 /* AppDelegate.swift in Sources */,
