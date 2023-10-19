@@ -12,6 +12,7 @@ final class WorkoutLog: Object {
     @Persisted(primaryKey: true) var workoutDate: String
     @Persisted var exerciseTime: TimeInterval
     @Persisted var restTime: TimeInterval
+    @Persisted var completedTime: Date?
     @Persisted var workoutMemo: String
     @Persisted var workouts = List<Workout>()
     

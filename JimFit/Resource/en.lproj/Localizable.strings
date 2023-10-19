@@ -1,4 +1,4 @@
-/* 
+/*
   Localizable.strings
   JimFit
 
@@ -21,7 +21,6 @@
 "grabber_date_formatter" = "dd MMM";
 "workout" = " Workout";
 "workout_log" = "Workout Log";
-"log" = "Log";
 
 // Search
 "selection_list%@" = "Choices %@/12";

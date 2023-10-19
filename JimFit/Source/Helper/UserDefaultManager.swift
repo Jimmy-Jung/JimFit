@@ -11,11 +11,8 @@ typealias UM = UserDefaultManager
 
 struct UserDefaultManager {
     
-    @UserDefault(key: KeyEnum.savedExerciseStartTime.rawValue, defaultValue: Date())
-    static var savedExerciseStartTime: Date
-    
-    @UserDefault(key: KeyEnum.savedRestStartTime.rawValue, defaultValue: Date())
-    static var savedRestStartTime: Date
+    @UserDefault(key: KeyEnum.savedTime.rawValue, defaultValue: Date())
+    static var savedTime: Date
     
     @UserDefault(key: KeyEnum.ETag.rawValue, defaultValue: "")
     static var ETag: String
@@ -27,8 +24,7 @@ struct UserDefaultManager {
     static var finishedLaunch: Bool
     
     enum KeyEnum: String {
-        case savedExerciseStartTime
-        case savedRestStartTime
+        case savedTime
         case ETag
         case currentLanguage
         case finishedLaunch
