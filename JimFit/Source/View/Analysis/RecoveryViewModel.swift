@@ -12,5 +12,4 @@ import RxRelay
 
 final class RecoveryViewModel {
 
-    
 }
