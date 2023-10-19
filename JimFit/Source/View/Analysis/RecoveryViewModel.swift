@@ -11,7 +11,6 @@ import RxSwift
 import RxRelay
 
 final class RecoveryViewModel {
-    let imageBlender: ImageBlender
     let exerciseInfoManager = ExerciseInfoManager()
     var frontImagePublisher = PublishRelay<UIImage>()
     var backImagePublisher = PublishRelay<UIImage>()
@@ -19,28 +18,16 @@ final class RecoveryViewModel {
     var disposeBag = DisposeBag()
     
     init() {
-        let exerciseInfo = exerciseInfoManager.getExerciseInfoFromWorkoutLogs(period: .threeDays)
-        imageBlender = ImageBlender(exerciseInfos: exerciseInfo)
+        
+        binding()
     }
     
     func binding() {
-        DispatchQueue.global().async { [weak self] in
-            guard let self else { return }
-            let (frontImage, backImage): (UIImage, UIImage) = imageBlender.getBlendedImage()
-            Observable<UIImage>
-                .just(frontImage)
-                .bind(to: frontImagePublisher)
-                .disposed(by: disposeBag)
-            
-            Observable<UIImage>
-                .just(backImage)
-                .bind(to: backImagePublisher)
-                .disposed(by: disposeBag)
-            
-            Observable<Bool>
-                .just(false)
-                .bind(to: loadingProgressStatePublisher)
-                .disposed(by: disposeBag)
-        }
+        let exerciseInfo = exerciseInfoManager.getExerciseInfoFromWorkoutLogs(period: .threeDays)
+        let imageBlender = ImageBlender(exerciseInfos: exerciseInfo)
+        let (frontImage, backImage): (UIImage, UIImage) = imageBlender.getBlendedImage()
+        self.frontImagePublisher.accept(frontImage)
+        self.backImagePublisher.accept(backImage)
+        self.loadingProgressStatePublisher.accept(false)
     }
 }

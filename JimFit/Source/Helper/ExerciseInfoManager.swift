@@ -9,6 +9,7 @@ import Foundation
 
 struct ExerciseInfo {
     var workoutDate: String
+    var completedTime: Date
     var bodyParts: [String]
     var targetMuscles: [String]
 }
@@ -31,24 +32,26 @@ struct ExerciseInfoManager {
         var exerciseInfos: [ExerciseInfo] = []
 
         for workoutLog in workoutLogs {
-            let workoutDate = workoutLog.workoutDate
-
-            for workout in workoutLog.workouts {
-                let exercise = realm.object(ofType: Exercise.self, forPrimaryKey: workout.exerciseReference)
-
-                var bodyParts: [String] = []
-                var targetMuscles: [String] = []
-
-                if let exerciseBodyParts = exercise?.bodyPart {
-                    bodyParts.append(contentsOf: exerciseBodyParts)
+            if let completedTime = workoutLog.completedTime {
+                let workoutDate = workoutLog.workoutDate
+                
+                for workout in workoutLog.workouts {
+                    let exercise = realm.object(ofType: Exercise.self, forPrimaryKey: workout.exerciseReference)
+                    
+                    var bodyParts: [String] = []
+                    var targetMuscles: [String] = []
+                    
+                    if let exerciseBodyParts = exercise?.bodyPart {
+                        bodyParts.append(contentsOf: exerciseBodyParts)
+                    }
+                    
+                    if let exerciseTargetMuscles = exercise?.targetMuscles {
+                        targetMuscles.append(contentsOf: exerciseTargetMuscles)
+                    }
+                    
+                    let exerciseInfo = ExerciseInfo(workoutDate: workoutDate, completedTime: completedTime, bodyParts: bodyParts, targetMuscles: targetMuscles)
+                    exerciseInfos.append(exerciseInfo)
                 }
-
-                if let exerciseTargetMuscles = exercise?.targetMuscles {
-                    targetMuscles.append(contentsOf: exerciseTargetMuscles)
-                }
-
-                let exerciseInfo = ExerciseInfo(workoutDate: workoutDate, bodyParts: bodyParts, targetMuscles: targetMuscles)
-                exerciseInfos.append(exerciseInfo)
             }
         }
 

@@ -47,6 +47,7 @@
 		556717192AE11ADB002430E0 /* RecoveryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556717172AE11ADB002430E0 /* RecoveryView.swift */; };
 		5567171B2AE153A2002430E0 /* ImageBlender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5567171A2AE153A2002430E0 /* ImageBlender.swift */; };
 		5567171D2AE158BF002430E0 /* ExerciseInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5567171C2AE158BF002430E0 /* ExerciseInfoManager.swift */; };
+		5567171F2AE166B1002430E0 /* RecoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5567171E2AE166B1002430E0 /* RecoveryViewController.swift */; };
 		5570E1A62AD2F52400350AF3 /* UITextField+Exension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5570E1A52AD2F52400350AF3 /* UITextField+Exension.swift */; };
 		5570E1A82AD3AFEB00350AF3 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5570E1A72AD3AFEB00350AF3 /* TimerManager.swift */; };
 		5570E1AA2AD3CB5700350AF3 /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5570E1A92AD3CB5700350AF3 /* UserDefaultManager.swift */; };
@@ -100,6 +101,7 @@
 		556717172AE11ADB002430E0 /* RecoveryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecoveryView.swift; sourceTree = "<group>"; };
 		5567171A2AE153A2002430E0 /* ImageBlender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBlender.swift; sourceTree = "<group>"; };
 		5567171C2AE158BF002430E0 /* ExerciseInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseInfoManager.swift; sourceTree = "<group>"; };
+		5567171E2AE166B1002430E0 /* RecoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryViewController.swift; sourceTree = "<group>"; };
 		5570E1A52AD2F52400350AF3 /* UITextField+Exension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Exension.swift"; sourceTree = "<group>"; };
 		5570E1A72AD3AFEB00350AF3 /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		5570E1A92AD3CB5700350AF3 /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 			children = (
 				556717162AE11ADB002430E0 /* RecoveryViewModel.swift */,
 				556717172AE11ADB002430E0 /* RecoveryView.swift */,
+				5567171E2AE166B1002430E0 /* RecoveryViewController.swift */,
 			);
 			path = Analysis;
 			sourceTree = "<group>";
@@ -483,6 +486,7 @@
 				555E6B9A2AC72ECF00DCA052 /* RealmManager.swift in Sources */,
 				550BA7AC2ADB1CB600475042 /* FireStorage.swift in Sources */,
 				555E6B782AC42CB500DCA052 /* GrabberView.swift in Sources */,
+				5567171F2AE166B1002430E0 /* RecoveryViewController.swift in Sources */,
 				550BA7722AD7DE2F00475042 /* UIViewController+Extension.swift in Sources */,
 				55936CCE2ADD6AD300F2E7E6 /* UISearchBar+Extension.swift in Sources */,
 				555E6B662AC3285B00DCA052 /* Constants.swift in Sources */,
@@ -679,7 +683,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Jimmy.JimFit;
+				PRODUCT_BUNDLE_IDENTIFIER = Jimmy.JimFit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -709,7 +713,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Jimmy.JimFit;
+				PRODUCT_BUNDLE_IDENTIFIER = Jimmy.JimFit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

@@ -25,7 +25,10 @@ final class TabBarController: UITabBarController {
         firstVC.tabBarItem.image = K.Image.Calendar
         firstVC.tabBarItem.title = "log".localized
         
-        setViewControllers([firstNav], animated: true)
+        let secondVC = RecoveryViewController()
+        secondVC.title = "recovery".localized
+        
+        setViewControllers([firstNav, secondVC], animated: true)
     }
     
     private func setupTabBarController() {

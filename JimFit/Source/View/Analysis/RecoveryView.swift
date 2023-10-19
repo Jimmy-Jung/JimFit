@@ -9,8 +9,9 @@ import UIKit
 
 final class RecoveryView: UIView {
     
+    let loadingProgressView = UIActivityIndicatorView(style: .large)
+    
     private lazy var containerView = UIView()
-        .addSubView(imageStackView)
     
     private lazy var imageStackView: UIStackView = UIStackView()
         .axis(.horizontal)
@@ -21,7 +22,11 @@ final class RecoveryView: UIView {
         .addArrangedSubview(backImageView)
     
     let frontImageView = UIImageView()
+        .image(UIImage(named: "mail_front_Adductor Magnus"))
+        .contentMode(.scaleAspectFit)
     let backImageView = UIImageView()
+        .image(UIImage(named: "mail_back_Forearms"))
+        .contentMode(.scaleAspectFit)
     
     private let coolDownLabel = UILabel()
         .text("cool_down".localized)
@@ -35,6 +40,7 @@ final class RecoveryView: UIView {
     }
     
     let progressLabel = UILabel()
+        .text("70%")
         .textColor(K.Color.Grayscale.Label)
         .font(K.Font.CellBody)
     
@@ -61,6 +67,7 @@ final class RecoveryView: UIView {
             make.horizontalEdges.equalToSuperview().inset(16)
         }
         
+        containerView.addSubView(imageStackView)
         imageStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -69,6 +76,7 @@ final class RecoveryView: UIView {
         progressStackView.snp.makeConstraints { make in
             make.top.equalTo(containerView.snp.bottom).offset(16)
             make.horizontalEdges.equalToSuperview().inset(20)
+            make.height.equalTo(30)
         }
         
         progressView.snp.makeConstraints { make in
@@ -79,6 +87,7 @@ final class RecoveryView: UIView {
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(progressStackView.snp.bottom).offset(16)
             make.horizontalEdges.equalToSuperview().inset(20)
+            make.height.equalTo(200)
             make.bottom.equalToSuperview()
         }
     }
