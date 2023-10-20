@@ -18,6 +18,8 @@ final class RecoveryViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         bind()
+        recoveryView.collectionView.delegate = self
+        recoveryView.collectionView.dataSource = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -26,7 +28,7 @@ final class RecoveryViewController: UIViewController {
     }
     
     private func setupUI() {
-        view.backgroundColor(.systemBackground)
+        view.backgroundColor(K.Color.Primary.Background)
         view.addSubview(recoveryView)
         recoveryView.snp.makeConstraints {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
@@ -40,23 +42,19 @@ final class RecoveryViewController: UIViewController {
         viewModel.backImagePublisher
             .bind(to: recoveryView.backImageView.rx.image)
             .disposed(by: disposeBag)
-//        viewModel.frontImagePublisher
-//            .subscribe(onNext: { [weak self] image in
-//                print(image)
-//                self?.recoveryView.frontImageView.image = image
-//            })
-//            .disposed(by: disposeBag)
-        
-        viewModel.loadingProgressStatePublisher
-            .subscribe(onNext: { [weak self] state in
-                print(state)
-                if state {
-                    self?.recoveryView.loadingProgressView.startAnimating()
-                } else {
-                    self?.recoveryView.loadingProgressView.stopAnimating()
-                }
-            })
-            .disposed(by: disposeBag)
     }
+    
+}
+
+extension RecoveryViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecoveryCollectionViewCell.identifier, for: indexPath)
+        return cell
+    }
+    
     
 }

@@ -48,8 +48,11 @@ final class WorkoutListTableViewCell: UITableViewCell {
         .font(K.Font.CellBody)
         .textColor(K.Color.Primary.Label)
     
-    private let progressView: UIProgressView = UIProgressView().then {
-        $0.trackTintColor = K.Color.Grayscale.SecondaryFill
+    private lazy var progressContentView = UIView()
+        .addSubView(progressBar)
+    
+    private let progressBar: UIProgressView = UIProgressView().then {
+        $0.trackTintColor = K.Color.Grayscale.Selected
         $0.progressTintColor = K.Color.Primary.Green
         $0.progress = 0
     }
@@ -65,7 +68,7 @@ final class WorkoutListTableViewCell: UITableViewCell {
         .spacing(4)
         .addArrangedSubview(titleLabel)
         .addArrangedSubview(secondaryLabel)
-        .addArrangedSubview(progressView)
+        .addArrangedSubview(progressContentView)
     
     private lazy var weightStackView: UIStackView = UIStackView()
         .axis(.horizontal)
@@ -102,7 +105,7 @@ final class WorkoutListTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        progressView.setProgress(0, animated: true)
+        progressBar.setProgress(0, animated: true)
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -188,7 +191,7 @@ extension WorkoutListTableViewCell {
         let progression = Float(setFinishedCount) / Float(setCount)
         progressLabel.text = " " + String(Int(progression * 100)) + "%"
         DispatchQueue.main.async {
-            self.progressView.setProgress(progression, animated: true)
+            self.progressBar.setProgress(progression, animated: true)
         }
     }
     
@@ -219,8 +222,11 @@ extension WorkoutListTableViewCell {
         titleLabel.snp.makeConstraints { make in
             make.height.equalTo(36)
         }
-        progressView.snp.makeConstraints { make in
+        progressBar.snp.makeConstraints { make in
             make.height.equalTo(6)
+            make.top.equalToSuperview().inset(4)
+            make.bottom.equalToSuperview().inset(4)
+            make.horizontalEdges.equalToSuperview()
         }
         // 코너 부드럽게
         borderView.layer.cornerCurve = .continuous

@@ -80,6 +80,9 @@ final class ExerciseSetViewModel: ExerciseSetViewModelProtocol {
                 self.isActiveTimerButton = false
             }
         }
+        if workoutLog.workoutDate != Date().convert(to: .primaryKey) {
+            self.isActiveTimerButton = false
+        }
     }
     
     // MARK: - Methods
