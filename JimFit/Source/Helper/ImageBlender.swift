@@ -8,18 +8,43 @@
 import UIKit
 import RealmSwift
 
+struct TargetImage {
+    var targetImage: [UIImage]
+    var alpha: CGFloat
+}
+
 struct ImageBlender {
     var exerciseInfos: [ExerciseInfo]
     init(exerciseInfos: [ExerciseInfo]) {
         self.exerciseInfos = exerciseInfos
     }
     
+    func getTargetImages() -> [TargetImage] {
+        return exerciseInfos.map { getTargetImage(exerciseInfo: $0) }
+    }
+    
+    private func getTargetImage(exerciseInfo: ExerciseInfo) -> TargetImage {
+        let alpha = hourPassedSince(date: exerciseInfos.first!.completedTime)
+        let bodyParts = exerciseInfo.bodyParts
+        let targetMuscles = exerciseInfo.targetMuscles
+        var targetImage = Set<UIImage>()
+        bodyParts.forEach {
+            if let image = UIImage(named: "mail_target_\($0)") {
+                targetImage.insert(image)
+            }
+        }
+        targetMuscles.forEach {
+            if let image = UIImage(named: "mail_target_\($0)") {
+                targetImage.insert(image)
+            }
+        }
+        return TargetImage(targetImage: Array(targetImage), alpha: alpha)
+    }
+    
     func getBlendedImage() -> (UIImage, UIImage) {
-        dump(exerciseInfos)
         var frontImage = [UIImage(named: "mail_front")!]
         var backImage = [UIImage(named: "mail_back")!]
         exerciseInfos.forEach {
-            print("count")
             let (front, back) = blendImage(exerciseInfo: $0)
             frontImage.append(front)
             backImage.append(back)
@@ -70,7 +95,7 @@ struct ImageBlender {
     ///
     /// - Parameters:
     ///   - images: 합성할 이미지 배열
-    ///   - alpha: 각 이미지의 투명도 배열 (기본값: 1.0)
+    ///   - alpha: 이미지의 투명도
     /// - Returns: 합성된 이미지
     private func blendImagesWithDarken(images: [UIImage], alpha: CGFloat) -> UIImage {
         guard let firstImage = images.first else { return UIImage() }

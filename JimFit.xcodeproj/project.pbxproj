@@ -48,6 +48,7 @@
 		5567171B2AE153A2002430E0 /* ImageBlender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5567171A2AE153A2002430E0 /* ImageBlender.swift */; };
 		5567171D2AE158BF002430E0 /* ExerciseInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5567171C2AE158BF002430E0 /* ExerciseInfoManager.swift */; };
 		5567171F2AE166B1002430E0 /* RecoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5567171E2AE166B1002430E0 /* RecoveryViewController.swift */; };
+		556717222AE27927002430E0 /* RecoveryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556717212AE27927002430E0 /* RecoveryCollectionViewCell.swift */; };
 		5570E1A62AD2F52400350AF3 /* UITextField+Exension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5570E1A52AD2F52400350AF3 /* UITextField+Exension.swift */; };
 		5570E1A82AD3AFEB00350AF3 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5570E1A72AD3AFEB00350AF3 /* TimerManager.swift */; };
 		5570E1AA2AD3CB5700350AF3 /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5570E1A92AD3CB5700350AF3 /* UserDefaultManager.swift */; };
@@ -102,6 +103,7 @@
 		5567171A2AE153A2002430E0 /* ImageBlender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBlender.swift; sourceTree = "<group>"; };
 		5567171C2AE158BF002430E0 /* ExerciseInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseInfoManager.swift; sourceTree = "<group>"; };
 		5567171E2AE166B1002430E0 /* RecoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryViewController.swift; sourceTree = "<group>"; };
+		556717212AE27927002430E0 /* RecoveryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryCollectionViewCell.swift; sourceTree = "<group>"; };
 		5570E1A52AD2F52400350AF3 /* UITextField+Exension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Exension.swift"; sourceTree = "<group>"; };
 		5570E1A72AD3AFEB00350AF3 /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		5570E1A92AD3CB5700350AF3 /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 				555E6B772AC42CB500DCA052 /* GrabberView.swift */,
 				55A2ABF62ACC191700927918 /* TimerView.swift */,
 				5570E1B22AD3F03300350AF3 /* TitleTimerView.swift */,
+				556717212AE27927002430E0 /* RecoveryCollectionViewCell.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -508,6 +511,7 @@
 				555E6B922AC5796F00DCA052 /* ExerciseDetail.swift in Sources */,
 				556717182AE11ADB002430E0 /* RecoveryViewModel.swift in Sources */,
 				5570E1A82AD3AFEB00350AF3 /* TimerManager.swift in Sources */,
+				556717222AE27927002430E0 /* RecoveryCollectionViewCell.swift in Sources */,
 				5570E1A62AD2F52400350AF3 /* UITextField+Exension.swift in Sources */,
 				555E6B382AC1D76B00DCA052 /* AppDelegate.swift in Sources */,
 				55A2ABF42ACC187F00927918 /* ExerciseSetViewController.swift in Sources */,

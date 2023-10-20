@@ -14,7 +14,6 @@ final class RecoveryViewModel {
     let exerciseInfoManager = ExerciseInfoManager()
     var frontImagePublisher = PublishRelay<UIImage>()
     var backImagePublisher = PublishRelay<UIImage>()
-    var loadingProgressStatePublisher = BehaviorRelay<Bool>(value: true)
     var disposeBag = DisposeBag()
     
     init() {
@@ -28,6 +27,5 @@ final class RecoveryViewModel {
         let (frontImage, backImage): (UIImage, UIImage) = imageBlender.getBlendedImage()
         self.frontImagePublisher.accept(frontImage)
         self.backImagePublisher.accept(backImage)
-        self.loadingProgressStatePublisher.accept(false)
     }
 }

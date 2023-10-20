@@ -23,12 +23,14 @@ final class TabBarController: UITabBarController {
         let firstNav = UINavigationController(rootViewController: firstVC)
         firstVC.title = "workout_log".localized
         firstVC.tabBarItem.image = K.Image.Calendar
-        firstVC.tabBarItem.title = "log".localized
+        firstVC.tabBarItem.title = nil
         
         let secondVC = RecoveryViewController()
-        secondVC.title = "recovery".localized
-        
-        setViewControllers([firstNav, secondVC], animated: true)
+        let secondNav = UINavigationController(rootViewController: secondVC)
+        secondVC.title = "analysis".localized
+        secondVC.tabBarItem.image = K.Image.ChartPie
+        secondVC.tabBarItem.title = nil
+        setViewControllers([firstNav, secondNav], animated: true)
     }
     
     private func setupTabBarController() {

@@ -28,7 +28,7 @@ enum K {
             static let Tint = UIColor.systemGray3
             static let Selected = UIColor.systemGray5
             static let Background = UIColor.systemGray6
-            static let SecondaryBackground = UIColor.secondarySystemGroupedBackground
+            static let SecondaryBackground = UIColor(named: "SecondaryBackground")!
             static let SecondaryFill = UIColor(named: "SecondaryFill")!
         }
         
@@ -47,7 +47,10 @@ enum K {
         static let Bolt = UIImage(systemName: "bolt.fill")?.font(Font.Body3)
         static let Dumbbell = UIImage(systemName: "dumbbell.fill")?
             .font(Font.Body3)
-        static let Calendar = UIImage(systemName: "calendar")
+        static let Calendar = UIImage(systemName: "calendar")?
+            .font(.boldSystemFont(ofSize: 20))
+        static let ChartPie = UIImage(systemName: "chart.pie")?
+            .font(.boldSystemFont(ofSize: 20))
     }
     
     enum Font {

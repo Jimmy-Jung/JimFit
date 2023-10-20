@@ -17,7 +17,9 @@
 "done_workout_message" = "운동을 완료하셨나요?";
 
 // Analysis
-"cool_down" = "쿨다운";
+"muscle_fatigue" = "근육 피로도";
+"total_fatigue" = "전체 피로도";
+"analysis" = "분석";
 
 // Log
 "header_date_formatter" = "yyyy년 MM월";

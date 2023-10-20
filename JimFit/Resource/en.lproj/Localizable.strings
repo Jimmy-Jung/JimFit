@@ -17,7 +17,9 @@
 "done_workout_message" = "Have you completed your workout?";
 
 // Analysis
-"cool_down" = "Cool Down";
+"muscle_fatigue" = "Muscle Fatigue";
+"total_fatigue" = "Total Fatigue";
+"analysis" = "Analysis";
 
 // Log
 "header_date_formatter" = "MMMM yyyy";
