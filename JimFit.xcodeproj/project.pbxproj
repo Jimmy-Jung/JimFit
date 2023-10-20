@@ -72,6 +72,7 @@
 		55A2ABF72ACC191700927918 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A2ABF62ACC191700927918 /* TimerView.swift */; };
 		55A2ABF92ACC2F6100927918 /* ExerciseSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A2ABF82ACC2F6100927918 /* ExerciseSetView.swift */; };
 		55A2ABFB2ACC351C00927918 /* ExerciseSetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A2ABFA2ACC351C00927918 /* ExerciseSetTableViewCell.swift */; };
+		55E42E4E2AE316F500AA67D3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55E42E502AE316F500AA67D3 /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -131,6 +132,8 @@
 		55A2ABF62ACC191700927918 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		55A2ABF82ACC2F6100927918 /* ExerciseSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetView.swift; sourceTree = "<group>"; };
 		55A2ABFA2ACC351C00927918 /* ExerciseSetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetTableViewCell.swift; sourceTree = "<group>"; };
+		55E42E4F2AE316F500AA67D3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		55E42E512AE316F800AA67D3 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +227,7 @@
 				556717112AE11718002430E0 /* GoogleService-Info.plist */,
 				556717122AE11718002430E0 /* remote_config_defaults.plist */,
 				555E6B6E2AC344CC00DCA052 /* Localizable.strings */,
+				55E42E502AE316F500AA67D3 /* InfoPlist.strings */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -494,6 +498,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				556717142AE11718002430E0 /* remote_config_defaults.plist in Resources */,
+				55E42E4E2AE316F500AA67D3 /* InfoPlist.strings in Resources */,
 				550BA79A2ADB045700475042 /* .gitignore in Resources */,
 				555E6B442AC1D76C00DCA052 /* LaunchScreen.storyboard in Resources */,
 				555E6B6C2AC344CC00DCA052 /* Localizable.strings in Resources */,
@@ -602,6 +607,15 @@
 				555E6B6F2AC344DD00DCA052 /* ko */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		55E42E502AE316F500AA67D3 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55E42E4F2AE316F500AA67D3 /* en */,
+				55E42E512AE316F800AA67D3 /* ko */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -729,11 +743,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 20231021;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = VJ2VF4KUF7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = JimFit/Resource/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CFBundleDisplayName;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -742,7 +758,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Jimmy.JimFit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -760,10 +776,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 20231021;
 				DEVELOPMENT_TEAM = VJ2VF4KUF7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = JimFit/Resource/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CFBundleDisplayName;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -772,7 +790,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Jimmy.JimFit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

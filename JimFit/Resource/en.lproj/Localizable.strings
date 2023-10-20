@@ -18,6 +18,7 @@
 
 // Setting
 "setting" = "Setting";
+"notification" = "Notification";
 "send_feedback" = "Send Feedback";
 "email_subject" = "[JimFit] Feedback";
 "fail_send_email" = "Fail to send email";

@@ -40,6 +40,7 @@ final class SettingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNavigationBarAppearance(backgroundColor: K.Color.Primary.Background)
         configureData()
         configureUI()
         tableView.delegate = self
@@ -76,12 +77,13 @@ final class SettingViewController: UIViewController {
                 ),
                 .staticCell(
                     model: SettingsOption(
-                        title: "알림",
+                        title: "notification".localized,
                         icon: UIImage(systemName: "bell.fill"),
                         iconBackgroundColor: .systemRed,
                         handler: {
                             let vc = NotificationViewController()
-                            vc.navigationItem.title = "알림"
+                            vc.navigationItem.title = "notification".localized
+                            
                             self.navigationController?
                                 .pushViewController(vc, animated: true)
                         }

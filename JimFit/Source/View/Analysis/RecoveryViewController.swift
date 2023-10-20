@@ -16,6 +16,7 @@ final class RecoveryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNavigationBarAppearance(backgroundColor: K.Color.Primary.Background)
         setupUI()
         bind()
     }

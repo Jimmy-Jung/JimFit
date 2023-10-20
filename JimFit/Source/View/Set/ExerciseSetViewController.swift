@@ -130,7 +130,6 @@ final class ExerciseSetViewController: UIViewController {
     }
     
     private func configureView() {
-        navigationController?.navigationBar.tintColor = .label
         view.backgroundColor(K.Color.Grayscale.SecondaryBackground)
         view.addSubview(exerciseSetView)
         exerciseSetView.snp.makeConstraints { make in

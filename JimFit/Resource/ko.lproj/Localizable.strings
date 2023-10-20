@@ -18,7 +18,8 @@
 
 // Setting
 "setting" = "설정";
-"send_feedback" = "피드백 보내기";
+"notification" = "알림";
+"send_feedback" = "문의하기";
 "email_subject" = "[JimFit] 피드백";
 "fail_send_email" = "이메일 전송에 실패";
 "fail_send_email_message" = "'Mail' 앱이 설치되어 있지 않습니다.";

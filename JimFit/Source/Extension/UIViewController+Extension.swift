@@ -25,15 +25,15 @@ extension UIViewController {
         present(alert, animated: true)
     }
     
-    func setNavigationBarAppearance() {
+    func setNavigationBarAppearance(backgroundColor: UIColor = K.Color.Grayscale.SecondaryBackground) {
         let navigationBarAppearance = UINavigationBarAppearance()
         navigationBarAppearance.configureWithOpaqueBackground()
-        navigationBarAppearance.backgroundColor = .systemBackground
+        navigationBarAppearance.backgroundColor = backgroundColor
         navigationBarAppearance.shadowColor = nil
         
         let attribute :[NSAttributedString.Key: Any] = [NSAttributedString.Key.font : K.Font.Header1]
         navigationBarAppearance.titleTextAttributes = attribute
-        
+        navigationController?.navigationBar.tintColor = .label
         navigationItem.scrollEdgeAppearance = navigationBarAppearance
         navigationItem.standardAppearance = navigationBarAppearance
         navigationController?.setNeedsStatusBarAppearanceUpdate()
