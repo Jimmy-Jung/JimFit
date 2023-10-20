@@ -64,7 +64,6 @@ final class RecoveryView: UIView {
         super.init(frame: frame)
         setupConstraints()
         configureCollectionView()
-        progressBar.setProgress(1, animated: true)
     }
     
     private func setupConstraints() {

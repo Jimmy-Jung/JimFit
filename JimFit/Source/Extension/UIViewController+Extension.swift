@@ -24,4 +24,18 @@ extension UIViewController {
         alert.addAction(cancelAction)
         present(alert, animated: true)
     }
+    
+    func setNavigationBarAppearance() {
+        let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.configureWithOpaqueBackground()
+        navigationBarAppearance.backgroundColor = .systemBackground
+        navigationBarAppearance.shadowColor = nil
+        
+        let attribute :[NSAttributedString.Key: Any] = [NSAttributedString.Key.font : K.Font.Header1]
+        navigationBarAppearance.titleTextAttributes = attribute
+        
+        navigationItem.scrollEdgeAppearance = navigationBarAppearance
+        navigationItem.standardAppearance = navigationBarAppearance
+        navigationController?.setNeedsStatusBarAppearanceUpdate()
+    }
 }

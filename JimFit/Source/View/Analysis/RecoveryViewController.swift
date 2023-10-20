@@ -58,7 +58,7 @@ final class RecoveryViewController: UIViewController {
         viewModel.fatiguePublisher
             .subscribe(onNext: { [weak self] in
                 self?.recoveryView.progressBar.setProgress($0, animated: true)
-                self?.recoveryView.progressLabel.text(String(Int($0*100)) + "%")
+                self?.recoveryView.progressLabel.text(String(format: "%.0f%%", $0.isNaN ? 0 : $0 * 100))
             })
             .disposed(by: disposeBag)
     }
