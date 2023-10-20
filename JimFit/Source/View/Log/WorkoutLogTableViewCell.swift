@@ -8,7 +8,7 @@
 import UIKit
 import RealmSwift
 
-final class WorkoutListTableViewCell: UITableViewCell {
+final class WorkoutLogTableViewCell: UITableViewCell {
     
     var workout: Workout? {
         didSet {
@@ -138,7 +138,7 @@ final class WorkoutListTableViewCell: UITableViewCell {
     }
 }
 
-extension WorkoutListTableViewCell {
+extension WorkoutLogTableViewCell {
     
     private func updateUI(with workout: Workout) {
         guard let exercise = RealmManager.shared

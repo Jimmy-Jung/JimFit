@@ -8,9 +8,10 @@
 import UIKit
 import RealmSwift
 
-struct TargetImage {
-    var targetImage: [UIImage]
-    var alpha: CGFloat
+struct TargetInfo: Hashable {
+    let targetName: String
+    let targetImage: UIImage
+    let alpha: Float
 }
 
 struct ImageBlender {
@@ -19,26 +20,38 @@ struct ImageBlender {
         self.exerciseInfos = exerciseInfos
     }
     
-    func getTargetImages() -> [TargetImage] {
-        return exerciseInfos.map { getTargetImage(exerciseInfo: $0) }
+    func getTargetImages() -> [TargetInfo] {
+        var targetImages = [TargetInfo]()
+        for exerciseInfo in exerciseInfos {
+            let targetImage = getTargetImage(exerciseInfo: exerciseInfo)
+            for newTargetImage in targetImage {
+                if let existingIndex = targetImages.firstIndex(where: { $0.targetName == newTargetImage.targetName && $0.alpha <= newTargetImage.alpha }) {
+                    targetImages.remove(at: existingIndex)
+                }
+                if newTargetImage.alpha != 0 {
+                    targetImages.append(newTargetImage)
+                }
+            }
+        }
+        return targetImages
     }
     
-    private func getTargetImage(exerciseInfo: ExerciseInfo) -> TargetImage {
-        let alpha = hourPassedSince(date: exerciseInfos.first!.completedTime)
+    private func getTargetImage(exerciseInfo: ExerciseInfo) -> [TargetInfo] {
+        let alpha = hourPassedSince(date: exerciseInfo.completedTime)
         let bodyParts = exerciseInfo.bodyParts
         let targetMuscles = exerciseInfo.targetMuscles
-        var targetImage = Set<UIImage>()
+        var targets = Set<TargetInfo>()
         bodyParts.forEach {
             if let image = UIImage(named: "mail_target_\($0)") {
-                targetImage.insert(image)
+                targets.insert(.init(targetName: $0, targetImage: image, alpha: Float(alpha)))
             }
         }
         targetMuscles.forEach {
             if let image = UIImage(named: "mail_target_\($0)") {
-                targetImage.insert(image)
+                targets.insert(.init(targetName: $0, targetImage: image, alpha: Float(alpha)))
             }
         }
-        return TargetImage(targetImage: Array(targetImage), alpha: alpha)
+        return Array(targets)
     }
     
     func getBlendedImage() -> (UIImage, UIImage) {
@@ -82,13 +95,12 @@ struct ImageBlender {
     }
     
     private func hourPassedSince(date: Date) -> CGFloat {
-        let calendar = Calendar.current
-        let now = Date()
-        let previousDay = calendar.startOfDay(for: date)
-        let difference = calendar.dateComponents([.hour], from: previousDay, to: now)
-        let hour = difference.hour! > 48 ? 48 : difference.hour!
-        let alpha = CGFloat(48 - hour) / 48
-        return alpha > 1 ? 1 : alpha
+        let recoveryPeriod = UM.recoveryPeriod
+        let timeInterval = Date().timeIntervalSince(date)
+        let hoursPassed = Int(timeInterval / 3600)
+        let hour = hoursPassed > recoveryPeriod ? recoveryPeriod : hoursPassed
+        let alpha = CGFloat(recoveryPeriod - hour) / CGFloat(recoveryPeriod)
+        return alpha
     }
     
     /// 여러 이미지를 darken blend 모드로 합성하여 하나의 이미지로 반환합니다.

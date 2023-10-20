@@ -202,7 +202,7 @@ extension WorkoutLogViewController: UITableViewDelegate, UITableViewDataSource, 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: WorkoutListTableViewCell.identifier, for: indexPath) as! WorkoutListTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: WorkoutLogTableViewCell.identifier, for: indexPath) as! WorkoutLogTableViewCell
             cell.workout = workoutLog?.workouts[indexPath.row]
             cell.selectionStyle = .none
             return cell

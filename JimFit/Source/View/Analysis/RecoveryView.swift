@@ -43,11 +43,10 @@ final class RecoveryView: UIView {
     let progressBar: UIProgressView = UIProgressView().then {
         $0.trackTintColor = K.Color.Grayscale.Selected
         $0.progressTintColor = K.Color.Primary.Blue
-        $0.progress = 0.5
+        $0.progress = 1
     }
     
     let progressLabel = UILabel()
-        .text("70%")
         .textColor(K.Color.Grayscale.Label)
         .font(K.Font.CellHeader)
     
@@ -65,6 +64,7 @@ final class RecoveryView: UIView {
         super.init(frame: frame)
         setupConstraints()
         configureCollectionView()
+        progressBar.setProgress(1, animated: true)
     }
     
     private func setupConstraints() {
