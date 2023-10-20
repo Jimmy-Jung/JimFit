@@ -26,12 +26,24 @@ struct UserDefaultManager {
     @UserDefault(key: KeyEnum.recoveryPeriod.rawValue, defaultValue: 72)
     static var recoveryPeriod: Int
     
+    @UserDefault(key: KeyEnum.isDarkMode.rawValue, defaultValue: false)
+    static var isDarkMode: Bool
+    
+    @UserDefault(key: KeyEnum.isDailyNotiOn.rawValue, defaultValue: false)
+    static var isDailyNotiOn: Bool
+    
+    @UserDefault(key: KeyEnum.notiTime.rawValue, defaultValue: Date())
+    static var notiTime: Date
+    
     enum KeyEnum: String {
         case savedTime
         case ETag
         case currentLanguage
         case finishedLaunch
         case recoveryPeriod
+        case isDarkMode
+        case isDailyNotiOn
+        case notiTime
     }
 }
 

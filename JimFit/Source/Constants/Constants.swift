@@ -51,6 +51,8 @@ enum K {
             .font(.boldSystemFont(ofSize: 20))
         static let ChartPie = UIImage(systemName: "chart.pie")?
             .font(.boldSystemFont(ofSize: 20))
+        static let Gear = UIImage(systemName: "gearshape")?
+            .font(.boldSystemFont(ofSize: 20))
     }
     
     enum Font {

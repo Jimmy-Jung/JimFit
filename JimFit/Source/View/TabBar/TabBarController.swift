@@ -30,7 +30,13 @@ final class TabBarController: UITabBarController {
         secondVC.title = "analysis".localized
         secondVC.tabBarItem.image = K.Image.ChartPie
         secondVC.tabBarItem.title = nil
-        setViewControllers([firstNav, secondNav], animated: true)
+        
+        let thirdVC = SettingViewController()
+        let thirdNav = UINavigationController(rootViewController: thirdVC)
+        thirdVC.title = "setting".localized
+        thirdVC.tabBarItem.image = K.Image.Gear
+        thirdVC.tabBarItem.title = nil
+        setViewControllers([firstNav, secondNav, thirdNav], animated: true)
     }
     
     private func setupTabBarController() {

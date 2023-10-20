@@ -16,6 +16,21 @@
 "done_workout_title" = "Workout Record Complete";
 "done_workout_message" = "Have you completed your workout?";
 
+// Setting
+"setting" = "Setting";
+"notification" = "Notification";
+"send_feedback" = "Send Feedback";
+"email_subject" = "[JimFit] Feedback";
+"fail_send_email" = "Fail to send email";
+"fail_send_email_message" = "'Mail' app is not installed.";
+"notification_permission_denied" = "Notification Permission Denied";
+"notification_permission_denied_message" = "Please go to the settings screen and allow notification permission.";
+"go_to_settings" = "Go To Setting";
+"daily_notifications" = "Daily Notifications";
+"daily_notifications_message" = "Notify your exercise time every day";
+"time_to_exercise" = "It's time to exercise!";
+"record_your_exercise" = "Please record your exercise for today!";
+
 // Analysis
 "muscle_fatigue" = "Muscle Fatigue";
 "total_fatigue" = "Total Fatigue";

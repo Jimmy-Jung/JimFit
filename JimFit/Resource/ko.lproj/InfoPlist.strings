@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  JimFit
+
+  Created by 정준영 on 2023/10/21.
+  
+*/
+
+"CFBundleDisplayName" = "짐핏";
+"CFBundleName" = "짐핏";

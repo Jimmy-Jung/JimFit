@@ -37,6 +37,7 @@ final class WorkoutLogViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNavigationBarAppearance()
         configureView()
         configureRealm()
         registerDelegate()
