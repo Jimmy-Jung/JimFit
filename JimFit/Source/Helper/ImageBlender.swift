@@ -21,7 +21,6 @@ struct ImageBlender {
     }
     
     func getTargetImages() -> [TargetInfo] {
-        //        return exerciseInfos.map { getTargetImage(exerciseInfo: $0) }.flatMap { $0 }
         var targetImages = [TargetInfo]()
         for exerciseInfo in exerciseInfos {
             let targetImage = getTargetImage(exerciseInfo: exerciseInfo)
@@ -34,7 +33,6 @@ struct ImageBlender {
                 }
             }
         }
-        dump(targetImages)
         return targetImages
     }
     
