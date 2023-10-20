@@ -8,7 +8,15 @@
 import UIKit
 
 final class RecoveryCollectionViewCell: UICollectionViewCell {
-    
+    var targetInfo: TargetInfo? {
+        didSet {
+            guard let targetInfo else { return }
+            muscleImageView.image(targetInfo.targetImage)
+            muscleNameLabel.text(targetInfo.targetName.localized)
+            progressLabel.text(String(format: "%.0f%%", targetInfo.alpha * 100))
+            progressBar.setProgress(targetInfo.alpha, animated: true)
+        }
+    }
     private let muscleImageView: UIImageView = UIImageView()
         .image(UIImage(named: "mail_target_Chest"))
         .contentMode(.scaleAspectFit)
@@ -30,7 +38,7 @@ final class RecoveryCollectionViewCell: UICollectionViewCell {
     private let progressBar: UIProgressView = UIProgressView().then {
         $0.trackTintColor = K.Color.Grayscale.Selected
         $0.progressTintColor = K.Color.Primary.Blue
-        $0.progress = 0.5
+        $0.progress = 1
     }
     
     private let progressLabel: UILabel = UILabel()
@@ -39,6 +47,10 @@ final class RecoveryCollectionViewCell: UICollectionViewCell {
         .textColor(K.Color.Primary.Label)
         .font(K.Font.CellBody)
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        progressBar.setProgress(1, animated: true)
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)

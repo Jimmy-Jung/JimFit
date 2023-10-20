@@ -84,7 +84,7 @@ final class WorkoutLogView: UIView {
     }
     
     private func configureTableView() {
-        tableView.register(WorkoutListTableViewCell.self, forCellReuseIdentifier: WorkoutListTableViewCell.identifier)
+        tableView.register(WorkoutLogTableViewCell.self, forCellReuseIdentifier: WorkoutLogTableViewCell.identifier)
         tableView.register(AddButtonTableViewCell.self, forCellReuseIdentifier: AddButtonTableViewCell.identifier)
         tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorStyle = .none

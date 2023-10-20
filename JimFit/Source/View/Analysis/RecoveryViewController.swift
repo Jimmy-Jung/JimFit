@@ -18,13 +18,16 @@ final class RecoveryViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         bind()
-        recoveryView.collectionView.delegate = self
-        recoveryView.collectionView.dataSource = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.binding()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        recoveryView.progressBar.setProgress(1, animated: true)
     }
     
     private func setupUI() {
@@ -39,22 +42,25 @@ final class RecoveryViewController: UIViewController {
         viewModel.frontImagePublisher
             .bind(to: recoveryView.frontImageView.rx.image)
             .disposed(by: disposeBag)
+        
         viewModel.backImagePublisher
             .bind(to: recoveryView.backImageView.rx.image)
             .disposed(by: disposeBag)
+        viewModel.targetImagesPublisher
+            .bind(to: recoveryView.collectionView.rx.items(
+                cellIdentifier: RecoveryCollectionViewCell.identifier,
+                cellType: RecoveryCollectionViewCell.self
+            )) { index, item, cell in
+                cell.targetInfo = item
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.fatiguePublisher
+            .subscribe(onNext: { [weak self] in
+                self?.recoveryView.progressBar.setProgress($0, animated: true)
+                self?.recoveryView.progressLabel.text(String(Int($0*100)) + "%")
+            })
+            .disposed(by: disposeBag)
     }
-    
-}
-
-extension RecoveryViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecoveryCollectionViewCell.identifier, for: indexPath)
-        return cell
-    }
-    
     
 }

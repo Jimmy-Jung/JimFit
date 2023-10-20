@@ -108,50 +108,6 @@
 "Biceps Brachii" = "Biceps Brachii";
 "Pectineous" = "Pectineous";
 
-// SynergistMuscles
-"Tibialis Anterior" = "Tibialis Anterior";
-"Pectoralis Major Sternal Head" = "Pectoralis Major Sternal Head";
-"Iliopsoas" = "Iliopsoas";
-"Levator Scapulae" = "Levator Scapulae";
-"Gluteus Medius" = "Gluteus Medius";
-"Deltoid Anterior" = "Deltoid Anterior";
-"Adductor Brevis" = "Adductor Brevis";
-"Trapezius Upper Fibers" = "Trapezius Upper Fibers";
-"Tensor Fasciae Latae" = "Tensor Fasciae Latae";
-"Subscapularis" = "Subscapularis";
-"Pectoralis Major Clavicular Head" = "Pectoralis Major Clavicular Head";
-"Obliques" = "Obliques";
-"Infraspinatus" = "Infraspinatus";
-"Wrist Extensors" = "Wrist Extensors";
-"Gluteus Maximus" = "Gluteus Maximus";
-"Biceps Brachii" = "Biceps Brachii";
-"Brachioradialis" = "Brachioradialis";
-"Trapezius Middle Fibers" = "Trapezius Middle Fibers";
-"Adductor Magnus" = "Adductor Magnus";
-"Splenius" = "Splenius";
-"Deltoid Posterior" = "Deltoid Posterior";
-"Rectus Abdominis" = "Rectus Abdominis";
-"Trapezius Lower Fibers" = "Trapezius Lower Fibers";
-"Sartorius" = "Sartorius";
-"Hamstrings" = "Hamstrings";
-"Brachialis" = "Brachialis";
-"Quadriceps" = "Quadriceps";
-"Triceps Brachii" = "Triceps Brachii";
-"Serratus Anterior" = "Serratus Anterior";
-"Deltoid Lateral" = "Deltoid Lateral";
-"Wrist Flexors" = "Wrist Flexors";
-"Gracilis" = "Gracilis";
-"Sternocleidomastoid" = "Sternocleidomastoid";
-"Latissimus Dorsi" = "Latissimus Dorsi";
-"Popliteus" = "Popliteus";
-"Adductor Longus" = "Adductor Longus";
-"Gastrocnemius" = "Gastrocnemius";
-"Teres Minor" = "Teres Minor";
-"Teres Major" = "Teres Major";
-"Pectineous" = "Pectineous";
-"Erector Spinae" = "Erector Spinae";
-"Soleus" = "Soleus";
-
 // ExerciseName
 "3/4 Sit-up" = "3/4 Sit-up";
 "45 degree Bycicle Twisting Crunch" = "45 degree Bycicle Twisting Crunch";

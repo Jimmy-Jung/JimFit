@@ -23,11 +23,15 @@ struct UserDefaultManager {
     @UserDefault(key: KeyEnum.finishedLaunch.rawValue, defaultValue: false)
     static var finishedLaunch: Bool
     
+    @UserDefault(key: KeyEnum.recoveryPeriod.rawValue, defaultValue: 72)
+    static var recoveryPeriod: Int
+    
     enum KeyEnum: String {
         case savedTime
         case ETag
         case currentLanguage
         case finishedLaunch
+        case recoveryPeriod
     }
 }
 
