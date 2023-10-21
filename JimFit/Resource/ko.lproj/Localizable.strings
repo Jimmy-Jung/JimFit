@@ -17,9 +17,15 @@
 "done_workout_message" = "운동을 완료하셨나요?";
 
 // Setting
+"unknown" = "알 수 없음";
 "setting" = "설정";
+"system" = "시스템";
+"dark_mode" = "다크모드";
+"version" = "버전";
 "notification" = "알림";
+"info" = "정보";
 "send_feedback" = "문의하기";
+"questions_and_comments" = "문의 및 의견을 남겨주세요.";
 "email_subject" = "[JimFit] 피드백";
 "fail_send_email" = "이메일 전송에 실패";
 "fail_send_email_message" = "'Mail' 앱이 설치되어 있지 않습니다.";
@@ -30,6 +36,7 @@
 "daily_notifications_message" = "매일 운동시간을 알려드려요";
 "time_to_exercise" = "운동할 시간이에요!";
 "record_your_exercise" = "오늘의 운동을 기록해주세요!";
+"google_form_url" = "https://forms.gle/6Tkb4gxmzut2dx9Q7";
 
 // Analysis
 "muscle_fatigue" = "근육 피로도";

@@ -97,7 +97,7 @@ final class SwitchTableViewCell: UITableViewCell {
         label.text = model.title
         iconImageView.image = model.icon
         iconContainer.backgroundColor = model.iconBackgroundColor
-        modeSwitch.setOn(model.switchValue, animated: true)
+        modeSwitch.isOn = model.switchValue
         self.handler = model.handler
     }
     
