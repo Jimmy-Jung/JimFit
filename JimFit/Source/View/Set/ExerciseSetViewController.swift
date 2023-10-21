@@ -14,15 +14,16 @@ final class ExerciseSetViewController: UIViewController {
     private lazy var exerciseSetView = ExerciseSetView()
     private let titleTimerView = TitleTimerView()
     private var viewModel: ExerciseSetViewModelProtocol!
-    private var timerStatus: TimerManager.TimerStatus = .paused
+    private var timerStatus: TimerManager.TimerStatus = .stop
     private let disposeBag = DisposeBag()
-    private lazy var pauseButton: UIBarButtonItem? = UIBarButtonItem(systemItem: .pause, primaryAction: pause)
+    private lazy var stopButton: UIBarButtonItem? = UIBarButtonItem(image: K.Image.Stop, primaryAction: stop)
     private lazy var playButton: UIBarButtonItem? = UIBarButtonItem(systemItem: .play, primaryAction: play)
     private lazy var play: UIAction = UIAction { [weak self] _ in
         HapticsManager.shared.vibrateForInteraction(style: .medium)
         self?.startWorkoutButtonTapped()
+        self?.stopButton?.tintColor = K.Color.Primary.Orange
     }
-    private lazy var pause = UIAction { [weak self] _ in
+    private lazy var stop = UIAction { [weak self] _ in
         HapticsManager.shared.vibrateForNotification(style: .error)
         self?.showAlert(
             title: "done_workout_title".localized,
@@ -46,7 +47,7 @@ final class ExerciseSetViewController: UIViewController {
         bindingView()
         BindingViewModel()
         
-        navigationItem.titleView = timerStatus == .paused ? nil : titleTimerView
+        navigationItem.titleView = timerStatus == .stop ? nil : titleTimerView
     }
     
     private func BindingViewModel() {
@@ -92,17 +93,17 @@ final class ExerciseSetViewController: UIViewController {
                     exerciseSetView.workoutTimer.activateColor()
                     navigationItem.titleView = titleTimerView
                     titleTimerView.fetchColor(.exercise)
-                    navigationItem.rightBarButtonItem = pauseButton
+                    navigationItem.rightBarButtonItem = stopButton
                 case .rest:
                     exerciseSetView.restTimer.activateColor()
                     navigationItem.titleView = titleTimerView
                     titleTimerView.fetchColor(.rest)
-                    navigationItem.rightBarButtonItem = pauseButton
-                case .paused:
+                    navigationItem.rightBarButtonItem = stopButton
+                case .stop:
                     exerciseSetView.restTimer.deactivateColor()
                     exerciseSetView.workoutTimer.deactivateColor()
                     navigationItem.titleView = nil
-                    titleTimerView.fetchColor(.paused)
+                    titleTimerView.fetchColor(.stop)
                     navigationItem.rightBarButtonItem = playButton
                 }
             }
@@ -114,7 +115,7 @@ final class ExerciseSetViewController: UIViewController {
         exerciseSetView.doneSetButton.isEnabled = viewModel.isActiveTimerButton
         if !viewModel.isActiveTimerButton {
             playButton = nil
-            pauseButton = nil
+            stopButton = nil
         }
         exerciseSetView.startWorkoutButton.rx.tap
             .subscribe(onNext:  { [weak self] in

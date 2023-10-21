@@ -77,8 +77,9 @@ final class ExerciseSearchViewController: UIViewController, ExerciseSearchTableV
     }
     
     func updateLike() {
-        let likeCount = oldRealm.objects(Exercise.self).filter("liked == %@", true).count
+        let likeCount = oldRealm.objects(Exercise.self).where { $0.liked == true }.count
         searchView.likeCount =  String(likeCount)
+        searchView.tableView.reloadData()
     }
     func configureTableView() {
         searchView.tableView.delegate = self
@@ -223,7 +224,8 @@ extension ExerciseSearchViewController: UITableViewDelegate, UITableViewDataSour
         }
         selectedIndexes.insert(indexPath.row)
         searchView.addListButton.isEnabled(selectedIndexes.count > 0)
-        searchView.selectedLabel.text("선택항목 \(selectedIndexes.count)/12")
+        searchView.selectedLabel.text("selection_list%@".localized("\(selectedIndexes.count)"))
+        
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
@@ -231,9 +233,10 @@ extension ExerciseSearchViewController: UITableViewDelegate, UITableViewDataSour
         selectedIndexes.remove(indexPath.row)
         guard selectedIndexes.count > 0 else {
             searchView.addListButton.isEnabled(false)
-            searchView.selectedLabel.text("선택항목 0/12")
+            searchView.selectedLabel.text("selection_list%@".localized("0"))
             return
         }
+        searchView.selectedLabel.text("selection_list%@".localized("\(selectedIndexes.count)"))
     }
     
 }

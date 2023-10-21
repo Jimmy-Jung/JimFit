@@ -29,7 +29,7 @@ final class TimerManager {
     private var exerciseTimer: Timer?
     private var restTimer: Timer?
     var timerStatusPublisher = PublishRelay<TimerStatus>()
-    var timerStatus: TimerStatus = .paused { didSet{ timerStatusPublisher.accept(timerStatus)}}
+    var timerStatus: TimerStatus = .stop { didSet{ timerStatusPublisher.accept(timerStatus)}}
     
     private init() {
         self.restoreTimers()
@@ -50,7 +50,7 @@ final class TimerManager {
         }
         exerciseTimer?.invalidate()
         restTimer?.invalidate()
-        timerStatus = .paused
+        timerStatus = .stop
         setExerciseTime = 0
         setRestTime = 0
         recordingDay = nil
@@ -146,6 +146,6 @@ extension TimerManager {
     enum TimerStatus {
         case exercise
         case rest
-        case paused
+        case stop
     }
 }
