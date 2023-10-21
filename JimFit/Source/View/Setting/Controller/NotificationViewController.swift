@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class NotificationViewController: UIViewController {
+final class NotificationViewController: UIViewController {
     // MARK: - Properties
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -66,23 +66,18 @@ class NotificationViewController: UIViewController {
             datePicker.isEnabled = isDailyNotiOn
         }
     }
-  
-    
-    // MARK: - Life cycle
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print(#function)
-        setDatePicker()
-        setNavigationBarAppearance()
-    }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNavigationBarAppearance(backgroundColor: K.Color.Primary.Background)
         datePicker.addTarget(self, action: #selector(timeSetHasChanged), for: .valueChanged)
         dailyNotificationSwitch.addTarget(self, action: #selector(updateNotificationSetting), for: .valueChanged)
-        
-        configure()
+        configureUI()
+    }
+    // MARK: - Life cycle
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setDatePicker()
     }
     
     // MARK: - Actions
@@ -119,21 +114,25 @@ class NotificationViewController: UIViewController {
         }
     }
     
-    func checkNotificationAuthorization() {
-        print("Notification: 권한 확인")
-        userNotificationCenter.getNotificationSettings { settings in
-            if settings.authorizationStatus == .authorized {
-                DispatchQueue.main.async {
-                    self.sendDailyNotification(baseTime: self.datePicker.date)
-                    self.isDailyNotiOn = true
-                    self.dailyNotificationSwitch.isOn = true
-                }
-                print("Notification: 설정 완료")
-            } else {
-                print("Notification: 설정되지 않음")
-            }
-        }
-    }
+//    func checkNotificationAuthorization() {
+//        print("Notification: 권한 확인")
+//        userNotificationCenter.getNotificationSettings { settings in
+//            if settings.authorizationStatus == .authorized {
+//                DispatchQueue.main.async {
+//                    self.sendDailyNotification(baseTime: self.datePicker.date)
+//                    self.isDailyNotiOn = true
+//                    self.dailyNotificationSwitch.isOn = true
+//                }
+//                print("Notification: 설정 완료")
+//            } else {
+//                DispatchQueue.main.async {
+//                    self.isDailyNotiOn = false
+//                    self.dailyNotificationSwitch.isOn = false
+//                }
+//                print("Notification: 설정되지 않음")
+//            }
+//        }
+//    }
     
     func checkNotificationPermission() {
         userNotificationCenter.getNotificationSettings { [weak self] settings in
@@ -142,12 +141,10 @@ class NotificationViewController: UIViewController {
                 if settings.authorizationStatus == .denied {
                     self.showAlert(title: "notification_permission_denied".localized, message: "notification_permission_denied_message".localized, preferredStyle: .alert, doneTitle: "go_to_settings".localized, cancelTitle: "cancel".localized) { _ in
                         self.openAppSettings()
-                        self.dailyNotificationSwitch.isOn = false
+                        self.dailyNotificationSwitch.setOn(false, animated: true)
                     } cancelHandler: { _ in
-                        self.dailyNotificationSwitch.isOn = false
+                        self.dailyNotificationSwitch.setOn(false, animated: true)
                     }
-                    
-                    
                 } else {
                     self.requestNotificationAuthorization()
                 }
@@ -161,7 +158,7 @@ class NotificationViewController: UIViewController {
     }
 
     // MARK: - Helpers
-    func configure() {
+    func configureUI() {
         view.backgroundColor = .systemBackground
         [titleLabel, descriptionLabel, upperStackView].forEach {
             view.addSubview($0)
@@ -213,9 +210,6 @@ class NotificationViewController: UIViewController {
     func setDatePicker() {
         datePicker.isEnabled = isDailyNotiOn // 알림 설정 off일 땐, DatePicker 선택 불가
 
-        guard let baseTime = UserDefaults.standard.object(forKey: "notiTime") as? Date else {
-            return
-        }
-        datePicker.date = baseTime
+        datePicker.date = UM.notiTime
     }
 }

@@ -27,16 +27,14 @@ final class Utils {
         
         return identifier
     }
-    
+
     static func getDeviceModelName() -> String {
         let device = UIDevice.current
-        let selName = "_\("deviceInfo")ForKey:"
-        let selector = NSSelectorFromString(selName)
-        
-        if device.responds(to: selector) { // [옵셔널 체크 실시]
-            let modelName = String(describing: device.perform(selector, with: "marketing-name").takeRetainedValue())
+        let modelName = device.name
+        if modelName.isEmpty {
+            return "unknown".localized
+        } else {
             return modelName
         }
-        return "알 수 없음"
     }
 }

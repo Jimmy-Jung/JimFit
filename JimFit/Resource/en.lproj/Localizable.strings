@@ -17,9 +17,15 @@
 "done_workout_message" = "Have you completed your workout?";
 
 // Setting
+"unknown" = "Unknown";
 "setting" = "Setting";
+"system" = "System";
+"dark_mode" = "Dark Mode";
+"version" = "Version";
+"info" = "Info";
 "notification" = "Notification";
 "send_feedback" = "Send Feedback";
+"questions_and_comments" = "Please write your questions and comments.";
 "email_subject" = "[JimFit] Feedback";
 "fail_send_email" = "Fail to send email";
 "fail_send_email_message" = "'Mail' app is not installed.";
@@ -30,6 +36,7 @@
 "daily_notifications_message" = "Notify your exercise time every day";
 "time_to_exercise" = "It's time to exercise!";
 "record_your_exercise" = "Please record your exercise for today!";
+"google_form_url" = "https://forms.gle/9Wz5wpnx4B3P7j849";
 
 // Analysis
 "muscle_fatigue" = "Muscle Fatigue";

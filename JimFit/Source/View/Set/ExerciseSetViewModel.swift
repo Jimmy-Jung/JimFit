@@ -65,7 +65,7 @@ final class ExerciseSetViewModel: ExerciseSetViewModelProtocol {
     init(workout: Workout) {
         self.workout = workout
         guard let workoutLog = workout.OriginWorkoutLog.first else { return }
-        if timer.timerStatus == .paused {
+        if timer.timerStatus == .stop {
             timer.fetchTimer(with: workoutLog)
             self.setUpBinding_Today()
             self.isActiveTimerButton = true
@@ -203,7 +203,7 @@ final class ExerciseSetViewModel: ExerciseSetViewModelProtocol {
             .disposed(by: disposeBag)
         
         Observable<TimerManager.TimerStatus>
-            .just(.paused)
+            .just(.stop)
             .bind(to: timerStatus)
             .disposed(by: disposeBag)
     }

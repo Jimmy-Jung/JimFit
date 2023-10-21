@@ -35,6 +35,8 @@ final class SettingViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        model = []
+        configureData()
         tableView.reloadData()
     }
     
@@ -49,7 +51,7 @@ final class SettingViewController: UIViewController {
     
     // MARK: - Helpers
     private func configureUI() {
-        navigationItem.title = "설정"
+        navigationItem.title = "setting".localized
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -59,72 +61,77 @@ final class SettingViewController: UIViewController {
     
     private func configureData() {
         self.model.append(
-            Section(title: "시스템", options: [
-                .switchCell(
-                    model: SettingSwitchOption(
-                        title: "다크모드",
-                        icon: UIImage(systemName: "moon.fill"),
-                        iconBackgroundColor: .darkGray, switchValue: UM.isDarkMode,
-                        handler: { sender in
-                            guard let window = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
-
-                            let windows = window.windows.first
-                            windows?.overrideUserInterfaceStyle = sender.isOn ? .dark : .light
-                            UM.isDarkMode = sender.isOn
-                            
-                        }
-                    )
-                ),
-                .staticCell(
-                    model: SettingsOption(
-                        title: "notification".localized,
-                        icon: UIImage(systemName: "bell.fill"),
-                        iconBackgroundColor: .systemRed,
-                        handler: {
-                            let vc = NotificationViewController()
-                            vc.navigationItem.title = "notification".localized
-                            
-                            self.navigationController?
-                                .pushViewController(vc, animated: true)
-                        }
-                    )
-                ),
-            ])
+            Section(
+                title: "system".localized,
+                options: [
+                    .switchCell(
+                        model: SettingSwitchOption(
+                            title: "dark_mode".localized,
+                            icon: UIImage(systemName: "moon.fill"),
+                            iconBackgroundColor: .darkGray,
+                            switchValue: UM.isDarkMode,
+                            handler: { sender in
+                                guard let window = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+                                
+                                let windows = window.windows.first
+                                windows?.overrideUserInterfaceStyle = sender.isOn ? .dark : .light
+                                UM.isDarkMode = sender.isOn
+                                
+                            }
+                        )
+                    ),
+                    .staticCell(
+                        model: SettingsOption(
+                            title: "notification".localized,
+                            icon: UIImage(systemName: "bell.fill"),
+                            iconBackgroundColor: .systemRed,
+                            handler: {
+                                let vc = NotificationViewController()
+                                vc.navigationItem.title = "notification".localized
+                                
+                                self.navigationController?
+                                    .pushViewController(vc, animated: true)
+                            }
+                        )
+                    ),
+                ])
         )
         
         self.model.append(
-            Section(title: "정보", options: [
-                //                .staticCell(
-                //                    model: SettingsOption(
-                //                        title: "사용 방법",
-                //                        icon: UIImage(systemName: "questionmark.circle.fill"),
-                //                        iconBackgroundColor: .systemBlue) { [weak self] in
-                //                            self?.performSegue(
-                //                                withIdentifier: "toHowToUse",
-                //                                sender: nil
-                //                            )
-                //                        }
-                //                ),
-                .staticCell(
-                    model: SettingsOption(
-                        title: "send_feedback".localized,
-                        icon: UIImage(systemName: "envelope.fill"),
-                        iconBackgroundColor: .systemBlue
-                    ) { self.makeAlert() }
-                ),
-                .staticCell(
-                    model: SettingsOption(
-                        title: "버전",
-                        icon: UIImage(systemName: "wand.and.rays.inverse"),
-                        iconBackgroundColor: .lightGray) {}
-                )
-            ])
+            Section(
+                title: "info".localized,
+                options: [
+                    //                .staticCell(
+                    //                    model: SettingsOption(
+                    //                        title: "사용 방법",
+                    //                        icon: UIImage(systemName: "questionmark.circle.fill"),
+                    //                        iconBackgroundColor: .systemBlue) { [weak self] in
+                    //                            self?.performSegue(
+                    //                                withIdentifier: "toHowToUse",
+                    //                                sender: nil
+                    //                            )
+                    //                        }
+                    //                ),
+                    .staticCell(
+                        model: SettingsOption(
+                            title: "send_feedback".localized,
+                            icon: UIImage(systemName: "envelope.fill"),
+                            iconBackgroundColor: .systemBlue
+                        ) { self.makeAlert() }
+                    ),
+                    .staticCell(
+                        model: SettingsOption(
+                            title: "version".localized,
+                            icon: UIImage(systemName: "wand.and.rays.inverse"),
+                            iconBackgroundColor: .lightGray) {}
+                    )
+                ])
         )
     }
     
     private func makeAlert() {
         let bodyString = """
-                     문의 사항 및 의견을 작성해주세요.
+                     \("questions_and_comments".localized)
                      
                      
                      
@@ -143,7 +150,7 @@ final class SettingViewController: UIViewController {
             vc.setMessageBody(bodyString, isHTML: false)
             self.present(vc, animated: true, completion: nil)
         } else {
-            let urlString = "https://forms.gle/6Tkb4gxmzut2dx9Q7"
+            let urlString = "google_form_url".localized
             if let url = URL(string: urlString) {
                 let safariViewController = SFSafariViewController(url: url)
                 

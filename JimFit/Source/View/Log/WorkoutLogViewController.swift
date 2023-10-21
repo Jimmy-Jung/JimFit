@@ -18,12 +18,12 @@ final class WorkoutLogViewController: UIViewController {
     private let workoutLogView = WorkoutLogView()
     private let titleTimerView = TitleTimerView()
     private let timer = TimerManager.shared
-    private var timerStatus: TimerManager.TimerStatus = .paused
+    private var timerStatus: TimerManager.TimerStatus = .stop
     private var workoutLog: WorkoutLog?
     private let realm: Realm = RealmManager.shared.oldRealm
     private let disposeBag = DisposeBag()
-    private lazy var pauseButton: UIBarButtonItem? = UIBarButtonItem(systemItem: .pause, primaryAction: pause)
-    private lazy var pause: UIAction = UIAction { [weak self] _ in
+    private lazy var stopButton: UIBarButtonItem? = UIBarButtonItem(image: K.Image.Stop, primaryAction: stop)
+    private lazy var stop: UIAction = UIAction { [weak self] _ in
         guard let self else { return }
         showAlert(title: "운동 기록 완료", message: "운동을 완료하셨나요?", preferredStyle: .alert, doneHandler: { _ in
             self.timer.stopTimer()
@@ -80,14 +80,16 @@ final class WorkoutLogViewController: UIViewController {
             titleTimerView.fetchColor(.exercise)
             navigationItem.titleView = titleTimerView
             titleTimerView.startBlinkingAnimation()
-            navigationItem.rightBarButtonItem = pauseButton
+            navigationItem.rightBarButtonItem = stopButton
+            stopButton?.tintColor = K.Color.Primary.Orange
         case .rest:
             titleTimerView.fetchColor(.rest)
             navigationItem.titleView = titleTimerView
             titleTimerView.startBlinkingAnimation()
-            navigationItem.rightBarButtonItem = pauseButton
-        case .paused:
-            titleTimerView.fetchColor(.paused)
+            navigationItem.rightBarButtonItem = stopButton
+            stopButton?.tintColor = K.Color.Primary.Orange
+        case .stop:
+            titleTimerView.fetchColor(.stop)
             navigationItem.titleView = nil
             navigationItem.rightBarButtonItem = nil
         }
@@ -103,7 +105,9 @@ final class WorkoutLogViewController: UIViewController {
     private func configureRealm() {
         let primaryKey = workoutLogView.calendar.selectedDate!.convert(to: .primaryKey)
         workoutLog = realm.object(ofType: WorkoutLog.self, forPrimaryKey: primaryKey)
+        #if DEBUG
         print(realm.configuration.fileURL)
+        #endif
     }
     
     private func reloadTableView() {
