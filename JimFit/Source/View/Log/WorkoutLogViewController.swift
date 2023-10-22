@@ -248,14 +248,42 @@ extension WorkoutLogViewController: UITableViewDelegate, UITableViewDataSource, 
             workoutLog?.workouts.move(from: sourceIndexPath.row, to: destinationIndexPath.row)
         }
     }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
-        try! realm.write {
-            workoutLog?.workouts.remove(at: indexPath.row)
-        }
-        tableView.deleteRows(at: [indexPath], with: .automatic)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            tableView.reloadData()
+        if workoutLog?.workouts.count == 1 {
+            HapticsManager.shared.vibrateForNotification(style: .error)
+            showAlert(
+                title: "delete_workout_log".localized,
+                message: "delete_workout_log_message".localized,
+                preferredStyle: .alert,
+                doneTitle: "ok".localized,
+                cancelTitle: "cancel".localized,
+                doneHandler: { [weak self] _ in
+                    guard let self else { return }
+                    try! realm.write {
+                        self.workoutLog?.workouts.remove(at: indexPath.row)
+                    }
+                    tableView.deleteRows(at: [indexPath], with: .automatic)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        tableView.reloadData()
+                        try! self.realm.write {
+                            guard let workoutLog = self.workoutLog else { return }
+                            self.realm.delete(workoutLog)
+                            self.reloadCalendar()
+                            self.workoutLog = nil
+                        }
+                    }
+                }
+            )
+        } else {
+            try! realm.write {
+                workoutLog?.workouts.remove(at: indexPath.row)
+            }
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                tableView.reloadData()
+            }
         }
     }
     

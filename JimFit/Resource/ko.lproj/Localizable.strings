@@ -48,6 +48,8 @@
 "grabber_date_formatter" = "MM월 dd일";
 "workout" = " 운동";
 "workout_log" = "운동 기록";
+"delete_workout_log" = "운동 기록을 삭제하시겠습니까?";
+"delete_workout_log_message" = "운동 리스트가 비어있을 경우 기록한 운동 시간이 삭제됩니다.";
 
 // Search
 "selection_list%@" = "선택항목 %@/12";
