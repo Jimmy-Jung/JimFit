@@ -67,7 +67,7 @@ final class ExerciseSetTableViewCell: UITableViewCell {
         .delegate(self)
     
     private let repsLabel = UILabel()
-        .text("reps")
+        .text("reps".localized)
         .font(K.Font.SubHeader)
     
     private lazy var repsTextField = UITextField()

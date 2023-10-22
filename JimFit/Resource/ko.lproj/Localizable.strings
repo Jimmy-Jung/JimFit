@@ -10,7 +10,7 @@
 "searchBar_placeholder" = "운동 이름을 입력하세요";
 "ok" = "확인";
 "cancel" = "취소";
-"edit" = "수정";
+"edit" = "편집";
 "done" = "완료";
 "locale_identifier" = "ko_KR";
 "done_workout_title" = "운동 기록 완료";
@@ -48,6 +48,8 @@
 "grabber_date_formatter" = "MM월 dd일";
 "workout" = " 운동";
 "workout_log" = "운동 기록";
+"delete_workout_log" = "운동 기록을 삭제하시겠습니까?";
+"delete_workout_log_message" = "운동 리스트가 비어있을 경우 기록한 운동 시간이 삭제됩니다.";
 
 // Search
 "selection_list%@" = "선택항목 %@/12";
@@ -62,6 +64,7 @@
 "set_rest_time" = "휴식 시간";
 "start_set" = "세트 시작";
 "done_set" = "세트 완료";
+"reps" = "회";
 
 // BodyPart
 "Waist" = "허리";

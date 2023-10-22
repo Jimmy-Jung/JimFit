@@ -48,6 +48,8 @@
 "grabber_date_formatter" = "dd MMM";
 "workout" = " Workout";
 "workout_log" = "Workout Log";
+"delete_workout_log" = "Do you want to delete the workout log?";
+"delete_workout_log_message" = "If the workout list is empty, the recorded workout time will be deleted.";
 
 // Search
 "selection_list%@" = "Choices %@/12";
@@ -62,6 +64,7 @@
 "set_rest_time" = "Rest";
 "start_set" = "Start Set";
 "done_set" = "Done Set";
+"reps" = "reps";
 
 // BodyPart
 "Waist" = "Waist";

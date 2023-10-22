@@ -332,7 +332,7 @@ extension ExerciseSearchViewController {
             }
         }
         selectedIndexes.removeAll()
-        searchView.selectedLabel.text("선택항목 0/12")
+        searchView.selectedLabel.text("selection_list%@".localized("0"))
     }
     
     func addSortToList(type: ButtonType, button: UIButton) {

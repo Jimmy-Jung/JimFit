@@ -21,7 +21,7 @@ final class ExerciseSetViewController: UIViewController {
     private lazy var play: UIAction = UIAction { [weak self] _ in
         HapticsManager.shared.vibrateForInteraction(style: .medium)
         self?.startWorkoutButtonTapped()
-        self?.stopButton?.tintColor = K.Color.Primary.Orange
+        self?.stopButton?.tintColor = K.Color.Primary.Red
     }
     private lazy var stop = UIAction { [weak self] _ in
         HapticsManager.shared.vibrateForNotification(style: .error)

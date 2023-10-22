@@ -25,7 +25,11 @@ final class WorkoutLogViewController: UIViewController {
     private lazy var stopButton: UIBarButtonItem? = UIBarButtonItem(image: K.Image.Stop, primaryAction: stop)
     private lazy var stop: UIAction = UIAction { [weak self] _ in
         guard let self else { return }
-        showAlert(title: "운동 기록 완료", message: "운동을 완료하셨나요?", preferredStyle: .alert, doneHandler: { _ in
+        showAlert(
+            title: "done_workout_title".localized,
+            message: "done_workout_message".localized,
+            preferredStyle: .alert,
+            doneHandler: { _ in
             self.timer.stopTimer()
             try! self.realm.write {
                 self.workoutLog?.exerciseTime = self.timer.totalExerciseTime
@@ -81,13 +85,13 @@ final class WorkoutLogViewController: UIViewController {
             navigationItem.titleView = titleTimerView
             titleTimerView.startBlinkingAnimation()
             navigationItem.rightBarButtonItem = stopButton
-            stopButton?.tintColor = K.Color.Primary.Orange
+            stopButton?.tintColor = K.Color.Primary.Red
         case .rest:
             titleTimerView.fetchColor(.rest)
             navigationItem.titleView = titleTimerView
             titleTimerView.startBlinkingAnimation()
             navigationItem.rightBarButtonItem = stopButton
-            stopButton?.tintColor = K.Color.Primary.Orange
+            stopButton?.tintColor = K.Color.Primary.Red
         case .stop:
             titleTimerView.fetchColor(.stop)
             navigationItem.titleView = nil
@@ -248,14 +252,42 @@ extension WorkoutLogViewController: UITableViewDelegate, UITableViewDataSource, 
             workoutLog?.workouts.move(from: sourceIndexPath.row, to: destinationIndexPath.row)
         }
     }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
-        try! realm.write {
-            workoutLog?.workouts.remove(at: indexPath.row)
-        }
-        tableView.deleteRows(at: [indexPath], with: .automatic)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            tableView.reloadData()
+        if workoutLog?.workouts.count == 1 {
+            HapticsManager.shared.vibrateForNotification(style: .error)
+            showAlert(
+                title: "delete_workout_log".localized,
+                message: "delete_workout_log_message".localized,
+                preferredStyle: .alert,
+                doneTitle: "ok".localized,
+                cancelTitle: "cancel".localized,
+                doneHandler: { [weak self] _ in
+                    guard let self else { return }
+                    try! realm.write {
+                        self.workoutLog?.workouts.remove(at: indexPath.row)
+                    }
+                    tableView.deleteRows(at: [indexPath], with: .automatic)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        tableView.reloadData()
+                        try! self.realm.write {
+                            guard let workoutLog = self.workoutLog else { return }
+                            self.realm.delete(workoutLog)
+                            self.reloadCalendar()
+                            self.workoutLog = nil
+                        }
+                    }
+                }
+            )
+        } else {
+            try! realm.write {
+                workoutLog?.workouts.remove(at: indexPath.row)
+            }
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                tableView.reloadData()
+            }
         }
     }
     
