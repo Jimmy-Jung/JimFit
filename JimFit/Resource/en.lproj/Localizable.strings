@@ -64,6 +64,7 @@
 "set_rest_time" = "Rest";
 "start_set" = "Start Set";
 "done_set" = "Done Set";
+"reps" = "reps";
 
 // BodyPart
 "Waist" = "Waist";

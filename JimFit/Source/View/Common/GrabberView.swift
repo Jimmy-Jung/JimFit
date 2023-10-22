@@ -33,12 +33,15 @@ final class GrabberView: UIView {
         .textColor(K.Color.Primary.Label)
 
     private lazy var rightBarButton: UIButton = UIButton(configuration: .plain())
-        .image(UIImage(systemName: "slider.horizontal.3"))
+        .titleWithFont(title: "edit".localized, font: K.Font.SubHeader)
+        .titleAlignment(.trailing)
         .addConfigurationUpdateHandler { button in
             switch button.state {
             case .selected:
-                button.baseBackgroundColor(K.Color.Primary.Orange)
+                button.baseForegroundColor(K.Color.Primary.Orange)
+                button.baseBackgroundColor(.clear)
             default:
+                button.baseForegroundColor(K.Color.Primary.Label)
                 button.baseBackgroundColor(.clear)
             }
         }
@@ -47,9 +50,10 @@ final class GrabberView: UIView {
     
     private lazy var horizontalStackView: UIStackView = UIStackView()
         .axis(.horizontal)
-        .alignment(.center)
+        .alignment(.fill)
         .distribution(.fill)
         .addArrangedSubview(titleLabel)
+        .addArrangedSubview(UIView())
         .addArrangedSubview(rightBarButton)
     
     weak var delegate: GrabberViewDelegate?
@@ -128,7 +132,8 @@ final class GrabberView: UIView {
         }
         
         rightBarButton.snp.makeConstraints { make in
-            make.size.equalTo(50)
+            rightBarButton.sizeToFit()
+            make.height.equalTo(50)
         }
     }
     

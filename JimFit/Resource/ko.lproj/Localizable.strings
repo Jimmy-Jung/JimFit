@@ -10,7 +10,7 @@
 "searchBar_placeholder" = "운동 이름을 입력하세요";
 "ok" = "확인";
 "cancel" = "취소";
-"edit" = "수정";
+"edit" = "편집";
 "done" = "완료";
 "locale_identifier" = "ko_KR";
 "done_workout_title" = "운동 기록 완료";
@@ -64,6 +64,7 @@
 "set_rest_time" = "휴식 시간";
 "start_set" = "세트 시작";
 "done_set" = "세트 완료";
+"reps" = "회";
 
 // BodyPart
 "Waist" = "허리";
