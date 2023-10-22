@@ -216,7 +216,9 @@ extension SettingViewController: UITableViewDelegate {
         let type = model[indexPath.section].options[indexPath.row]
         switch type.self {
         case .staticCell(let data):
-            HapticsManager.shared.vibrateForSelection()
+            if data.title != "version".localized {
+                HapticsManager.shared.vibrateForSelection()
+            }
             data.handler()
         case .switchCell:
             break

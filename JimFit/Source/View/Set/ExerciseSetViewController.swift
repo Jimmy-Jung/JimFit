@@ -94,11 +94,13 @@ final class ExerciseSetViewController: UIViewController {
                     navigationItem.titleView = titleTimerView
                     titleTimerView.fetchColor(.exercise)
                     navigationItem.rightBarButtonItem = stopButton
+                    stopButton?.tintColor = K.Color.Primary.Red
                 case .rest:
                     exerciseSetView.restTimer.activateColor()
                     navigationItem.titleView = titleTimerView
                     titleTimerView.fetchColor(.rest)
                     navigationItem.rightBarButtonItem = stopButton
+                    stopButton?.tintColor = K.Color.Primary.Red
                 case .stop:
                     exerciseSetView.restTimer.deactivateColor()
                     exerciseSetView.workoutTimer.deactivateColor()

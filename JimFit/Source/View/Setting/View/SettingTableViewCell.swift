@@ -84,7 +84,7 @@ class SettingTableViewCell: UITableViewCell {
         titleLabel.text = model.title
         iconImageView.image = model.icon
         iconContainer.backgroundColor = model.iconBackgroundColor
-        if model.title == "버전" {
+        if model.title == "version".localized {
             subtextLabel = UILabel(
                 frame: CGRect(
                     x: 0,
@@ -98,6 +98,7 @@ class SettingTableViewCell: UITableViewCell {
             subtextLabel.textAlignment = .right
             subtextLabel.sizeToFit()
             self.accessoryView = subtextLabel
+            self.selectionStyle = .none
         }
     }
  
