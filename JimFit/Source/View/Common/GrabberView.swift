@@ -121,12 +121,12 @@ final class GrabberView: UIView {
             make.width.equalTo(70)
             make.height.equalTo(4)
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().inset(16)
+            make.top.equalToSuperview().inset(8)
         }
         
         backView.addSubview(horizontalStackView)
         horizontalStackView.snp.makeConstraints { make in
-            make.top.equalTo(grabberView.snp.bottom).offset(12)
+            make.top.equalTo(grabberView.snp.bottom).offset(8)
             make.horizontalEdges.equalToSuperview().inset(20)
             make.bottom.equalToSuperview()
         }

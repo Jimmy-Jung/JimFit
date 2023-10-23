@@ -25,16 +25,14 @@ final class WorkoutLogViewController: UIViewController {
     private lazy var stopButton: UIBarButtonItem? = UIBarButtonItem(image: K.Image.Stop, primaryAction: stop)
     private lazy var stop: UIAction = UIAction { [weak self] _ in
         guard let self else { return }
+        HapticsManager.shared.vibrateForNotification(style: .error)
         showAlert(
             title: "done_workout_title".localized,
             message: "done_workout_message".localized,
             preferredStyle: .alert,
             doneHandler: { _ in
+                HapticsManager.shared.vibrateForSelection()
             self.timer.stopTimer()
-            try! self.realm.write {
-                self.workoutLog?.exerciseTime = self.timer.totalExerciseTime
-                self.workoutLog?.restTime = self.timer.totalRestTime
-            }
             self.reloadCalendar()
         })
     }

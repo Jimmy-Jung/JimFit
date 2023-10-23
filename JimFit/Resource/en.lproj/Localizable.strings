@@ -42,6 +42,23 @@
 "muscle_fatigue" = "Muscle Fatigue";
 "total_fatigue" = "Total Fatigue";
 "analysis" = "Analysis";
+"recovery_info_title" = "Muscle recovery's optimum time";
+"recovery_info_message" = "
+JimFit sets the recovery time for muscles at 72 hours.
+
+The recommended time for muscle recovery is 48 to 72 hours. This can vary depending on body composition, diet, physical activity, and strength.
+
+When exercising at high intensity, muscle damage occurs more frequently than in individuals who exercise at lower intensity. People with more muscle mass may take longer to achieve the same results as those with less muscle mass.
+
+Muscles grow when they receive stimulation and an adequate intake of nutrients. Therefore, to promote muscle growth, it is necessary to not only rest but also consume a healthy diet and perform proper exercise.
+
+Another important factor that greatly influences muscle recovery is exercise split.
+
+Exercise split refers to separating muscle groups on different days of the week. You should choose a split that best suits your individual needs and habits, or sometimes opt for the most popular split to find what works best for you.
+
+Each of these options has its advantages and disadvantages, and you need to find what is most suitable for you.
+
+For example, it is not a good idea to do chest exercises again on Tuesday after doing them on Monday. You should ensure that enough rest days are provided for the muscles.";
 
 // Log
 "header_date_formatter" = "MMMM yyyy";

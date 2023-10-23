@@ -55,6 +55,8 @@ enum K {
             .font(.boldSystemFont(ofSize: 20))
         static let Stop = UIImage(systemName: "stop.circle")?
             .font(.boldSystemFont(ofSize: 20))
+        static let Xmark = UIImage(systemName: "xmark.circle")?
+            .font(.boldSystemFont(ofSize: 20))
     }
     
     enum Font {
