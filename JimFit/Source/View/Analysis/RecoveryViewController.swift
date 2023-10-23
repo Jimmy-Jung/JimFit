@@ -37,6 +37,13 @@ final class RecoveryViewController: UIViewController {
         recoveryView.snp.makeConstraints {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
+        recoveryView.infoButton.addAction { [weak self] in
+            HapticsManager.shared.vibrateForSelection()
+            self?.transition(viewController: InfoPopoverViewController(), style: .present, preprocessViewController: { vc in
+                vc.modalPresentationStyle = .overFullScreen
+                vc.modalTransitionStyle = .crossDissolve
+            })
+        }
     }
     
     private func bind() {

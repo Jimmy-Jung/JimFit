@@ -58,6 +58,10 @@ final class RecoveryView: UIView {
         .font(K.Font.Header1)
         .textAlignment(.left)
     
+    let infoButton = UIButton(configuration: .plain())
+        .image(UIImage(systemName: "info.circle"))
+        .baseForegroundColor(K.Color.Primary.Label)
+    
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
     
     override init(frame: CGRect) {
@@ -111,6 +115,12 @@ final class RecoveryView: UIView {
             make.top.equalTo(separatorView.snp.bottom).offset(20)
             make.horizontalEdges.equalToSuperview().inset(20)
             make.height.equalTo(20)
+        }
+        
+        addSubView(infoButton)
+        infoButton.snp.makeConstraints { make in
+            make.centerY.equalTo(titleLabel)
+            make.trailing.equalToSuperview().inset(20)
         }
         
         addSubView(collectionView)
