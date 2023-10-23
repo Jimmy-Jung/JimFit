@@ -1,8 +1,8 @@
 //
 //  SwitchTableViewCell.swift
-//  DollarMoreRefactor
+//  JimFit
 //
-//  Created by 정준영 on 2023/06/15.
+//  Created by 정준영 on 2023/10/20.
 //
 
 import UIKit

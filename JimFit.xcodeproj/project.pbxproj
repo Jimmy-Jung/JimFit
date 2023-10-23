@@ -244,14 +244,14 @@
 		555E6B602AC326E900DCA052 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				556717232AE2DF3F002430E0 /* Setting */,
-				556717152AE11ADB002430E0 /* Analysis */,
-				550BA7B22ADC422A00475042 /* Loading */,
 				555E6B722AC34D9400DCA052 /* Common */,
+				550BA7B22ADC422A00475042 /* Loading */,
 				555E6B792AC44CCB00DCA052 /* TabBar */,
-				55A2ABF22ACC183400927918 /* Search */,
 				555E6B832AC54E3A00DCA052 /* Log */,
-				55A2ABF52ACC18BA00927918 /* Set */,
+				55A2ABF22ACC183400927918 /* Search */,
+				55A2ABF52ACC18BA00927918 /* Exercise Set */,
+				556717152AE11ADB002430E0 /* Analysis */,
+				556717232AE2DF3F002430E0 /* Setting */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -311,6 +311,8 @@
 				555E6B912AC5796F00DCA052 /* ExerciseDetail.swift */,
 				555E6B9B2AC7F3B100DCA052 /* WorkoutLog.swift */,
 				550BA7B02ADB500C00475042 /* JSONExercise.swift */,
+				5567173B2AE2E5B1002430E0 /* Utils.swift */,
+				556717292AE2DF3F002430E0 /* SettingModels.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -358,38 +360,12 @@
 		556717232AE2DF3F002430E0 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				556717242AE2DF3F002430E0 /* Controller */,
-				556717282AE2DF3F002430E0 /* Model */,
-				5567172B2AE2DF3F002430E0 /* View */,
-			);
-			path = Setting;
-			sourceTree = "<group>";
-		};
-		556717242AE2DF3F002430E0 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
 				556717252AE2DF3F002430E0 /* SettingViewController.swift */,
 				556717272AE2DF3F002430E0 /* NotificationViewController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		556717282AE2DF3F002430E0 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				5567173B2AE2E5B1002430E0 /* Utils.swift */,
-				556717292AE2DF3F002430E0 /* SettingModels.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		5567172B2AE2DF3F002430E0 /* View */ = {
-			isa = PBXGroup;
-			children = (
 				5567172F2AE2DF3F002430E0 /* SettingTableViewCell.swift */,
 				556717302AE2DF3F002430E0 /* SwitchTableViewCell.swift */,
 			);
-			path = View;
+			path = Setting;
 			sourceTree = "<group>";
 		};
 		55A2ABF22ACC183400927918 /* Search */ = {
@@ -402,7 +378,7 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
-		55A2ABF52ACC18BA00927918 /* Set */ = {
+		55A2ABF52ACC18BA00927918 /* Exercise Set */ = {
 			isa = PBXGroup;
 			children = (
 				55A2ABFA2ACC351C00927918 /* ExerciseSetTableViewCell.swift */,
@@ -410,7 +386,7 @@
 				55A2ABF82ACC2F6100927918 /* ExerciseSetView.swift */,
 				55A2ABF32ACC187F00927918 /* ExerciseSetViewController.swift */,
 			);
-			path = Set;
+			path = "Exercise Set";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
