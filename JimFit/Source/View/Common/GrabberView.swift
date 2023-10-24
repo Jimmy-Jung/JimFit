@@ -38,9 +38,11 @@ final class GrabberView: UIView {
         .addConfigurationUpdateHandler { button in
             switch button.state {
             case .selected:
+                button.titleWithFont(title: "done".localized, font: K.Font.SubHeader)
                 button.baseForegroundColor(K.Color.Primary.Orange)
                 button.baseBackgroundColor(.clear)
             default:
+                button.titleWithFont(title: "edit".localized, font: K.Font.SubHeader)
                 button.baseForegroundColor(K.Color.Primary.Label)
                 button.baseBackgroundColor(.clear)
             }

@@ -74,4 +74,7 @@ final class InfoPopoverViewController: UIViewController {
             make.bottom.equalToSuperview().offset(-16)
         }
     }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        dismiss(animated: true, completion: nil)
+    }
 }
