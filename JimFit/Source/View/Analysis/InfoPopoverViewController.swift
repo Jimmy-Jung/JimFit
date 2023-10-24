@@ -17,7 +17,7 @@ final class InfoPopoverViewController: UIViewController {
     }
     private lazy var dismissButton: UIButton = UIButton(configuration: .plain())
         .image(K.Image.Xmark)
-        .baseForegroundColor(K.Color.Primary.Label)
+        .baseForegroundColor(.white)
         .addAction { [weak self] in
             HapticsManager.shared.vibrateForSelection()
             self?.dismiss(animated: true, completion: nil)
@@ -73,5 +73,8 @@ final class InfoPopoverViewController: UIViewController {
             make.centerX.equalTo(view)
             make.bottom.equalToSuperview().offset(-16)
         }
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        dismiss(animated: true, completion: nil)
     }
 }

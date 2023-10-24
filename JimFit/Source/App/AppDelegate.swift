@@ -19,7 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         fetchRemoteConfig()
         RealmManager.shared.localizeRealm()
-
+        // 알림 권한 설정
+        UNUserNotificationCenter.current().delegate = self
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { success, error in
+        }
         return true
     }
     
@@ -63,3 +66,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 }
 
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    // 포그라운드에서 알림 받기
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.sound, .badge, .banner, .list])
+    }
+    // 푸쉬 탭을 선택했을 때 아래 코드 실행
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let notification = response.notification
+        let userInfo = notification.request.content.userInfo
+        
+        if response.actionIdentifier == UNNotificationDismissActionIdentifier {
+            print ("Message Closed")
+        }
+        else if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
+            print ("푸시 메시지 클릭 했을 때")
+            print(userInfo)
+        }
+        completionHandler()
+    }
+}
