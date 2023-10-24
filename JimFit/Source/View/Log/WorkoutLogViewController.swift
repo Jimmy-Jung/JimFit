@@ -274,6 +274,8 @@ extension WorkoutLogViewController: UITableViewDelegate, UITableViewDataSource, 
                             self.realm.delete(workoutLog)
                             self.reloadCalendar()
                             self.workoutLog = nil
+                            self.timer.workoutLog = nil
+                            self.timer.stopTimer()
                         }
                     }
                 }

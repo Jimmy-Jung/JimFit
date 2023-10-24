@@ -43,10 +43,12 @@ final class TimerManager {
     }
     
     func stopTimer() {
-        try! realm.write {
-            workoutLog?.exerciseTime = totalExerciseTime
-            workoutLog?.restTime = totalRestTime
-            workoutLog?.completedTime = Date()
+        if let workoutLog {
+            try! realm.write {
+                workoutLog.exerciseTime = totalExerciseTime
+                workoutLog.restTime = totalRestTime
+                workoutLog.completedTime = Date()
+            }
         }
         exerciseTimer?.invalidate()
         restTimer?.invalidate()
