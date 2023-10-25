@@ -39,6 +39,11 @@ final class WorkoutLogViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if realm.object(ofType: Exercise.self, forPrimaryKey: "0001") == nil {
+            showAlert(title: "problem_with_data".localized, message: "problem_with_data_message".localized, preferredStyle: .alert, doneTitle: "ok".localized, cancelTitle: "cancel".localized, doneHandler: { [weak self] _ in
+                self?.transition(viewController: BackupViewController(), style: .pushNavigation)
+            })
+        }
         setNavigationBarAppearance()
         configureView()
         configureRealm()

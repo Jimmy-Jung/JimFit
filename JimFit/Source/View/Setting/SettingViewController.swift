@@ -14,7 +14,6 @@ import SafariServices
 final class SettingViewController: UIViewController {
     
     // MARK: - Properties
-    let device = UIDevice.current.model
     private let tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .insetGrouped)
         table.register(
@@ -51,7 +50,6 @@ final class SettingViewController: UIViewController {
     
     // MARK: - Helpers
     private func configureUI() {
-        navigationItem.title = "setting".localized
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -84,7 +82,7 @@ final class SettingViewController: UIViewController {
                         model: SettingsOption(
                             title: "notification".localized,
                             icon: UIImage(systemName: "bell.fill"),
-                            iconBackgroundColor: .systemRed,
+                            iconBackgroundColor: K.Color.Primary.Red,
                             handler: {
                                 let vc = NotificationViewController()
                                 vc.navigationItem.title = "notification".localized
@@ -94,6 +92,20 @@ final class SettingViewController: UIViewController {
                             }
                         )
                     ),
+                    .staticCell(
+                        model: SettingsOption(
+                            title: "backup_and_restore".localized,
+                            icon: UIImage(systemName: "externaldrive.fill"),
+                            iconBackgroundColor: K.Color.Primary.Mint,
+                            handler: {
+                                let vc = BackupViewController()
+                                vc.navigationItem.title = "backup_and_restore".localized
+                                
+                                self.navigationController?
+                                    .pushViewController(vc, animated: true)
+                            }
+                        )
+                    )
                 ])
         )
         
@@ -101,17 +113,6 @@ final class SettingViewController: UIViewController {
             Section(
                 title: "info".localized,
                 options: [
-                    //                .staticCell(
-                    //                    model: SettingsOption(
-                    //                        title: "사용 방법",
-                    //                        icon: UIImage(systemName: "questionmark.circle.fill"),
-                    //                        iconBackgroundColor: .systemBlue) { [weak self] in
-                    //                            self?.performSegue(
-                    //                                withIdentifier: "toHowToUse",
-                    //                                sender: nil
-                    //                            )
-                    //                        }
-                    //                ),
                     .staticCell(
                         model: SettingsOption(
                             title: "send_feedback".localized,
@@ -125,7 +126,8 @@ final class SettingViewController: UIViewController {
                             icon: UIImage(systemName: "wand.and.rays.inverse"),
                             iconBackgroundColor: .lightGray) {}
                     )
-                ])
+                ]
+            )
         )
     }
     

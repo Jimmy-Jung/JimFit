@@ -72,6 +72,10 @@
 		55A2ABF72ACC191700927918 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A2ABF62ACC191700927918 /* TimerView.swift */; };
 		55A2ABF92ACC2F6100927918 /* ExerciseSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A2ABF82ACC2F6100927918 /* ExerciseSetView.swift */; };
 		55A2ABFB2ACC351C00927918 /* ExerciseSetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A2ABFA2ACC351C00927918 /* ExerciseSetTableViewCell.swift */; };
+		55DD08A22AE909E100D43959 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 55DD08A12AE909E100D43959 /* Zip */; };
+		55DD08A42AE90BDA00D43959 /* BackupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DD08A32AE90BDA00D43959 /* BackupViewController.swift */; };
+		55DD08A62AE9212A00D43959 /* BackupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DD08A52AE9212A00D43959 /* BackupView.swift */; };
+		55DD08A82AE94C7F00D43959 /* BackupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DD08A72AE94C7F00D43959 /* BackupManager.swift */; };
 		55E42E4E2AE316F500AA67D3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55E42E502AE316F500AA67D3 /* InfoPlist.strings */; };
 		55E42E5A2AE628A100AA67D3 /* InfoPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E42E592AE628A100AA67D3 /* InfoPopoverViewController.swift */; };
 /* End PBXBuildFile section */
@@ -133,6 +137,9 @@
 		55A2ABF62ACC191700927918 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		55A2ABF82ACC2F6100927918 /* ExerciseSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetView.swift; sourceTree = "<group>"; };
 		55A2ABFA2ACC351C00927918 /* ExerciseSetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetTableViewCell.swift; sourceTree = "<group>"; };
+		55DD08A32AE90BDA00D43959 /* BackupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupViewController.swift; sourceTree = "<group>"; };
+		55DD08A52AE9212A00D43959 /* BackupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupView.swift; sourceTree = "<group>"; };
+		55DD08A72AE94C7F00D43959 /* BackupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupManager.swift; sourceTree = "<group>"; };
 		55E42E4F2AE316F500AA67D3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		55E42E512AE316F800AA67D3 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		55E42E592AE628A100AA67D3 /* InfoPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPopoverViewController.swift; sourceTree = "<group>"; };
@@ -145,6 +152,7 @@
 			files = (
 				550BA7A82ADB152200475042 /* FirebaseRemoteConfig in Frameworks */,
 				555E6B8C2AC55BCC00DCA052 /* RealmSwift in Frameworks */,
+				55DD08A22AE909E100D43959 /* Zip in Frameworks */,
 				555E6B4D2AC1D79900DCA052 /* JimmyKit in Frameworks */,
 				555E6B5A2AC30C3A00DCA052 /* FSCalendar in Frameworks */,
 				5570E1AD2AD3D1C900350AF3 /* RxCocoa in Frameworks */,
@@ -295,6 +303,7 @@
 				55936CCB2ADD64EE00F2E7E6 /* HapticManager.swift */,
 				5567171A2AE153A2002430E0 /* ImageBlender.swift */,
 				5567171C2AE158BF002430E0 /* ExerciseInfoManager.swift */,
+				55DD08A72AE94C7F00D43959 /* BackupManager.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -367,6 +376,8 @@
 				556717272AE2DF3F002430E0 /* NotificationViewController.swift */,
 				5567172F2AE2DF3F002430E0 /* SettingTableViewCell.swift */,
 				556717302AE2DF3F002430E0 /* SwitchTableViewCell.swift */,
+				55DD08A32AE90BDA00D43959 /* BackupViewController.swift */,
+				55DD08A52AE9212A00D43959 /* BackupView.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -422,6 +433,7 @@
 				550BA7A42ADB065800475042 /* FirebaseCrashlytics */,
 				550BA7A72ADB152200475042 /* FirebaseRemoteConfig */,
 				550BA7AE2ADB2E7F00475042 /* Alamofire */,
+				55DD08A12AE909E100D43959 /* Zip */,
 			);
 			productName = JimFit;
 			productReference = 555E6B342AC1D76B00DCA052 /* JimFit.app */;
@@ -461,6 +473,7 @@
 				5570E1AB2AD3D1C900350AF3 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				550BA7A12ADB065800475042 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				550BA7AD2ADB2E7F00475042 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				55DD08A02AE909E100D43959 /* XCRemoteSwiftPackageReference "Zip" */,
 			);
 			productRefGroup = 555E6B352AC1D76B00DCA052 /* Products */;
 			projectDirPath = "";
@@ -531,7 +544,9 @@
 				555E6B662AC3285B00DCA052 /* Constants.swift in Sources */,
 				555E6B7B2AC44D4700DCA052 /* TabBarController.swift in Sources */,
 				556717192AE11ADB002430E0 /* RecoveryView.swift in Sources */,
+				55DD08A82AE94C7F00D43959 /* BackupManager.swift in Sources */,
 				5567171D2AE158BF002430E0 /* ExerciseInfoManager.swift in Sources */,
+				55DD08A62AE9212A00D43959 /* BackupView.swift in Sources */,
 				550BA7B42ADC424100475042 /* LoadingViewController.swift in Sources */,
 				556717342AE2DF40002430E0 /* SettingModels.swift in Sources */,
 				556717392AE2DF40002430E0 /* SettingTableViewCell.swift in Sources */,
@@ -554,6 +569,7 @@
 				5570E1A62AD2F52400350AF3 /* UITextField+Exension.swift in Sources */,
 				555E6B382AC1D76B00DCA052 /* AppDelegate.swift in Sources */,
 				55A2ABF42ACC187F00927918 /* ExerciseSetViewController.swift in Sources */,
+				55DD08A42AE90BDA00D43959 /* BackupViewController.swift in Sources */,
 				5567173A2AE2DF40002430E0 /* SwitchTableViewCell.swift in Sources */,
 				555E6B712AC3459A00DCA052 /* String+Extension.swift in Sources */,
 				55A2ABF92ACC2F6100927918 /* ExerciseSetView.swift in Sources */,
@@ -723,7 +739,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20231024;
+				CURRENT_PROJECT_VERSION = 20231026;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = VJ2VF4KUF7;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -738,7 +754,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Jimmy.JimFit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -756,7 +772,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20231024;
+				CURRENT_PROJECT_VERSION = 20231026;
 				DEVELOPMENT_TEAM = VJ2VF4KUF7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = JimFit/Resource/Info.plist;
@@ -770,7 +786,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Jimmy.JimFit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -870,6 +886,14 @@
 				minimumVersion = 6.0.0;
 			};
 		};
+		55DD08A02AE909E100D43959 /* XCRemoteSwiftPackageReference "Zip" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/marmelroy/Zip.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -932,6 +956,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5570E1AB2AD3D1C900350AF3 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
+		};
+		55DD08A12AE909E100D43959 /* Zip */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 55DD08A02AE909E100D43959 /* XCRemoteSwiftPackageReference "Zip" */;
+			productName = Zip;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

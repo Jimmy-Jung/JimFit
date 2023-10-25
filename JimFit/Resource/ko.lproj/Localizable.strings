@@ -6,7 +6,27 @@
   
 */
 
+// Backup
+"backup_title" = "데이터 백업/복원";
+"backup" = "백업";
+"restore" = "복원";
+"no_backup" = "백업 데이터가 없습니다.";
+"backup_message" = "사용자의 iPhone에서 앱이 삭제되면 운동 기록 데이터도 함께 삭제됩니다. 데이터의 안전한 보관을 위해 백업 파일을 생성하고 안전한 위치에 저장하세요. 아래의 백업 파일을 선택하여 파일을 다른 위치로 공유할 수 있습니다.";
+"no_document_directory" = "도큐멘토리 경로가 존재하지 않습니다";
+"no_backup_file" = "백업할 파일이 없습니다";
+"zip_error" = "압축하는데 오류가 발생했습니다";
+"remove_error" = "파일을 제거 실패";
+"try_again_message" = "다시 시도해주세요";
+"checking_backup_message" = "정말로 백업 데이터를 삭제하시겠습니까?";
+"backup_success" = "백업 성공";
+"backup_success_message" = "백업 파일을 다른 위치로 공유할 수 있습니다.";
+"would_restore" = "선택한 파일로 복원하시겠습니까?";
+"would_restore_message" = "기존 운동 기록에 복원한 데이터를 덮어씌웁니다";
+"restore_success" = "복원 완료";
+"restore_success_message" = "복원이 완료되어 앱을 종료합니다";
+
 // System
+"warning" = "경고";
 "searchBar_placeholder" = "운동 이름을 입력하세요";
 "ok" = "확인";
 "cancel" = "취소";
@@ -17,6 +37,7 @@
 "done_workout_message" = "운동을 완료하셨나요?";
 
 // Setting
+"backup_and_restore" = "백업/복원";
 "unknown" = "알 수 없음";
 "setting" = "설정";
 "system" = "시스템";
@@ -67,6 +88,8 @@ JimFit에서는 근육이 회복하는데 72시간을 기준으로 설정하고 
 "workout_log" = "운동 기록";
 "delete_workout_log" = "운동 기록을 삭제하시겠습니까?";
 "delete_workout_log_message" = "운동 리스트가 비어있을 경우 기록한 운동 시간이 삭제됩니다.";
+"problem_with_data" = "데이터에 문제가 발생했습니다";
+"problem_with_data_message" = "복원 화면으로 이동해 데이터를 복원해주세요";
 
 // Search
 "selection_list%@" = "선택항목 %@/12";
