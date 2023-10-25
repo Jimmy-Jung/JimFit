@@ -18,10 +18,14 @@ extension UIViewController {
         cancelHandler: ((UIAlertAction) -> Void)? = nil
     ) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
-        let doneAction = UIAlertAction(title: doneTitle, style: .destructive, handler: doneHandler)
-        let cancelAction = UIAlertAction(title: cancelTitle, style: .default, handler: cancelHandler)
-        alert.addAction(doneAction)
-        alert.addAction(cancelAction)
+        if doneTitle != nil {
+            let doneAction = UIAlertAction(title: doneTitle, style: .destructive, handler: doneHandler)
+            alert.addAction(doneAction)
+        }
+        if cancelTitle != nil {
+            let cancelAction = UIAlertAction(title: cancelTitle, style: .default, handler: cancelHandler)
+            alert.addAction(cancelAction)
+        }
         present(alert, animated: true)
     }
     
@@ -37,5 +41,13 @@ extension UIViewController {
         navigationItem.scrollEdgeAppearance = navigationBarAppearance
         navigationItem.standardAppearance = navigationBarAppearance
         navigationController?.setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    func documentDirectoryPath() -> URL? {
+        let documentDirectory = FileManager
+            .default
+            .urls(for: .documentDirectory, in: .userDomainMask)
+            .first
+        return documentDirectory
     }
 }

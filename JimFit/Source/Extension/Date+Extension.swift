@@ -13,6 +13,7 @@ extension Date {
         case headerDate = "header_date_formatter"
         case grabberDate = "grabber_date_formatter"
         case primaryKey = "yyyyMMdd"
+        case backup = "yyMMddHHmmss"
     }
     
     /// 지정된 형식을 사용하여 날짜를 문자열 표현으로 변환합니다.

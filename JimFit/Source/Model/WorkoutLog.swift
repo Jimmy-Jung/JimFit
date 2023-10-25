@@ -60,7 +60,6 @@ final class Exercise: Object, Codable {
 }
 
 final class ExerciseSet: Object {
-//    @Persisted(originProperty: "exerciseSets") var OriginWorkout: LinkingObjects<Workout>
     @Persisted var repetitionCount: Int
     @Persisted var weight: Int
     @Persisted var isFinished: Bool

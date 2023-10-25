@@ -5,8 +5,27 @@
   Created by 정준영 on 2023/09/27.
   
 */
+// Backup
+"backup_title" = "Data Backup/Restore";
+"backup" = "Backup";
+"restore" = "Restore";
+"no_backup" = "No Backup Data";
+"backup_message" = "If the app is deleted from the user's iPhone, the exercise record data will also be deleted. Create a backup file for secure storage and save it in a safe location. You can select the backup file below to share the file to a different location.";
+"no_document_directory" = "No Document Directory";
+"no_backup_file" = "No Backup File";
+"zip_error" = "Zip Error";
+"remove_error" = "Remove Error";
+"try_again_message" = "Please try it again";
+"checking_backup_message" = "Are you sure you want to delete the backup data?";
+"backup_success" = "Backup successful";
+"backup_success_message" = "You can share the backup file to a different location.";
+"would_restore" = "Would you like to restore the selected file?";
+"would_restore_message" = "Restoring the data will overwrite the existing exercise records.";
+"restore_success" = "Restore successful";
+"restore_success_message" = "Restoration complete. The app will now close.";
 
 // System
+"warning" = "Warning";
 "searchBar_placeholder" = "Enter the exercise Name";
 "ok" = "OK";
 "cancel" = "Cancel";
@@ -17,6 +36,7 @@
 "done_workout_message" = "Have you completed your workout?";
 
 // Setting
+"backup_and_restore" = "Backup/Restore";
 "unknown" = "Unknown";
 "setting" = "Setting";
 "system" = "System";
@@ -67,6 +87,8 @@ For example, it is not a good idea to do chest exercises again on Tuesday after 
 "workout_log" = "Workout Log";
 "delete_workout_log" = "Do you want to delete the workout log?";
 "delete_workout_log_message" = "If the workout list is empty, the recorded workout time will be deleted.";
+"problem_with_data" = "There was a problem with the data" ;
+"problem_with_data_message" = "Please go to the restore tab to restore the data";
 
 // Search
 "selection_list%@" = "Choices %@/12";

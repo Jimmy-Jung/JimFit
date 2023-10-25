@@ -7,6 +7,7 @@
 
 import Foundation
 import RealmSwift
+import UIKit
 
 final class RealmManager {
     
@@ -26,7 +27,11 @@ final class RealmManager {
     private init() {}
     
     private func createOldRealm() -> Realm {
-        return try! Realm(fileURL: oldFileURL)
+        do {
+            return try Realm(fileURL: oldFileURL)
+        } catch {
+            return try! Realm()
+        }
     }
     
     private func createNewRealm() -> Realm {
@@ -64,7 +69,6 @@ final class RealmManager {
     }
     
     func localizeRealm() {
-        let new = newRealm.objects(Exercise.self)
         let old = oldRealm.objects(Exercise.self)
         let firstReference = "0001"
         if newRealm.object(ofType: Exercise.self, forPrimaryKey: firstReference) != oldRealm.object(ofType: Exercise.self, forPrimaryKey: firstReference) {
@@ -75,5 +79,4 @@ final class RealmManager {
             }
         }
     }
-    
 }
