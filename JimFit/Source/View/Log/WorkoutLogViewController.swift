@@ -54,8 +54,12 @@ final class WorkoutLogViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         reloadTableView()
-        reloadCalendar()
         fetchTimerStatus()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        reloadCalendar()
     }
     
     private func setupBindings() {
