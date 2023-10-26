@@ -89,7 +89,10 @@ extension BackupViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = UITableViewCell()
         var content = cell.defaultContentConfiguration()
         content.text = zipFileList[indexPath.row]
-        content.image = UIImage(systemName: "doc.zipper")
+        content.textProperties.font = K.Font.CellHeader
+        content.image = UIImage(systemName: "doc.zipper")?.renderingColor(.monochrome).font(K.Font.CellHeader)
+        content.imageProperties.tintColor = K.Color.Primary.Orange
+        content.imageToTextPadding = 8
         cell.contentConfiguration = content
         cell.accessoryType = .disclosureIndicator
         return cell
