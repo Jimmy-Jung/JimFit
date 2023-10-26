@@ -10,6 +10,7 @@ import FirebaseAnalytics
 import FirebaseCore
 import FirebaseRemoteConfig
 import RealmSwift
+import SwiftRater
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -25,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UNUserNotificationCenter.current().delegate = self
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { success, error in
         }
+        rateStar()
         return true
     }
     
@@ -86,5 +88,15 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             print(userInfo)
         }
         completionHandler()
+    }
+    
+    func rateStar() {
+        SwiftRater.daysUntilPrompt = 7
+        SwiftRater.usesUntilPrompt = 10
+        SwiftRater.significantUsesUntilPrompt = 3
+        SwiftRater.daysBeforeReminding = 1
+        SwiftRater.showLaterButton = true
+        SwiftRater.appID = "6470066708"
+        SwiftRater.appLaunched()
     }
 }
