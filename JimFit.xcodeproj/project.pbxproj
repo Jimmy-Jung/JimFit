@@ -76,6 +76,7 @@
 		55DD08A62AE9212A00D43959 /* BackupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DD08A52AE9212A00D43959 /* BackupView.swift */; };
 		55DD08A82AE94C7F00D43959 /* BackupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DD08A72AE94C7F00D43959 /* BackupManager.swift */; };
 		55DD08AA2AEA3B3C00D43959 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 55DD08A92AEA3B3C00D43959 /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		55DD08AF2AEA497400D43959 /* SwiftRater in Frameworks */ = {isa = PBXBuildFile; productRef = 55DD08AE2AEA497400D43959 /* SwiftRater */; };
 		55E42E4E2AE316F500AA67D3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55E42E502AE316F500AA67D3 /* InfoPlist.strings */; };
 		55E42E5A2AE628A100AA67D3 /* InfoPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E42E592AE628A100AA67D3 /* InfoPopoverViewController.swift */; };
 /* End PBXBuildFile section */
@@ -157,6 +158,7 @@
 				555E6B5A2AC30C3A00DCA052 /* FSCalendar in Frameworks */,
 				5570E1AD2AD3D1C900350AF3 /* RxCocoa in Frameworks */,
 				555E6B502AC1D7C800DCA052 /* SnapKit in Frameworks */,
+				55DD08AF2AEA497400D43959 /* SwiftRater in Frameworks */,
 				555E6B5D2AC3198700DCA052 /* Then in Frameworks */,
 				5570E1AF2AD3D1C900350AF3 /* RxSwift in Frameworks */,
 				550BA7A52ADB065800475042 /* FirebaseCrashlytics in Frameworks */,
@@ -434,6 +436,7 @@
 				550BA7AE2ADB2E7F00475042 /* Alamofire */,
 				55DD08A12AE909E100D43959 /* Zip */,
 				55DD08A92AEA3B3C00D43959 /* FirebaseAnalyticsWithoutAdIdSupport */,
+				55DD08AE2AEA497400D43959 /* SwiftRater */,
 			);
 			productName = JimFit;
 			productReference = 555E6B342AC1D76B00DCA052 /* JimFit.app */;
@@ -474,6 +477,7 @@
 				550BA7A12ADB065800475042 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				550BA7AD2ADB2E7F00475042 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				55DD08A02AE909E100D43959 /* XCRemoteSwiftPackageReference "Zip" */,
+				55DD08AD2AEA497400D43959 /* XCRemoteSwiftPackageReference "SwiftRater" */,
 			);
 			productRefGroup = 555E6B352AC1D76B00DCA052 /* Products */;
 			projectDirPath = "";
@@ -894,6 +898,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		55DD08AD2AEA497400D43959 /* XCRemoteSwiftPackageReference "SwiftRater" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/takecian/SwiftRater.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -961,6 +973,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 550BA7A12ADB065800475042 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		55DD08AE2AEA497400D43959 /* SwiftRater */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 55DD08AD2AEA497400D43959 /* XCRemoteSwiftPackageReference "SwiftRater" */;
+			productName = SwiftRater;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
