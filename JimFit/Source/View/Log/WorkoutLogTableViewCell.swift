@@ -186,12 +186,17 @@ extension WorkoutLogTableViewCell {
     }
     
     private func updateProgress(with exerciseSets: List<ExerciseSet>) {
-        let setCount = exerciseSets.count
-        let setFinishedCount = exerciseSets.filter { $0.isFinished }.count
-        let progression = Float(setFinishedCount) / Float(setCount)
-        progressLabel.text = " " + String(Int(progression * 100)) + "%"
-        DispatchQueue.main.async {
-            self.progressBar.setProgress(progression, animated: true)
+        if exerciseSets.isEmpty {
+            progressLabel.text = "0 %"
+            progressBar.setProgress(0, animated: true)
+        } else {
+            let setCount = exerciseSets.count
+            let setFinishedCount = exerciseSets.filter { $0.isFinished }.count
+            let progression = Float(setFinishedCount) / Float(setCount)
+            progressLabel.text = " " + String(Int(progression * 100)) + "%"
+            DispatchQueue.main.async {
+                self.progressBar.setProgress(progression, animated: true)
+            }
         }
     }
     
