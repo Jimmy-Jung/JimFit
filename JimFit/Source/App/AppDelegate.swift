@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAnalytics
 import FirebaseCore
 import FirebaseRemoteConfig
 import RealmSwift
@@ -17,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UM.finishedLaunch = false
 
         FirebaseApp.configure()
+        Analytics.logEvent(AnalyticsEventAppOpen, parameters: nil)
         fetchRemoteConfig()
         RealmManager.shared.localizeRealm()
         // 알림 권한 설정
