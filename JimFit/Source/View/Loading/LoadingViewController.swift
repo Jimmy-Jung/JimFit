@@ -75,26 +75,27 @@ final class LoadingViewController: UIViewController {
                     self?.systemUpdater.openAppStore()
                 }
             )
-        }
-        guard let latestVersion = await systemUpdater.latestVersion() else {
-            UM.noNeedUpdate = true
-            return
-        }
-        if await systemUpdater.isUpdateNeeds() {
-            self.showAlert(
-                title: "needs_to_update_title".localized,
-                message: "needs_to_update_message%@".localized(latestVersion),
-                preferredStyle: .alert,
-                doneTitle: "later".localized,
-                cancelTitle: "update".localized,
-                doneStyle: .default,
-                cancelStyle: .cancel,
-                doneHandler: { _ in UM.noNeedUpdate = true },
-                cancelHandler:  { [weak self] _ in
-                    self?.systemUpdater.openAppStore()
-                })
         } else {
-            UM.noNeedUpdate = true
+            guard let latestVersion = await systemUpdater.latestVersion() else {
+                UM.noNeedUpdate = true
+                return
+            }
+            if await systemUpdater.isUpdateNeeds() {
+                self.showAlert(
+                    title: "needs_to_update_title".localized,
+                    message: "needs_to_update_message%@".localized(latestVersion),
+                    preferredStyle: .alert,
+                    doneTitle: "later".localized,
+                    cancelTitle: "update".localized,
+                    doneStyle: .default,
+                    cancelStyle: .cancel,
+                    doneHandler: { _ in UM.noNeedUpdate = true },
+                    cancelHandler:  { [weak self] _ in
+                        self?.systemUpdater.openAppStore()
+                    })
+            } else {
+                UM.noNeedUpdate = true
+            }
         }
     }
     
