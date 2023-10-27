@@ -35,6 +35,12 @@ struct UserDefaultManager {
     @UserDefault(key: KeyEnum.notiTime.rawValue, defaultValue: Date())
     static var notiTime: Date
     
+    @UserDefault(key: KeyEnum.minimumVersion.rawValue, defaultValue: "1.1.3")
+    static var minimumVersion: String
+    
+    @UserDefault(key: KeyEnum.noNeedUpdate.rawValue, defaultValue: false)
+    static var noNeedUpdate: Bool
+    
     enum KeyEnum: String {
         case savedTime
         case ETag
@@ -44,6 +50,8 @@ struct UserDefaultManager {
         case isDarkMode
         case isDailyNotiOn
         case notiTime
+        case minimumVersion
+        case noNeedUpdate
     }
 }
 

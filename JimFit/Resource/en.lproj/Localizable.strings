@@ -31,9 +31,15 @@
 "cancel" = "Cancel";
 "edit" = "Edit";
 "done" = "Done";
+"update" = "Update";
+"later" = "Later";
 "locale_identifier" = "en_US";
 "done_workout_title" = "Workout Record Complete";
 "done_workout_message" = "Have you completed your workout?";
+"needs_to_update_title" = "Update Notification";
+"needs_to_update_message%@" = "A new version is available. Would you like to update to %@ version?";
+"must_update_title" = "Update Required";
+"must_update_message%@" = "Required updates have been released. Please update to %@ version";
 
 // Setting
 "backup_and_restore" = "Backup/Restore";

@@ -14,16 +14,18 @@ extension UIViewController {
         preferredStyle: UIAlertController.Style,
         doneTitle: String? = "done".localized,
         cancelTitle: String? = "cancel".localized,
+        doneStyle: UIAlertAction.Style = .destructive,
+        cancelStyle: UIAlertAction.Style = .default,
         doneHandler: ((UIAlertAction) -> Void)? = nil,
         cancelHandler: ((UIAlertAction) -> Void)? = nil
     ) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
         if doneTitle != nil {
-            let doneAction = UIAlertAction(title: doneTitle, style: .destructive, handler: doneHandler)
+            let doneAction = UIAlertAction(title: doneTitle, style: doneStyle, handler: doneHandler)
             alert.addAction(doneAction)
         }
         if cancelTitle != nil {
-            let cancelAction = UIAlertAction(title: cancelTitle, style: .default, handler: cancelHandler)
+            let cancelAction = UIAlertAction(title: cancelTitle, style: cancelStyle, handler: cancelHandler)
             alert.addAction(cancelAction)
         }
         present(alert, animated: true)

@@ -9,7 +9,7 @@ import UIKit
 
 final class BackupView: UIView {
     private lazy var backupView: UIView = UIView()
-        .backgroundColor(K.Color.Primary.Background)
+        .backgroundColor(.secondarySystemGroupedBackground)
         .cornerRadius(K.Size.cellRadius)
     
     private lazy var backupImageBackView: UIView = UIView()
@@ -97,12 +97,13 @@ final class BackupView: UIView {
     let tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .insetGrouped)
         table.sectionHeaderTopPadding = 0
+        table.backgroundColor(.clear)
         return table
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor(.secondarySystemBackground)
+        backgroundColor(.systemGroupedBackground)
         
         addSubView(backupView)
         backupView.snp.makeConstraints { make in
