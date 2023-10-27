@@ -17,7 +17,7 @@ final class BackupViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setNavigationBarAppearance(backgroundColor: K.Color.Grayscale.Background)
+        setNavigationBarAppearance(backgroundColor: .systemGroupedBackground)
         configureUI()
         configureData()
         documentPicker.delegate = self

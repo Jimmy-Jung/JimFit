@@ -8,6 +8,7 @@
 import UIKit
 
 final class LoadingViewController: UIViewController {
+    private let systemUpdater = SystemUpdater()
     private var imageArray: [UIImage] = []
     private var imageView: UIImageView!
     private var imageIndex = 0
@@ -18,6 +19,7 @@ final class LoadingViewController: UIViewController {
         setupImages()
         setupImageView()
         startImageTransition()
+        Task { await alertUpdate() }
     }
 
     private func setupImages() {
@@ -52,10 +54,47 @@ final class LoadingViewController: UIViewController {
             UIView.transition(with: self.imageView, duration: transitionDuration, options: .transitionCrossDissolve, animations: {
                 self.imageView.image = self.imageArray[self.imageIndex]
             }, completion: nil)
-            if UM.finishedLaunch {
-//                self.dismiss(animated: true)
+            
+            if UM.finishedLaunch && UM.noNeedUpdate {
                 changeRootViewController()
             }
+        }
+    }
+    
+    func alertUpdate() async {
+        UM.noNeedUpdate = false
+        if systemUpdater.isUpdateRequires() {
+            self.showAlert(
+                title: "must_update_title".localized,
+                message: "must_update_message%@".localized(UM.minimumVersion),
+                preferredStyle: .alert,
+                doneTitle: "update".localized,
+                cancelTitle: nil,
+                doneStyle: .cancel,
+                doneHandler:  { [weak self] _ in
+                    self?.systemUpdater.openAppStore()
+                }
+            )
+        }
+        guard let latestVersion = await systemUpdater.latestVersion() else {
+            UM.noNeedUpdate = true
+            return
+        }
+        if await systemUpdater.isUpdateNeeds() {
+            self.showAlert(
+                title: "needs_to_update_title".localized,
+                message: "needs_to_update_message%@".localized(latestVersion),
+                preferredStyle: .alert,
+                doneTitle: "later".localized,
+                cancelTitle: "update".localized,
+                doneStyle: .default,
+                cancelStyle: .cancel,
+                doneHandler: { _ in UM.noNeedUpdate = true },
+                cancelHandler:  { [weak self] _ in
+                    self?.systemUpdater.openAppStore()
+                })
+        } else {
+            UM.noNeedUpdate = true
         }
     }
     

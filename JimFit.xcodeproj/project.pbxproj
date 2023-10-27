@@ -77,6 +77,7 @@
 		55DD08A82AE94C7F00D43959 /* BackupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DD08A72AE94C7F00D43959 /* BackupManager.swift */; };
 		55DD08AA2AEA3B3C00D43959 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 55DD08A92AEA3B3C00D43959 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		55DD08AF2AEA497400D43959 /* SwiftRater in Frameworks */ = {isa = PBXBuildFile; productRef = 55DD08AE2AEA497400D43959 /* SwiftRater */; };
+		55DD08B92AEBF32100D43959 /* SystemUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DD08B82AEBF32100D43959 /* SystemUpdater.swift */; };
 		55E42E4E2AE316F500AA67D3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55E42E502AE316F500AA67D3 /* InfoPlist.strings */; };
 		55E42E5A2AE628A100AA67D3 /* InfoPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E42E592AE628A100AA67D3 /* InfoPopoverViewController.swift */; };
 /* End PBXBuildFile section */
@@ -141,6 +142,7 @@
 		55DD08A32AE90BDA00D43959 /* BackupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupViewController.swift; sourceTree = "<group>"; };
 		55DD08A52AE9212A00D43959 /* BackupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupView.swift; sourceTree = "<group>"; };
 		55DD08A72AE94C7F00D43959 /* BackupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupManager.swift; sourceTree = "<group>"; };
+		55DD08B82AEBF32100D43959 /* SystemUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemUpdater.swift; sourceTree = "<group>"; };
 		55E42E4F2AE316F500AA67D3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		55E42E512AE316F800AA67D3 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		55E42E592AE628A100AA67D3 /* InfoPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPopoverViewController.swift; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 				5567171A2AE153A2002430E0 /* ImageBlender.swift */,
 				5567171C2AE158BF002430E0 /* ExerciseInfoManager.swift */,
 				55DD08A72AE94C7F00D43959 /* BackupManager.swift */,
+				55DD08B82AEBF32100D43959 /* SystemUpdater.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -571,6 +574,7 @@
 				5570E1A82AD3AFEB00350AF3 /* TimerManager.swift in Sources */,
 				556717222AE27927002430E0 /* RecoveryCollectionViewCell.swift in Sources */,
 				5570E1A62AD2F52400350AF3 /* UITextField+Exension.swift in Sources */,
+				55DD08B92AEBF32100D43959 /* SystemUpdater.swift in Sources */,
 				555E6B382AC1D76B00DCA052 /* AppDelegate.swift in Sources */,
 				55A2ABF42ACC187F00927918 /* ExerciseSetViewController.swift in Sources */,
 				55DD08A42AE90BDA00D43959 /* BackupViewController.swift in Sources */,
@@ -743,7 +747,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20231026;
+				CURRENT_PROJECT_VERSION = 20231028;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = VJ2VF4KUF7;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -758,7 +762,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.3;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Jimmy.JimFit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -776,7 +780,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20231026;
+				CURRENT_PROJECT_VERSION = 20231028;
 				DEVELOPMENT_TEAM = VJ2VF4KUF7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = JimFit/Resource/Info.plist;
@@ -790,7 +794,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.3;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Jimmy.JimFit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

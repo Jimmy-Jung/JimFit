@@ -40,9 +40,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if status == .success {
                 remoteConfig.activate { changed, error in
                     if changed || APIKEY.ExerciseDataURL.isEmpty {
-                        guard let exerciseDataURL = remoteConfig["ExerciseDataURL"].stringValue else { return }
-                        APIKEY.ExerciseDataURL = exerciseDataURL
-                        FireStorage().checkETagFromFireStore()
+                        if let minimumVersion = remoteConfig["MinimumVersion"].stringValue {
+                            UM.minimumVersion = minimumVersion
+                        }
+                        if let exerciseDataURL = remoteConfig["ExerciseDataURL"].stringValue {
+                            APIKEY.ExerciseDataURL = exerciseDataURL
+                            FireStorage().checkETagFromFireStore()
+                        }
                     } else {
                         UM.finishedLaunch = true
                     }

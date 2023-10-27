@@ -9,6 +9,7 @@ import UIKit
 import FSCalendar
 import RealmSwift
 import RxSwift
+import SwiftRater
 
 protocol ReloadDelegate: AnyObject {
     func reloadData()
@@ -49,6 +50,7 @@ final class WorkoutLogViewController: UIViewController {
         configureRealm()
         registerDelegate()
         setupBindings()
+        SwiftRater.check()
     }
     
     override func viewWillAppear(_ animated: Bool) {
