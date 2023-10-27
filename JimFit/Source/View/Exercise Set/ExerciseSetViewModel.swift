@@ -71,11 +71,9 @@ final class ExerciseSetViewModel: ExerciseSetViewModelProtocol {
             self.isActiveTimerButton = true
         } else {
             if timer.recordingDay == workoutLog.workoutDate {
-                timer.fetchTimer(with: workoutLog)
                 self.setUpBinding_Today()
                 self.isActiveTimerButton = true
             } else {
-                timer.fetchTimer(with: workoutLog)
                 self.setUpBinding_NotToday()
                 self.isActiveTimerButton = false
             }
@@ -142,7 +140,6 @@ final class ExerciseSetViewModel: ExerciseSetViewModelProtocol {
     // MARK: - Private Methods
 
     private func setUpBinding_Today() {
-        guard let workoutLog = workout.OriginWorkoutLog.first else { return }
         
         timer.totalExerciseTimePublisher
             .map { $0.formattedTime() }
