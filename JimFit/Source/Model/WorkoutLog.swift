@@ -25,7 +25,7 @@ final class WorkoutLog: Object {
     }
 }
 
-final class Workout: Object {
+final class Workout: Object,Codable {
     @Persisted(primaryKey: true) var workoutId = ObjectId.generate()
     @Persisted var exerciseReference: String
     @Persisted var exerciseSets = List<ExerciseSet>()
@@ -35,6 +35,12 @@ final class Workout: Object {
         self.init()
         self.exerciseReference = exerciseReference
         self.exerciseSets.append(ExerciseSet(repetitionCount: 0, weight: 0))
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case workoutId
+        case exerciseReference
+        case exerciseSets
     }
 }
 
@@ -59,7 +65,7 @@ final class Exercise: Object, Codable {
     }
 }
 
-final class ExerciseSet: Object {
+final class ExerciseSet: Object, Codable {
     @Persisted var repetitionCount: Int
     @Persisted var weight: Int
     @Persisted var isFinished: Bool
