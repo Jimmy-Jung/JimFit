@@ -78,9 +78,31 @@
 		55DD08AA2AEA3B3C00D43959 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 55DD08A92AEA3B3C00D43959 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		55DD08AF2AEA497400D43959 /* SwiftRater in Frameworks */ = {isa = PBXBuildFile; productRef = 55DD08AE2AEA497400D43959 /* SwiftRater */; };
 		55DD08B92AEBF32100D43959 /* SystemUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DD08B82AEBF32100D43959 /* SystemUpdater.swift */; };
+		55DD09092AF4B1B000D43959 /* testExerciseSetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DD09082AF4B1B000D43959 /* testExerciseSetViewModel.swift */; };
+		55DD09102AF4B62100D43959 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 55DD090F2AF4B62100D43959 /* Realm */; };
+		55DD09122AF4B62500D43959 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 55DD09112AF4B62500D43959 /* RealmSwift */; };
+		55DD09142AF4B65000D43959 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 55DD09132AF4B65000D43959 /* RxCocoa */; };
+		55DD09162AF4B65800D43959 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 55DD09152AF4B65800D43959 /* RxSwift */; };
+		55DD09182AF4B67000D43959 /* JimmyKit in Frameworks */ = {isa = PBXBuildFile; productRef = 55DD09172AF4B67000D43959 /* JimmyKit */; };
+		55DD091A2AF4B67300D43959 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 55DD09192AF4B67300D43959 /* SnapKit */; };
+		55DD091C2AF4B67900D43959 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 55DD091B2AF4B67900D43959 /* FSCalendar */; };
+		55DD091E2AF4B69E00D43959 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 55DD091D2AF4B69E00D43959 /* FirebaseRemoteConfig */; };
+		55DD09202AF4B6A600D43959 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 55DD091F2AF4B6A600D43959 /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		55DD09222AF4B6B600D43959 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 55DD09212AF4B6B600D43959 /* FirebaseCrashlytics */; };
+		55DD09242AF4B6E500D43959 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 55DD09232AF4B6E500D43959 /* RxRelay */; };
 		55E42E4E2AE316F500AA67D3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55E42E502AE316F500AA67D3 /* InfoPlist.strings */; };
 		55E42E5A2AE628A100AA67D3 /* InfoPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E42E592AE628A100AA67D3 /* InfoPopoverViewController.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		55DD090A2AF4B1B000D43959 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 555E6B2C2AC1D76B00DCA052 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 555E6B332AC1D76B00DCA052;
+			remoteInfo = JimFit;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		550BA7712AD7DE2F00475042 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
@@ -143,6 +165,8 @@
 		55DD08A52AE9212A00D43959 /* BackupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupView.swift; sourceTree = "<group>"; };
 		55DD08A72AE94C7F00D43959 /* BackupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupManager.swift; sourceTree = "<group>"; };
 		55DD08B82AEBF32100D43959 /* SystemUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemUpdater.swift; sourceTree = "<group>"; };
+		55DD09062AF4B1AF00D43959 /* JimFitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JimFitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		55DD09082AF4B1B000D43959 /* testExerciseSetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testExerciseSetViewModel.swift; sourceTree = "<group>"; };
 		55E42E4F2AE316F500AA67D3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		55E42E512AE316F800AA67D3 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		55E42E592AE628A100AA67D3 /* InfoPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPopoverViewController.swift; sourceTree = "<group>"; };
@@ -167,6 +191,24 @@
 				550BA7AF2ADB2E7F00475042 /* Alamofire in Frameworks */,
 				55DD08AA2AEA3B3C00D43959 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				555E6B8A2AC55BCC00DCA052 /* Realm in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55DD09032AF4B1AF00D43959 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55DD09142AF4B65000D43959 /* RxCocoa in Frameworks */,
+				55DD09122AF4B62500D43959 /* RealmSwift in Frameworks */,
+				55DD09182AF4B67000D43959 /* JimmyKit in Frameworks */,
+				55DD091A2AF4B67300D43959 /* SnapKit in Frameworks */,
+				55DD09162AF4B65800D43959 /* RxSwift in Frameworks */,
+				55DD091C2AF4B67900D43959 /* FSCalendar in Frameworks */,
+				55DD09102AF4B62100D43959 /* Realm in Frameworks */,
+				55DD09222AF4B6B600D43959 /* FirebaseCrashlytics in Frameworks */,
+				55DD09202AF4B6A600D43959 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				55DD091E2AF4B69E00D43959 /* FirebaseRemoteConfig in Frameworks */,
+				55DD09242AF4B6E500D43959 /* RxRelay in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				555E6B362AC1D76B00DCA052 /* JimFit */,
+				55DD09072AF4B1B000D43959 /* JimFitTests */,
 				555E6B352AC1D76B00DCA052 /* Products */,
 				550BA7A62ADB152200475042 /* Frameworks */,
 			);
@@ -218,6 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				555E6B342AC1D76B00DCA052 /* JimFit.app */,
+				55DD09062AF4B1AF00D43959 /* JimFitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -408,6 +452,14 @@
 			path = "Exercise Set";
 			sourceTree = "<group>";
 		};
+		55DD09072AF4B1B000D43959 /* JimFitTests */ = {
+			isa = PBXGroup;
+			children = (
+				55DD09082AF4B1B000D43959 /* testExerciseSetViewModel.swift */,
+			);
+			path = JimFitTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -445,6 +497,37 @@
 			productReference = 555E6B342AC1D76B00DCA052 /* JimFit.app */;
 			productType = "com.apple.product-type.application";
 		};
+		55DD09052AF4B1AF00D43959 /* JimFitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 55DD090C2AF4B1B000D43959 /* Build configuration list for PBXNativeTarget "JimFitTests" */;
+			buildPhases = (
+				55DD09022AF4B1AF00D43959 /* Sources */,
+				55DD09032AF4B1AF00D43959 /* Frameworks */,
+				55DD09042AF4B1AF00D43959 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				55DD090B2AF4B1B000D43959 /* PBXTargetDependency */,
+			);
+			name = JimFitTests;
+			packageProductDependencies = (
+				55DD090F2AF4B62100D43959 /* Realm */,
+				55DD09112AF4B62500D43959 /* RealmSwift */,
+				55DD09132AF4B65000D43959 /* RxCocoa */,
+				55DD09152AF4B65800D43959 /* RxSwift */,
+				55DD09172AF4B67000D43959 /* JimmyKit */,
+				55DD09192AF4B67300D43959 /* SnapKit */,
+				55DD091B2AF4B67900D43959 /* FSCalendar */,
+				55DD091D2AF4B69E00D43959 /* FirebaseRemoteConfig */,
+				55DD091F2AF4B6A600D43959 /* FirebaseAnalyticsWithoutAdIdSupport */,
+				55DD09212AF4B6B600D43959 /* FirebaseCrashlytics */,
+				55DD09232AF4B6E500D43959 /* RxRelay */,
+			);
+			productName = JimFitTests;
+			productReference = 55DD09062AF4B1AF00D43959 /* JimFitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -457,6 +540,10 @@
 				TargetAttributes = {
 					555E6B332AC1D76B00DCA052 = {
 						CreatedOnToolsVersion = 14.3.1;
+					};
+					55DD09052AF4B1AF00D43959 = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = 555E6B332AC1D76B00DCA052;
 					};
 				};
 			};
@@ -487,6 +574,7 @@
 			projectRoot = "";
 			targets = (
 				555E6B332AC1D76B00DCA052 /* JimFit */,
+				55DD09052AF4B1AF00D43959 /* JimFitTests */,
 			);
 		};
 /* End PBXProject section */
@@ -503,6 +591,13 @@
 				555E6B6C2AC344CC00DCA052 /* Localizable.strings in Resources */,
 				555E6B412AC1D76C00DCA052 /* Assets.xcassets in Resources */,
 				556717132AE11718002430E0 /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55DD09042AF4B1AF00D43959 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -593,7 +688,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		55DD09022AF4B1AF00D43959 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55DD09092AF4B1B000D43959 /* testExerciseSetViewModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		55DD090B2AF4B1B000D43959 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 555E6B332AC1D76B00DCA052 /* JimFit */;
+			targetProxy = 55DD090A2AF4B1B000D43959 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		555E6B422AC1D76C00DCA052 /* LaunchScreen.storyboard */ = {
@@ -806,6 +917,44 @@
 			};
 			name = Release;
 		};
+		55DD090D2AF4B1B000D43959 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VJ2VF4KUF7;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Jimmy.JimFitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JimFit.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/JimFit";
+			};
+			name = Debug;
+		};
+		55DD090E2AF4B1B000D43959 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VJ2VF4KUF7;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Jimmy.JimFitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JimFit.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/JimFit";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -823,6 +972,15 @@
 			buildConfigurations = (
 				555E6B492AC1D76C00DCA052 /* Debug */,
 				555E6B4A2AC1D76C00DCA052 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		55DD090C2AF4B1B000D43959 /* Build configuration list for PBXNativeTarget "JimFitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55DD090D2AF4B1B000D43959 /* Debug */,
+				55DD090E2AF4B1B000D43959 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -982,6 +1140,61 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 55DD08AD2AEA497400D43959 /* XCRemoteSwiftPackageReference "SwiftRater" */;
 			productName = SwiftRater;
+		};
+		55DD090F2AF4B62100D43959 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 555E6B882AC55BCC00DCA052 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		55DD09112AF4B62500D43959 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 555E6B882AC55BCC00DCA052 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		55DD09132AF4B65000D43959 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5570E1AB2AD3D1C900350AF3 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		55DD09152AF4B65800D43959 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5570E1AB2AD3D1C900350AF3 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		55DD09172AF4B67000D43959 /* JimmyKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 555E6B4B2AC1D79900DCA052 /* XCRemoteSwiftPackageReference "JimmyKit" */;
+			productName = JimmyKit;
+		};
+		55DD09192AF4B67300D43959 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 555E6B4E2AC1D7C800DCA052 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		55DD091B2AF4B67900D43959 /* FSCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 555E6B582AC30C3A00DCA052 /* XCRemoteSwiftPackageReference "FSCalendar" */;
+			productName = FSCalendar;
+		};
+		55DD091D2AF4B69E00D43959 /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 550BA7A12ADB065800475042 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+		55DD091F2AF4B6A600D43959 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 550BA7A12ADB065800475042 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		55DD09212AF4B6B600D43959 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 550BA7A12ADB065800475042 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		55DD09232AF4B6E500D43959 /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5570E1AB2AD3D1C900350AF3 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

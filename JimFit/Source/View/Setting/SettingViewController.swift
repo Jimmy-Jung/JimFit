@@ -69,12 +69,35 @@ final class SettingViewController: UIViewController {
                             iconBackgroundColor: .darkGray,
                             switchValue: UM.isDarkMode,
                             handler: { sender in
-                                guard let window = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
                                 
-                                let windows = window.windows.first
-                                windows?.overrideUserInterfaceStyle = sender.isOn ? .dark : .light
+                                // Capture and add screenshot of current screen
+                                let navigationSnapshot = UIImageView()
+                                navigationSnapshot.image = self.view.makeSnapshot()
+                                
+                                let tabBarSnapshot = UIImageView()
+                                tabBarSnapshot.image = self.view.makeSnapshot()
+                                
+                                
+                                self.navigationController!.view.addSubview(navigationSnapshot)
+                                navigationSnapshot.snp.makeConstraints { (maker) in
+                                    maker.edges.equalToSuperview()
+                                }
+                                self.tabBarController!.view.addSubview(tabBarSnapshot)
+                                tabBarSnapshot.snp.makeConstraints { (maker) in
+                                    maker.edges.equalToSuperview()
+                                }
+                                // Set new dark mode setting and fade out screenshot
+                                UIView.animate(withDuration: 0.3, animations: {
+                                    // Important to set it within the animations closure, so that the status bar will animate
+                                    navigationSnapshot.alpha = 0
+                                    tabBarSnapshot.alpha = 0
+                                    self.view.window?.overrideUserInterfaceStyle = sender.isOn ? .dark : .light
+                                    
+                                }) { (_) in
+                                    navigationSnapshot.removeFromSuperview()
+                                    tabBarSnapshot.removeFromSuperview()
+                                }
                                 UM.isDarkMode = sender.isOn
-                                
                             }
                         )
                     ),
