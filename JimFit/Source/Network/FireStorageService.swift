@@ -8,12 +8,19 @@
 import Foundation
 import Alamofire
 import RealmSwift
+import RxSwift
 
 enum FireStoreError: Error {
     case url
 }
 
-enum FireStoreRouter: URLRequestConvertible {
+protocol Router: URLRequestConvertible {
+    var baseURL: URL? { get }
+    var method: HTTPMethod { get }
+    var headers: HTTPHeaders? { get }
+}
+
+enum FireStoreRouter: Router {
     case checkETag
     case fetchData
     
@@ -48,7 +55,7 @@ enum FireStoreRouter: URLRequestConvertible {
     }
 }
 
-final class FireStorage {
+final class FireStorageService {
     
     let realmManager = RealmManager.shared
     
@@ -63,13 +70,16 @@ final class FireStorage {
                     UM.finishedLaunch = true
                 }
             case .failure(let error):
+                #if DEBUG
                 print("Error: checking ETag - \(error)")
+                #endif
+                
                 UM.finishedLaunch = true
             }
         }
     }
     
-    func fetchDataFromFireStore()  {
+    private func fetchDataFromFireStore()  {
         AF.request(FireStoreRouter.fetchData).response { response in
             switch response.result {
             case .success(let data):
@@ -77,7 +87,10 @@ final class FireStorage {
                 self.parseExerciseData(jsonData: data)
                 UM.ETag = response.response?.allHeaderFields["Etag"] as? String ?? ""
             case .failure(let error):
+                #if DEBUG
                 print("Error: fetching FireStore Data - \(error)")
+                #endif
+
                 UM.finishedLaunch = true
             }
         }
@@ -91,7 +104,9 @@ final class FireStorage {
             realmManager.saveNewRealm(exercises: exercises)
             realmManager.copyLikeAndRemoveOldRealm()
         } catch {
+            #if DEBUG
             print("Error: Parsing exercise data")
+            #endif
             UM.finishedLaunch = true
         }
     }
