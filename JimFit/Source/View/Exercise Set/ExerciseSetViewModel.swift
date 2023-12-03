@@ -205,3 +205,99 @@ final class ExerciseSetViewModel: ExerciseSetViewModelProtocol {
             .disposed(by: disposeBag)
     }
 }
+
+final class ExerciseSetViewModelTest: ExerciseSetViewModelProtocol {
+    var totalExerciseTime: BehaviorRelay<String> = BehaviorRelay<String>(value: "")
+    var totalRestTime: BehaviorRelay<String> = BehaviorRelay<String>(value: "")
+    var setExerciseTime: BehaviorRelay<String> = BehaviorRelay<String>(value: "")
+    var setRestTime: BehaviorRelay<String> = BehaviorRelay<String>(value: "")
+    var totalTime: BehaviorRelay<String> = BehaviorRelay<String>(value: "")
+    var timerStatus: BehaviorRelay<TimerManager.TimerStatus> = BehaviorRelay<TimerManager.TimerStatus>(value: .stop)
+    var grabberTitle: String? = ""
+    var exerciseSetsCount: Int = 0
+    var lastFinishedExerciseSetIndex: Int? = nil
+    var isActiveTimerButton: Bool = false
+    
+    var isExerciseSetFinishedCalled: Bool = false
+    var exerciseSetCalled: Bool = false
+    var toggleExerciseSetFinishedCalled: Bool = false
+    var moveExerciseSetCalled: Bool = false
+    var removeExerciseSetCalled: Bool = false
+    var appendExerciseSetCalled: Bool = false
+    var startExerciseTimerCalled: Bool = false
+    var startRestTimerCalled: Bool = false
+    var stopExerciseCalled: Bool = false
+    
+    func isExerciseSetFinished(at index: Int) -> Bool {
+        // 해당 메서드가 호출되었음을 나타내는 플래그 변수를 설정합니다.
+        isExerciseSetFinishedCalled = true
+        
+        // ExerciseSet이 끝났는지 여부를 판단하여 반환합니다.
+        // 여기에서는 항상 false를 반환하도록 설정되어 있습니다.
+        return false
+    }
+    
+    func exerciseSet(at index: Int) -> ExerciseSet {
+        // 해당 메서드가 호출되었음을 나타내는 플래그 변수를 설정합니다.
+        exerciseSetCalled = true
+        
+        // repetitionCount와 weight가 0인 ExerciseSet 인스턴스를 생성하여 반환합니다.
+        return ExerciseSet(repetitionCount: 0, weight: 0)
+    }
+    
+    func toggleExerciseSetFinished(at index: Int) {
+        // 해당 메서드가 호출되었음을 나타내는 플래그 변수를 설정합니다.
+        toggleExerciseSetFinishedCalled = true
+        
+        // ExerciseSet의 완료 여부를 토글합니다.
+        // 여기에서는 실제로 토글되는 동작은 구현되어 있지 않습니다.
+    }
+    
+    func moveExerciseSet(from source: Int, to destination: Int) {
+        // 해당 메서드가 호출되었음을 나타내는 플래그 변수를 설정합니다.
+        moveExerciseSetCalled = true
+        
+        // source 인덱스에서 destination 인덱스로 ExerciseSet을 이동시킵니다.
+        // 여기에서는 실제로 이동되는 동작은 구현되어 있지 않습니다.
+    }
+    
+    func removeExerciseSet(at index: Int) {
+        // 해당 메서드가 호출되었음을 나타내는 플래그 변수를 설정합니다.
+        removeExerciseSetCalled = true
+        
+        // 주어진 인덱스에 해당하는 ExerciseSet을 제거합니다.
+        // 여기에서는 실제로 제거되는 동작은 구현되어 있지 않습니다.
+    }
+    
+    func appendExerciseSet() {
+        // 해당 메서드가 호출되었음을 나타내는 플래그 변수를 설정합니다.
+        appendExerciseSetCalled = true
+        
+        // 새로운 ExerciseSet을 추가합니다.
+        // 여기에서는 실제로 추가되는 동작은 구현되어 있지 않습니다.
+    }
+    
+    func startExerciseTimer() {
+        // 해당 메서드가 호출되었음을 나타내는 플래그 변수를 설정합니다.
+        startExerciseTimerCalled = true
+        
+        // 운동 타이머를 시작합니다.
+        // 여기에서는 실제로 타이머가 시작되는 동작은 구현되어 있지 않습니다.
+    }
+    
+    func startRestTimer() {
+        // 해당 메서드가 호출되었음을 나타내는 플래그 변수를 설정합니다.
+        startRestTimerCalled = true
+        
+        // 휴식 타이머를 시작합니다.
+        // 여기에서는 실제로 타이머가 시작되는 동작은 구현되어 있지 않습니다.
+    }
+    
+    func stopExercise() {
+        // 해당 메서드가 호출되었음을 나타내는 플래그 변수를 설정합니다.
+        stopExerciseCalled = true
+        
+        // 운동을 중지합니다.
+        // 여기에서는 실제로 운동이 중지되는 동작은 구현되어 있지 않습니다.
+    }
+}
