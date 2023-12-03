@@ -48,7 +48,7 @@ enum FireStoreRouter: URLRequestConvertible {
     }
 }
 
-final class FireStorage {
+final class FireStorageService {
     
     let realmManager = RealmManager.shared
     

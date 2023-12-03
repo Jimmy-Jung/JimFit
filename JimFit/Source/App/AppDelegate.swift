@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         }
                         if let exerciseDataURL = remoteConfig["ExerciseDataURL"].stringValue {
                             APIKEY.ExerciseDataURL = exerciseDataURL
-                            FireStorage().checkETagFromFireStore()
+                            FireStorageService().checkETagFromFireStore()
                         }
                     } else {
                         UM.finishedLaunch = true

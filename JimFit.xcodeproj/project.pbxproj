@@ -12,7 +12,7 @@
 		550BA79E2ADB04BF00475042 /* APIKEY.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550BA79D2ADB04BF00475042 /* APIKEY.swift */; };
 		550BA7A52ADB065800475042 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 550BA7A42ADB065800475042 /* FirebaseCrashlytics */; };
 		550BA7A82ADB152200475042 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 550BA7A72ADB152200475042 /* FirebaseRemoteConfig */; };
-		550BA7AC2ADB1CB600475042 /* FireStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550BA7AB2ADB1CB600475042 /* FireStorage.swift */; };
+		550BA7AC2ADB1CB600475042 /* FireStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550BA7AB2ADB1CB600475042 /* FireStorageService.swift */; };
 		550BA7AF2ADB2E7F00475042 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 550BA7AE2ADB2E7F00475042 /* Alamofire */; };
 		550BA7B12ADB500C00475042 /* JSONExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550BA7B02ADB500C00475042 /* JSONExercise.swift */; };
 		550BA7B42ADC424100475042 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550BA7B32ADC424100475042 /* LoadingViewController.swift */; };
@@ -86,7 +86,7 @@
 		550BA7712AD7DE2F00475042 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		550BA7992ADB045700475042 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		550BA79D2ADB04BF00475042 /* APIKEY.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKEY.swift; sourceTree = "<group>"; };
-		550BA7AB2ADB1CB600475042 /* FireStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStorage.swift; sourceTree = "<group>"; };
+		550BA7AB2ADB1CB600475042 /* FireStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStorageService.swift; sourceTree = "<group>"; };
 		550BA7B02ADB500C00475042 /* JSONExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONExercise.swift; sourceTree = "<group>"; };
 		550BA7B32ADC424100475042 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		555E6B342AC1D76B00DCA052 /* JimFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JimFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -177,7 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				550BA7A02ADB04E100475042 /* APIKEY */,
-				550BA7AB2ADB1CB600475042 /* FireStorage.swift */,
+				550BA7AB2ADB1CB600475042 /* FireStorageService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -542,7 +542,7 @@
 				555E6B742AC34DD900DCA052 /* WorkoutLogTableViewCell.swift in Sources */,
 				55E42E5A2AE628A100AA67D3 /* InfoPopoverViewController.swift in Sources */,
 				555E6B9A2AC72ECF00DCA052 /* RealmManager.swift in Sources */,
-				550BA7AC2ADB1CB600475042 /* FireStorage.swift in Sources */,
+				550BA7AC2ADB1CB600475042 /* FireStorageService.swift in Sources */,
 				555E6B782AC42CB500DCA052 /* GrabberView.swift in Sources */,
 				556717312AE2DF40002430E0 /* SettingViewController.swift in Sources */,
 				5567171F2AE166B1002430E0 /* RecoveryViewController.swift in Sources */,
